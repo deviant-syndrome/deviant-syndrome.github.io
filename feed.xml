@@ -5,8 +5,8 @@
     <description>coding, multimedia, gamedev, engineering</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 13 Aug 2021 14:59:46 +0300</pubDate>
-    <lastBuildDate>Fri, 13 Aug 2021 14:59:46 +0300</lastBuildDate>
+    <pubDate>Fri, 13 Aug 2021 15:18:57 +0300</pubDate>
+    <lastBuildDate>Fri, 13 Aug 2021 15:18:57 +0300</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -33,7 +33,7 @@
 	&lt;audio src=&quot;/mp3/2021/GoToDrums_demo.mp3&quot; preload=&quot;auto&quot;&gt;&lt;/audio&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;downloadBox&quot; onclick=&quot;window.location='/assets/soundfounts/gotodrums.zip'; return false;&quot;&gt;
+&lt;div class=&quot;downloadBox&quot; onclick=&quot;window.location='/assets/soundfonts/gotodrums.zip'; return false;&quot;&gt;
   Download Zip&lt;br /&gt;
   &lt;p style=&quot;font-size: small; margin-top: 2px; margin-bottom: 2px;&quot;&gt;GoToDrums Soundfont&lt;/p&gt;
 &lt;/div&gt;
@@ -768,6 +768,8 @@ Note 2: The original key of this song is in fact Eb minor, but I’m too lazy to
       
         	
      
+  
+
   
 
   
