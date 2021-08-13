@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <meta name="robots" content="noindex">
+  
+
+  <title>Deviant Syndrome</title>
+  <meta name="description" content="coding, multimedia, gamedev, engineering">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Deviant Syndrome">
+  <meta name="twitter:description" content="coding, multimedia, gamedev, engineering">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Deviant Syndrome">
+  <meta property="og:description" content="coding, multimedia, gamedev, engineering">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <img style='width: 100%; margin-bottom: 40px;' src="/images/lcdheader.png"/>
+
+<div style='column-count: 3; margin-bottom: 32px'>
+<h4 style='margin-top: 0px;'>MENU</h4>
+<ul>
+
+  
+    
+      <li><a href="/categories/#code-bits">code bits (4)</a></li>
+    
+      <li><a href="/categories/#demo">demo (1)</a></li>
+    
+      <li><a href="/categories/#dsp-math">dsp math (2)</a></li>
+    
+      <li><a href="/categories/#vst-audio-software">vst audio software (13)</a></li>
+    
+      <li><a href="/categories/#music">music (1)</a></li>
+    
+      <li><a href="/categories/#journalism?">journalism? (2)</a></li>
+    
+      <li><a href="/categories/#dsp">dsp (2)</a></li>
+    
+  
+
+</ul>
+</div>
+
+<!--
+  // TODO: uncomment, once you have some updates ;-) 
+  <header class="post-header">
+   <h2 class="post-list__post-title">
+     <a href="#" title="Latest updates">Latest updates</a>
+   </h2>
+</header>
+<p></p>
+<section class="post">
+    I am very interesting, talented and sophisticated
+</section>
+<p></p>
+<hr class="post-list__divider">
+
+-->
+<div class="main-post-list">
+
+  <ol class="post-list">
+    
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2022/Docker_Audio_Hell_Pt__2/" title="Docker Audio Hell Pt. 2">Docker Audio Hell Pt. 2</a></h2>
+        
+			 <p><section class="post"><h4 id="false-promises-of-posix-compatibility">False Promises of POSIX-compatibility</h4>
+
+<p>In previous article we briefly touched upon evolution of audio playback and processing under Unix-like operating system. That was quite a ride, if you remember. Maintaining traditions firmly set in this blog, let’s ask ourselves a question, how can we make my experience with *NIX audio even more pathological. Any suggestions? Right! Let’s run it in Docker under MacOS.</p>
+
+<p>Ok. Let’s first politely (for the most part) dismiss the obvious suggestions from the sane-minded people. This would be sure mixed with some old-man’s rumbling touching the peculiarity of his ill habits.
+Q: Why not just install Wine on your host system? 
+A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure I’m ready for that yet.</p>
+
+<p>Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of schenaningas anyway?
+A: Two point here. Frist, I simply do not want to install another piece of heavyweight software on my laptop (which is, tehcnically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)</p>
+
+<p>Q: What’s the use of some old Win32 application?  It does not fit the modern audio production standards at all. 
+A: That’s just how I roll, sir/ma’m</p>
+
+<p>On normal Unix-like systems, the host’s sound (and MIDI) hardware could be simply shared via plain docker device mountpoint, like:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># x11docker provides this setup with option --alsa.</span>
+docker run <span class="nt">--rm</span> <span class="nt">--device</span> /dev/snd ALSAIMAGE speaker-test
+
+</code></pre></div></div>
+
+<h4 id="hoops-of-hellfire-and-blades">Hoops of Hellfire and Blades</h4>
+
+<p>As an alternatively-abled, alternavie OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:</p>
+<ul>
+  <li>Some strange latency issues, latency increases over time, and requires me to periodically restart the server on my host OS.</li>
+  <li>My version of pulseaudio, obtained from Homebrew (I believe), does not allow me to output to a virtual device (in my case, BlackHole 16ch)</li>
+</ul>
+
+<p>Seems, like the problem here is not particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).</p>
+
+<details>
+  <summary>MacOS PulseAudio Server Logs
+</summary>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
+I: [] module-card-restore.c: Restoring port latency offsets for card BlackHole_16ch.
+D: [] card.c: Looking for initial profile for card BlackHole_16ch
+D: [] card.c: on availability unknown
+I: [] card.c: BlackHole_16ch: active_profile: on
+I: [] card.c: Created 0 "BlackHole_16ch"
+D: [] module-coreaudio-device.c: Sample rate: 44100.000000
+D: [] module-coreaudio-device.c: 64 bytes per packet
+D: [] module-coreaudio-device.c: 1 frames per packet
+D: [] module-coreaudio-device.c: 64 bytes per frame
+D: [] module-coreaudio-device.c: 16 channels per frame
+D: [] module-coreaudio-device.c: 32 bits per channel
+D: [] module-coreaudio-device.c: Stream name is &gt;Channel 1, Channel 2, Channel 3, Channel 4, Channel 5, Channel 6, Channel 7, Channel 8, Channel 9, Channel 10, Channel 11, Channel 12, Channel 13, Channel 14, Channel 15, Channel 16&lt;
+D: [] module-device-restore.c: Database contains no data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann
+D: [] module-device-restore.c: Database contains no (or invalid) data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann:null
+I: [] sink.c: Created sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann" with sample spec float32le 16ch 44100Hz and channel map mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono
+I: [] sink.c:     device.string = "BlackHole 16ch"
+I: [] sink.c:     device.product.name = "BlackHole 16ch"
+I: [] sink.c:     device.description = "BlackHole 16ch"
+I: [] sink.c:     device.access_mode = "mmap"
+I: [] sink.c:     device.class = "sound"
+I: [] sink.c:     device.api = "CoreAudio"
+I: [] sink.c:     device.buffering.buffer_size = "32768"
+I: [] sink.c:     device.vendor.name = "Existential Audio Inc."
+I: [] sink.c:     device.icon_name = "audio-card"
+D: [] source.c: Failed to register name Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann.monitor.
+I: [] sink.c: Freeing sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann"
+E: [] module-coreaudio-device.c: unable to create sink.
+</code></pre></div>  </div>
+</details>
+
+<p>Those couple of issues mentioned above, of course, make recording the container’s audio output comparable to jumping through the hoops of hellfire and blades every tine. So, instead of that, I decided to use 
+OulseAudio RTP sink support, which could be defined like that (on the host system):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pulseaudio <span class="nt">--load</span><span class="o">=</span>module-native-protocol-tcp <span class="nt">--exit-idle-time</span><span class="o">=</span><span class="nt">-1</span> <span class="nt">-vvvvv</span>
+<span class="c"># since we did not daemonize the serivce, the commands below can be executed in a separate terminal window</span>
+pacmd load-module module-null-sink <span class="nv">sink_name</span><span class="o">=</span>rtp
+pacmd load-module module-rtp-send <span class="nb">source</span><span class="o">=</span>rtp.monitor <span class="nv">port</span><span class="o">=</span>1234 <span class="nv">loop</span><span class="o">=</span>1
+</code></pre></div></div>
+
+<p>(RTP protocol)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol] can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).</p>
+
+<p>By the way, you can check the UDP commnication between docker container and host using netcat.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># inside the container</span>
+nc <span class="nt">-u</span> &lt;HOST_IP&gt; 1234
+
+<span class="c"># on host machine</span>
+nc <span class="nt">-ul</span> 1234 
+</code></pre></div></div>
+
+<p>And we are also have to do some exotic magic to simply obtain the host’s IP on the Docker network. Our life would be too easy and dull without that, wouldn’t it?</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># either an arbitrary IPv4 address from host</span>
+<span class="nv">Hostip</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>ip <span class="nt">-4</span> <span class="nt">-o</span> a | <span class="nb">awk</span> <span class="s1">'{print $4}'</span> | <span class="nb">cut</span> <span class="nt">-d</span>/ <span class="nt">-f1</span> | <span class="nb">grep</span> <span class="nt">-v</span> 127.0.0.1 | <span class="nb">head</span> <span class="nt">-n1</span><span class="si">)</span><span class="s2">"</span>
+
+<span class="c"># or especially IP from docker daemon</span>
+<span class="nv">Hostip</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span>ip <span class="nt">-4</span> <span class="nt">-o</span> a| <span class="nb">grep </span>docker0 | <span class="nb">awk</span> <span class="s1">'{print $4}'</span> | <span class="nb">cut</span> <span class="nt">-d</span>/ <span class="nt">-f1</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>Then why not simply define a loop back address and a free UDP port, by convention for RTP it’s 1234 (RTP usually uses UDP as a transport). Then we could simply forward this port from guest to host. Well, shocking news, ladies ang gentelmen, 
+in Docker world, ports are forwared <em>from host to container</em>, not the other way around. So, if you are into that kind of naughty stuff, you\ll have to use dockers’s –network=host option. So, then you can determine the host’s IP and speicify it in the config. (Hack me gently with a chainsaw, but I do not remember, why loopback did not work in this case).</p>
+
+<h4 id="6inks-6inks-6inks">6inks, 6inks, 6inks</h4>
+
+<p>Aaaaaand, it works. Well, sort of. I was able to pass my audio to the <em>other side</em>. It was accompanied by a constant wall of digital noise, though. 
+When I try to stream raw PCM audio using faplay, for example:</p>
+
+<pre><code class="language-`bash">ffplay  -sample_rate 44100 -autoexit -f s16be rtp://127.0.0.1:1234
+</code></pre>
+<p>When I try to do the same, with, say, VLC player, it tries to interpret the data stream as some interleaved AV, and outputs all kind of glitchy weirdess in the video window.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlc <span class="nt">--demux</span><span class="o">=</span>rawaud <span class="nt">--rawaud-channels</span><span class="o">=</span>2 <span class="nt">--rawaud-samplerate</span><span class="o">=</span>44100 udp://@:1234
+</code></pre></div></div>
+
+<p>First, I thought it was raw audio byte format problem, judging by the logs the defaul format is <code class="highlighter-rouge">s16be</code> (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo here:
+(https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/)</p>
+
+<p>However, I made sure they are matching and it left me with nothing but two more flavoirs of digital audio pollution. Well, it’s time to reveal you the brutal truth. Pulseaudio RTP sinks are <em>multi-cast only</em>. So, when you specify a single IP address and port there, it dumps all the it’s sister RTP Control Stuff (stats, metadata and heartbeats) right above the raw audio, manifestating itself in a form a constant audiable noise.</p>
+
+<p>So, I swithed to multicast, and now now I’m able to get the audio output from Docker container to my virtual device for recording. 
+The latency is still there of course. Thankfully, I’m not obligated to perform live with this kind of setup.</p>
+
+<h4 id="i-might-still-be-insane-though">I might still be insane, though</h4>
+
+<p>PulseAudio has native mechanism for capturing audio. The monitor sink is created the similar way, and then, allegedly, you can pipe it anywhere.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pactl load-module module-null-sink <span class="nv">sink_name</span><span class="o">=</span>steam
+parec <span class="nt">-d</span> steam.monitor | oggenc <span class="nt">-b</span> 192 <span class="nt">-o</span> steam.ogg <span class="nt">--raw</span> - 
+</code></pre></div></div>
+<p><code class="highlighter-rouge">oggenc</code> is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.</p>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2022-08-21 17:26" class="post-list__meta--date date">21 Aug 2022</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#docker">docker</a> <a href="/tags/#wine">wine</a> <a href="/tags/#pulseaudio">pulseaudio</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2022/Cursed_FM_Synth/" title="Cursed FM Synth">Cursed FM Synth</a></h2>
+        
+			 <p><section class="post"><h4 id="as-it-was-not-cursed-enough-already">As it was not cursed enough already</h4>
+
+<p><img src="/assets/images/cursedfm7.svg" alt="heck" width="100%" style="margin-top: 20px;" /></p>
+
+<div class="audio-container" style="margin-bottom: 32px;">
+	<audio src="/assets//mp3/2022/cursedfm.mp3" preload="auto"></audio>
+</div>
+
+<p>You all know <a href="https://asb2m10.github.io/dexed/">DEXED</a>, an awesome Yamaha DX7 librarian. Seems like I stumbled upon an undocumented feature. When you use it to load a DX7 cart dump, it allows you to select any file on your system. So, why not pick a file, that has nothing to do with DX or even music whatsoever? This way it fills all the registers of a virtual Yamaha with rubbish. And it sounds wild, folks, absolutely untamed.</p>
+
+<p>Listening back to this, I was kinda imagining those big heads like B. Eno or T. Reznor who have somehow found a way, to do the same with a real physical DX7 keyvoard. Was it really  a dedicated programmator, or were they just sending digital noise in form of SYSEX  messages?</p>
+
+<p>Probably the former, no matter what my corrupted imagkintation tells me.</p>
+
+<div class="downloadBox" onclick="window.location='/assets/CURSED.syx'; return false;">
+  Download SYX<br />
+  <p style="font-size: small; margin-top: 2px; margin-bottom: 2px;">Cursed DX7 Cart</p>
+</div>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2022-06-26 14:38" class="post-list__meta--date date">26 Jun 2022</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2022/OverType_TypeWriter_Simulator/" title="OverType TypeWriter Simulator">OverType TypeWriter Simulator</a></h2>
+        
+			 <p><section class="post"><h4 id="when-too-realistic-is-not-enough">When Too Realistic is Not Enough</h4>
+
+<p>Have you folks seen this amazing JS demo, resembling an <a href="https://uniqcode.com/typewriter/">old typewriter</a>? I, personally, find it hilarious and enjoyable. The ink refill process, the brokeness fader, the click sound, this makes it  almost an ideal <em>soft machine</em>.</p>
+
+<p>There is one  problem though, which, sadly, cannot really attribute that to the precision of the simulation. Sometimes, it will just hangs up, stop reacting to any keystrokes, and there is no way to save the text you’ve already typed, or, continuing the analogy, - feed the page back into the roll, after you fix the jam.</p>
+
+<p>My intuitive approach to this show-stopper, would be just re-run the bits of javascript that set the virtual typewriter up. I found a very useful code bit somewhere, which worked exactly as I expected.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">)</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span>
+    <span class="nb">eval</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">n</span><span class="p">].</span><span class="nx">innerHTML</span><span class="p">)</span> <span class="c1">//run script inside div</span>
+</code></pre></div></div>
+
+<p>Thanks to this, I was able to finish a page of my upcoming horror-story fanzine. Hell yeah, you cannot really achieve it in any other way, than using a good old typewriter!</p>
+
+<p><img src="/assets/images/fanzine01_thumb.png" data-ngsrc="/assets/images/fanzine01.jpg" data-nanogallery2-lightbox="{ &quot;viewerGallery &quot;: &quot;none&quot; }" /></p>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2022-06-14 13:50" class="post-list__meta--date date">14 Jun 2022</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#js">js</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2022/Docker_Audio_Hell/" title="Docker Audio Hell Pt. 1">Docker Audio Hell Pt. 1</a></h2>
+        
+			 <p><section class="post"><h4 id="and-the-passive-amoeba-of-linux-audio">And The Passive Amoeba of Linux Audio</h4>
+
+<p><img src="/assets/images/figures/amoeba1.svg" alt="heck" width="100%" style="margin-top: 20px;" /></p>
+
+<p>In this article, we are going to quickly reiterate the reason why audio-production on Linux can be challenging (if not frustrating at times). I think, the main reason for that, besides of course, my own incompetence, is audio-facilties being handled in too much of Unix-way. But what is Unix way, anyway? Well, in short, we have one isolated piece of software doing one single thing, but doing well.If any additional processing needs to be done with the output, we pipe (|) it into another isolated piece of software. Several steps of that form a <em>pipeline</em>. 
+Sounds great, right? Well, unfortunately, sometimes the seeming tidiness of this approach could quikcly go down the tubes (pun intended). 
+Once you need something specific, or something simply done <em>your</em> way, you’ll have to explore the whole pipeline from end to end. It’s alright, if the nodes there are simple utilities like <code class="highlighter-rouge">cat</code> or <code class="highlighter-rouge">grep</code>, but imaging exploring each of those having massive tectonic layers of legacy software archeology above them.</p>
+
+<p>So, here is how this usually happens. It all starts with ALSA, a kernel subsystem, which works directly with your audio hardware. It does not efficiently handle software mixing and routing, though, so applications  cannot share your device inputs/outputs effieicently, and we were not even talking about routing audio inputs and outputs between them. 
+To satisfy those needs, PulseAudio was introduced. A software wrapper around ALSA, that re-routes all the audio streams through itself, and distributes it between existing hardware inputs and outputs (sinks). Applications compiled to use PulseAuido as audio-driver cannot use ALSA directly, all according to the hightest standards of incomprehensible madman’s logic we maintain in the world of prograaming.</p>
+
+<p>PulseAudio, however had some issues with latency, which made it hardly usable for “professional” audio-recording, that usually includes near real-time record monitoring, for example. 
+To solve problem, purposedly introdued, we wrote an alternative to PulseAudio called JACK. Does this remind you of <a href="https://en.wikipedia.org/wiki/The_Futurological_Congress">“The Futurological Congress”</a>? For me it totally does.
+For a long time, JACK was the standard for (semi)professional audio work on Linux. Apparently, does not play nicely with PulseAudio. Some applications, (ex: Wine), does not support JACK at all. Of course, Wine has WineASIO, which can be routed to JACK, however, it is possible only for applications that use ASIO for audio, i.e. DAWs.</p>
+
+<p>Both JACK and Pulseaudio, have different solutions for audio-over network. PulseAudio has native client-server support, and also , a special audio-sink for streaming audio in RTP protocol (is it the same thing as zeroconf or not?). Judging by these configuration strings, client-server support of pulseaudio, can use TCP as a transport, and something called “native”, which I presume, would be standard unix-sockets.</p>
+
+<p><img src="/assets/images/figures/amoeba2.svg" alt="heck" width="100%" /></p>
+
+<p>JACK provides <a href="https://jackaudio.org/faq/netjack.html">several ways</a> remote audio networking. It’s native <code class="highlighter-rouge">netone</code> addon using CELT codec and master/follower pattern,  and some newer netJACK2, which has network discovery.</p>
+
+<p>Lately, yet another ultra-low-latency professional-audio-grade Unix soundsystem was introduced. It’s called PipeWire, and it is sort of a chamenion protocol, which can act as a PulseAudio backend for PulseAudio clients, Jack backend to Jack clients and so on. AFAIK, Pipewire does not have audio-over-network support.</p>
+
+<p><strong>NOTE</strong>: Some amoebas are not shown on the figures, simply because they are considered extinct. Before ALSA, earlier versions of Linux were shipped with Open Sound System (OSS), which then was appropriated and no longer counts as free software. However, as we know, once introduced at the kernel level, is destined to be supported for eternity. That’s why ALSA still has an OSS emulation mode.</p>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2022-06-07 09:47" class="post-list__meta--date date">7 Jun 2022</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#docker">docker</a> <a href="/tags/#wine">wine</a> <a href="/tags/#pulseaudio">pulseaudio</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2021/GotoDrums/" title="GoToDrums. Free Drum Sample Lib">GoToDrums. Free Drum Sample Lib</a></h2>
+        
+			 <p><section class="post"><h4 id="motivation">Motivation</h4>
+
+<p>Challenging the paradigm of taking sampled drum sounds for granted and using them as, if it is one of the most conventional practices that constitute the framework for creating “electronic music”.</p>
+
+<h4 id="attempt-at-some-historical-excourse">Attempt at Some Historical Excourse</h4>
+
+<p>Since when  had it became like that?</p>
+
+<p>Sampling one-hit percussion, or, alternatively, recreating it with synthesis, was the primary direction in early electronic music, that made it into consumer sector, since the nature of battery instruments implies repetition, and those sounds are usually short, which made then good candidates to be utilized in first low-memory digital samplers. Since those instruments usually do not have a strongly defined pitch, so the pitch change is not used as a form of expression, when playing those. That eliminates the problem of handling changing pitch of an instrument, during synthesis or having to store a large number of pitches in sampler’s memory. Early rhythm-machines, were mostly built around borderline neglecting the timbral structure in favour of persistence of generated rhythmic pattern, e.g. a sequence of transients.</p>
+
+<h4 id="description">Description</h4>
+
+<p>Overall, the sound of this small library, can be described as something really lo-fi, but still moderately punchy and usable. To put those
+ samples together, I’ve been digging through a whole lot of source material. This <a href="https://www.youtube.com/watch?v=DFhFDrlYTng&amp;t=1063s">tutorial</a> about recreating a snare drum sound with FM
+  synthesis, and this SOS <a href="https://www.soundonsound.com/techniques/practical-cymbal-synthesis">article</a> about cymbal synthesis, were the most important bits of information that kickstarted the whole thing. Rest of this kit’s pieces were done intuitively. Part of those are very basic, like subtractive synthesis, other came out from more adventurous approaches, including resonant filter banks, and layering of found sounds.</p>
+
+<p>Using this lib, I put together a simple gloomy rock tune, what would serve the demonstration purposes. But before we proceed, I feel like I need to put a disclaimer: this collection of sounds it not designed to be high-quality commercial grade product, but rather an exercise, showcasing the exciting possibilities that open up the moment you get off the beaten “pre-cooked drum samples” path.</p>
+
+<div class="audio-container" style="margin-bottom: 32px;">
+	<audio src="/mp3/2021/GoToDrums_demo.mp3" preload="auto"></audio>
+</div>
+
+<div class="downloadBox" onclick="window.location='/assets/soundfonts/gotodrums.zip'; return false;">
+  Download Zip<br />
+  <p style="font-size: small; margin-top: 2px; margin-bottom: 2px;">GoToDrums Soundfont</p>
+</div>
+
+<h4 id="takeaways">Takeaways</h4>
+
+<p>Sometimes, rhythmic patterns and note length are really more important than the timbres themselves. This sets us back to the origins of rhythm-machines. This aspect of how humans perceive rythms is what made the concept of “programmed drums” wholesome.</p>
+
+<p>So, while trying to nail down the timbres, I should have really been paying more attention to dynamics, for this whole sample patch to be more expressive. Well, there were reasons for that beyond my ignorance. Initially, using a free version of TX Software Sampler, I found a number of expression-related settings to be non-intuitive, while other to have UX and stability issues. No offence to the authors, it might be my DAW’s or my OS problem as well. 
+Probably, my (kill to) cure from that would be trying to do the same workout on Yamaha sampler, so I’d realise how much of privileged “mouse-smudger” I am, using point-and-click software.</p>
+
+<p>Cymbals naturally have their dynamic range very wide. And practically none of the widespread approximations (FM, samples, resonant filters) does cover the desired palette of hues on their own. So, ideally, when trying to approximate a cymbal sound, you would have to change the model/approach when reaching a certain velocity boundary. Like, one FM patch for the lower velocities, another one for the moderate ones, and when, probably some combination of pre-recorded sound and resonant. And since the change of timber could be dramatically obvious, you’ll probably need to apply to crossfading between them as well.</p>
+
+<p>The latter sounds like a whole lot of manual work on any sampler, so, if I ever go down that path, that would be, I’ll have to think about automating the process of laying down the usual 32/64/128 levels of velocity, each from a separate sampled sound.</p>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2021-07-26 17:44" class="post-list__meta--date date">26 Jul 2021</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#drums">drums</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2021/Drum_Loops_From_Nowhere/" title="Drum Loops From Nowhere">Drum Loops From Nowhere</a></h2>
+        
+	<p class="excerpt"><h4 id="why-should-i-do-what-everyone-does">Why Should I Do What Everyone Does</h4>
+
+<p>What I currently miss the most with my minimalist no-budget music production setup, definitely would be some organic, pounding and swinging battery. I do not really have much interest in using loops or pre-processed sample libs (tHat CUTt trhU Ze MiX!), because as Chris Randall once said, you have no time to screw around with somebody else’s music if you’re really want to make your own. Truly, with the standards I impose on my self, simply downloading a copy of MT PowerDrums, would be a statement of artistic and engineer impotence.
+So far, I got some applicable results in “personalised” percussive sounds, by exploring the following approaches:</p>
+<ul>
+  <li>Basic subtractive and FM synthesis. Unless, you are a sound-design and electrical-engineering expert, that is your usual “blip-blop” type of electro-drum sounds.</li>
+  <li>Found objects. This is always fun. Just put your smartphone on record every time you take out the trash,</li>
+  <li>Physical modeling. Good for membrane percussion, quickly gets complicated for cymbals, because of their complex “clustered” nature of sound.</li>
+</ul>
+
+<p>So here is a small demo I built around a manipulated drum loop which was generate. On the course of this post I’ll try to explain how you can create one yourself.</p>
+
+<div class="audio-container" style="margin-bottom: 32px;">
+	<audio src="/mp3/2021/nn_drums_demo.mp3" preload="auto"></audio>
+</div>
+
+<div class="downloadBox" onclick="window.location='/assets/nn_gen_drum_phrases.zip'; return false;">
+  Download Zip<br />
+  <p style="font-size: small; margin-top: 2px; margin-bottom: 2px;">Sample WAVs Generated by NN</p>
+</div>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2021/Drum_Loops_From_Nowhere/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2021-06-14 12:36" class="post-list__meta--date date">14 Jun 2021</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#wavegan">wavegan</a> <a href="/tags/#software">software</a> <a href="/tags/#docker">docker</a> <a href="/tags/#dsp">dsp</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2021/MacOS_Catalina_Docker_Wine_For_Windows_VST_Plugins/" title="MacOS Catalina Docker Wine For Windows VST Plugins">MacOS Catalina Docker Wine For Windows VST Plugins</a></h2>
+        
+			 <p><section class="post"><h4 id="aka-what-the-hell-am-i-doing-with-my-life">AKA What the Hell am I Doing with My Life</h4>
+
+<p>Do you like strange audio software like I do? Most of really odd and retro stuff, like a total emulation of PPG Wave Computer Suite, or this micro electro drum machine, runs only under Win32 and, therefore out of my direct reach as a <em>typical</em> mac user.
+This also applies to a lot of software written for academic research purposes. Usually those programs were made to perform specific calculations that prove the thesis stated in one’s master’s paper. Usually, written by people who do not specialize in software, during pre-Jupiter pre-cloud era, the choice of platform and tooling was . Yes, there were the times, when they were teaching engineers and mathetimaticans to program on Delphi and Prolog. Don’t ask me why. Fun fact, I know for sure, that there are still people who support and maintain in-house Delphi projects.</p>
+
+<p>So, what are my options? Well, current versions of Wine does not support MacOS Catalina, and Winebottler has a very strange paradigm of usage which seems totally alien to me, Like packing exe into Mac App? Automated installations? On what planet am I? And, of course, there is no way, I’m trying to build Wine myself, as it now requires pulling all of the 32-bit versions of development libraries and such. Something is sure gonna break, and I am not smart enough to deal with that confidently. So, why not try docker instead, since I do care about latency for the specified use cases.</p>
+
+<p>So, I’ve assembled a docker image, lousely based on the ones provided by <a href="https://github.com/jessfraz/dockerfiles/tree/master/pulseaudio">Jess Frazelle</a> for PulseAudio support and <a href="https://github.com/scottyhardy/docker-wine">Scott Hardy</a> for X session support.</p>
+
+<p>Dockerfile is available in <a href="https://github.com/deviant-syndrome/pulse-carlawine">this repo</a> which also includes pulseaudio config files.</p>
+
+<p>To get the X forwarding from container, which would act as a thin client of sorts. We will be using XQuartz for MacOS. From the XQuartz preferences, in the security tab, make sure Allow connections from network clients is enabled. Restart XQuartz.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xhost +localhost
+</code></pre></div></div>
+
+<p>Did not won over MONO(?)/framework installation problems, though. Every time I run a fresh image it would ask me to download a few things. Not critcal for me right now. 
+When running a Linux distro inside docker, ALSA will not work properly out of the box, as it would not be able to locate a hardware audio
+ interface (no dummy hw bindings allowed at ALSA level, if you want that - welcome to kernel recomplication!). On most UNIX and Unix-like environments, you can just bind your <code class="highlighter-rouge">/snd/audio </code> from host to docker container, but not on your shiny polished MacOS. One of the possible solutions here, is to use pulseaudio client-server over its native transport.</p>
+
+<p>Pulseaudio was once designed to be a “distribution layer” between ALSA and applications, for them to share audio channels and buffers properly
+. It worked quite well for general-purpose multimedia apps, but fell a bit short when it came to .. working with audio (i.e DAWs, audio-editors, samplers, etc). Therefore, people designed Jack which serves a similar purpose, but with much richer feature set and latency footprint. I believe, Jack is currently the “unofficial standard” for audio and music production on Linux.</p>
+
+<p>As you see from the file, I also had to install KXStudio stuff. Setup repos, according to the <a href="https://kx.studio/Repositories">instructions</a> on their site. 
+I decided to go with Carla as a VST host. For it, I also installed wine bridges, x32 and x64 one. 
+There was some typical open-source fun stuff along the way, of course. Like, I had to go to Carla’s settings and enable the corresponding experimental feature. After that I tried to scan for new plugins, but that did not work (worked when I ran it under root privileges for some reason). Finally, I got it working by just dragging and dropping a DLL file onto Carla’s rack panel.</p>
+
+<p>Curious fact, I’ve also tried to run <a href="http://www.niallmoody.com/apps/pedalboard2">Pedalboard2</a> VSTHost through Wine. It starts, it loads the Win32 plugin DLL, however the audio it produces consists of clicks and pops exclusively. In theory, WineASIO should mitigate those problems, however it is built exclusively around Jack. 
+And this is where we will be facing the fundamental problem with this kind of setup: pulseaudio and Jack does not mesh well together at all. You cannot output from Jack to pulseaudio sink. Jack forwarding requires a Jack server on the host machine. And installing and running Jack on MacOS is the most unnatural thing ever (by my standards, of course). 
+So, I opted for pulseaudio and it’s native sink. Thankfully, there is a brew formula for pulseaudio. So, just run the sink like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pulseaudio <span class="nt">--load</span><span class="o">=</span>module-native-protocol-tcp <span class="nt">--exit-idle-time</span><span class="o">=</span><span class="nt">-1</span> <span class="nt">--daemon</span>
+</code></pre></div></div>
+
+<p>For more or less correct VST plugin GUI display, I also had to install several Wine-specific fix-ups.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>winetricks mfc42
+winetricks gdiplus
+winetricks corefonts
+</code></pre></div></div>
+
+<p>Finally, to run the image with X and pulseaudio forwarding:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">-e</span> <span class="nv">DISPLAY</span><span class="o">=</span>host.docker.internal:0 <span class="nt">-e</span> <span class="nv">PULSE_SERVER</span><span class="o">=</span>docker.for.mac.localhost <span class="nt">-v</span> ~/.config/pulse:/home/pulseaudio/.config/pulse <span class="nt">--entrypoint</span> /bin/bash <span class="nt">--ipc</span><span class="o">=</span>host <span class="nt">--rm</span> dieheart/pulse2:latest
+</code></pre></div></div>
+
+<p>So, conceptually it works. As you can see, I’m sharing this “pulseaudio-cookie” file across guest and host by simply mounting the config directory to container’s filesystem. And now, the caveats.</p>
+<ul>
+  <li>It seems, like PA can only output to a <strong>physical</strong> audio device. I tried editing the config in multiple ways, and it explicitly stated that in the error message: [github link]. Not really total deal breaker of course, if you only need monitoring. You can monitor and then simply record it to WAV inside container.</li>
+  <li>No freaking MIDI support. MIDI sequencing and events are all handled within ALSA, therefore require a device to be present. Well, you know what. I can use <a href="https://en.wikipedia.org/wiki/Open_Sound_Control">OSC protocol</a> for that, and pass through a configured docker network port.</li>
+</ul>
+
+<p>There is a handful of directions we can head from here. And it feels that they all go to Hell. So, I took the random one, which would be try to compile pulseaudio myself, and make an override that will output to virtual device.</p>
+
+<p>The intricacies of that should be somewhere in <a href="https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/blob/master/src/modules/macosx/module-coreaudio-device.c">PulseAudio CoreAudio Module</a></p>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2021-06-02 08:44" class="post-list__meta--date date">2 Jun 2021</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#docker">docker</a> <a href="/tags/#wine">wine</a> <a href="/tags/#pulseaudio">pulseaudio</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2021/sc-help-css/" title="SuperCollider Help Panel Custom CSS">SuperCollider Help Panel Custom CSS</a></h2>
+        
+			 <p><section class="post"><h4 id="dark-systems-for-darkminded-people">Dark Systems for Darkminded People!</h4>
+
+<p><img src="/assets/images/sc_theme.png" alt="Screenshot SuperCollider" /></p>
+
+<p><code class="highlighter-rouge">Dir:</code> <code class="highlighter-rouge">[</code><span style="background: green; color: aquamarine">~/Library/ApplicationSupport/SuperCollider/Help</span><code class="highlighter-rouge">]</code></p>
+
+<p>First, some CSS mad skillz, mostly based on <a href="https://github.com/gkroon/dracula-css">Dracula</a> theme. Notice the dirty 
+hack to evade flooding into CodeMirror spans.</p>
+<details>
+  <summary>custom.css
+</summary>
+
+  <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">html</span><span class="o">,</span>
+<span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">background-image</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="m">42</span><span class="p">,</span> <span class="m">54</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span><span class="nd">:not</span><span class="o">(</span><span class="nc">.editor</span><span class="o">)</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">248</span><span class="p">,</span> <span class="m">248</span><span class="p">,</span> <span class="m">242</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="m">42</span><span class="p">,</span> <span class="m">54</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#summary</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#6cd4ae</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.warning</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">aliceblue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.note</span> <span class="o">&gt;</span> <span class="nt">a</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">blueviolet</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.note</span> <span class="o">&gt;</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">blacks</span> <span class="cp">!important</span><span class="p">;</span><span class="err">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.note</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">aliceblue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="o">,</span>
+<span class="nt">a</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">80</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">123</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#menubar</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">black</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nt">a</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="nt">a</span><span class="nd">:visited:hover</span><span class="o">,</span>
+<span class="nt">a</span><span class="nd">:visited:hover</span> <span class="o">*,</span>
+<span class="nt">span</span><span class="o">[</span><span class="nt">onclick</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nt">div</span><span class="o">[</span><span class="nt">onclick</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"link"</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"link"</span><span class="o">]</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"button"</span><span class="o">]</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"menuitem"</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"menuitem"</span><span class="o">]</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="nc">.link</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nc">.link</span><span class="nd">:hover</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">241</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">140</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="nd">:visited</span><span class="o">,</span>
+<span class="nt">a</span><span class="nd">:visited</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">98</span><span class="p">,</span> <span class="m">114</span><span class="p">,</span> <span class="m">164</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">h1</span><span class="o">,</span>
+<span class="nt">h2</span><span class="o">,</span>
+<span class="nt">h3</span><span class="o">,</span>
+<span class="nt">h4</span><span class="o">,</span>
+<span class="nt">h5</span><span class="o">,</span>
+<span class="nt">h6</span><span class="o">,</span>
+<span class="nt">strong</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"headline"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"headline"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"header"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"header"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"header"</span><span class="o">]</span> <span class="nt">td</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">108</span><span class="p">,</span> <span class="m">166</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">table</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="m">42</span><span class="p">,</span> <span class="m">54</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"overlay"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"lightbox"</span><span class="o">],</span>
+<span class="nt">blockquote</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">68</span><span class="p">,</span> <span class="m">71</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">pre</span><span class="o">,</span>
+<span class="nt">dl</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">39</span><span class="p">,</span> <span class="m">40</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">input</span><span class="o">,</span>
+<span class="nt">select</span><span class="o">,</span>
+<span class="nt">button</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"button"</span><span class="o">],</span>
+<span class="nt">a</span><span class="nc">.button</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.submit</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.BigButton</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.TabLink</span><span class="o">,</span>
+<span class="nc">.install</span><span class="o">[</span><span class="nt">onclick</span><span class="o">]</span> <span class="p">{</span>
+    <span class="nl">text-indent</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+    <span class="nl">appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-moz-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-webkit-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">68</span><span class="p">,</span> <span class="m">71</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">textarea</span> <span class="p">{</span>
+    <span class="nl">appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-moz-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-webkit-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">68</span><span class="p">,</span> <span class="m">71</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="nc">.highlight</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.highlight</span> <span class="o">*,</span>
+<span class="nt">a</span><span class="nc">.active</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.active</span> <span class="o">*,</span>
+<span class="nc">.selected</span><span class="o">,</span>
+<span class="nc">.selected</span> <span class="o">*,</span>
+<span class="o">[</span><span class="nt">href</span><span class="o">=</span><span class="s1">"#"</span><span class="o">]</span> <span class="p">{</span>
+    <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bold</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">139</span><span class="p">,</span> <span class="m">233</span><span class="p">,</span> <span class="m">253</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+
+</details>
+<p>Then disable CodeMirror bindings in the following two files. In the last file, I substituted the <code class="highlighter-rouge">cm-default</code> with
+the ones you’ll find in CodeMirror’s theme CSS files, which also goes by the name of the famous Romanian count. 
+I of course could change the CodeMirror’s theme the proper way, as its documentation suggests, however, then I would
+need to change the HTML help file generation for SC, which I’m too lazy and desorganized for.</p>
+<details>
+  <summary>editor.css
+</summary>
+  <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/*!* syntax hightlighting *!*/</span>
+<span class="c">/*.cm-s-default .cm-keyword { color: #0000e6; font-weight: bold; }*/</span>
+<span class="c">/*.cm-s-default .cm-built-in { color: #3333bf; }*/</span>
+<span class="c">/*.cm-s-default .cm-number { color: #980099; }*/</span>
+<span class="c">/*.cm-s-default .cm-symbol { color: #007300; }*/</span>
+<span class="c">/*.cm-s-default .cm-class { color: #0000d2; }*/</span>
+<span class="c">/*.cm-s-default .cm-primitive { color: #0000d2; }*/</span>
+<span class="c">/*.cm-s-default .cm-char { color: #007300; }*/</span>
+<span class="c">/*.cm-s-default .cm-env-var { color: #8c4614; }*/</span>
+<span class="c">/*.cm-s-default .cm-comment { color: #bf0000; }*/</span>
+<span class="c">/*.cm-s-default .cm-string { color: #5f5f5f; }*/</span>
+<span class="c">/*.cm-s-default .cm-text { color: #000000; }*/</span>
+</code></pre></div>  </div>
+</details>
+<details>
+  <summary>codemirror.css
+</summary>
+  <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* DEFAULT THEME */</span>
+
+<span class="nc">.cm-s-default.CodeMirror</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-gutters</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#282a36</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#f8f8f2</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-gutters</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#282a36</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-cursor</span> <span class="p">{</span> <span class="nl">border-left</span><span class="p">:</span> <span class="nb">solid</span> <span class="nb">thin</span> <span class="m">#f8f8f0</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-linenumber</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#6D8A88</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-selected</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">0.10</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span><span class="nd">::selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::selection</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">0.10</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span><span class="nd">::-moz-selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::-moz-selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::-moz-selection</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">0.10</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-comment</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#6272a4</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-string</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-string-2</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#f1fa8c</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-number</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#bd93f9</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-variable</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-variable-2</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-def</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-operator</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ff79c6</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-keyword</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ff79c6</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-atom</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#bd93f9</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-meta</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#f8f8f2</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-tag</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ff79c6</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-attribute</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-qualifier</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-property</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#66d9ef</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-builtin</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-variable-3</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-type</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ffb86c</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-activeline-background</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span><span class="m">255</span><span class="p">,</span><span class="m">255</span><span class="p">,</span><span class="m">0.1</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-matchingbracket</span> <span class="p">{</span> <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">underline</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="no">white</span> <span class="cp">!important</span><span class="p">;</span> <span class="p">}</span>
+
+
+<span class="c">/*.cm-s-default .cm-header {color: blue;}*/</span>
+<span class="c">/*.cm-s-default .cm-quote {color: #090;}*/</span>
+<span class="c">/*.cm-negative {color: #d44;}*/</span>
+<span class="c">/*.cm-positive {color: #292;}*/</span>
+<span class="c">/*.cm-header, .cm-strong {font-weight: bold;}*/</span>
+<span class="c">/*.cm-em {font-style: italic;}*/</span>
+<span class="c">/*.cm-link {text-decoration: underline;}*/</span>
+<span class="c">/*.cm-strikethrough {text-decoration: line-through;}*/</span>
+
+<span class="c">/*.cm-s-default .cm-keyword {color: #708;}*/</span>
+<span class="c">/*.cm-s-default .cm-atom {color: #219;}*/</span>
+<span class="c">/*.cm-s-default .cm-number {color: #164;}*/</span>
+<span class="c">/*.cm-s-default .cm-def {color: #00f;}*/</span>
+<span class="c">/*.cm-s-default .cm-variable,*/</span>
+<span class="c">/*.cm-s-default .cm-punctuation,*/</span>
+<span class="c">/*.cm-s-default .cm-property,*/</span>
+<span class="c">/*.cm-s-default .cm-operator {}*/</span>
+<span class="c">/*.cm-s-default .cm-variable-2 {color: #05a;}*/</span>
+<span class="c">/*.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #085;}*/</span>
+<span class="c">/*.cm-s-default .cm-comment {color: #a50;}*/</span>
+<span class="c">/*.cm-s-default .cm-string {color: #a11;}*/</span>
+<span class="c">/*.cm-s-default .cm-string-2 {color: #f50;}*/</span>
+<span class="c">/*.cm-s-default .cm-meta {color: #555;}*/</span>
+<span class="c">/*.cm-s-default .cm-qualifier {color: #555;}*/</span>
+<span class="c">/*.cm-s-default .cm-builtin {color: #30a;}*/</span>
+<span class="c">/*.cm-s-default .cm-bracket {color: #997;}*/</span>
+<span class="c">/*.cm-s-default .cm-tag {color: #170;}*/</span>
+<span class="c">/*.cm-s-default .cm-attribute {color: #00c;}*/</span>
+<span class="c">/*.cm-s-default .cm-hr {color: #999;}*/</span>
+<span class="c">/*.cm-s-default .cm-link {color: #00c;}*/</span>
+
+<span class="c">/*.cm-s-default .cm-error {color: #f00;}*/</span>
+<span class="c">/*.cm-invalidchar {color: #f00;}*/</span>
+</code></pre></div>  </div>
+</details>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2021-01-12 20:42" class="post-list__meta--date date">12 Jan 2021</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#supercollider">supercollider</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2021/Moby_Drums_and_Samples/" title="Sample-Replacement Backwards">Sample-Replacement Backwards</a></h2>
+        
+	<p class="excerpt"><h4 id="mobys-approach">Moby’s approach</h4>
+
+<p>Sample reinforcement (or even complete replacement) has became the stample of modern drum production. Surprisingly enough, this practice is not bounded to stricly “electronic” or “sample-based” music. Even for “rock” records, some studios skip the drumkit recording entirely and just program all the drums instead. The more “extreme” drum parts get, the more likely the production will embrace some kind of sample reinforcment, with justification for that being the hightest requirements for timing and hitting consistnecy dictated by the genre.</p>
+
+<div class="video-thumb-container">
+  <img class="video-thumb" id="moby1.jpg" src="/assets/yt-thumbs/moby1.jpg" data-ngsrc="https://www.youtube.com/watch?v=VJgqdvlSwZs" data-nanogallery2-lightbox="{ &quot;viewerToolbar&quot;: { &quot;display&quot;: false } }" />
+  
+    <svg class="video-thumb-icon" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:version="1.0beta2 (2b71d25, 2019-12-03)" sodipodi:docname="movie-videos.svg" xml:space="preserve" style="enable-background:new 0 0 122.88 95.8" viewBox="0 0 122.88 95.8" y="0px" x="0px" id="Layer_1" version="1.1"><metadata id="metadata1022"><rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs id="defs1020" /><sodipodi:namedview inkscape:current-layer="Layer_1" inkscape:window-maximized="1" inkscape:window-y="23" inkscape:window-x="0" inkscape:cy="52.761824" inkscape:cx="59.782559" inkscape:zoom="9.0501041" showgrid="false" id="namedview1018" inkscape:window-height="1075" inkscape:window-width="1792" inkscape:pageshadow="2" inkscape:pageopacity="0" guidetolerance="10" gridtolerance="10" objecttolerance="10" borderopacity="1" inkscape:document-rotation="0" bordercolor="#666666" pagecolor="#ffffff" /><g id="g1015"><path class="bar" id="path1013" d="M12.14,0H32.8h29.43h28.8h19.71c3.34,0,6.38,1.37,8.58,3.56c2.2,2.2,3.56,5.24,3.56,8.58v7.13v57.25v7.09 c0,3.34-1.37,6.38-3.56,8.58c-2.2,2.2-5.24,3.56-8.58,3.56h-19.2c-0.16,0.03-0.33,0.04-0.51,0.04c-0.17,0-0.34-0.01-0.51-0.04 H62.74c-0.16,0.03-0.33,0.04-0.51,0.04c-0.17,0-0.34-0.01-0.51-0.04H33.31c-0.16,0.03-0.33,0.04-0.51,0.04 c-0.17,0-0.34-0.01-0.51-0.04H12.14c-3.34,0-6.38-1.37-8.58-3.56S0,86.95,0,83.61v-7.09V19.27v-7.13C0,8.8,1.37,5.76,3.56,3.56 C5.76,1.37,8.8,0,12.14,0L12.14,0z M55.19,31.24l20.53,14.32c0.32,0.2,0.61,0.48,0.84,0.81c0.92,1.33,0.58,3.14-0.74,4.06 L55.37,64.57c-0.5,0.41-1.15,0.66-1.85,0.66c-1.62,0-2.93-1.31-2.93-2.93V33.63h0.01c0-0.58,0.17-1.16,0.52-1.67 C52.05,30.64,53.87,30.32,55.19,31.24L55.19,31.24z M93.95,79.45V89.9h16.78c1.73,0,3.3-0.71,4.44-1.85 c1.14-1.14,1.85-2.71,1.85-4.44v-4.16H93.95L93.95,79.45z M88.1,89.9V79.45H65.16V89.9H88.1L88.1,89.9z M59.31,89.9V79.45H35.73 V89.9H59.31L59.31,89.9z M29.87,89.9V79.45H5.85v4.16c0,1.73,0.71,3.3,1.85,4.44c1.14,1.14,2.71,1.85,4.44,1.85H29.87L29.87,89.9z M5.85,73.6H32.8h29.43h28.8h26V22.2h-26h-28.8H32.8H5.85V73.6L5.85,73.6z M88.1,16.35V5.85H65.16v10.49H88.1L88.1,16.35z M93.95,5.85v10.49h23.07v-4.2c0-1.73-0.71-3.3-1.85-4.44c-1.14-1.14-2.71-1.85-4.44-1.85H93.95L93.95,5.85z M59.31,16.35V5.85 H35.73v10.49H59.31L59.31,16.35z M29.87,16.35V5.85H12.14c-1.73,0-3.3,0.71-4.44,1.85c-1.14,1.14-1.85,2.71-1.85,4.44v4.2H29.87 L29.87,16.35z" /></g></svg>
+
+ 
+</div>
+
+<p>And it did not happen overnight. The moment first digital drum machine, specifically, <a href="https://en.wikipedia.org/wiki/Linn_LM-1">Linn LM-1 Drum Computer</a> hit the market in 1980 at stunning launch price of $4,995, there were already producers, who did not want all the fuss with miking up a real drum kit. So, they just asked the drummer of the band to program-in their parts into Linn. Later, as the 
+MIDI standard became more and more established among studio equipment manufactures, many of them contemplatingly offering a new kind of “no humans needed” approach to music recording.</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2021/Moby_Drums_and_Samples/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2021-01-02 22:51" class="post-list__meta--date date">2 Jan 2021</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/The_Years_s_Gift/" title="The Years's Gift">The Years's Gift</a></h2>
+        
+	<p class="excerpt"><h4 id="my-first-riff-analysis-ever">My first riff analysis ever</h4>
+
+<p><img src="/assets/images/figures/catamenia_bridge_1-1-1.svg" style="width: 100%; filter: invert(0.8);" /></p>
+
+<p>So, let’s take a look at this bunch of notes from a song, I’m trying to learn. For almost a year now. Yeah, that’s embarrassing as heck, I know. 
+It has a , that totally example of what could be called “power chord music theory”. The .. you can rather easily introduce accidentals and even short temporary modulations, just by playing the notes of a scale in form of all power chords. 
+Let’s take a closer look at how it happens.</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/The_Years_s_Gift/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-09-11 22:41" class="post-list__meta--date date">11 Sep 2020</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+  </ol>
+
+  <hr class="post-list__divider ">
+
+  
+      <nav class="pagination" role="navigation">
+  
+
+  <span class="pagination__page-number">Page 1 of 4</span>
+
+  
+    <a rel="next" class="posts older btn small" href="/page2/">Older Posts →</a>
+  
+</nav>
+
+  
+
+</div>
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

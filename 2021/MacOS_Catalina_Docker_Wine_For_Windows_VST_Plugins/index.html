@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>MacOS Catalina Docker Wine For Windows VST Plugins</title>
+  <meta name="description" content="AKA What the Hell am I Doing with My Life
+
+Do you like strange audio software like I do? Most of really odd and retro stuff, like a total emulation of PPG Wave Computer Suite, or this micro electro drum machine, runs only under Win32 and, therefore out of my direct reach as a typical mac user.
+This also applies to a lot of software written for academic research purposes. Usually those programs were made to perform specific calculations that prove the thesis stated in one’s master’s paper. Usually, written by people who do not specialize in software, during pre-Jupiter pre-cloud era, the choice of platform and tooling was . Yes, there were the times, when they were teaching engineers and mathetimaticans to program on Delphi and Prolog. Don’t ask me why. Fun fact, I know for sure, that there are still people who support and maintain in-house Delphi projects.
+
+So, what are my options? Well, current versions of Wine does not support MacOS Catalina, and Winebottler has a very strange paradigm of usage which seems totally alien to me, Like packing exe into Mac App? Automated installations? On what planet am I? And, of course, there is no way, I’m trying to build Wine myself, as it now requires pulling all of the 32-bit versions of development libraries and such. Something is sure gonna break, and I am not smart enough to deal with that confidently. So, why not try docker instead, since I do care about latency for the specified use cases.
+
+So, I’ve assembled a docker image, lousely based on the ones provided by Jess Frazelle for PulseAudio support and Scott Hardy for X session support.
+
+Dockerfile is available in this repo which also includes pulseaudio config files.
+
+To get the X forwarding from container, which would act as a thin client of sorts. We will be using XQuartz for MacOS. From the XQuartz preferences, in the security tab, make sure Allow connections from network clients is enabled. Restart XQuartz.
+xhost +localhost
+
+
+Did not won over MONO(?)/framework installation problems, though. Every time I run a fresh image it would ask me to download a few things. Not critcal for me right now. 
+When running a Linux distro inside docker, ALSA will not work properly out of the box, as it would not be able to locate a hardware audio
+ interface (no dummy hw bindings allowed at ALSA level, if you want that - welcome to kernel recomplication!). On most UNIX and Unix-like environments, you can just bind your /snd/audio  from host to docker container, but not on your shiny polished MacOS. One of the possible solutions here, is to use pulseaudio client-server over its native transport.
+
+Pulseaudio was once designed to be a “distribution layer” between ALSA and applications, for them to share audio channels and buffers properly
+. It worked quite well for general-purpose multimedia apps, but fell a bit short when it came to .. working with audio (i.e DAWs, audio-editors, samplers, etc). Therefore, people designed Jack which serves a similar purpose, but with much richer feature set and latency footprint. I believe, Jack is currently the “unofficial standard” for audio and music production on Linux.
+
+As you see from the file, I also had to install KXStudio stuff. Setup repos, according to the instructions on their site. 
+I decided to go with Carla as a VST host. For it, I also installed wine bridges, x32 and x64 one. 
+There was some typical open-source fun stuff along the way, of course. Like, I had to go to Carla’s settings and enable the corresponding experimental feature. After that I tried to scan for new plugins, but that did not work (worked when I ran it under root privileges for some reason). Finally, I got it working by just dragging and dropping a DLL file onto Carla’s rack panel.
+
+Curious fact, I’ve also tried to run Pedalboard2 VSTHost through Wine. It starts, it loads the Win32 plugin DLL, however the audio it produces consists of clicks and pops exclusively. In theory, WineASIO should mitigate those problems, however it is built exclusively around Jack. 
+And this is where we will be facing the fundamental problem with this kind of setup: pulseaudio and Jack does not mesh well together at all. You cannot output from Jack to pulseaudio sink. Jack forwarding requires a Jack server on the host machine. And installing and running Jack on MacOS is the most unnatural thing ever (by my standards, of course). 
+So, I opted for pulseaudio and it’s native sink. Thankfully, there is a brew formula for pulseaudio. So, just run the sink like this:
+
+pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon
+
+
+For more or less correct VST plugin GUI display, I also had to install several Wine-specific fix-ups.
+winetricks mfc42
+winetricks gdiplus
+winetricks corefonts
+
+
+Finally, to run the image with X and pulseaudio forwarding:
+docker run -it -e DISPLAY=host.docker.internal:0 -e PULSE_SERVER=docker.for.mac.localhost -v ~/.config/pulse:/home/pulseaudio/.config/pulse --entrypoint /bin/bash --ipc=host --rm dieheart/pulse2:latest
+
+
+So, conceptually it works. As you can see, I’m sharing this “pulseaudio-cookie” file across guest and host by simply mounting the config directory to container’s filesystem. And now, the caveats.
+
+  It seems, like PA can only output to a physical audio device. I tried editing the config in multiple ways, and it explicitly stated that in the error message: [github link]. Not really total deal breaker of course, if you only need monitoring. You can monitor and then simply record it to WAV inside container.
+  No freaking MIDI support. MIDI sequencing and events are all handled within ALSA, therefore require a device to be present. Well, you know what. I can use OSC protocol for that, and pass through a configured docker network port.
+
+
+There is a handful of directions we can head from here. And it feels that they all go to Hell. So, I took the random one, which would be try to compile pulseaudio myself, and make an override that will output to virtual device.
+
+The intricacies of that should be somewhere in PulseAudio CoreAudio Module
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MacOS Catalina Docker Wine For Windows VST Plugins">
+  <meta name="twitter:description" content="AKA What the Hell am I Doing with My Life
+
+Do you like strange audio software like I do? Most of really odd and retro stuff, like a total emulation of PPG Wave Computer Suite, or this micro electro drum machine, runs only under Win32 and, therefore out of my direct reach as a typical mac user.
+This also applies to a lot of software written for academic research purposes. Usually those programs were made to perform specific calculations that prove the thesis stated in one’s master’s paper. Usually, written by people who do not specialize in software, during pre-Jupiter pre-cloud era, the choice of platform and tooling was . Yes, there were the times, when they were teaching engineers and mathetimaticans to program on Delphi and Prolog. Don’t ask me why. Fun fact, I know for sure, that there are still people who support and maintain in-house Delphi projects.
+
+So, what are my options? Well, current versions of Wine does not support MacOS Catalina, and Winebottler has a very strange paradigm of usage which seems totally alien to me, Like packing exe into Mac App? Automated installations? On what planet am I? And, of course, there is no way, I’m trying to build Wine myself, as it now requires pulling all of the 32-bit versions of development libraries and such. Something is sure gonna break, and I am not smart enough to deal with that confidently. So, why not try docker instead, since I do care about latency for the specified use cases.
+
+So, I’ve assembled a docker image, lousely based on the ones provided by Jess Frazelle for PulseAudio support and Scott Hardy for X session support.
+
+Dockerfile is available in this repo which also includes pulseaudio config files.
+
+To get the X forwarding from container, which would act as a thin client of sorts. We will be using XQuartz for MacOS. From the XQuartz preferences, in the security tab, make sure Allow connections from network clients is enabled. Restart XQuartz.
+xhost +localhost
+
+
+Did not won over MONO(?)/framework installation problems, though. Every time I run a fresh image it would ask me to download a few things. Not critcal for me right now. 
+When running a Linux distro inside docker, ALSA will not work properly out of the box, as it would not be able to locate a hardware audio
+ interface (no dummy hw bindings allowed at ALSA level, if you want that - welcome to kernel recomplication!). On most UNIX and Unix-like environments, you can just bind your /snd/audio  from host to docker container, but not on your shiny polished MacOS. One of the possible solutions here, is to use pulseaudio client-server over its native transport.
+
+Pulseaudio was once designed to be a “distribution layer” between ALSA and applications, for them to share audio channels and buffers properly
+. It worked quite well for general-purpose multimedia apps, but fell a bit short when it came to .. working with audio (i.e DAWs, audio-editors, samplers, etc). Therefore, people designed Jack which serves a similar purpose, but with much richer feature set and latency footprint. I believe, Jack is currently the “unofficial standard” for audio and music production on Linux.
+
+As you see from the file, I also had to install KXStudio stuff. Setup repos, according to the instructions on their site. 
+I decided to go with Carla as a VST host. For it, I also installed wine bridges, x32 and x64 one. 
+There was some typical open-source fun stuff along the way, of course. Like, I had to go to Carla’s settings and enable the corresponding experimental feature. After that I tried to scan for new plugins, but that did not work (worked when I ran it under root privileges for some reason). Finally, I got it working by just dragging and dropping a DLL file onto Carla’s rack panel.
+
+Curious fact, I’ve also tried to run Pedalboard2 VSTHost through Wine. It starts, it loads the Win32 plugin DLL, however the audio it produces consists of clicks and pops exclusively. In theory, WineASIO should mitigate those problems, however it is built exclusively around Jack. 
+And this is where we will be facing the fundamental problem with this kind of setup: pulseaudio and Jack does not mesh well together at all. You cannot output from Jack to pulseaudio sink. Jack forwarding requires a Jack server on the host machine. And installing and running Jack on MacOS is the most unnatural thing ever (by my standards, of course). 
+So, I opted for pulseaudio and it’s native sink. Thankfully, there is a brew formula for pulseaudio. So, just run the sink like this:
+
+pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon
+
+
+For more or less correct VST plugin GUI display, I also had to install several Wine-specific fix-ups.
+winetricks mfc42
+winetricks gdiplus
+winetricks corefonts
+
+
+Finally, to run the image with X and pulseaudio forwarding:
+docker run -it -e DISPLAY=host.docker.internal:0 -e PULSE_SERVER=docker.for.mac.localhost -v ~/.config/pulse:/home/pulseaudio/.config/pulse --entrypoint /bin/bash --ipc=host --rm dieheart/pulse2:latest
+
+
+So, conceptually it works. As you can see, I’m sharing this “pulseaudio-cookie” file across guest and host by simply mounting the config directory to container’s filesystem. And now, the caveats.
+
+  It seems, like PA can only output to a physical audio device. I tried editing the config in multiple ways, and it explicitly stated that in the error message: [github link]. Not really total deal breaker of course, if you only need monitoring. You can monitor and then simply record it to WAV inside container.
+  No freaking MIDI support. MIDI sequencing and events are all handled within ALSA, therefore require a device to be present. Well, you know what. I can use OSC protocol for that, and pass through a configured docker network port.
+
+
+There is a handful of directions we can head from here. And it feels that they all go to Hell. So, I took the random one, which would be try to compile pulseaudio myself, and make an override that will output to virtual device.
+
+The intricacies of that should be somewhere in PulseAudio CoreAudio Module
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MacOS Catalina Docker Wine For Windows VST Plugins">
+  <meta property="og:description" content="AKA What the Hell am I Doing with My Life
+
+Do you like strange audio software like I do? Most of really odd and retro stuff, like a total emulation of PPG Wave Computer Suite, or this micro electro drum machine, runs only under Win32 and, therefore out of my direct reach as a typical mac user.
+This also applies to a lot of software written for academic research purposes. Usually those programs were made to perform specific calculations that prove the thesis stated in one’s master’s paper. Usually, written by people who do not specialize in software, during pre-Jupiter pre-cloud era, the choice of platform and tooling was . Yes, there were the times, when they were teaching engineers and mathetimaticans to program on Delphi and Prolog. Don’t ask me why. Fun fact, I know for sure, that there are still people who support and maintain in-house Delphi projects.
+
+So, what are my options? Well, current versions of Wine does not support MacOS Catalina, and Winebottler has a very strange paradigm of usage which seems totally alien to me, Like packing exe into Mac App? Automated installations? On what planet am I? And, of course, there is no way, I’m trying to build Wine myself, as it now requires pulling all of the 32-bit versions of development libraries and such. Something is sure gonna break, and I am not smart enough to deal with that confidently. So, why not try docker instead, since I do care about latency for the specified use cases.
+
+So, I’ve assembled a docker image, lousely based on the ones provided by Jess Frazelle for PulseAudio support and Scott Hardy for X session support.
+
+Dockerfile is available in this repo which also includes pulseaudio config files.
+
+To get the X forwarding from container, which would act as a thin client of sorts. We will be using XQuartz for MacOS. From the XQuartz preferences, in the security tab, make sure Allow connections from network clients is enabled. Restart XQuartz.
+xhost +localhost
+
+
+Did not won over MONO(?)/framework installation problems, though. Every time I run a fresh image it would ask me to download a few things. Not critcal for me right now. 
+When running a Linux distro inside docker, ALSA will not work properly out of the box, as it would not be able to locate a hardware audio
+ interface (no dummy hw bindings allowed at ALSA level, if you want that - welcome to kernel recomplication!). On most UNIX and Unix-like environments, you can just bind your /snd/audio  from host to docker container, but not on your shiny polished MacOS. One of the possible solutions here, is to use pulseaudio client-server over its native transport.
+
+Pulseaudio was once designed to be a “distribution layer” between ALSA and applications, for them to share audio channels and buffers properly
+. It worked quite well for general-purpose multimedia apps, but fell a bit short when it came to .. working with audio (i.e DAWs, audio-editors, samplers, etc). Therefore, people designed Jack which serves a similar purpose, but with much richer feature set and latency footprint. I believe, Jack is currently the “unofficial standard” for audio and music production on Linux.
+
+As you see from the file, I also had to install KXStudio stuff. Setup repos, according to the instructions on their site. 
+I decided to go with Carla as a VST host. For it, I also installed wine bridges, x32 and x64 one. 
+There was some typical open-source fun stuff along the way, of course. Like, I had to go to Carla’s settings and enable the corresponding experimental feature. After that I tried to scan for new plugins, but that did not work (worked when I ran it under root privileges for some reason). Finally, I got it working by just dragging and dropping a DLL file onto Carla’s rack panel.
+
+Curious fact, I’ve also tried to run Pedalboard2 VSTHost through Wine. It starts, it loads the Win32 plugin DLL, however the audio it produces consists of clicks and pops exclusively. In theory, WineASIO should mitigate those problems, however it is built exclusively around Jack. 
+And this is where we will be facing the fundamental problem with this kind of setup: pulseaudio and Jack does not mesh well together at all. You cannot output from Jack to pulseaudio sink. Jack forwarding requires a Jack server on the host machine. And installing and running Jack on MacOS is the most unnatural thing ever (by my standards, of course). 
+So, I opted for pulseaudio and it’s native sink. Thankfully, there is a brew formula for pulseaudio. So, just run the sink like this:
+
+pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon
+
+
+For more or less correct VST plugin GUI display, I also had to install several Wine-specific fix-ups.
+winetricks mfc42
+winetricks gdiplus
+winetricks corefonts
+
+
+Finally, to run the image with X and pulseaudio forwarding:
+docker run -it -e DISPLAY=host.docker.internal:0 -e PULSE_SERVER=docker.for.mac.localhost -v ~/.config/pulse:/home/pulseaudio/.config/pulse --entrypoint /bin/bash --ipc=host --rm dieheart/pulse2:latest
+
+
+So, conceptually it works. As you can see, I’m sharing this “pulseaudio-cookie” file across guest and host by simply mounting the config directory to container’s filesystem. And now, the caveats.
+
+  It seems, like PA can only output to a physical audio device. I tried editing the config in multiple ways, and it explicitly stated that in the error message: [github link]. Not really total deal breaker of course, if you only need monitoring. You can monitor and then simply record it to WAV inside container.
+  No freaking MIDI support. MIDI sequencing and events are all handled within ALSA, therefore require a device to be present. Well, you know what. I can use OSC protocol for that, and pass through a configured docker network port.
+
+
+There is a handful of directions we can head from here. And it feels that they all go to Hell. So, I took the random one, which would be try to compile pulseaudio myself, and make an override that will output to virtual device.
+
+The intricacies of that should be somewhere in PulseAudio CoreAudio Module
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2021/MacOS_Catalina_Docker_Wine_For_Windows_VST_Plugins/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2021-06-02 08:44" class="post-meta__date date">2 Jun 2021</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#docker">docker</a> <a href="/tags/#wine">wine</a> <a href="/tags/#pulseaudio">pulseaudio</a> </span>
+      
+    </div>
+    <h1 class="post-title">MacOS Catalina Docker Wine For Windows VST Plugins</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="aka-what-the-hell-am-i-doing-with-my-life">AKA What the Hell am I Doing with My Life</h4>
+
+<p>Do you like strange audio software like I do? Most of really odd and retro stuff, like a total emulation of PPG Wave Computer Suite, or this micro electro drum machine, runs only under Win32 and, therefore out of my direct reach as a <em>typical</em> mac user.
+This also applies to a lot of software written for academic research purposes. Usually those programs were made to perform specific calculations that prove the thesis stated in one’s master’s paper. Usually, written by people who do not specialize in software, during pre-Jupiter pre-cloud era, the choice of platform and tooling was . Yes, there were the times, when they were teaching engineers and mathetimaticans to program on Delphi and Prolog. Don’t ask me why. Fun fact, I know for sure, that there are still people who support and maintain in-house Delphi projects.</p>
+
+<p>So, what are my options? Well, current versions of Wine does not support MacOS Catalina, and Winebottler has a very strange paradigm of usage which seems totally alien to me, Like packing exe into Mac App? Automated installations? On what planet am I? And, of course, there is no way, I’m trying to build Wine myself, as it now requires pulling all of the 32-bit versions of development libraries and such. Something is sure gonna break, and I am not smart enough to deal with that confidently. So, why not try docker instead, since I do care about latency for the specified use cases.</p>
+
+<p>So, I’ve assembled a docker image, lousely based on the ones provided by <a href="https://github.com/jessfraz/dockerfiles/tree/master/pulseaudio">Jess Frazelle</a> for PulseAudio support and <a href="https://github.com/scottyhardy/docker-wine">Scott Hardy</a> for X session support.</p>
+
+<p>Dockerfile is available in <a href="https://github.com/deviant-syndrome/pulse-carlawine">this repo</a> which also includes pulseaudio config files.</p>
+
+<p>To get the X forwarding from container, which would act as a thin client of sorts. We will be using XQuartz for MacOS. From the XQuartz preferences, in the security tab, make sure Allow connections from network clients is enabled. Restart XQuartz.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xhost +localhost
+</code></pre></div></div>
+
+<p>Did not won over MONO(?)/framework installation problems, though. Every time I run a fresh image it would ask me to download a few things. Not critcal for me right now. 
+When running a Linux distro inside docker, ALSA will not work properly out of the box, as it would not be able to locate a hardware audio
+ interface (no dummy hw bindings allowed at ALSA level, if you want that - welcome to kernel recomplication!). On most UNIX and Unix-like environments, you can just bind your <code class="highlighter-rouge">/snd/audio </code> from host to docker container, but not on your shiny polished MacOS. One of the possible solutions here, is to use pulseaudio client-server over its native transport.</p>
+
+<p>Pulseaudio was once designed to be a “distribution layer” between ALSA and applications, for them to share audio channels and buffers properly
+. It worked quite well for general-purpose multimedia apps, but fell a bit short when it came to .. working with audio (i.e DAWs, audio-editors, samplers, etc). Therefore, people designed Jack which serves a similar purpose, but with much richer feature set and latency footprint. I believe, Jack is currently the “unofficial standard” for audio and music production on Linux.</p>
+
+<p>As you see from the file, I also had to install KXStudio stuff. Setup repos, according to the <a href="https://kx.studio/Repositories">instructions</a> on their site. 
+I decided to go with Carla as a VST host. For it, I also installed wine bridges, x32 and x64 one. 
+There was some typical open-source fun stuff along the way, of course. Like, I had to go to Carla’s settings and enable the corresponding experimental feature. After that I tried to scan for new plugins, but that did not work (worked when I ran it under root privileges for some reason). Finally, I got it working by just dragging and dropping a DLL file onto Carla’s rack panel.</p>
+
+<p>Curious fact, I’ve also tried to run <a href="http://www.niallmoody.com/apps/pedalboard2">Pedalboard2</a> VSTHost through Wine. It starts, it loads the Win32 plugin DLL, however the audio it produces consists of clicks and pops exclusively. In theory, WineASIO should mitigate those problems, however it is built exclusively around Jack. 
+And this is where we will be facing the fundamental problem with this kind of setup: pulseaudio and Jack does not mesh well together at all. You cannot output from Jack to pulseaudio sink. Jack forwarding requires a Jack server on the host machine. And installing and running Jack on MacOS is the most unnatural thing ever (by my standards, of course). 
+So, I opted for pulseaudio and it’s native sink. Thankfully, there is a brew formula for pulseaudio. So, just run the sink like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pulseaudio <span class="nt">--load</span><span class="o">=</span>module-native-protocol-tcp <span class="nt">--exit-idle-time</span><span class="o">=</span><span class="nt">-1</span> <span class="nt">--daemon</span>
+</code></pre></div></div>
+
+<p>For more or less correct VST plugin GUI display, I also had to install several Wine-specific fix-ups.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>winetricks mfc42
+winetricks gdiplus
+winetricks corefonts
+</code></pre></div></div>
+
+<p>Finally, to run the image with X and pulseaudio forwarding:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> <span class="nt">-e</span> <span class="nv">DISPLAY</span><span class="o">=</span>host.docker.internal:0 <span class="nt">-e</span> <span class="nv">PULSE_SERVER</span><span class="o">=</span>docker.for.mac.localhost <span class="nt">-v</span> ~/.config/pulse:/home/pulseaudio/.config/pulse <span class="nt">--entrypoint</span> /bin/bash <span class="nt">--ipc</span><span class="o">=</span>host <span class="nt">--rm</span> dieheart/pulse2:latest
+</code></pre></div></div>
+
+<p>So, conceptually it works. As you can see, I’m sharing this “pulseaudio-cookie” file across guest and host by simply mounting the config directory to container’s filesystem. And now, the caveats.</p>
+<ul>
+  <li>It seems, like PA can only output to a <strong>physical</strong> audio device. I tried editing the config in multiple ways, and it explicitly stated that in the error message: [github link]. Not really total deal breaker of course, if you only need monitoring. You can monitor and then simply record it to WAV inside container.</li>
+  <li>No freaking MIDI support. MIDI sequencing and events are all handled within ALSA, therefore require a device to be present. Well, you know what. I can use <a href="https://en.wikipedia.org/wiki/Open_Sound_Control">OSC protocol</a> for that, and pass through a configured docker network port.</li>
+</ul>
+
+<p>There is a handful of directions we can head from here. And it feels that they all go to Hell. So, I took the random one, which would be try to compile pulseaudio myself, and make an override that will output to virtual device.</p>
+
+<p>The intricacies of that should be somewhere in <a href="https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/blob/master/src/modules/macosx/module-coreaudio-device.c">PulseAudio CoreAudio Module</a></p>
+
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>SuperCollider Help Panel Custom CSS</title>
+  <meta name="description" content="Dark Systems for Darkminded People!
+
+
+
+Dir: [~/Library/ApplicationSupport/SuperCollider/Help]
+
+First, some CSS mad skillz, mostly based on Dracula theme. Notice the dirty 
+hack to evade flooding into CodeMirror spans.
+
+  custom.css
+
+
+  html,
+body {
+    background-image: none !important;
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+body:not(.editor) {
+    color: rgba(248, 248, 242, 1) !important;
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+#summary {
+    color: #6cd4ae !important;
+}
+
+body &gt; div.contents &gt; div.warning {
+    color: black;
+    background: aliceblue;
+}
+
+body &gt; div.contents &gt; div.note &gt; a {
+    color: blueviolet !important;
+}
+
+body &gt; div.contents &gt; div.note &gt; a:hover {
+    color: blacks !important;;
+}
+
+body &gt; div.contents &gt; div.note {
+    color: black;
+    background: aliceblue;
+}
+
+a,
+a * {
+    color: rgba(80, 250, 123, 1) !important;
+    background-color: transparent !important;
+}
+
+#menubar {
+    background: black !important;
+}
+
+a:hover,
+a:hover *,
+a:visited:hover,
+a:visited:hover *,
+span[onclick]:hover,
+div[onclick]:hover,
+[role="link"]:hover,
+[role="link"]:hover *,
+[role="button"]:hover *,
+[role="menuitem"]:hover,
+[role="menuitem"]:hover *,
+.link:hover,
+.link:hover * {
+    color: rgba(241, 250, 140, 1) !important;
+}
+
+a:visited,
+a:visited * {
+    color: rgba(98, 114, 164, 1) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+[id*="headline"],
+[class*="headline"],
+[id*="header"],
+[class*="header"],
+[class*="header"] td {
+    color: rgba(108, 166, 255, 1) !important;
+}
+
+table {
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+[id*="overlay"],
+[id*="lightbox"],
+blockquote {
+    background-color: rgba(68, 71, 90, 1) !important;
+}
+
+pre,
+dl {
+    background-color: rgba(39, 40, 45, 1) !important;
+}
+
+input,
+select,
+button,
+[role="button"],
+a.button,
+a.submit,
+a.BigButton,
+a.TabLink,
+.install[onclick] {
+    text-indent: 5px;
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    background: rgba(68, 71, 90, 1) !important;
+}
+
+textarea {
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    background: rgba(68, 71, 90, 1) !important;
+}
+
+a.highlight,
+a.highlight *,
+a.active,
+a.active *,
+.selected,
+.selected *,
+[href="#"] {
+    font-weight: bold !important;
+    color: rgba(139, 233, 253, 1) !important;
+}
+  
+
+
+Then disable CodeMirror bindings in the following two files. In the last file, I substituted the cm-default with
+the ones you’ll find in CodeMirror’s theme CSS files, which also goes by the name of the famous Romanian count. 
+I of course could change the CodeMirror’s theme the proper way, as its documentation suggests, however, then I would
+need to change the HTML help file generation for SC, which I’m too lazy and desorganized for.
+
+  editor.css
+
+  /*!* syntax hightlighting *!*/
+/*.cm-s-default .cm-keyword { color: #0000e6; font-weight: bold; }*/
+/*.cm-s-default .cm-built-in { color: #3333bf; }*/
+/*.cm-s-default .cm-number { color: #980099; }*/
+/*.cm-s-default .cm-symbol { color: #007300; }*/
+/*.cm-s-default .cm-class { color: #0000d2; }*/
+/*.cm-s-default .cm-primitive { color: #0000d2; }*/
+/*.cm-s-default .cm-char { color: #007300; }*/
+/*.cm-s-default .cm-env-var { color: #8c4614; }*/
+/*.cm-s-default .cm-comment { color: #bf0000; }*/
+/*.cm-s-default .cm-string { color: #5f5f5f; }*/
+/*.cm-s-default .cm-text { color: #000000; }*/
+  
+
+
+  codemirror.css
+
+  /* DEFAULT THEME */
+
+.cm-s-default.CodeMirror, .cm-s-default .CodeMirror-gutters {
+  background-color: #282a36 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+.cm-s-default .CodeMirror-gutters { color: #282a36; }
+.cm-s-default .CodeMirror-cursor { border-left: solid thin #f8f8f0; }
+.cm-s-default .CodeMirror-linenumber { color: #6D8A88; }
+.cm-s-default .CodeMirror-selected { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default .CodeMirror-line::selection, .cm-s-default .CodeMirror-line &gt; span::selection, .cm-s-default .CodeMirror-line &gt; span &gt; span::selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default .CodeMirror-line::-moz-selection, .cm-s-default .CodeMirror-line &gt; span::-moz-selection, .cm-s-default .CodeMirror-line &gt; span &gt; span::-moz-selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default span.cm-comment { color: #6272a4; }
+.cm-s-default span.cm-string, .cm-s-default span.cm-string-2 { color: #f1fa8c; }
+.cm-s-default span.cm-number { color: #bd93f9; }
+.cm-s-default span.cm-variable { color: #50fa7b; }
+.cm-s-default span.cm-variable-2 { color: white; }
+.cm-s-default span.cm-def { color: #50fa7b; }
+.cm-s-default span.cm-operator { color: #ff79c6; }
+.cm-s-default span.cm-keyword { color: #ff79c6; }
+.cm-s-default span.cm-atom { color: #bd93f9; }
+.cm-s-default span.cm-meta { color: #f8f8f2; }
+.cm-s-default span.cm-tag { color: #ff79c6; }
+.cm-s-default span.cm-attribute { color: #50fa7b; }
+.cm-s-default span.cm-qualifier { color: #50fa7b; }
+.cm-s-default span.cm-property { color: #66d9ef; }
+.cm-s-default span.cm-builtin { color: #50fa7b; }
+.cm-s-default span.cm-variable-3, .cm-s-default span.cm-type { color: #ffb86c; }
+
+.cm-s-default .CodeMirror-activeline-background { background: rgba(255,255,255,0.1); }
+.cm-s-default .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+
+
+/*.cm-s-default .cm-header {color: blue;}*/
+/*.cm-s-default .cm-quote {color: #090;}*/
+/*.cm-negative {color: #d44;}*/
+/*.cm-positive {color: #292;}*/
+/*.cm-header, .cm-strong {font-weight: bold;}*/
+/*.cm-em {font-style: italic;}*/
+/*.cm-link {text-decoration: underline;}*/
+/*.cm-strikethrough {text-decoration: line-through;}*/
+
+/*.cm-s-default .cm-keyword {color: #708;}*/
+/*.cm-s-default .cm-atom {color: #219;}*/
+/*.cm-s-default .cm-number {color: #164;}*/
+/*.cm-s-default .cm-def {color: #00f;}*/
+/*.cm-s-default .cm-variable,*/
+/*.cm-s-default .cm-punctuation,*/
+/*.cm-s-default .cm-property,*/
+/*.cm-s-default .cm-operator {}*/
+/*.cm-s-default .cm-variable-2 {color: #05a;}*/
+/*.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #085;}*/
+/*.cm-s-default .cm-comment {color: #a50;}*/
+/*.cm-s-default .cm-string {color: #a11;}*/
+/*.cm-s-default .cm-string-2 {color: #f50;}*/
+/*.cm-s-default .cm-meta {color: #555;}*/
+/*.cm-s-default .cm-qualifier {color: #555;}*/
+/*.cm-s-default .cm-builtin {color: #30a;}*/
+/*.cm-s-default .cm-bracket {color: #997;}*/
+/*.cm-s-default .cm-tag {color: #170;}*/
+/*.cm-s-default .cm-attribute {color: #00c;}*/
+/*.cm-s-default .cm-hr {color: #999;}*/
+/*.cm-s-default .cm-link {color: #00c;}*/
+
+/*.cm-s-default .cm-error {color: #f00;}*/
+/*.cm-invalidchar {color: #f00;}*/
+  
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SuperCollider Help Panel Custom CSS">
+  <meta name="twitter:description" content="Dark Systems for Darkminded People!
+
+
+
+Dir: [~/Library/ApplicationSupport/SuperCollider/Help]
+
+First, some CSS mad skillz, mostly based on Dracula theme. Notice the dirty 
+hack to evade flooding into CodeMirror spans.
+
+  custom.css
+
+
+  html,
+body {
+    background-image: none !important;
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+body:not(.editor) {
+    color: rgba(248, 248, 242, 1) !important;
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+#summary {
+    color: #6cd4ae !important;
+}
+
+body &gt; div.contents &gt; div.warning {
+    color: black;
+    background: aliceblue;
+}
+
+body &gt; div.contents &gt; div.note &gt; a {
+    color: blueviolet !important;
+}
+
+body &gt; div.contents &gt; div.note &gt; a:hover {
+    color: blacks !important;;
+}
+
+body &gt; div.contents &gt; div.note {
+    color: black;
+    background: aliceblue;
+}
+
+a,
+a * {
+    color: rgba(80, 250, 123, 1) !important;
+    background-color: transparent !important;
+}
+
+#menubar {
+    background: black !important;
+}
+
+a:hover,
+a:hover *,
+a:visited:hover,
+a:visited:hover *,
+span[onclick]:hover,
+div[onclick]:hover,
+[role="link"]:hover,
+[role="link"]:hover *,
+[role="button"]:hover *,
+[role="menuitem"]:hover,
+[role="menuitem"]:hover *,
+.link:hover,
+.link:hover * {
+    color: rgba(241, 250, 140, 1) !important;
+}
+
+a:visited,
+a:visited * {
+    color: rgba(98, 114, 164, 1) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+[id*="headline"],
+[class*="headline"],
+[id*="header"],
+[class*="header"],
+[class*="header"] td {
+    color: rgba(108, 166, 255, 1) !important;
+}
+
+table {
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+[id*="overlay"],
+[id*="lightbox"],
+blockquote {
+    background-color: rgba(68, 71, 90, 1) !important;
+}
+
+pre,
+dl {
+    background-color: rgba(39, 40, 45, 1) !important;
+}
+
+input,
+select,
+button,
+[role="button"],
+a.button,
+a.submit,
+a.BigButton,
+a.TabLink,
+.install[onclick] {
+    text-indent: 5px;
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    background: rgba(68, 71, 90, 1) !important;
+}
+
+textarea {
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    background: rgba(68, 71, 90, 1) !important;
+}
+
+a.highlight,
+a.highlight *,
+a.active,
+a.active *,
+.selected,
+.selected *,
+[href="#"] {
+    font-weight: bold !important;
+    color: rgba(139, 233, 253, 1) !important;
+}
+  
+
+
+Then disable CodeMirror bindings in the following two files. In the last file, I substituted the cm-default with
+the ones you’ll find in CodeMirror’s theme CSS files, which also goes by the name of the famous Romanian count. 
+I of course could change the CodeMirror’s theme the proper way, as its documentation suggests, however, then I would
+need to change the HTML help file generation for SC, which I’m too lazy and desorganized for.
+
+  editor.css
+
+  /*!* syntax hightlighting *!*/
+/*.cm-s-default .cm-keyword { color: #0000e6; font-weight: bold; }*/
+/*.cm-s-default .cm-built-in { color: #3333bf; }*/
+/*.cm-s-default .cm-number { color: #980099; }*/
+/*.cm-s-default .cm-symbol { color: #007300; }*/
+/*.cm-s-default .cm-class { color: #0000d2; }*/
+/*.cm-s-default .cm-primitive { color: #0000d2; }*/
+/*.cm-s-default .cm-char { color: #007300; }*/
+/*.cm-s-default .cm-env-var { color: #8c4614; }*/
+/*.cm-s-default .cm-comment { color: #bf0000; }*/
+/*.cm-s-default .cm-string { color: #5f5f5f; }*/
+/*.cm-s-default .cm-text { color: #000000; }*/
+  
+
+
+  codemirror.css
+
+  /* DEFAULT THEME */
+
+.cm-s-default.CodeMirror, .cm-s-default .CodeMirror-gutters {
+  background-color: #282a36 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+.cm-s-default .CodeMirror-gutters { color: #282a36; }
+.cm-s-default .CodeMirror-cursor { border-left: solid thin #f8f8f0; }
+.cm-s-default .CodeMirror-linenumber { color: #6D8A88; }
+.cm-s-default .CodeMirror-selected { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default .CodeMirror-line::selection, .cm-s-default .CodeMirror-line &gt; span::selection, .cm-s-default .CodeMirror-line &gt; span &gt; span::selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default .CodeMirror-line::-moz-selection, .cm-s-default .CodeMirror-line &gt; span::-moz-selection, .cm-s-default .CodeMirror-line &gt; span &gt; span::-moz-selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default span.cm-comment { color: #6272a4; }
+.cm-s-default span.cm-string, .cm-s-default span.cm-string-2 { color: #f1fa8c; }
+.cm-s-default span.cm-number { color: #bd93f9; }
+.cm-s-default span.cm-variable { color: #50fa7b; }
+.cm-s-default span.cm-variable-2 { color: white; }
+.cm-s-default span.cm-def { color: #50fa7b; }
+.cm-s-default span.cm-operator { color: #ff79c6; }
+.cm-s-default span.cm-keyword { color: #ff79c6; }
+.cm-s-default span.cm-atom { color: #bd93f9; }
+.cm-s-default span.cm-meta { color: #f8f8f2; }
+.cm-s-default span.cm-tag { color: #ff79c6; }
+.cm-s-default span.cm-attribute { color: #50fa7b; }
+.cm-s-default span.cm-qualifier { color: #50fa7b; }
+.cm-s-default span.cm-property { color: #66d9ef; }
+.cm-s-default span.cm-builtin { color: #50fa7b; }
+.cm-s-default span.cm-variable-3, .cm-s-default span.cm-type { color: #ffb86c; }
+
+.cm-s-default .CodeMirror-activeline-background { background: rgba(255,255,255,0.1); }
+.cm-s-default .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+
+
+/*.cm-s-default .cm-header {color: blue;}*/
+/*.cm-s-default .cm-quote {color: #090;}*/
+/*.cm-negative {color: #d44;}*/
+/*.cm-positive {color: #292;}*/
+/*.cm-header, .cm-strong {font-weight: bold;}*/
+/*.cm-em {font-style: italic;}*/
+/*.cm-link {text-decoration: underline;}*/
+/*.cm-strikethrough {text-decoration: line-through;}*/
+
+/*.cm-s-default .cm-keyword {color: #708;}*/
+/*.cm-s-default .cm-atom {color: #219;}*/
+/*.cm-s-default .cm-number {color: #164;}*/
+/*.cm-s-default .cm-def {color: #00f;}*/
+/*.cm-s-default .cm-variable,*/
+/*.cm-s-default .cm-punctuation,*/
+/*.cm-s-default .cm-property,*/
+/*.cm-s-default .cm-operator {}*/
+/*.cm-s-default .cm-variable-2 {color: #05a;}*/
+/*.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #085;}*/
+/*.cm-s-default .cm-comment {color: #a50;}*/
+/*.cm-s-default .cm-string {color: #a11;}*/
+/*.cm-s-default .cm-string-2 {color: #f50;}*/
+/*.cm-s-default .cm-meta {color: #555;}*/
+/*.cm-s-default .cm-qualifier {color: #555;}*/
+/*.cm-s-default .cm-builtin {color: #30a;}*/
+/*.cm-s-default .cm-bracket {color: #997;}*/
+/*.cm-s-default .cm-tag {color: #170;}*/
+/*.cm-s-default .cm-attribute {color: #00c;}*/
+/*.cm-s-default .cm-hr {color: #999;}*/
+/*.cm-s-default .cm-link {color: #00c;}*/
+
+/*.cm-s-default .cm-error {color: #f00;}*/
+/*.cm-invalidchar {color: #f00;}*/
+  
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SuperCollider Help Panel Custom CSS">
+  <meta property="og:description" content="Dark Systems for Darkminded People!
+
+
+
+Dir: [~/Library/ApplicationSupport/SuperCollider/Help]
+
+First, some CSS mad skillz, mostly based on Dracula theme. Notice the dirty 
+hack to evade flooding into CodeMirror spans.
+
+  custom.css
+
+
+  html,
+body {
+    background-image: none !important;
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+body:not(.editor) {
+    color: rgba(248, 248, 242, 1) !important;
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+#summary {
+    color: #6cd4ae !important;
+}
+
+body &gt; div.contents &gt; div.warning {
+    color: black;
+    background: aliceblue;
+}
+
+body &gt; div.contents &gt; div.note &gt; a {
+    color: blueviolet !important;
+}
+
+body &gt; div.contents &gt; div.note &gt; a:hover {
+    color: blacks !important;;
+}
+
+body &gt; div.contents &gt; div.note {
+    color: black;
+    background: aliceblue;
+}
+
+a,
+a * {
+    color: rgba(80, 250, 123, 1) !important;
+    background-color: transparent !important;
+}
+
+#menubar {
+    background: black !important;
+}
+
+a:hover,
+a:hover *,
+a:visited:hover,
+a:visited:hover *,
+span[onclick]:hover,
+div[onclick]:hover,
+[role="link"]:hover,
+[role="link"]:hover *,
+[role="button"]:hover *,
+[role="menuitem"]:hover,
+[role="menuitem"]:hover *,
+.link:hover,
+.link:hover * {
+    color: rgba(241, 250, 140, 1) !important;
+}
+
+a:visited,
+a:visited * {
+    color: rgba(98, 114, 164, 1) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+[id*="headline"],
+[class*="headline"],
+[id*="header"],
+[class*="header"],
+[class*="header"] td {
+    color: rgba(108, 166, 255, 1) !important;
+}
+
+table {
+    background-color: rgba(40, 42, 54, 1) !important;
+}
+
+[id*="overlay"],
+[id*="lightbox"],
+blockquote {
+    background-color: rgba(68, 71, 90, 1) !important;
+}
+
+pre,
+dl {
+    background-color: rgba(39, 40, 45, 1) !important;
+}
+
+input,
+select,
+button,
+[role="button"],
+a.button,
+a.submit,
+a.BigButton,
+a.TabLink,
+.install[onclick] {
+    text-indent: 5px;
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    background: rgba(68, 71, 90, 1) !important;
+}
+
+textarea {
+    appearance: none !important;
+    -moz-appearance: none !important;
+    -webkit-appearance: none !important;
+    background: rgba(68, 71, 90, 1) !important;
+}
+
+a.highlight,
+a.highlight *,
+a.active,
+a.active *,
+.selected,
+.selected *,
+[href="#"] {
+    font-weight: bold !important;
+    color: rgba(139, 233, 253, 1) !important;
+}
+  
+
+
+Then disable CodeMirror bindings in the following two files. In the last file, I substituted the cm-default with
+the ones you’ll find in CodeMirror’s theme CSS files, which also goes by the name of the famous Romanian count. 
+I of course could change the CodeMirror’s theme the proper way, as its documentation suggests, however, then I would
+need to change the HTML help file generation for SC, which I’m too lazy and desorganized for.
+
+  editor.css
+
+  /*!* syntax hightlighting *!*/
+/*.cm-s-default .cm-keyword { color: #0000e6; font-weight: bold; }*/
+/*.cm-s-default .cm-built-in { color: #3333bf; }*/
+/*.cm-s-default .cm-number { color: #980099; }*/
+/*.cm-s-default .cm-symbol { color: #007300; }*/
+/*.cm-s-default .cm-class { color: #0000d2; }*/
+/*.cm-s-default .cm-primitive { color: #0000d2; }*/
+/*.cm-s-default .cm-char { color: #007300; }*/
+/*.cm-s-default .cm-env-var { color: #8c4614; }*/
+/*.cm-s-default .cm-comment { color: #bf0000; }*/
+/*.cm-s-default .cm-string { color: #5f5f5f; }*/
+/*.cm-s-default .cm-text { color: #000000; }*/
+  
+
+
+  codemirror.css
+
+  /* DEFAULT THEME */
+
+.cm-s-default.CodeMirror, .cm-s-default .CodeMirror-gutters {
+  background-color: #282a36 !important;
+  color: #f8f8f2 !important;
+  border: none;
+}
+.cm-s-default .CodeMirror-gutters { color: #282a36; }
+.cm-s-default .CodeMirror-cursor { border-left: solid thin #f8f8f0; }
+.cm-s-default .CodeMirror-linenumber { color: #6D8A88; }
+.cm-s-default .CodeMirror-selected { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default .CodeMirror-line::selection, .cm-s-default .CodeMirror-line &gt; span::selection, .cm-s-default .CodeMirror-line &gt; span &gt; span::selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default .CodeMirror-line::-moz-selection, .cm-s-default .CodeMirror-line &gt; span::-moz-selection, .cm-s-default .CodeMirror-line &gt; span &gt; span::-moz-selection { background: rgba(255, 255, 255, 0.10); }
+.cm-s-default span.cm-comment { color: #6272a4; }
+.cm-s-default span.cm-string, .cm-s-default span.cm-string-2 { color: #f1fa8c; }
+.cm-s-default span.cm-number { color: #bd93f9; }
+.cm-s-default span.cm-variable { color: #50fa7b; }
+.cm-s-default span.cm-variable-2 { color: white; }
+.cm-s-default span.cm-def { color: #50fa7b; }
+.cm-s-default span.cm-operator { color: #ff79c6; }
+.cm-s-default span.cm-keyword { color: #ff79c6; }
+.cm-s-default span.cm-atom { color: #bd93f9; }
+.cm-s-default span.cm-meta { color: #f8f8f2; }
+.cm-s-default span.cm-tag { color: #ff79c6; }
+.cm-s-default span.cm-attribute { color: #50fa7b; }
+.cm-s-default span.cm-qualifier { color: #50fa7b; }
+.cm-s-default span.cm-property { color: #66d9ef; }
+.cm-s-default span.cm-builtin { color: #50fa7b; }
+.cm-s-default span.cm-variable-3, .cm-s-default span.cm-type { color: #ffb86c; }
+
+.cm-s-default .CodeMirror-activeline-background { background: rgba(255,255,255,0.1); }
+.cm-s-default .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
+
+
+/*.cm-s-default .cm-header {color: blue;}*/
+/*.cm-s-default .cm-quote {color: #090;}*/
+/*.cm-negative {color: #d44;}*/
+/*.cm-positive {color: #292;}*/
+/*.cm-header, .cm-strong {font-weight: bold;}*/
+/*.cm-em {font-style: italic;}*/
+/*.cm-link {text-decoration: underline;}*/
+/*.cm-strikethrough {text-decoration: line-through;}*/
+
+/*.cm-s-default .cm-keyword {color: #708;}*/
+/*.cm-s-default .cm-atom {color: #219;}*/
+/*.cm-s-default .cm-number {color: #164;}*/
+/*.cm-s-default .cm-def {color: #00f;}*/
+/*.cm-s-default .cm-variable,*/
+/*.cm-s-default .cm-punctuation,*/
+/*.cm-s-default .cm-property,*/
+/*.cm-s-default .cm-operator {}*/
+/*.cm-s-default .cm-variable-2 {color: #05a;}*/
+/*.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #085;}*/
+/*.cm-s-default .cm-comment {color: #a50;}*/
+/*.cm-s-default .cm-string {color: #a11;}*/
+/*.cm-s-default .cm-string-2 {color: #f50;}*/
+/*.cm-s-default .cm-meta {color: #555;}*/
+/*.cm-s-default .cm-qualifier {color: #555;}*/
+/*.cm-s-default .cm-builtin {color: #30a;}*/
+/*.cm-s-default .cm-bracket {color: #997;}*/
+/*.cm-s-default .cm-tag {color: #170;}*/
+/*.cm-s-default .cm-attribute {color: #00c;}*/
+/*.cm-s-default .cm-hr {color: #999;}*/
+/*.cm-s-default .cm-link {color: #00c;}*/
+
+/*.cm-s-default .cm-error {color: #f00;}*/
+/*.cm-invalidchar {color: #f00;}*/
+  
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2021/sc-help-css/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2021-01-12 20:42" class="post-meta__date date">12 Jan 2021</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#supercollider">supercollider</a> </span>
+      
+    </div>
+    <h1 class="post-title">SuperCollider Help Panel Custom CSS</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="dark-systems-for-darkminded-people">Dark Systems for Darkminded People!</h4>
+
+<p><img src="/assets/images/sc_theme.png" alt="Screenshot SuperCollider" /></p>
+
+<p><code class="highlighter-rouge">Dir:</code> <code class="highlighter-rouge">[</code><span style="background: green; color: aquamarine">~/Library/ApplicationSupport/SuperCollider/Help</span><code class="highlighter-rouge">]</code></p>
+
+<p>First, some CSS mad skillz, mostly based on <a href="https://github.com/gkroon/dracula-css">Dracula</a> theme. Notice the dirty 
+hack to evade flooding into CodeMirror spans.</p>
+<details>
+  <summary>custom.css
+</summary>
+
+  <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">html</span><span class="o">,</span>
+<span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">background-image</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="m">42</span><span class="p">,</span> <span class="m">54</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span><span class="nd">:not</span><span class="o">(</span><span class="nc">.editor</span><span class="o">)</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">248</span><span class="p">,</span> <span class="m">248</span><span class="p">,</span> <span class="m">242</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="m">42</span><span class="p">,</span> <span class="m">54</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#summary</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#6cd4ae</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.warning</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">aliceblue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.note</span> <span class="o">&gt;</span> <span class="nt">a</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">blueviolet</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.note</span> <span class="o">&gt;</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">blacks</span> <span class="cp">!important</span><span class="p">;</span><span class="err">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.contents</span> <span class="o">&gt;</span> <span class="nt">div</span><span class="nc">.note</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">aliceblue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="o">,</span>
+<span class="nt">a</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">80</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">123</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#menubar</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">black</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nt">a</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="nt">a</span><span class="nd">:visited:hover</span><span class="o">,</span>
+<span class="nt">a</span><span class="nd">:visited:hover</span> <span class="o">*,</span>
+<span class="nt">span</span><span class="o">[</span><span class="nt">onclick</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nt">div</span><span class="o">[</span><span class="nt">onclick</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"link"</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"link"</span><span class="o">]</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"button"</span><span class="o">]</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"menuitem"</span><span class="o">]</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"menuitem"</span><span class="o">]</span><span class="nd">:hover</span> <span class="o">*,</span>
+<span class="nc">.link</span><span class="nd">:hover</span><span class="o">,</span>
+<span class="nc">.link</span><span class="nd">:hover</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">241</span><span class="p">,</span> <span class="m">250</span><span class="p">,</span> <span class="m">140</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="nd">:visited</span><span class="o">,</span>
+<span class="nt">a</span><span class="nd">:visited</span> <span class="o">*</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">98</span><span class="p">,</span> <span class="m">114</span><span class="p">,</span> <span class="m">164</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">h1</span><span class="o">,</span>
+<span class="nt">h2</span><span class="o">,</span>
+<span class="nt">h3</span><span class="o">,</span>
+<span class="nt">h4</span><span class="o">,</span>
+<span class="nt">h5</span><span class="o">,</span>
+<span class="nt">h6</span><span class="o">,</span>
+<span class="nt">strong</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"headline"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"headline"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"header"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"header"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">class</span><span class="o">*=</span><span class="s1">"header"</span><span class="o">]</span> <span class="nt">td</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">108</span><span class="p">,</span> <span class="m">166</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">table</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">40</span><span class="p">,</span> <span class="m">42</span><span class="p">,</span> <span class="m">54</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"overlay"</span><span class="o">],</span>
+<span class="o">[</span><span class="nt">id</span><span class="o">*=</span><span class="s1">"lightbox"</span><span class="o">],</span>
+<span class="nt">blockquote</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">68</span><span class="p">,</span> <span class="m">71</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">pre</span><span class="o">,</span>
+<span class="nt">dl</span> <span class="p">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">39</span><span class="p">,</span> <span class="m">40</span><span class="p">,</span> <span class="m">45</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">input</span><span class="o">,</span>
+<span class="nt">select</span><span class="o">,</span>
+<span class="nt">button</span><span class="o">,</span>
+<span class="o">[</span><span class="nt">role</span><span class="o">=</span><span class="s1">"button"</span><span class="o">],</span>
+<span class="nt">a</span><span class="nc">.button</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.submit</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.BigButton</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.TabLink</span><span class="o">,</span>
+<span class="nc">.install</span><span class="o">[</span><span class="nt">onclick</span><span class="o">]</span> <span class="p">{</span>
+    <span class="nl">text-indent</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+    <span class="nl">appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-moz-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-webkit-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">68</span><span class="p">,</span> <span class="m">71</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">textarea</span> <span class="p">{</span>
+    <span class="nl">appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-moz-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">-webkit-appearance</span><span class="p">:</span> <span class="nb">none</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">68</span><span class="p">,</span> <span class="m">71</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">a</span><span class="nc">.highlight</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.highlight</span> <span class="o">*,</span>
+<span class="nt">a</span><span class="nc">.active</span><span class="o">,</span>
+<span class="nt">a</span><span class="nc">.active</span> <span class="o">*,</span>
+<span class="nc">.selected</span><span class="o">,</span>
+<span class="nc">.selected</span> <span class="o">*,</span>
+<span class="o">[</span><span class="nt">href</span><span class="o">=</span><span class="s1">"#"</span><span class="o">]</span> <span class="p">{</span>
+    <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bold</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">139</span><span class="p">,</span> <span class="m">233</span><span class="p">,</span> <span class="m">253</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+
+</details>
+<p>Then disable CodeMirror bindings in the following two files. In the last file, I substituted the <code class="highlighter-rouge">cm-default</code> with
+the ones you’ll find in CodeMirror’s theme CSS files, which also goes by the name of the famous Romanian count. 
+I of course could change the CodeMirror’s theme the proper way, as its documentation suggests, however, then I would
+need to change the HTML help file generation for SC, which I’m too lazy and desorganized for.</p>
+<details>
+  <summary>editor.css
+</summary>
+  <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/*!* syntax hightlighting *!*/</span>
+<span class="c">/*.cm-s-default .cm-keyword { color: #0000e6; font-weight: bold; }*/</span>
+<span class="c">/*.cm-s-default .cm-built-in { color: #3333bf; }*/</span>
+<span class="c">/*.cm-s-default .cm-number { color: #980099; }*/</span>
+<span class="c">/*.cm-s-default .cm-symbol { color: #007300; }*/</span>
+<span class="c">/*.cm-s-default .cm-class { color: #0000d2; }*/</span>
+<span class="c">/*.cm-s-default .cm-primitive { color: #0000d2; }*/</span>
+<span class="c">/*.cm-s-default .cm-char { color: #007300; }*/</span>
+<span class="c">/*.cm-s-default .cm-env-var { color: #8c4614; }*/</span>
+<span class="c">/*.cm-s-default .cm-comment { color: #bf0000; }*/</span>
+<span class="c">/*.cm-s-default .cm-string { color: #5f5f5f; }*/</span>
+<span class="c">/*.cm-s-default .cm-text { color: #000000; }*/</span>
+</code></pre></div>  </div>
+</details>
+<details>
+  <summary>codemirror.css
+</summary>
+  <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* DEFAULT THEME */</span>
+
+<span class="nc">.cm-s-default.CodeMirror</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-gutters</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#282a36</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#f8f8f2</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-gutters</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#282a36</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-cursor</span> <span class="p">{</span> <span class="nl">border-left</span><span class="p">:</span> <span class="nb">solid</span> <span class="nb">thin</span> <span class="m">#f8f8f0</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-linenumber</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#6D8A88</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-selected</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">0.10</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span><span class="nd">::selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::selection</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">0.10</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span><span class="nd">::-moz-selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::-moz-selection</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-line</span> <span class="o">&gt;</span> <span class="nt">span</span> <span class="o">&gt;</span> <span class="nt">span</span><span class="nd">::-moz-selection</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">255</span><span class="p">,</span> <span class="m">0.10</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-comment</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#6272a4</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-string</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-string-2</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#f1fa8c</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-number</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#bd93f9</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-variable</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-variable-2</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-def</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-operator</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ff79c6</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-keyword</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ff79c6</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-atom</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#bd93f9</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-meta</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#f8f8f2</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-tag</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ff79c6</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-attribute</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-qualifier</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-property</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#66d9ef</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-builtin</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#50fa7b</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-variable-3</span><span class="o">,</span> <span class="nc">.cm-s-default</span> <span class="nt">span</span><span class="nc">.cm-type</span> <span class="p">{</span> <span class="nl">color</span><span class="p">:</span> <span class="m">#ffb86c</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-activeline-background</span> <span class="p">{</span> <span class="nl">background</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="m">255</span><span class="p">,</span><span class="m">255</span><span class="p">,</span><span class="m">255</span><span class="p">,</span><span class="m">0.1</span><span class="p">);</span> <span class="p">}</span>
+<span class="nc">.cm-s-default</span> <span class="nc">.CodeMirror-matchingbracket</span> <span class="p">{</span> <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">underline</span><span class="p">;</span> <span class="nl">color</span><span class="p">:</span> <span class="no">white</span> <span class="cp">!important</span><span class="p">;</span> <span class="p">}</span>
+
+
+<span class="c">/*.cm-s-default .cm-header {color: blue;}*/</span>
+<span class="c">/*.cm-s-default .cm-quote {color: #090;}*/</span>
+<span class="c">/*.cm-negative {color: #d44;}*/</span>
+<span class="c">/*.cm-positive {color: #292;}*/</span>
+<span class="c">/*.cm-header, .cm-strong {font-weight: bold;}*/</span>
+<span class="c">/*.cm-em {font-style: italic;}*/</span>
+<span class="c">/*.cm-link {text-decoration: underline;}*/</span>
+<span class="c">/*.cm-strikethrough {text-decoration: line-through;}*/</span>
+
+<span class="c">/*.cm-s-default .cm-keyword {color: #708;}*/</span>
+<span class="c">/*.cm-s-default .cm-atom {color: #219;}*/</span>
+<span class="c">/*.cm-s-default .cm-number {color: #164;}*/</span>
+<span class="c">/*.cm-s-default .cm-def {color: #00f;}*/</span>
+<span class="c">/*.cm-s-default .cm-variable,*/</span>
+<span class="c">/*.cm-s-default .cm-punctuation,*/</span>
+<span class="c">/*.cm-s-default .cm-property,*/</span>
+<span class="c">/*.cm-s-default .cm-operator {}*/</span>
+<span class="c">/*.cm-s-default .cm-variable-2 {color: #05a;}*/</span>
+<span class="c">/*.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #085;}*/</span>
+<span class="c">/*.cm-s-default .cm-comment {color: #a50;}*/</span>
+<span class="c">/*.cm-s-default .cm-string {color: #a11;}*/</span>
+<span class="c">/*.cm-s-default .cm-string-2 {color: #f50;}*/</span>
+<span class="c">/*.cm-s-default .cm-meta {color: #555;}*/</span>
+<span class="c">/*.cm-s-default .cm-qualifier {color: #555;}*/</span>
+<span class="c">/*.cm-s-default .cm-builtin {color: #30a;}*/</span>
+<span class="c">/*.cm-s-default .cm-bracket {color: #997;}*/</span>
+<span class="c">/*.cm-s-default .cm-tag {color: #170;}*/</span>
+<span class="c">/*.cm-s-default .cm-attribute {color: #00c;}*/</span>
+<span class="c">/*.cm-s-default .cm-hr {color: #999;}*/</span>
+<span class="c">/*.cm-s-default .cm-link {color: #00c;}*/</span>
+
+<span class="c">/*.cm-s-default .cm-error {color: #f00;}*/</span>
+<span class="c">/*.cm-invalidchar {color: #f00;}*/</span>
+</code></pre></div>  </div>
+</details>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

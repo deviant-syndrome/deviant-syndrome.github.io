@@ -1,0 +1,2922 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <meta name="robots" content="noindex">
+  
+
+  <title>Deviant Syndrome</title>
+  <meta name="description" content="coding, multimedia, gamedev, engineering">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Deviant Syndrome">
+  <meta name="twitter:description" content="coding, multimedia, gamedev, engineering">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Deviant Syndrome">
+  <meta property="og:description" content="coding, multimedia, gamedev, engineering">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/page2/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <img style='width: 100%; margin-bottom: 40px;' src="/images/lcdheader.png"/>
+
+<div style='column-count: 3; margin-bottom: 32px'>
+<h4 style='margin-top: 0px;'>MENU</h4>
+<ul>
+
+  
+    
+      <li><a href="/categories/#code-bits">code bits (4)</a></li>
+    
+      <li><a href="/categories/#demo">demo (1)</a></li>
+    
+      <li><a href="/categories/#dsp-math">dsp math (2)</a></li>
+    
+      <li><a href="/categories/#vst-audio-software">vst audio software (13)</a></li>
+    
+      <li><a href="/categories/#music">music (1)</a></li>
+    
+      <li><a href="/categories/#journalism?">journalism? (2)</a></li>
+    
+      <li><a href="/categories/#dsp">dsp (2)</a></li>
+    
+  
+
+</ul>
+</div>
+
+<!--
+  // TODO: uncomment, once you have some updates ;-) 
+  <header class="post-header">
+   <h2 class="post-list__post-title">
+     <a href="#" title="Latest updates">Latest updates</a>
+   </h2>
+</header>
+<p></p>
+<section class="post">
+    I am very interesting, talented and sophisticated
+</section>
+<p></p>
+<hr class="post-list__divider">
+
+-->
+<div class="main-post-list">
+
+  <ol class="post-list">
+    
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/Acid_Snots/" title="Acid Snots. The Edge of the Obsession">Acid Snots. The Edge of the Obsession</a></h2>
+        
+	<p class="excerpt"><h4 id="creating-a-simple-303-ish-line-using-free-software">Creating a simple 303-ish line using free software</h4>
+
+<div data-nanogallery2="{&quot;thumbnailHeight&quot;:150,
+				     &quot;thumbnailWidth&quot;:&quot;auto&quot;,
+				     &quot;itemsBaseURL&quot;:&quot;&quot;,
+&quot;thumbnailBuildInit2&quot;:&quot;image_grayscale_100%&quot;}" id="/assets/galleries/2020/AcidSnots">
+
+  <!-- gallery content -->
+  
+  
+
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/AcidSnots/1_synth.jpg" title="1_synth" data-ngthumb="/assets/galleries/2020/AcidSnots/thumbs/1_synth.jpg">1_synth</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/AcidSnots/2_pedal.jpg" title="2_pedal" data-ngthumb="/assets/galleries/2020/AcidSnots/thumbs/2_pedal.jpg">2_pedal</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/AcidSnots/3_delay.jpg" title="3_delay" data-ngthumb="/assets/galleries/2020/AcidSnots/thumbs/3_delay.jpg">3_delay</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/AcidSnots/4_reverb.jpg" title="4_reverb" data-ngthumb="/assets/galleries/2020/AcidSnots/thumbs/4_reverb.jpg">4_reverb</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</div>
+
+<p>We all know that sound, it’s been iconised and canoninesed way before I opened my first can of beer.  There were numerous replicas of that little machine, and later Roland itself returned to the market with a new upgraded version of that magic box.</p>
+
+<p>Lately, someone asked me, how he can recreate that kind of sound with software.</p>
+
+<p>In my opinion, there are three main components, that make the majority of this sound’s characteristic. Saw oscillator, hight-resonant low pass filter, short sequenced lines with portamento and accents.</p>
+
+<p>So, what would be the steps of dialing-in this components? Well, kinda depends on your time and budget. I believe FL Studio had an emulation of these, but it got deprecated in the later versions. Roland cloud offers software emulations as well. There is even a browser app, that does the trick <a href="here">http://errozero.co.uk/acid-machine/</a> . However, if you want to get your hands dirty, general guideline will be the following:</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/Acid_Snots/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-09-11 22:14" class="post-list__meta--date date">11 Sep 2020</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/The_Star_of_the_Mists/" title="The Star of the Mists">The Star of the Mists</a></h2>
+        
+			 <p><section class="post"><h4 id="sanasto">Sanasto</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Suomea</th>
+      <th>Englantia</th>
+      <th>Suomea</th>
+      <th>Englantia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>kannatta</td>
+      <td>to support</td>
+      <td>painata</td>
+      <td>to press</td>
+    </tr>
+    <tr>
+      <td>likkua</td>
+      <td>to move</td>
+      <td>koe</td>
+      <td>test</td>
+    </tr>
+    <tr>
+      <td>puhallin</td>
+      <td>woodwind</td>
+      <td>tuote</td>
+      <td>product</td>
+    </tr>
+    <tr>
+      <td>maailma</td>
+      <td>world</td>
+      <td>moukari</td>
+      <td>sledgehammer</td>
+    </tr>
+    <tr>
+      <td>uni</td>
+      <td>sleep</td>
+      <td>biletää</td>
+      <td>to party</td>
+    </tr>
+    <tr>
+      <td>kamala</td>
+      <td>horrible</td>
+      <td>jättää</td>
+      <td>to leave</td>
+    </tr>
+    <tr>
+      <td>huutaa</td>
+      <td>to shout</td>
+      <td>sitä paitsi</td>
+      <td>besides</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="koe">Koe</h4>
+
+<p>Kirjotat paritiivi muoto: <span id="koeLabel"></span><br /></p>
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;">
+<textarea style="background: dimgrey;color: lightgray" rows="1" cols="15" id="koeInput"></textarea>
+<button id="koeButton" style="background: cornflowerblue;">Tarkeita!</button>
+</div>
+<div id="result"></div>
+<div id="finalResult"></div>
+
+<script>
+dataPartitiivi = {
+  kala: "kalaa",
+  talo: "taloa",
+  loma: "lomaa",
+  melu: "melua",
+  mies: "miestä",
+  askel: "askelta",
+  keskus: "keskusta",
+  rikas: "rikasta",
+  lyhyt: "lyhyttä",
+  sampoo: "sampoota",
+  elokuu: "elokuuta",
+  maa: "maata",
+  syy: "syytä",
+  työ: "työtä",
+  yö: "yötä",
+  vaikea: "vaikeaa",
+  pimeä: "pimeää",
+  haalea: "haaleaa",
+  asia: "asiaa",
+  video: "videota",
+  kahvi: "kahvia",
+  posti: "postia",
+  paperi: "paperia",
+  järvi: "järveä",
+  sormi: "sormea",
+  lehti: "leheä",
+  kivi: "kiveä",
+  uusi: "utta",
+  vuosi: "vuotta",
+  käsi: "kättä",
+  kuukausi: "kuukautta",
+  pieni: "pientä",
+  sieni: "sientä",
+  meri: "merta",
+  suuri: "suurta",
+  tuli: "tulta",
+  hiiri: "hiirtä",
+  iloinen: "iloista",
+  sininen: "sinistä",
+  eteinen: "eteistä",
+  hevonen: "hevosta",
+  pimeys: "pimeyttä",
+  kysymys: "kysymystä",
+  opetus: "opetusta",
+  kappale: "kappaletta",
+  kirje: "kirjettä",
+  taide: "taidetta"
+};
+
+let label = document.getElementById("koeLabel");
+let input = document.getElementById("koeInput");
+let button = document.getElementById("koeButton");
+let result = document.getElementById("result");
+let finalResult = document.getElementById("finalResult");
+
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+var key = undefined;
+var value = undefined;
+var finished = false;
+var errors = 0;
+var count = 0;
+var shuffledArray = shuffle(Object.entries(dataPartitiivi));
+
+function ok() {
+  result.innerHTML = "Oikea!";
+  hide();
+}
+
+function wrong(correctAnswer) {
+  result.innerHTML = "Vaara! Se on " + correctAnswer;
+  hide();
+}
+
+function hide() {
+  setTimeout(function () {
+    result.innerHTML = "";
+  }, 2000);
+}
+
+button.addEventListener("click", function () {
+  if (count === shuffledArray.length) { 
+     count = 0;
+     errors = 0;
+     finalResult.innerHTML = "";
+     button.innerHTML = "Tarkeita!"
+  }
+  
+  if (input.value === value) {
+    ok();
+  } else {
+    wrong(value);
+    errors++;
+  }
+  
+  next();
+  
+  input.value="";
+});
+
+function next() {
+  key = shuffledArray[count][0];
+  value = shuffledArray[count][1];
+  label.innerHTML = key + " (" + count + "/" + shuffledArray.length + ")";
+  count++;
+  if (count === shuffledArray.length) {
+    finalResult.innerHTML = "Test completed. Result " + (shuffledArray.length - errors) + "/" + shuffledArray.length
+    button.innerHTML = "Reset";
+  }
+}
+
+next();
+
+</script>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-09-03 20:37" class="post-list__meta--date date">3 Sep 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#suomea">suomea</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/SC_Modeling_Membraine_Snare/" title="Modeling a Snare Drum in SuperCollider">Modeling a Snare Drum in SuperCollider</a></h2>
+        
+	<p class="excerpt"><h4 id="supercolliders-extensions-for-physical-modeling">SuperCollider’s extensions for physical modeling</h4>
+
+<p>Last year I (almost accidently) discovered <a href="https://supercollider.github.io/">SuperCollider</a>. This is a kind of advanced mutlipurpose audio software platform, a computer music nerd like me could only dream about. Its server part is 
+a real-time audio-generationg powerhouse, which responds to OSC protocol commands, and could be programmed using <code class="highlighter-rouge">sclang</code> language.</p>
+
+<p>I’ve installed it and was totally hooked, the moment I executed its  helloworld code. Why? Well, it generated a gabber beat on the fly, for f0kks sake!</p>
+
+<p>And then I realized that it also supports physical modeling, I was literally blown away. Also, remember, these are  all free and open source tools, they might be not so glossy. do not have that “WOW EFFECT ON” switch, they do not come with sweet marketed advertising s promises of magically making your productions sound “commercial”, “radio-friendly”, “like your fav. band/procducer”. However, if you put effort into learning them, they can really take your creative process to the next level.</p>
+
+<p>So, there are a number of SuperCollider <a href="http://doc.sccode.org/Guides/WritingUGens.html">unit generators</a> (uGens), that are based on physical modeling. 
+You’ll have to build those yourself and place into sc extensions directory. Here is a brief instructions on that:</p>
+
+<p>Also, if you are loading synthdefs that use extensions inside
+any containerized environment (SuperColliderAU), the extension plugins should be reachable from there.</p>
+
+<p>In this article we will concentrate on making a somewhat realistic snare drum sound, using a physical model, that simulates
+audible vibrations of a simple membraine, as a foundation. On their own, those DWGMembrain SC ugens  sound somwhat like a tuned percussive timpani-sh <a href="https://en.wikipedia.org/wiki/Rototom">rototoms</a>.</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/SC_Modeling_Membraine_Snare/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-08-20 16:12" class="post-list__meta--date date">20 Aug 2020</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/SuperColliderAU_p4_mix/" title="SuperColliderAU Part 4">SuperColliderAU Part 4</a></h2>
+        
+	<p class="excerpt"><h4 id="part-4-routing-and-mixing">Part 4. Routing and mixing</h4>
+
+<p>So far, we’ve been working on a set of rather isolated code components, that produce audio, using structurally different approaches: physical modeling (through SuperColliderAU “containerized” instance), PCM sample playback (via RomplerGun), and subtractive synthesis (via SynthKick). 
+However, if you remember the initial set of requirements we listed for MembrainSC, I mentioned flexible mixing and matching options, which could make this VST an interesting hybrid drum machine, rather than one more 909 clone.<br />
+So, in practical terms, how do I mix sampled and synthesized component of a kick drum and output it to specific output channel of a plugin? Same goes for a blend of modeled and sampled snares, which should have its own channel in plugins’ output bus. <br />
+To get a bit of grip on that, let’s explore JUCE’s mixing and routing possibilities.</p>
+
+<p><img src="/assets/images/figures/membrainsc_audio_mix.svg" alt="routing audio in MembrainSC using JUCE" /></p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/SuperColliderAU_p4_mix/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-08-11 11:53" class="post-list__meta--date date">11 Aug 2020</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/Architecture_Ownership/" title="Architecture Ownership in the World of Agile">Architecture Ownership in the World of Agile</a></h2>
+        
+			 <p><section class="post"><blockquote>
+  <p>Advertisements are all good; the news is all bad</p>
+
+  <p>– <cite>Marshall McLuhan</cite></p>
+</blockquote>
+
+<p>This article summarises my thoughts, on why we often end up shipping terrible code, despite formally following
+all the good practices.</p>
+
+<h4 id="we-will-think-about-this-in-the-next-sprint">We will think about this in the next sprint</h4>
+
+<p>Agile software development presents itself as a set of perfectly fitted values, unfortunately, very little of them really help to 
+improve the quality of the product from the engineering point of view. 
+This bulk of healthy practices of customer collaboration and continious delivery does not really directly address any of the potential code quality issues that comes along. Sometimes it feels like this methodology is enforcing you to avoid this topic entirely, 
+substituting it with a “pact with the Devil” grade approach. Instead of making bad code better, it makes bad code <em>shippable</em>.
+What’s even more pityful, the agile requirements can blur the lines between “good code” and “shippable code” so much, 
+that developer teams can ship code for years, without even realizing how bad it is. Until it all suddenly crumbles. 
+Sure, that the profressional software engineering communitty reacted to that with their famous and noble <a href="https://en.wikipedia.org/wiki/Software_craftsmanship#Manifesto">Software Craftmanship Manifesto</a>, it is IMHO still too abstract to have a  real impact on how software development (read: writing code) is approached in the world of Agile.</p>
+
+<h4 id="peer-reviewed-garbage">Peer-reviewed garbage</h4>
+
+<blockquote>
+  <p>Relevant information is hard to come by. Soom it’ll be everywhere, unnoticed.</p>
+
+  <p>– <cite>John Cage</cite></p>
+</blockquote>
+
+<p>Despite being very important and useful practice, code review cannot solve the problem of “shippable code” by itself.
+In practice, code review can efficiently check the following:</p>
+<ul>
+  <li>Some obvious errors, which were  overlooked by the author and caught by a fresh pair of eyes</li>
+  <li>Compliance to team’s conventions, readability and code quality standards</li>
+  <li>Correctness of selected data structures</li>
+  <li>Correctness of class structure and links between the elements introduced within the PR and nearby</li>
+</ul>
+
+<p>What code review process often fails to achieve, is to evaluate how does this part of code, which might be cohesive and
+make total sense by itself, fits into the bigger picture: the project, the domain, the role, etc.
+Thus, it becomes very hard to prevent situation, where on paper (and in mind) you ship a perfectly fine piece of code, 
+when in fact, you’re just throwing another bucket of garbage into a pile.
+<em>Practical example</em>: the PR adds some new functionality to a feature and it introduces a new service/utility class.
+But what if that domain already has 50 services? Can a peer reviewer confidently keep track on that?</p>
+
+<h4 id="micro-services-are-not-the-answer">Micro-services are not the answer</h4>
+
+<blockquote>
+  <p>There is nothing we really need to do that is not dangerous.</p>
+
+  <p>– <cite>John Cage</cite></p>
+</blockquote>
+
+<p>The proposed solution for that would be the thing I call “architecture ownership”. Or “ownership of architecture”, this
+should be analogous to other agile jargonisms like “product ownership”, “feature ownership”, etc.
+Being an owner of a certain part of the project architecture implies having the answers to the following questions:</p>
+
+<ul>
+  <li>What are the business objects? What operations are defined on them?</li>
+  <li>What invariants do those business object have?</li>
+  <li>What is the pipeline of presenting those objects to the cusomer?</li>
+  <li>What is the biggest current code quality challenge, what pollutes code the most?</li>
+</ul>
+
+<p>There is important omitment to be made here. You cannot have architecture ownership at the beginning of a project/feature, 
+because in agile world, you, basically, not supposed to make architectural decisions at that point. Sounds crazy, huh?<br />
+It might be a good approach, to have ownerships of certain domains/feature stuctures and flows, once they have matured a bit. 
+Frequently that comes alongside with heavy refactoring and code re-arrangements, but once you have those set, it will be much 
+easier to detect undesireable distortions of architecture, when reviewing some PRs.</p>
+
+<p>Certain architectural descsions, like invariant checking, strict typing, member visibility, final classes and methods can enforce 
+some definitive patterns, so it will make sub-par OOP approaches if not impossible, then at least clearly visible even in isolated PRs.</p>
+
+<h4 id="but-what-do-i-do">But what do I do?</h4>
+
+<blockquote>
+  <p>The way to loose our principles is to examine them.</p>
+
+  <p>– <cite>John Cage</cite></p>
+</blockquote>
+
+<p>Practical steps to introducing the concept of architecture ownership within an agile team would be the following:</p>
+<ul>
+  <li>Identify a part of the product, that needs architecture ownership. Most often it is the one, that is the  hardest to maintain, and
+constantly giving you headaches.</li>
+  <li>Measure the test coverage of this part</li>
+  <li>Try to determine what was the main reason this part of the project became unmaintanable. What kind of bad patterns accumulated there?</li>
+  <li>Based on the previous observation, come up with new clean architecture, that enforces certain patterns</li>
+  <li>Gradually move this feature/functionality to the new architecture, using previously written test as a backup</li>
+  <li>Agree on a way of code reviewing the upcoming related PRs, that checks them for possible pollutions and misusage of current elements of the architecture.</li>
+</ul>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-08-05 20:02" class="post-list__meta--date date">5 Aug 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#agile">agile</a> <a href="/tags/#software">software</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/Audio_Postcards_1/" title="Audio Postcards from Stokfjörður's Dungeon">Audio Postcards from Stokfjörður's Dungeon</a></h2>
+        
+			 <p><section class="post"><style>
+	.cplay-bounds {
+		background-color: #4b4848;
+		padding: 4px;
+	}
+	.cplay-bg {
+	    height: 130px;
+		margin-top: 4px;
+		background-image: url("/assets/images/cover_art/healing.png");
+		color: #cfd4d4;
+	}
+	h4.cplay-h {
+        margin-top: 0px;
+		padding-top: 6px;
+		padding-left: 6px;
+	}
+</style>
+
+<div data-nanogallery2="{&quot;thumbnailHeight&quot;:150,
+				     &quot;thumbnailWidth&quot;:&quot;auto&quot;,
+				     &quot;itemsBaseURL&quot;:&quot;&quot;,
+&quot;thumbnailBuildInit2&quot;:&quot;image_grayscale_100%&quot;}" id="/assets/galleries/2020/Suomenlinna">
+
+  <!-- gallery content -->
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/Suomenlinna/1.jpeg" title="1" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/1.jpeg">1</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/Suomenlinna/2.jpeg" title="2" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/2.jpeg">2</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/Suomenlinna/3.jpeg" title="3" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/3.jpeg">3</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/Suomenlinna/4.jpeg" title="4" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/4.jpeg">4</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        <a href="/assets/galleries/2020/Suomenlinna/5.jpeg" title="5" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/5.jpeg">5</a>
+      	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+    
+
+      
+      
+      
+      
+        	
+     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</div>
+
+<div class="cplay-bounds"> <!-- gray bounding box  -->
+	<b style="padding-left: 6px; color: lightblue">Dark Ambient/Experimental</b>
+	<div class="cplay-bg">
+	   <h4 class="cplay-h">Health Chamber</h4> <!-- todo margin -->
+	   <p style="margin-left: 6px">Some raw soundscapes I came up with while assembling my virtual modular</p>
+	</div>
+	<!-- player -->
+	<div class="audio-container">
+	   <audio src="/mp3/2020/healthChamber.mp3" preload="auto"></audio>
+	</div>
+</div>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-08-04 21:28" class="post-list__meta--date date">4 Aug 2020</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/The_Way_of_the_Fire/" title="The Way of the Fire">The Way of the Fire</a></h2>
+        
+			 <p><section class="post"><h4 id="suomalainen-sanakirja">Suomalainen sanakirja</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Suomea</th>
+      <th>Englantia</th>
+      <th>Suomea</th>
+      <th>Englatia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>taivas</td>
+      <td>skies</td>
+      <td>hidas</td>
+      <td>slow</td>
+    </tr>
+    <tr>
+      <td>vatsani</td>
+      <td>stomach</td>
+      <td>liian</td>
+      <td>too (late)</td>
+    </tr>
+    <tr>
+      <td>mahtua</td>
+      <td>to fit</td>
+      <td>eroaa</td>
+      <td>to resign</td>
+    </tr>
+    <tr>
+      <td>valvoa</td>
+      <td>to control</td>
+      <td>noudattaa</td>
+      <td>to obey</td>
+    </tr>
+    <tr>
+      <td>tappaa</td>
+      <td>to kill</td>
+      <td>jaada</td>
+      <td>to stay</td>
+    </tr>
+    <tr>
+      <td>takia</td>
+      <td>because of</td>
+      <td>keralla</td>
+      <td>at a time</td>
+    </tr>
+    <tr>
+      <td>ampua</td>
+      <td>to shoot</td>
+      <td>taas</td>
+      <td>again</td>
+    </tr>
+    <tr>
+      <td>ovi</td>
+      <td>door</td>
+      <td>toinen</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <td>johtaa</td>
+      <td>to lead</td>
+      <td>makaa</td>
+      <td>to lie</td>
+    </tr>
+    <tr>
+      <td>työntaa</td>
+      <td>to push</td>
+      <td>kunnioitta</td>
+      <td>to respect</td>
+    </tr>
+  </tbody>
+</table>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-06-18 11:24" class="post-list__meta--date date">18 Jun 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#suomea">suomea</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/SuperCollider_pt3_rgun/" title="SuperCollider AU">SuperCollider AU</a></h2>
+        
+	<p class="excerpt"><h4 id="part-3-rompler-gun">Part 3. Rompler gun</h4>
+
+<p>In order for MembrainSC to stand-out, alongside with the other features, we want it be able to play one-shot percussion PCM samples. This might seem unimportant and obvious, but combining synthethis / modeling with samples is extremely valuable. Again, I want to empaphize, that it moves complexity of layering different elements of percussion hits away from your DAW routing.</p>
+
+<p>So, playing wave samples. JUCE has built-in support for that, and the API is surprisingly agile and straightforward.
+All you need to do, is to define a new class, make it inherit Synthesiser, define a file reader for your wav, define the key range (yes, JUCE even does the sample pitch-mapping for you!).</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">RomplerGun</span><span class="o">::</span><span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// add voices to our sampler</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_VOICES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">addVoice</span><span class="p">(</span><span class="k">new</span> <span class="n">SamplerVoice</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="c1">// set up our AudioFormatManager class as detailed in the API docs</span>
+    <span class="c1">// we can now use WAV and AIFF files!</span>
+    <span class="n">audioFormatManager</span><span class="p">.</span><span class="n">registerBasicFormats</span><span class="p">();</span>
+
+    <span class="c1">// now that we have our manager, lets read a simple file so we can pass it to our SamplerSound object.</span>
+    <span class="n">File</span><span class="o">*</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">getSpecialLocation</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">currentApplicationFile</span><span class="p">).</span><span class="n">getFullPathName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"/Contents/Resources/kick_trimmed.wav"</span><span class="p">);</span>
+    
+    <span class="n">AudioFormatReader</span><span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">audioFormatManager</span><span class="p">.</span><span class="n">createReaderFor</span><span class="p">(</span><span class="o">*</span><span class="n">file</span><span class="p">);</span>
+
+    <span class="c1">// lock our sound to middle C</span>
+    <span class="n">BigInteger</span> <span class="n">allNotes</span><span class="p">;</span>
+    <span class="n">allNotes</span><span class="p">.</span><span class="n">setRange</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="c1">// finally, add our sound</span>
+    <span class="n">addSound</span><span class="p">(</span><span class="k">new</span> <span class="n">SamplerSound</span><span class="p">(</span><span class="s">"default"</span><span class="p">,</span> <span class="o">*</span><span class="n">reader</span><span class="p">,</span> <span class="n">allNotes</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">));</span>
+    <span class="kt">int</span> <span class="n">numFiles</span> <span class="o">=</span> <span class="n">scanROM</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">getSpecialLocation</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">userDocumentsDirectory</span><span class="p">).</span><span class="n">getFullPathName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"/MembrainSC"</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Scanned files: "</span> <span class="o">&lt;&lt;</span> <span class="n">numFiles</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    
+    <span class="n">sampleLoaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">sampleIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/SuperCollider_pt3_rgun/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-06-02 21:01" class="post-list__meta--date date">2 Jun 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#juce">juce</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/SuperColliderAU_p2/" title="SuperColliderAU">SuperColliderAU</a></h2>
+        
+	<p class="excerpt"><h4 id="part-2-containerizing-in-a-juce-based-plugin">Part 2. Containerizing in a JUCE-based plugin</h4>
+
+<p>Now, that we managed to build the thing. Let’s see how we can actually use it. Of course, you can follow official instructions and sorta “bake” SuperCollider synthdefs into the plugin. There is (was) even a script among the SuperCollider quarks for that. 
+But this approach kinda fell flat for me. Guess why? Boooring GUI? Yes sure, and also no multichannel output, and MIDI support being rudimental as well.</p>
+
+<p>The normal approach here would be just port the project to a modern framework like JUCE, because the there is not that much DSP-specific code in SCAU itself, it  kinda just start the SC server, exposes a UDP port and routes the server’s output to plugin output. Unfortunately, this is still too much for my “a pointer to  a pointer? WTF?” C++ skills.</p>
+
+<p>So, my descioon was to start the  DSP C++ journey of mine with something extremely noob-friendly and actively maintained as JUCE framework. Among the million other cool DSP-related features, it provides a suite to . So, you basically can hve a plugin audio-procesing chain inside a parent “container plugin”. Well, why not try it with our recently build SuperColliderAU then? Let’s see how it goes:</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/SuperColliderAU_p2/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-05-30 15:08" class="post-list__meta--date date">30 May 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#juce">juce</a> <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/SuperCollderAU_p1/" title="SuperCollderAU">SuperCollderAU</a></h2>
+        
+			 <p><section class="post"><h4 id="part-1-building">Part 1: Building</h4>
+
+<p>Hey! You! Wanna turn your SuperCollider program into a real AU virtual instrument to use in your DAW? Great, then come with me into the depths of C++ sloppiness and clumsiness.</p>
+
+<p>So, once upon.a time there was a project that allowed to run a SuperCollider SC synth server inside an AU plugin. It even ended up in the
+ official SC repositories. But years  were  passing and dependencies around it slowly mutated, becoming more and more hostile. At some point in time, it stopped producing a valid AU, and later then even stopped building at all. The original author still expresses some interest to the project, last commit was about half year ago, but yet again I’m too anti-social to bother people with my crazy ideas, so I went there myself.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--recursive</span> https://github.com/supercollider/SuperColliderAU
+</code></pre></div></div>
+
+<p>Down below are the steps that fixes problem with building it.</p>
+
+<ol>
+  <li>
+    <p>At the moment of writing this post, I am on macOS Catalina 10.15.3 (19D76). I do not know how much it is actually important, but nevertheless.</p>
+  </li>
+  <li>
+    <p>It is better to build Supercollider from its standalone repo. Just get the fresh revision and follow the build instructions. Then copy it to /SuperColliderAU/supercollider/build. Revision (22e45f78fb8db8769aea34ce4ce09082917dd40d) worked for me.</p>
+  </li>
+  <li>
+    <p>Go to superCollider submodule and checkout to develop branch. Get some fresh revision, (30205c18a6cb5d74fff775d28469051899a2d0bb) worked for me.</p>
+  </li>
+  <li>
+    <p>On some hosts (Like the one bundled with JUCE as a code example, SuperColliderAU does not get fully initialised on scan, so the scan crushes, when tries to destroy its instance afterwards). If that is your case, edit the SCProcess.cpp file, comment out the mPort-&gt;stopAsioThread(); line.</p>
+  </li>
+  <li>
+    <p>By the way, what’s awesome about running a JUCE VST Host through Xcode, you can use debugger on the problematic plugin code, if you have sources and it was compiled with debug symbols.</p>
+  </li>
+  <li>Supercollider now uses bundled C++ boost, SupercolliderAU make files are not aware of that. As a workaround:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deadvikki@darkhorse<span class="nv">$ </span>brew <span class="nb">install </span>boost
+</code></pre></div>    </div>
+    <p>6.1. And edited SuperCollierAU CMakeList.txt file, so it searches in my local include paths:</p>
+    <pre><code class="language-code">diff --git a/CMakeLists.txt b/CMakeLists.txt
+index dd3d4c7..b206ac6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -76,11 +76,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+ 
+set(scau_bundle "SuperColliderAU")
+set(SNDFILE_INCLUDE_DIR ${SC_DIR}/external_libraries/libsndfile/)
+-set(BOOST_INCLUDE_DIR ${SC_DIR}external_libraries/boost/)
++set(BOOST_INCLUDE_DIR /usr/local/include/)
+set(TLSF_INCLUDE_DIR ${SC_DIR}/external_libraries/TLSF-2.4.6/src/)
+ 
+ include_directories(${SC_DIR}/external_libraries
+-       ${SC_DIR}/${BOOST_INCLUDE_DIR}
++       ${BOOST_INCLUDE_DIR}
+        ${SNDFILE_INCLUDE_DIR}
+        ${PTHREADS_INCLUDE_DIR}
+       ${TLSF_INCLUDE_DIR}
+(END)
+</code></pre>
+  </li>
+  <li>We do not want to use bundled Boost, so we say
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-DSYSTEM_BOOST</span><span class="o">=</span>ON ..
+make
+</code></pre></div>    </div>
+    <p>5.1. It will compile, but the link process will fail, but that’s not fatal</p>
+  </li>
+  <li>Re-run make in verbose mode,
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nv">VERBOSE</span><span class="o">=</span>1
+</code></pre></div>    </div>
+    <p>6.1. Manually execute the last command, just edit it a bit. 
+ 6.2. Remove <code class="highlighter-rouge">-lboost_system</code> and add  <code class="highlighter-rouge">-L /usr/local/lib -framework AppKit</code></p>
+  </li>
+  <li><code class="highlighter-rouge">!</code> Run make again to it can finish copying resource files to build dir.</li>
+</ol>
+
+<p>By the way it screwed up my icu4c vesion , which node relied on. So, 
+brew info icu4c <br />
+brew switch icu4c 64.2</p>
+
+<p>Bottom line: 
+It builds.Currently it does not passes AUVAL checks, thankfully, garbage DAWs like my old trustworthy Tracktion7, do not bother validation. People been reporting that it also work in Reaper.</p>
+
+<p>Problem: it seems that we are not freeing UDP port properly, so within the same host it starts on different port every time. But it might be the nature of UDP ports</p>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-05-21 22:05" class="post-list__meta--date date">21 May 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#dsp">dsp</a> <a href="/tags/#juce">juce</a> <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+  </ol>
+
+  <hr class="post-list__divider ">
+
+  
+      <nav class="pagination" role="navigation">
+  
+    
+      <a rel="prev" class="posts newer btn small" href="/#blog" title="Previous Page">← Newer Posts</a>
+    
+  
+
+  <span class="pagination__page-number">Page 2 of 4</span>
+
+  
+    <a rel="next" class="posts older btn small" href="/page3/">Older Posts →</a>
+  
+</nav>
+
+  
+
+</div>
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

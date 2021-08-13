@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>Technical Demo</title>
+  <meta name="description" content="So, I spent a quite a while pimping up my blog engine. And here is the list of awesome features it can do. And event more to come soon. You probably already noticed the cool dark CSS styling of an open-source Jekyll theme, but there is much more to go.
+
+Alright, let’s move.
+
+MathJax support
+
+See the awesome math needed for researching DSP whitepapers and stuff.
+
+  Solving quadratic equations
+
+  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+
+  $$
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}.
+$$
+
+  $\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}$
+
+
+AlphaTab sheet music support
+
+I’m struggling to teach myself music theory the most thoughtful way – through understanding written scores and sheet music. There is something about written notations, that makes me feel sorta sophisticated, and as I total narcissist I like that feeling.
+
+
+  Rendering sheet music
+
+  
+\title "Canon Rock"
+\subtitle "JerryC"
+\tempo 90
+.
+:2 19.2{v f} 17.2{v f} |
+15.2{v f} 14.2{v f}|
+12.2{v f} 10.2{v f}|
+12.2{v f} 14.2{v f}.4 :8 15.2 17.2 |
+14.1.2 :8 17.2 15.1 14.1{h} 17.2 |
+15.2{v d}.4 :16 17.2{h} 15.2 :8 14.2 14.1 17.1{b(0 4 4 0)}.4 |
+15.1.8 :16 14.1{tu 3} 15.1{tu 3} 14.1{tu 3} :8 17.2 15.1 14.1 :16 12.1{tu 3} 14.1{tu 3} 12.1{tu 3} :8 15.2 14.2 |
+12.2 14.3 12.3 15.2 :32 14.2{h} 15.2{h} 14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}
+
+
+
+AudioJS Embeded MP3 player
+
+Feels super cool to be able to embed my audio demos and sketches with a music player via audioJS. Then they are all nicely sorted Now also with playlist support!
+
+
+  Embeded MP3 player
+
+  
+    
+    
+	
+	   
+	      Guitar through R-Mod module, simple sine used as carrier
+	   
+	
+	
+	   
+	      Mora Facility (ambient demo with R-Mod)
+	   
+	
+
+  
+
+
+ThebeLab emneded Jupyter notebooks
+
+Python + scipy + numpy inside a Jupyter notebook. There is nothing better to sketch/flesh-out mathematical ideas than that. With [ThebeLab] and a dedicated Jupyter server available, you can make your Python sketches runnable on your site.
+
+
+  Interactive Jupyter Notebooks
+
+  
+%matplotlib inline
+import numpy as np
+from jupyterthemes import jtplot
+import matplotlib.pyplot as plt
+jtplot.style()
+x = np.linspace(0,10)
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+
+
+
+Coming soon!
+
+  Python notebooks via nbsphinx
+  Embed my demos with a music player via audioJS
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Technical Demo">
+  <meta name="twitter:description" content="So, I spent a quite a while pimping up my blog engine. And here is the list of awesome features it can do. And event more to come soon. You probably already noticed the cool dark CSS styling of an open-source Jekyll theme, but there is much more to go.
+
+Alright, let’s move.
+
+MathJax support
+
+See the awesome math needed for researching DSP whitepapers and stuff.
+
+  Solving quadratic equations
+
+  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+
+  $$
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}.
+$$
+
+  $\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}$
+
+
+AlphaTab sheet music support
+
+I’m struggling to teach myself music theory the most thoughtful way – through understanding written scores and sheet music. There is something about written notations, that makes me feel sorta sophisticated, and as I total narcissist I like that feeling.
+
+
+  Rendering sheet music
+
+  
+\title "Canon Rock"
+\subtitle "JerryC"
+\tempo 90
+.
+:2 19.2{v f} 17.2{v f} |
+15.2{v f} 14.2{v f}|
+12.2{v f} 10.2{v f}|
+12.2{v f} 14.2{v f}.4 :8 15.2 17.2 |
+14.1.2 :8 17.2 15.1 14.1{h} 17.2 |
+15.2{v d}.4 :16 17.2{h} 15.2 :8 14.2 14.1 17.1{b(0 4 4 0)}.4 |
+15.1.8 :16 14.1{tu 3} 15.1{tu 3} 14.1{tu 3} :8 17.2 15.1 14.1 :16 12.1{tu 3} 14.1{tu 3} 12.1{tu 3} :8 15.2 14.2 |
+12.2 14.3 12.3 15.2 :32 14.2{h} 15.2{h} 14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}
+
+
+
+AudioJS Embeded MP3 player
+
+Feels super cool to be able to embed my audio demos and sketches with a music player via audioJS. Then they are all nicely sorted Now also with playlist support!
+
+
+  Embeded MP3 player
+
+  
+    
+    
+	
+	   
+	      Guitar through R-Mod module, simple sine used as carrier
+	   
+	
+	
+	   
+	      Mora Facility (ambient demo with R-Mod)
+	   
+	
+
+  
+
+
+ThebeLab emneded Jupyter notebooks
+
+Python + scipy + numpy inside a Jupyter notebook. There is nothing better to sketch/flesh-out mathematical ideas than that. With [ThebeLab] and a dedicated Jupyter server available, you can make your Python sketches runnable on your site.
+
+
+  Interactive Jupyter Notebooks
+
+  
+%matplotlib inline
+import numpy as np
+from jupyterthemes import jtplot
+import matplotlib.pyplot as plt
+jtplot.style()
+x = np.linspace(0,10)
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+
+
+
+Coming soon!
+
+  Python notebooks via nbsphinx
+  Embed my demos with a music player via audioJS
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Technical Demo">
+  <meta property="og:description" content="So, I spent a quite a while pimping up my blog engine. And here is the list of awesome features it can do. And event more to come soon. You probably already noticed the cool dark CSS styling of an open-source Jekyll theme, but there is much more to go.
+
+Alright, let’s move.
+
+MathJax support
+
+See the awesome math needed for researching DSP whitepapers and stuff.
+
+  Solving quadratic equations
+
+  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+
+  $$
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}.
+$$
+
+  $\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}$
+
+
+AlphaTab sheet music support
+
+I’m struggling to teach myself music theory the most thoughtful way – through understanding written scores and sheet music. There is something about written notations, that makes me feel sorta sophisticated, and as I total narcissist I like that feeling.
+
+
+  Rendering sheet music
+
+  
+\title "Canon Rock"
+\subtitle "JerryC"
+\tempo 90
+.
+:2 19.2{v f} 17.2{v f} |
+15.2{v f} 14.2{v f}|
+12.2{v f} 10.2{v f}|
+12.2{v f} 14.2{v f}.4 :8 15.2 17.2 |
+14.1.2 :8 17.2 15.1 14.1{h} 17.2 |
+15.2{v d}.4 :16 17.2{h} 15.2 :8 14.2 14.1 17.1{b(0 4 4 0)}.4 |
+15.1.8 :16 14.1{tu 3} 15.1{tu 3} 14.1{tu 3} :8 17.2 15.1 14.1 :16 12.1{tu 3} 14.1{tu 3} 12.1{tu 3} :8 15.2 14.2 |
+12.2 14.3 12.3 15.2 :32 14.2{h} 15.2{h} 14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}
+
+
+
+AudioJS Embeded MP3 player
+
+Feels super cool to be able to embed my audio demos and sketches with a music player via audioJS. Then they are all nicely sorted Now also with playlist support!
+
+
+  Embeded MP3 player
+
+  
+    
+    
+	
+	   
+	      Guitar through R-Mod module, simple sine used as carrier
+	   
+	
+	
+	   
+	      Mora Facility (ambient demo with R-Mod)
+	   
+	
+
+  
+
+
+ThebeLab emneded Jupyter notebooks
+
+Python + scipy + numpy inside a Jupyter notebook. There is nothing better to sketch/flesh-out mathematical ideas than that. With [ThebeLab] and a dedicated Jupyter server available, you can make your Python sketches runnable on your site.
+
+
+  Interactive Jupyter Notebooks
+
+  
+%matplotlib inline
+import numpy as np
+from jupyterthemes import jtplot
+import matplotlib.pyplot as plt
+jtplot.style()
+x = np.linspace(0,10)
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+
+
+
+Coming soon!
+
+  Python notebooks via nbsphinx
+  Embed my demos with a music player via audioJS
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2019/Technical_Demo/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-12-08 19:39" class="post-meta__date date">8 Dec 2019</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#js">js</a> <a href="/tags/#markdown">markdown</a> </span>
+      
+    </div>
+    <h1 class="post-title">Technical Demo</h1>
+  </header>
+
+  <section class="post">
+    <p>So, I spent a quite a while pimping up my blog engine. And here is the list of awesome features it can do. And event more to come soon. You probably already noticed the cool dark CSS styling of an open-source Jekyll theme, but there is much more to go.</p>
+
+<p>Alright, let’s move.</p>
+
+<h4 id="mathjax-support">MathJax support</h4>
+
+<p>See the awesome math needed for researching DSP whitepapers and stuff.</p>
+<details>
+  <summary>Solving quadratic equations
+</summary>
+  <p>When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are</p>
+
+  <div class="kdmath">$$
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}.
+$$</div>
+
+  <p><span class="kdmath">$\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}$</span></p>
+</details>
+
+<h4 id="alphatab-sheet-music-support">AlphaTab sheet music support</h4>
+
+<p>I’m struggling to teach myself music theory the most thoughtful way – through understanding written scores and sheet music. There is something about written notations, that makes me feel sorta sophisticated, and as I total narcissist I like that feeling.</p>
+
+<details>
+  <summary>Rendering sheet music
+</summary>
+  <div id="alphaTab" data-tex="true" class="notation">
+\title "Canon Rock"
+\subtitle "JerryC"
+\tempo 90
+.
+:2 19.2{v f} 17.2{v f} |
+15.2{v f} 14.2{v f}|
+12.2{v f} 10.2{v f}|
+12.2{v f} 14.2{v f}.4 :8 15.2 17.2 |
+14.1.2 :8 17.2 15.1 14.1{h} 17.2 |
+15.2{v d}.4 :16 17.2{h} 15.2 :8 14.2 14.1 17.1{b(0 4 4 0)}.4 |
+15.1.8 :16 14.1{tu 3} 15.1{tu 3} 14.1{tu 3} :8 17.2 15.1 14.1 :16 12.1{tu 3} 14.1{tu 3} 12.1{tu 3} :8 15.2 14.2 |
+12.2 14.3 12.3 15.2 :32 14.2{h} 15.2{h} 14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}
+</div>
+</details>
+
+<h4 id="audiojs-embeded-mp3-player">AudioJS Embeded MP3 player</h4>
+
+<p>Feels super cool to be able to embed my audio demos and sketches with a music player via <a href="http://kolber.github.io/audiojs/">audioJS</a>. Then they are all nicely sorted Now also with playlist support!</p>
+
+<details>
+  <summary>Embeded MP3 player
+</summary>
+  <div class="audio-container">
+    <audio src="/mp3/2020/rmod_demo1.mp3" preload="auto"></audio>
+    <ol>
+	<li class="playing">
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo1.mp3">
+	      Guitar through R-Mod module, simple sine used as carrier
+	   </a>
+	</li>
+	<li>
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo2.mp3">
+	      Mora Facility (ambient demo with R-Mod)
+	   </a>
+	</li>
+</ol>
+  </div>
+</details>
+
+<h4 id="thebelab-emneded-jupyter-notebooks">ThebeLab emneded Jupyter notebooks</h4>
+
+<p>Python + scipy + numpy inside a Jupyter notebook. There is nothing better to sketch/flesh-out mathematical ideas than that. With [ThebeLab] and a dedicated Jupyter server available, you can make your Python sketches runnable on your site.</p>
+
+<details class="thebefold" id="thebefold1">
+  <summary>Interactive Jupyter Notebooks
+</summary>
+  <pre data-language="python" class="cm-s-dracula">
+%matplotlib inline
+import numpy as np
+from jupyterthemes import jtplot
+import matplotlib.pyplot as plt
+jtplot.style()
+x = np.linspace(0,10)
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+</pre>
+</details>
+
+<h5 id="coming-soon">Coming soon!</h5>
+<ul>
+  <li>Python notebooks via <a href="https://nbsphinx.readthedocs.io/en/0.5.0/index.html#">nbsphinx</a></li>
+  <li>Embed my demos with a music player via <a href="http://kolber.github.io/audiojs/">audioJS</a></li>
+</ul>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>Docker Audio Hell Pt. 1</title>
+  <meta name="description" content="And The Passive Amoeba of Linux Audio
+
+
+
+In this article, we are going to quickly reiterate the reason why audio-production on Linux can be challenging (if not frustrating at times). I think, the main reason for that, besides of course, my own incompetence, is audio-facilties being handled in too much of Unix-way. But what is Unix way, anyway? Well, in short, we have one isolated piece of software doing one single thing, but doing well.If any additional processing needs to be done with the output, we pipe (|) it into another isolated piece of software. Several steps of that form a pipeline. 
+Sounds great, right? Well, unfortunately, sometimes the seeming tidiness of this approach could quikcly go down the tubes (pun intended). 
+Once you need something specific, or something simply done your way, you’ll have to explore the whole pipeline from end to end. It’s alright, if the nodes there are simple utilities like cat or grep, but imaging exploring each of those having massive tectonic layers of legacy software archeology above them.
+
+So, here is how this usually happens. It all starts with ALSA, a kernel subsystem, which works directly with your audio hardware. It does not efficiently handle software mixing and routing, though, so applications  cannot share your device inputs/outputs effieicently, and we were not even talking about routing audio inputs and outputs between them. 
+To satisfy those needs, PulseAudio was introduced. A software wrapper around ALSA, that re-routes all the audio streams through itself, and distributes it between existing hardware inputs and outputs (sinks). Applications compiled to use PulseAuido as audio-driver cannot use ALSA directly, all according to the hightest standards of incomprehensible madman’s logic we maintain in the world of prograaming.
+
+PulseAudio, however had some issues with latency, which made it hardly usable for “professional” audio-recording, that usually includes near real-time record monitoring, for example. 
+To solve problem, purposedly introdued, we wrote an alternative to PulseAudio called JACK. Does this remind you of “The Futurological Congress”? For me it totally does.
+For a long time, JACK was the standard for (semi)professional audio work on Linux. Apparently, does not play nicely with PulseAudio. Some applications, (ex: Wine), does not support JACK at all. Of course, Wine has WineASIO, which can be routed to JACK, however, it is possible only for applications that use ASIO for audio, i.e. DAWs.
+
+Both JACK and Pulseaudio, have different solutions for audio-over network. PulseAudio has native client-server support, and also , a special audio-sink for streaming audio in RTP protocol (is it the same thing as zeroconf or not?). Judging by these configuration strings, client-server support of pulseaudio, can use TCP as a transport, and something called “native”, which I presume, would be standard unix-sockets.
+
+
+
+JACK provides several ways remote audio networking. It’s native netone addon using CELT codec and master/follower pattern,  and some newer netJACK2, which has network discovery.
+
+Lately, yet another ultra-low-latency professional-audio-grade Unix soundsystem was introduced. It’s called PipeWire, and it is sort of a chamenion protocol, which can act as a PulseAudio backend for PulseAudio clients, Jack backend to Jack clients and so on. AFAIK, Pipewire does not have audio-over-network support.
+
+NOTE: Some amoebas are not shown on the figures, simply because they are considered extinct. Before ALSA, earlier versions of Linux were shipped with Open Sound System (OSS), which then was appropriated and no longer counts as free software. However, as we know, once introduced at the kernel level, is destined to be supported for eternity. That’s why ALSA still has an OSS emulation mode.
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker Audio Hell Pt. 1">
+  <meta name="twitter:description" content="And The Passive Amoeba of Linux Audio
+
+
+
+In this article, we are going to quickly reiterate the reason why audio-production on Linux can be challenging (if not frustrating at times). I think, the main reason for that, besides of course, my own incompetence, is audio-facilties being handled in too much of Unix-way. But what is Unix way, anyway? Well, in short, we have one isolated piece of software doing one single thing, but doing well.If any additional processing needs to be done with the output, we pipe (|) it into another isolated piece of software. Several steps of that form a pipeline. 
+Sounds great, right? Well, unfortunately, sometimes the seeming tidiness of this approach could quikcly go down the tubes (pun intended). 
+Once you need something specific, or something simply done your way, you’ll have to explore the whole pipeline from end to end. It’s alright, if the nodes there are simple utilities like cat or grep, but imaging exploring each of those having massive tectonic layers of legacy software archeology above them.
+
+So, here is how this usually happens. It all starts with ALSA, a kernel subsystem, which works directly with your audio hardware. It does not efficiently handle software mixing and routing, though, so applications  cannot share your device inputs/outputs effieicently, and we were not even talking about routing audio inputs and outputs between them. 
+To satisfy those needs, PulseAudio was introduced. A software wrapper around ALSA, that re-routes all the audio streams through itself, and distributes it between existing hardware inputs and outputs (sinks). Applications compiled to use PulseAuido as audio-driver cannot use ALSA directly, all according to the hightest standards of incomprehensible madman’s logic we maintain in the world of prograaming.
+
+PulseAudio, however had some issues with latency, which made it hardly usable for “professional” audio-recording, that usually includes near real-time record monitoring, for example. 
+To solve problem, purposedly introdued, we wrote an alternative to PulseAudio called JACK. Does this remind you of “The Futurological Congress”? For me it totally does.
+For a long time, JACK was the standard for (semi)professional audio work on Linux. Apparently, does not play nicely with PulseAudio. Some applications, (ex: Wine), does not support JACK at all. Of course, Wine has WineASIO, which can be routed to JACK, however, it is possible only for applications that use ASIO for audio, i.e. DAWs.
+
+Both JACK and Pulseaudio, have different solutions for audio-over network. PulseAudio has native client-server support, and also , a special audio-sink for streaming audio in RTP protocol (is it the same thing as zeroconf or not?). Judging by these configuration strings, client-server support of pulseaudio, can use TCP as a transport, and something called “native”, which I presume, would be standard unix-sockets.
+
+
+
+JACK provides several ways remote audio networking. It’s native netone addon using CELT codec and master/follower pattern,  and some newer netJACK2, which has network discovery.
+
+Lately, yet another ultra-low-latency professional-audio-grade Unix soundsystem was introduced. It’s called PipeWire, and it is sort of a chamenion protocol, which can act as a PulseAudio backend for PulseAudio clients, Jack backend to Jack clients and so on. AFAIK, Pipewire does not have audio-over-network support.
+
+NOTE: Some amoebas are not shown on the figures, simply because they are considered extinct. Before ALSA, earlier versions of Linux were shipped with Open Sound System (OSS), which then was appropriated and no longer counts as free software. However, as we know, once introduced at the kernel level, is destined to be supported for eternity. That’s why ALSA still has an OSS emulation mode.
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Docker Audio Hell Pt. 1">
+  <meta property="og:description" content="And The Passive Amoeba of Linux Audio
+
+
+
+In this article, we are going to quickly reiterate the reason why audio-production on Linux can be challenging (if not frustrating at times). I think, the main reason for that, besides of course, my own incompetence, is audio-facilties being handled in too much of Unix-way. But what is Unix way, anyway? Well, in short, we have one isolated piece of software doing one single thing, but doing well.If any additional processing needs to be done with the output, we pipe (|) it into another isolated piece of software. Several steps of that form a pipeline. 
+Sounds great, right? Well, unfortunately, sometimes the seeming tidiness of this approach could quikcly go down the tubes (pun intended). 
+Once you need something specific, or something simply done your way, you’ll have to explore the whole pipeline from end to end. It’s alright, if the nodes there are simple utilities like cat or grep, but imaging exploring each of those having massive tectonic layers of legacy software archeology above them.
+
+So, here is how this usually happens. It all starts with ALSA, a kernel subsystem, which works directly with your audio hardware. It does not efficiently handle software mixing and routing, though, so applications  cannot share your device inputs/outputs effieicently, and we were not even talking about routing audio inputs and outputs between them. 
+To satisfy those needs, PulseAudio was introduced. A software wrapper around ALSA, that re-routes all the audio streams through itself, and distributes it between existing hardware inputs and outputs (sinks). Applications compiled to use PulseAuido as audio-driver cannot use ALSA directly, all according to the hightest standards of incomprehensible madman’s logic we maintain in the world of prograaming.
+
+PulseAudio, however had some issues with latency, which made it hardly usable for “professional” audio-recording, that usually includes near real-time record monitoring, for example. 
+To solve problem, purposedly introdued, we wrote an alternative to PulseAudio called JACK. Does this remind you of “The Futurological Congress”? For me it totally does.
+For a long time, JACK was the standard for (semi)professional audio work on Linux. Apparently, does not play nicely with PulseAudio. Some applications, (ex: Wine), does not support JACK at all. Of course, Wine has WineASIO, which can be routed to JACK, however, it is possible only for applications that use ASIO for audio, i.e. DAWs.
+
+Both JACK and Pulseaudio, have different solutions for audio-over network. PulseAudio has native client-server support, and also , a special audio-sink for streaming audio in RTP protocol (is it the same thing as zeroconf or not?). Judging by these configuration strings, client-server support of pulseaudio, can use TCP as a transport, and something called “native”, which I presume, would be standard unix-sockets.
+
+
+
+JACK provides several ways remote audio networking. It’s native netone addon using CELT codec and master/follower pattern,  and some newer netJACK2, which has network discovery.
+
+Lately, yet another ultra-low-latency professional-audio-grade Unix soundsystem was introduced. It’s called PipeWire, and it is sort of a chamenion protocol, which can act as a PulseAudio backend for PulseAudio clients, Jack backend to Jack clients and so on. AFAIK, Pipewire does not have audio-over-network support.
+
+NOTE: Some amoebas are not shown on the figures, simply because they are considered extinct. Before ALSA, earlier versions of Linux were shipped with Open Sound System (OSS), which then was appropriated and no longer counts as free software. However, as we know, once introduced at the kernel level, is destined to be supported for eternity. That’s why ALSA still has an OSS emulation mode.
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2022/Docker_Audio_Hell/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2022-06-07 09:47" class="post-meta__date date">7 Jun 2022</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#docker">docker</a> <a href="/tags/#wine">wine</a> <a href="/tags/#pulseaudio">pulseaudio</a> </span>
+      
+    </div>
+    <h1 class="post-title">Docker Audio Hell Pt. 1</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="and-the-passive-amoeba-of-linux-audio">And The Passive Amoeba of Linux Audio</h4>
+
+<p><img src="/assets/images/figures/amoeba1.svg" alt="heck" width="100%" style="margin-top: 20px;" /></p>
+
+<p>In this article, we are going to quickly reiterate the reason why audio-production on Linux can be challenging (if not frustrating at times). I think, the main reason for that, besides of course, my own incompetence, is audio-facilties being handled in too much of Unix-way. But what is Unix way, anyway? Well, in short, we have one isolated piece of software doing one single thing, but doing well.If any additional processing needs to be done with the output, we pipe (|) it into another isolated piece of software. Several steps of that form a <em>pipeline</em>. 
+Sounds great, right? Well, unfortunately, sometimes the seeming tidiness of this approach could quikcly go down the tubes (pun intended). 
+Once you need something specific, or something simply done <em>your</em> way, you’ll have to explore the whole pipeline from end to end. It’s alright, if the nodes there are simple utilities like <code class="highlighter-rouge">cat</code> or <code class="highlighter-rouge">grep</code>, but imaging exploring each of those having massive tectonic layers of legacy software archeology above them.</p>
+
+<p>So, here is how this usually happens. It all starts with ALSA, a kernel subsystem, which works directly with your audio hardware. It does not efficiently handle software mixing and routing, though, so applications  cannot share your device inputs/outputs effieicently, and we were not even talking about routing audio inputs and outputs between them. 
+To satisfy those needs, PulseAudio was introduced. A software wrapper around ALSA, that re-routes all the audio streams through itself, and distributes it between existing hardware inputs and outputs (sinks). Applications compiled to use PulseAuido as audio-driver cannot use ALSA directly, all according to the hightest standards of incomprehensible madman’s logic we maintain in the world of prograaming.</p>
+
+<p>PulseAudio, however had some issues with latency, which made it hardly usable for “professional” audio-recording, that usually includes near real-time record monitoring, for example. 
+To solve problem, purposedly introdued, we wrote an alternative to PulseAudio called JACK. Does this remind you of <a href="https://en.wikipedia.org/wiki/The_Futurological_Congress">“The Futurological Congress”</a>? For me it totally does.
+For a long time, JACK was the standard for (semi)professional audio work on Linux. Apparently, does not play nicely with PulseAudio. Some applications, (ex: Wine), does not support JACK at all. Of course, Wine has WineASIO, which can be routed to JACK, however, it is possible only for applications that use ASIO for audio, i.e. DAWs.</p>
+
+<p>Both JACK and Pulseaudio, have different solutions for audio-over network. PulseAudio has native client-server support, and also , a special audio-sink for streaming audio in RTP protocol (is it the same thing as zeroconf or not?). Judging by these configuration strings, client-server support of pulseaudio, can use TCP as a transport, and something called “native”, which I presume, would be standard unix-sockets.</p>
+
+<p><img src="/assets/images/figures/amoeba2.svg" alt="heck" width="100%" /></p>
+
+<p>JACK provides <a href="https://jackaudio.org/faq/netjack.html">several ways</a> remote audio networking. It’s native <code class="highlighter-rouge">netone</code> addon using CELT codec and master/follower pattern,  and some newer netJACK2, which has network discovery.</p>
+
+<p>Lately, yet another ultra-low-latency professional-audio-grade Unix soundsystem was introduced. It’s called PipeWire, and it is sort of a chamenion protocol, which can act as a PulseAudio backend for PulseAudio clients, Jack backend to Jack clients and so on. AFAIK, Pipewire does not have audio-over-network support.</p>
+
+<p><strong>NOTE</strong>: Some amoebas are not shown on the figures, simply because they are considered extinct. Before ALSA, earlier versions of Linux were shipped with Open Sound System (OSS), which then was appropriated and no longer counts as free software. However, as we know, once introduced at the kernel level, is destined to be supported for eternity. That’s why ALSA still has an OSS emulation mode.</p>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

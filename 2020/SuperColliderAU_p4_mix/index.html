@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>SuperColliderAU Part 4</title>
+  <meta name="description" content="Part 4. Routing and mixing
+
+So far, we’ve been working on a set of rather isolated code components, that produce audio, using structurally different approaches: physical modeling (through SuperColliderAU “containerized” instance), PCM sample playback (via RomplerGun), and subtractive synthesis (via SynthKick). 
+However, if you remember the initial set of requirements we listed for MembrainSC, I mentioned flexible mixing and matching options, which could make this VST an interesting hybrid drum machine, rather than one more 909 clone.
+So, in practical terms, how do I mix sampled and synthesized component of a kick drum and output it to specific output channel of a plugin? Same goes for a blend of modeled and sampled snares, which should have its own channel in plugins’ output bus. 
+To get a bit of grip on that, let’s explore JUCE’s mixing and routing possibilities.
+
+
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SuperColliderAU Part 4">
+  <meta name="twitter:description" content="Part 4. Routing and mixing
+
+So far, we’ve been working on a set of rather isolated code components, that produce audio, using structurally different approaches: physical modeling (through SuperColliderAU “containerized” instance), PCM sample playback (via RomplerGun), and subtractive synthesis (via SynthKick). 
+However, if you remember the initial set of requirements we listed for MembrainSC, I mentioned flexible mixing and matching options, which could make this VST an interesting hybrid drum machine, rather than one more 909 clone.
+So, in practical terms, how do I mix sampled and synthesized component of a kick drum and output it to specific output channel of a plugin? Same goes for a blend of modeled and sampled snares, which should have its own channel in plugins’ output bus. 
+To get a bit of grip on that, let’s explore JUCE’s mixing and routing possibilities.
+
+
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SuperColliderAU Part 4">
+  <meta property="og:description" content="Part 4. Routing and mixing
+
+So far, we’ve been working on a set of rather isolated code components, that produce audio, using structurally different approaches: physical modeling (through SuperColliderAU “containerized” instance), PCM sample playback (via RomplerGun), and subtractive synthesis (via SynthKick). 
+However, if you remember the initial set of requirements we listed for MembrainSC, I mentioned flexible mixing and matching options, which could make this VST an interesting hybrid drum machine, rather than one more 909 clone.
+So, in practical terms, how do I mix sampled and synthesized component of a kick drum and output it to specific output channel of a plugin? Same goes for a blend of modeled and sampled snares, which should have its own channel in plugins’ output bus. 
+To get a bit of grip on that, let’s explore JUCE’s mixing and routing possibilities.
+
+
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2020/SuperColliderAU_p4_mix/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2020-08-11 11:53" class="post-meta__date date">11 Aug 2020</time>
+      
+    </div>
+    <h1 class="post-title">SuperColliderAU Part 4</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="part-4-routing-and-mixing">Part 4. Routing and mixing</h4>
+
+<p>So far, we’ve been working on a set of rather isolated code components, that produce audio, using structurally different approaches: physical modeling (through SuperColliderAU “containerized” instance), PCM sample playback (via RomplerGun), and subtractive synthesis (via SynthKick). 
+However, if you remember the initial set of requirements we listed for MembrainSC, I mentioned flexible mixing and matching options, which could make this VST an interesting hybrid drum machine, rather than one more 909 clone.<br />
+So, in practical terms, how do I mix sampled and synthesized component of a kick drum and output it to specific output channel of a plugin? Same goes for a blend of modeled and sampled snares, which should have its own channel in plugins’ output bus. <br />
+To get a bit of grip on that, let’s explore JUCE’s mixing and routing possibilities.</p>
+
+<p><img src="/assets/images/figures/membrainsc_audio_mix.svg" alt="routing audio in MembrainSC using JUCE" /></p>
+
+<!-- readmore -->
+
+<h4 id="juceaudiosource">juce::AudioSource</h4>
+
+<p><code class="highlighter-rouge">AudioSource</code> is the base class for objects that can produce a continious stream of audio. The main point of interest for us there will be a method called <code class="highlighter-rouge">getNextAudioBlock()</code>, which, basically fills the audio buffer. For our purposes we will use this class a wrapper around our previously built audio components. 
+Consider this, we are passing our sound-inducing code object to AudioSource wrappers contrsuctor, and then it takes .. of filling the buffer. 
+After the buffer is full, we are applying a gain level to it. Default is 0.5 (which is convenient for the common case of two audio sources mixed at equilibrium). We will also have a separate method to set the gain.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "RomplerGunAudioSource.h"
+</span>
+<span class="n">RomplerGunAudioSource</span><span class="o">::</span><span class="n">RomplerGunAudioSource</span><span class="p">(</span><span class="n">RomplerGun</span><span class="o">&amp;</span> <span class="n">rg</span><span class="p">)</span> <span class="o">:</span> <span class="n">romplerGun</span><span class="p">(</span><span class="n">rg</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">RomplerGunAudioSource</span><span class="o">::</span><span class="n">getNextAudioBlock</span> <span class="p">(</span><span class="k">const</span> <span class="n">AudioSourceChannelInfo</span><span class="o">&amp;</span> <span class="n">channelInfo</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">AudioSampleBuffer</span><span class="o">*</span> <span class="n">outBuffer</span> <span class="o">=</span> <span class="n">channelInfo</span><span class="p">.</span><span class="n">buffer</span><span class="p">;</span>
+    <span class="n">renderingBuffer</span><span class="p">.</span><span class="n">clear</span> <span class="p">();</span>
+
+    <span class="n">romplerGun</span><span class="p">.</span><span class="n">renderNextBlock</span><span class="p">(</span><span class="o">*</span><span class="n">outBuffer</span><span class="p">,</span> <span class="o">*</span><span class="n">midiMessages</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">channelInfo</span><span class="p">.</span><span class="n">numSamples</span><span class="p">);</span>
+    <span class="n">outBuffer</span><span class="o">-&gt;</span><span class="n">applyGain</span><span class="p">(</span><span class="n">volume</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This way, we will obtain the possibility to mix them down into one stereo output, using another JUCE class which is described below. 
+<em>NOTE</em>: for unknown reasons (possibly, poor C++ knowledge), it does not work when I call <code class="highlighter-rouge">prepareToPlay()</code> method of the plugin instance inside the AudioSource wrapper. Maybe, it misbehaves, because I actually invoke <code class="highlighter-rouge">prepareToPlay()</code> multiple times, so, I assume I should move the preparations from the PluginProcessor class initilization to those AudioSource descendants, rather than repeating the invocation there.</p>
+
+<h4 id="jucemixeraudiosource">juce::MixerAudioSource</h4>
+
+<p>Once we’ve got our wrappers ready, JUCE has a convenient way to virtually “plug” them into an audio mixer. Just create an instance of
+MixerAudioSource, and add your   audiosources as its inputs.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="n">kickMix</span><span class="p">.</span><span class="n">addInputSource</span><span class="p">(</span><span class="o">&amp;</span><span class="n">romplerGunKickAudioSource</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+        <span class="n">kickMix</span><span class="p">.</span><span class="n">addInputSource</span><span class="p">(</span><span class="o">&amp;</span><span class="n">blipBlopKickAudioSource</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><em>NOTE</em>: for some other unknown reason (possibly, substance abuse), I was able to get it working only by setting <code class="highlighter-rouge">releaseResources</code> flag to false, 
+otherwise it got the software crushing on exit. I guess, this now causes a memory leak, which would need to be fixed.</p>
+
+<h4 id="juce-output-bus-setup">JUCE Output Bus Setup</h4>
+
+<p>Thanks to <code class="highlighter-rouge">MixerAudioSource</code>, we are now able to make hybrid drum sounds, by mixing different sources toghether, like simple synthesized blip kick and a kick drum PCM sample. We will use similar approach for a snare drum, where we mix an audio output of of vibrating physical membraine with a PCM sample as well. So, the last bit to be handled, is routing them to separate VST output channels. Luckily enough, JUCE’s API for bus routing is not that complicated either.
+You need to specify the number of channels in the class’s headers  macro.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MembrainScAudioProcessor</span><span class="o">::</span><span class="n">MembrainScAudioProcessor</span><span class="p">()</span>
+
+<span class="cp">#ifndef JucePlugin_PreferredChannelConfigurations
+</span>     <span class="o">:</span> <span class="n">AudioProcessor</span> <span class="p">(</span><span class="n">BusesProperties</span><span class="p">()</span>
+                     <span class="cp">#if ! JucePlugin_IsMidiEffect
+</span>                      <span class="cp">#if ! JucePlugin_IsSynth
+</span>                       <span class="p">.</span><span class="n">withInput</span>  <span class="p">(</span><span class="s">"Input"</span><span class="p">,</span>  <span class="n">AudioChannelSet</span><span class="o">::</span><span class="n">stereo</span><span class="p">(),</span> <span class="nb">true</span><span class="p">)</span>
+                      <span class="cp">#endif
+</span>                       <span class="p">.</span><span class="n">withOutput</span> <span class="p">(</span><span class="s">"SD"</span><span class="p">,</span> <span class="n">AudioChannelSet</span><span class="o">::</span><span class="n">stereo</span><span class="p">(),</span> <span class="nb">true</span><span class="p">)</span>
+                       <span class="p">.</span><span class="n">withOutput</span> <span class="p">(</span><span class="s">"BD"</span><span class="p">,</span> <span class="n">AudioChannelSet</span><span class="o">::</span><span class="n">stereo</span><span class="p">(),</span> <span class="nb">true</span><span class="p">)</span>
+                       <span class="p">.</span><span class="n">withOutput</span> <span class="p">(</span><span class="s">"HH"</span><span class="p">,</span> <span class="n">AudioChannelSet</span><span class="o">::</span><span class="n">stereo</span><span class="p">(),</span> <span class="nb">true</span><span class="p">)</span>
+                     <span class="cp">#endif
+</span>                     <span class="p">)</span>
+</code></pre></div></div>
+
+<p>Then you just iterate the output channels of your VST instance inside the rendering loop, and use a special constructor to get a dedicated audiobuffer for each stereo channel.</p>
+
+<p><em>NOTE</em>: some audio sources, like JUCE’s built-in sample player explcitly requires a MIDI event. Contary to what is was like with the previous tasks we faced in this chapter, creating an arbitary MIDI event in JUCE is a bit awkward, because it has no special high-level builder for that, and I really want to save my (poor) bit arithmetic skills for the situations, where they are really appropriate. So, I’m just using
+some boilerplate code to pass the MIDI event around from the main loop.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">auto</span> <span class="n">busCount</span> <span class="o">=</span> <span class="n">getBusCount</span> <span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+
+       <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">busNr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">busNr</span> <span class="o">&lt;</span> <span class="n">busCount</span><span class="p">;</span> <span class="o">++</span><span class="n">busNr</span><span class="p">)</span>
+       <span class="p">{</span>
+           <span class="k">auto</span> <span class="n">audioBusBuffer</span> <span class="o">=</span> <span class="n">getBusBuffer</span> <span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="n">busNr</span><span class="p">);</span>
+
+           <span class="k">if</span> <span class="p">(</span><span class="n">busNr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+               <span class="n">handleKickParams</span><span class="p">(</span><span class="n">midiMessages</span><span class="p">);</span>
+
+               <span class="n">AudioSourceChannelInfo</span> <span class="n">info</span> <span class="p">(</span><span class="n">audioBusBuffer</span><span class="p">);</span>
+               <span class="n">kickMix</span><span class="p">.</span><span class="n">getNextAudioBlock</span><span class="p">(</span><span class="n">info</span><span class="p">);</span>
+           <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+               <span class="k">if</span> <span class="p">(</span><span class="n">busNr</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">scSnare</span><span class="o">-&gt;</span><span class="n">processBlock</span><span class="p">(</span><span class="n">audioBusBuffer</span><span class="p">,</span> <span class="n">midiMessages</span><span class="p">);</span>
+               <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                   <span class="n">AudioSourceChannelInfo</span> <span class="n">info</span> <span class="p">(</span><span class="n">audioBusBuffer</span><span class="p">);</span>
+
+                   <span class="kt">float</span> <span class="n">mix</span> <span class="o">=</span> <span class="o">*</span><span class="n">paramsHub</span><span class="p">.</span><span class="n">getRawParameterValue</span><span class="p">(</span><span class="n">IDs</span><span class="o">::</span><span class="n">hihatMix</span><span class="p">);</span>
+                   <span class="n">romplerGunHHAudioSource</span><span class="p">.</span><span class="n">setVolume</span><span class="p">(</span><span class="n">mix</span><span class="p">);</span>
+<span class="n">c</span>                  <span class="n">romplerGunHHAudioSource</span><span class="p">.</span><span class="n">passMIDIMessages</span><span class="p">(</span><span class="n">midiMessages</span><span class="p">);</span>
+    
+                   <span class="n">scHiHatAudioSource</span><span class="o">-&gt;</span><span class="n">setVolume</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">mix</span><span class="p">);</span>
+                   <span class="n">scHiHatAudioSource</span><span class="o">-&gt;</span><span class="n">passMIDIMessages</span><span class="p">(</span><span class="n">midiMessages</span><span class="p">);</span>
+                   <span class="n">hhMix</span><span class="p">.</span><span class="n">getNextAudioBlock</span><span class="p">(</span><span class="n">info</span><span class="p">);</span>
+               <span class="p">}</span>
+           <span class="p">}</span>
+       <span class="p">}</span>
+</code></pre></div></div>
+
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

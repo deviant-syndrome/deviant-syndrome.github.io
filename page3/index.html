@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <meta name="robots" content="noindex">
+  
+
+  <title>Deviant Syndrome</title>
+  <meta name="description" content="coding, multimedia, gamedev, engineering">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Deviant Syndrome">
+  <meta name="twitter:description" content="coding, multimedia, gamedev, engineering">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Deviant Syndrome">
+  <meta property="og:description" content="coding, multimedia, gamedev, engineering">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/page3/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <img style='width: 100%; margin-bottom: 40px;' src="/images/lcdheader.png"/>
+
+<div style='column-count: 3; margin-bottom: 32px'>
+<h4 style='margin-top: 0px;'>MENU</h4>
+<ul>
+
+  
+    
+      <li><a href="/categories/#code-bits">code bits (4)</a></li>
+    
+      <li><a href="/categories/#demo">demo (1)</a></li>
+    
+      <li><a href="/categories/#dsp-math">dsp math (2)</a></li>
+    
+      <li><a href="/categories/#vst-audio-software">vst audio software (13)</a></li>
+    
+      <li><a href="/categories/#music">music (1)</a></li>
+    
+      <li><a href="/categories/#journalism?">journalism? (2)</a></li>
+    
+      <li><a href="/categories/#dsp">dsp (2)</a></li>
+    
+  
+
+</ul>
+</div>
+
+<!--
+  // TODO: uncomment, once you have some updates ;-) 
+  <header class="post-header">
+   <h2 class="post-list__post-title">
+     <a href="#" title="Latest updates">Latest updates</a>
+   </h2>
+</header>
+<p></p>
+<section class="post">
+    I am very interesting, talented and sophisticated
+</section>
+<p></p>
+<hr class="post-list__divider">
+
+-->
+<div class="main-post-list">
+
+  <ol class="post-list">
+    
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/MembrainSC_Toolset/" title="MembrainSC Development.">MembrainSC Development.</a></h2>
+        
+	<p class="excerpt"><h4 id="part-1-technical-overview-and-toolset">Part 1. Technical Overview and toolset</h4>
+
+<p><img src="/assets/images/figures/membrainsc_routing.svg" alt="MemebrainSC proposed architecture" /></p>
+
+<p>As you, in this series of blog posts, we (well, mostly me) gonna built some kind of strange drum machine in a form of VST (virtual instrument) plugin.</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/MembrainSC_Toolset/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-05-21 20:24" class="post-list__meta--date date">21 May 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#dsp">dsp</a> <a href="/tags/#juce">juce</a> <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/MembrainSC_Contents/" title="MembrainSC. Introduction">MembrainSC. Introduction</a></h2>
+        
+	<p class="excerpt"><h4 id="a-drum-machine-with-that-sci-fi-underground-vibe">A drum machine with that “sci-fi underground” vibe…</h4>
+
+<p>So, I can already imagine you all asking me, why design your own drum machine in 2020, for fokks sake? 
+Well, in short, I have my reasons. Those are mainly education, inspiration and megalomania, of course. The latter is particularly important, because, instead of doing one more classic 80’s drum machine replica (which am I not capable of, anyway) I came up with an idea of a plugin, that resembles the same “engineering around limitations” approach to doing drum sounds: a combination of synthesis, physical modelling and PCM samples.</p>
+
+<p>Also, unlike those old low-computational power units, we can supply it with much more humanise capabilities, especially for cymbals.</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/MembrainSC_Contents/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-05-21 20:13" class="post-list__meta--date date">21 May 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#dsp">dsp</a> <a href="/tags/#juce">juce</a> <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/The_Danger_of_the_Soul/" title="The Danger of the Soul">The Danger of the Soul</a></h2>
+        
+			 <p><section class="post"><h4 id="suomalainen-sanakirja">Suomalainen sanakirja</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Suomea</th>
+      <th>Englantia</th>
+      <th>Suomea</th>
+      <th>Englantia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>selittä</td>
+      <td>to explain</td>
+      <td>pyyhkia</td>
+      <td>to erase</td>
+    </tr>
+    <tr>
+      <td>valmistella</td>
+      <td>to prepare</td>
+      <td>toistaa</td>
+      <td>to repeat</td>
+    </tr>
+    <tr>
+      <td>levätä</td>
+      <td>to rest</td>
+      <td>hikoilla</td>
+      <td>to sweat</td>
+    </tr>
+    <tr>
+      <td>miettiä</td>
+      <td>to think</td>
+      <td>poistua</td>
+      <td>to leave</td>
+    </tr>
+    <tr>
+      <td>laittaa</td>
+      <td>to put</td>
+      <td>suhtautua</td>
+      <td>to relate</td>
+    </tr>
+    <tr>
+      <td>pslsutta</td>
+      <td>to return</td>
+      <td>sammutta</td>
+      <td>to turn off</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- more -->
+
+<p>And more to go here!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Suomea</th>
+      <th>Englantia</th>
+      <th>Suomea</th>
+      <th>Englantia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>liitto</td>
+      <td>union</td>
+      <td>teräksen</td>
+      <td>steel</td>
+    </tr>
+    <tr>
+      <td>leviää</td>
+      <td>to spread</td>
+      <td>tuotanossa</td>
+      <td>production</td>
+    </tr>
+    <tr>
+      <td>yhteistyö</td>
+      <td>cooperation</td>
+      <td>järjestö</td>
+      <td>organisation</td>
+    </tr>
+    <tr>
+      <td>ase</td>
+      <td>gun</td>
+      <td>ampua</td>
+      <td>to shoot</td>
+    </tr>
+    <tr>
+      <td>aiemmin</td>
+      <td>previous</td>
+      <td>kertoa</td>
+      <td>to tell</td>
+    </tr>
+    <tr>
+      <td>heittää</td>
+      <td>to throw</td>
+      <td>seura</td>
+      <td>company</td>
+    </tr>
+    <tr>
+      <td>pyytä</td>
+      <td>to ask a f.</td>
+      <td>kestä</td>
+      <td>stand up</td>
+    </tr>
+  </tbody>
+</table>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-05-16 10:24" class="post-list__meta--date date">16 May 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#suomea">suomea</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/NeverLooseAScript/" title="Never loose a Bash script again">Never loose a Bash script again</a></h2>
+        
+			 <p><section class="post"><p>Like most of us, I’ve a handful of bash scripts to automate my day to day tasks, related to work and personal activities. They all live somewhere along the lines of ~/myscripts and this entry is added to my PATH shell env.</p>
+
+<p>The downside of this, is, of course, that you scripts directory become a bit of a mess, congested with all that obsolete and half-baked stuff, that also pollutes your autocomplete as well.</p>
+
+<p>To fight this I came up with a simple convention for all the utility scripts I place In that magic folder. There should be two commented block after bash header in every script: first is a single string of space separated tags, then a short description of what this script does.</p>
+
+<p>Example would be like:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># blog util mp3</span>
+<span class="c"># Convert DAW rendered demo WAVs to MP3 and places them </span>
+<span class="c"># into dedicated blog folder</span>
+</code></pre></div></div>
+
+<p>Sticking to that convention, I was able to come up with a script that generates a summary of my utilities. It also filters by tag and flags the undocumented ones.</p>
+
+<details>
+  <summary>Lots of poor Bash gibberish
+</summary>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># meta</span>
+<span class="c"># Lists my DIY Bash scripts</span>
+<span class="nv">nodescr</span><span class="o">=</span><span class="s2">""</span>
+
+<span class="nv">files</span><span class="o">=(</span><span class="si">$(</span><span class="nb">ls</span> ~/myscripts/. | <span class="nb">grep</span> <span class="nt">-v</span> <span class="s1">'\.'</span><span class="si">)</span><span class="o">)</span>
+<span class="nv">tags</span><span class="o">=</span><span class="s2">""</span>
+<span class="k">for </span>f <span class="k">in</span> <span class="k">${</span><span class="nv">files</span><span class="p">[*]</span><span class="k">}</span><span class="p">;</span> <span class="k">do
+    </span><span class="nv">filename</span><span class="o">=</span><span class="nv">$f</span>
+    <span class="nv">descr</span><span class="o">=</span><span class="s2">""</span>
+    <span class="nv">skip</span><span class="o">=</span><span class="s2">"no"</span>
+    <span class="nv">linecount</span><span class="o">=</span>0
+    <span class="k">while </span><span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> <span class="nt">-r</span> line<span class="p">;</span> <span class="k">do
+        if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span> <span class="o">=</span>~ ^#.<span class="k">*</span><span class="nv">$ </span><span class="o">]]</span><span class="p">;</span> <span class="k">then
+            </span><span class="nb">let</span> <span class="s2">"linecount+=1"</span>
+            <span class="k">if</span> <span class="o">((</span>linecount <span class="o">==</span> 2<span class="o">))</span><span class="p">;</span> <span class="k">then
+                if</span> <span class="o">!</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"tags"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+                    if</span> <span class="o">[[</span> <span class="nv">$line</span> <span class="o">!=</span> <span class="k">*</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="k">*</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+                        </span><span class="nv">skip</span><span class="o">=</span><span class="s2">"yes"</span>
+                    <span class="k">fi
+                fi
+                </span><span class="nv">tags</span><span class="o">=</span><span class="s2">"</span><span class="nv">$tags</span><span class="k">${</span><span class="nv">line</span>:1<span class="k">}</span><span class="s2">"</span>
+
+            <span class="k">fi
+            if</span> <span class="o">((</span>linecount <span class="o">&gt;</span> 2<span class="o">))</span><span class="p">;</span> <span class="k">then
+                </span>descr+<span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">line</span>:1<span class="k">}</span><span class="s2">"</span>
+            <span class="k">fi
+        else
+            </span><span class="nb">break
+        </span><span class="k">fi
+    done</span> &lt;<span class="s2">"</span><span class="nv">$filename</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$descr</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nv">nodescr</span><span class="o">=</span><span class="s2">"</span><span class="nv">$nodescr</span><span class="s2"> </span><span class="nv">$filename</span><span class="s2">"</span>
+    <span class="k">else
+        </span><span class="nb">dd</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">printf</span> <span class="s1">'%-20s'</span> <span class="nv">$filename</span><span class="si">)</span><span class="s2">:"</span>
+        <span class="k">if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">!=</span> <span class="s2">"tags"</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+            if</span> <span class="o">[[</span> <span class="s2">"</span><span class="nv">$skip</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"no"</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then
+                </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$dd</span><span class="s2">#</span><span class="nv">$descr</span><span class="s2">"</span> | <span class="nb">awk</span> <span class="nt">-f</span> table.awk
+                <span class="nb">printf</span> <span class="s1">'\n'</span>
+            <span class="k">fi
+        fi
+    fi
+done
+</span><span class="nb">echo</span> <span class="nv">$tags</span> | xargs <span class="nt">-n1</span> | <span class="nb">sort</span> <span class="nt">-u</span> | xargs
+<span class="nb">echo </span>Missing description: <span class="nv">$nodescr</span>
+</code></pre></div>  </div>
+</details>
+
+<p>Output looks really nice, though:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">br34kp0int@lobsterblood~/» ./scriptz blog 
+blogmp3             : Converts the files from Repulsive 
+                      Recrods tech software demos to MP3 
+                      and copies them to blog for 
+                      educational purposes
+
+blogthumbs          : Generates thumbnails for blog 
+                      galleries
+
+day2day             : Generates a blog entry with current 
+                      data and some random title
+</span></code></pre></div></div>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-05-14 19:07" class="post-list__meta--date date">14 May 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#bash">bash</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/VCV_RMod_Notes/" title="Kkampf RMod Tech notes">Kkampf RMod Tech notes</a></h2>
+        
+			 <p><section class="post"><p>As a part of me trying to get into DSP (and attract ladies), I made a simple VCV Rack module that does ring modulation. The implementation of this effect in digital domain is devilishly simple. You just multiply two signals sample by sample to get the output.
+I still wanted my module to comply VCV Rack’s audio audio signal “virtual voltage” standards, so I decided to apply some simple soft clipping to the multiplication product, because multiplication operation can easily give us results in higher orders of magnitude, than the arguments. 
+In theory, a hyperbolic tangent function should applied, because it has those nice smooth leads to the asymptotic (-1, 1). The problem here that it is kinda complex function to evaluate. 
+So, we’d better use some approximation. Let’s see, what is available.</p>
+
+<h4 id="polynomial-interpolation">Polynomial interpolation</h4>
+
+<div class="kdmath">$$
+tanh(x) \approx a_{0}x + a_{1}x^2 + a_{2}x^3 + \cdots + a_{n}x^n
+$$</div>
+
+<p><img src="/assets/images/plots/tan_appx_int.png" alt="Hyperbolic tangent Polynomial Interpolation" class="img-responsive" /></p>
+
+<p>So, we took some of the points of the original curse and interpolated over them. Coefficients are not very important here (or I was too lazy to retype them in \(L_{A}TE^{X}\). Does not look very well to me, it has up to 10th degree argument which implied a lot of multiplications. Also, as you can see from the graph, it goes wild after about, 5. 
+I also tried to experiment to reduce the high-degree arguments as non-significant, but that approach failed miserably. Ok, moving on.</p>
+
+<h4 id="continued-fraction-representations">Continued fraction representations</h4>
+
+<div class="kdmath">$$
+tanh(z) = \frac{z}{1 + \frac{z^2}{3 + \frac{z^2}{5 +\frac{z^2}{7 + \frac{z^2}{9 + \frac{z^2}{11 + \ldots}}}}}}
+$$</div>
+
+<p>And here we can have a recursive process of getting fractions to achieve a certain degree of approximation. Looks nice, but still quite some work to do, especially in  C++ which I’m terrible at. Interesting, can we have a super crude approximation, just giving up on subsequent recursive divisions.</p>
+
+<div class="kdmath">$$
+tanh(x) \approx \frac{x}{1 + \vert{x}\vert}
+$$</div>
+
+<p><img src="/assets/images/plots/tanh_appx_simplest.png" alt="Hyperbolic tangent Polynomial Interpolation" class="img-responsive" /></p>
+
+<p>This looks alright, in fact quite suitable for my need of simple output clipping. 
+In case you’re curios, this is how it sounds like:</p>
+
+<div class="audio-container">
+  <audio src="/mp3/2020/rmod_demo1.mp3" preload="auto"></audio>
+  <ol>
+	<li class="playing">
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo1.mp3">
+	      Guitar through R-Mod module, simple sine used as carrier
+	   </a>
+	</li>
+	<li>
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo2.mp3">
+	      Mora Facility (ambient demo with R-Mod)
+	   </a>
+	</li>
+</ol>
+</div>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-04-21 18:55" class="post-list__meta--date date">21 Apr 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#kkampf">kkampf</a> <a href="/tags/#vcv">vcv</a> <a href="/tags/#saturation">saturation</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/The_Time_of_the_Wolf/" title="The Time of the Wolf">The Time of the Wolf</a></h2>
+        
+			 <p><section class="post"><p>Two cool guitar licks I’m currently practicing:</p>
+
+<div id="coldbound2" data-file="/assets/sheetmusic/coldbound2.musicxml" data-tracks="0" class="notation">
+</div>
+
+<p><em>(the way I spelled the Coldbound lick would force me to finally start remembering ledger lines. Oh, damn)</em></p>
+
+<div id="hangar1" data-file="/assets/sheetmusic/hangar1.musicxml" data-tracks="0" class="notation">
+</div>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-01-09 19:26" class="post-list__meta--date date">9 Jan 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#guitar">guitar</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2019/Basics_of_FFT_part_1/" title="Basics of FFT part 1">Basics of FFT part 1</a></h2>
+        
+			 <p><section class="post"><h4 id="math">Math</h4>
+
+<p>As we already know, we can write the Fourier transform in a discrete form like this:</p>
+
+<div class="kdmath">$$
+X_{k} = \sum_{n = 0}^{N} x_n e^{ \frac{-2\pi k n}{N} }
+$$</div>
+
+<p>Note, that when working with DFT we use different notation convention. If in a continuous domain we wrote the Fourier transform as \(\hat{f}\), here we notate the sampled (tabbed) function as \(x\) as it’s frequency domain representation as \(X_k\) where \(k\) is the frequency argument.</p>
+
+<p>So, let’s split that heap of sampled function values into two equally sized parts. One part will contain even indexed samples and the other part odd indexed samples, respectively. Then we can rewrite the DFT in the following form:</p>
+
+<div class="kdmath">$$
+X_{k} = \sum_{m = 0}^{N/2} x_{2m} e^{ \frac{-2\pi ik}{N}2m } + \sum_{m = 0}^{N/2} x_{2m+1} e^{\frac{-2\pi ik}{N}(2m + 1)}
+$$</div>
+
+<p>Now, we want both of this parts to represent a separate self-sufficient DFT transform themselves. To achieve this, we are moving multiplication by 2 from the numerator to denominator, so there it effectively becomes \(N/2\). This way, sigma expression summing from 0 to \(N/2\) becomes a DFT. In the odd part we just moving static stuff outside the sigma operator:</p>
+
+<div class="kdmath">$$
+X_{k} = \sum_{m = 0}^{N/2} x_{2m} e^{\frac{-2\pi i k m}{N/2} } + e^{ \frac{2\pi ik}{N}} \sum_{m = 0}^{N/2} x_{2m + 1} e^{ \frac{-2\pi ikm}{N/2}}
+$$</div>
+
+<p>For further convenience we will define left (even) DFT and right (odd) DFT as \(E_k\) and \(O_k\). In this case we can interpret the
+ statement above as:</p>
+
+<div class="kdmath">$$
+X_{k} = E_k + e^{ \frac{ =2\pi ik}{N}}O_k
+$$</div>
+
+<p>Now, here is the moment where magic happens: complex exponential functions are periodic, and we can take advantage of that, by reusing already calculated \(E_k\) and \(O_k\) to also calculate \(X_{k + N/2}\). Let’s see, how:</p>
+
+<div class="kdmath">$$
+e^{i(\theta + 2\pi ik)} = e^{i\theta}
+$$</div>
+
+<div class="kdmath">$$
+X_{k + N/2} = \sum_{m = 0}^{N/2} x_{2m} e^{\frac{-2\pi i}{N/2}m(k + N/2)} + e^{\frac{-2\pi i}{N/2}(k + N/2)}\sum_{m = 0}^{N/2} x_{2m + 1} e^{\frac{2\pi i}{N/2}m(k + N/2)}
+$$</div>
+
+<p>When simplifying this expression, we express exponential degree of sum as a multiplication of two exponential degrees. So, in the first and second sum it just eliminates, because \(e^{-2\pi i m} = 1\) for any \(m\), and the one coefficient on the right will just change it’s sign, because \(e^{-\pi i} = -1\). In detail this would be like:</p>
+
+<div class="kdmath">$$
+X_{k + N/2} = \sum_{m = 0}^{N/2} x_{2m} e^{\frac{-2\pi i mk}{N/2}} e^{-2\pi i m} + e^{\frac{-2\pi i k}{N/2}} e^{\pi i} \sum_{m = 0}^{m = N/2} e^{\frac{-2\pi i m}{N/2}} e^{-2\pi i m}
+$$</div>
+
+<p>Which simplifies to:</p>
+
+<div class="kdmath">$$
+X_{k + N/2} = E_{k} - e^{\frac{-2\pi ik}{N}} O_k
+$$</div>
+
+<p>So, many classical FFT algorithms perform those calculations recursively, reusing the previously computed \(E_k\) and \(O_k\) (which is illustrated by “butterfly” data flow diagram of those algorithms). The complexity of this algorithm family is about O(N log N)</p>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2019-12-30 08:23" class="post-list__meta--date date">30 Dec 2019</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#fft">fft</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2019/Technical_Demo/" title="Technical Demo">Technical Demo</a></h2>
+        
+			 <p><section class="post"><p>So, I spent a quite a while pimping up my blog engine. And here is the list of awesome features it can do. And event more to come soon. You probably already noticed the cool dark CSS styling of an open-source Jekyll theme, but there is much more to go.</p>
+
+<p>Alright, let’s move.</p>
+
+<h4 id="mathjax-support">MathJax support</h4>
+
+<p>See the awesome math needed for researching DSP whitepapers and stuff.</p>
+<details>
+  <summary>Solving quadratic equations
+</summary>
+  <p>When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are</p>
+
+  <div class="kdmath">$$
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}.
+$$</div>
+
+  <p><span class="kdmath">$\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}$</span></p>
+</details>
+
+<h4 id="alphatab-sheet-music-support">AlphaTab sheet music support</h4>
+
+<p>I’m struggling to teach myself music theory the most thoughtful way – through understanding written scores and sheet music. There is something about written notations, that makes me feel sorta sophisticated, and as I total narcissist I like that feeling.</p>
+
+<details>
+  <summary>Rendering sheet music
+</summary>
+  <div id="alphaTab" data-tex="true" class="notation">
+\title "Canon Rock"
+\subtitle "JerryC"
+\tempo 90
+.
+:2 19.2{v f} 17.2{v f} |
+15.2{v f} 14.2{v f}|
+12.2{v f} 10.2{v f}|
+12.2{v f} 14.2{v f}.4 :8 15.2 17.2 |
+14.1.2 :8 17.2 15.1 14.1{h} 17.2 |
+15.2{v d}.4 :16 17.2{h} 15.2 :8 14.2 14.1 17.1{b(0 4 4 0)}.4 |
+15.1.8 :16 14.1{tu 3} 15.1{tu 3} 14.1{tu 3} :8 17.2 15.1 14.1 :16 12.1{tu 3} 14.1{tu 3} 12.1{tu 3} :8 15.2 14.2 |
+12.2 14.3 12.3 15.2 :32 14.2{h} 15.2{h} 14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}
+</div>
+</details>
+
+<h4 id="audiojs-embeded-mp3-player">AudioJS Embeded MP3 player</h4>
+
+<p>Feels super cool to be able to embed my audio demos and sketches with a music player via <a href="http://kolber.github.io/audiojs/">audioJS</a>. Then they are all nicely sorted Now also with playlist support!</p>
+
+<details>
+  <summary>Embeded MP3 player
+</summary>
+  <div class="audio-container">
+    <audio src="/mp3/2020/rmod_demo1.mp3" preload="auto"></audio>
+    <ol>
+	<li class="playing">
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo1.mp3">
+	      Guitar through R-Mod module, simple sine used as carrier
+	   </a>
+	</li>
+	<li>
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo2.mp3">
+	      Mora Facility (ambient demo with R-Mod)
+	   </a>
+	</li>
+</ol>
+  </div>
+</details>
+
+<h4 id="thebelab-emneded-jupyter-notebooks">ThebeLab emneded Jupyter notebooks</h4>
+
+<p>Python + scipy + numpy inside a Jupyter notebook. There is nothing better to sketch/flesh-out mathematical ideas than that. With [ThebeLab] and a dedicated Jupyter server available, you can make your Python sketches runnable on your site.</p>
+
+<details class="thebefold" id="thebefold1">
+  <summary>Interactive Jupyter Notebooks
+</summary>
+  <pre data-language="python" class="cm-s-dracula">
+%matplotlib inline
+import numpy as np
+from jupyterthemes import jtplot
+import matplotlib.pyplot as plt
+jtplot.style()
+x = np.linspace(0,10)
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+</pre>
+</details>
+
+<h5 id="coming-soon">Coming soon!</h5>
+<ul>
+  <li>Python notebooks via <a href="https://nbsphinx.readthedocs.io/en/0.5.0/index.html#">nbsphinx</a></li>
+  <li>Embed my demos with a music player via <a href="http://kolber.github.io/audiojs/">audioJS</a></li>
+</ul>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2019-12-08 19:39" class="post-list__meta--date date">8 Dec 2019</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#js">js</a> <a href="/tags/#markdown">markdown</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2019/The_Stars_of_the_Servant/" title="The Stars of the Servant">The Stars of the Servant</a></h2>
+        
+			 <p><section class="post"><h4 id="suomalainen-sanasto">Suomalainen sanasto</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>suomea</th>
+      <th>englatia</th>
+      <th>suomea</th>
+      <th>englantia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>vanhammat</td>
+      <td>parents</td>
+      <td>kampaaja</td>
+      <td>hairdresser</td>
+    </tr>
+    <tr>
+      <td>mies</td>
+      <td>husband</td>
+      <td>toimittaja</td>
+      <td>journalist</td>
+    </tr>
+    <tr>
+      <td>vaimo</td>
+      <td>wife</td>
+      <td>naimisissa</td>
+      <td>to be married</td>
+    </tr>
+    <tr>
+      <td>ostaa</td>
+      <td>to buy</td>
+      <td>erronnut</td>
+      <td>to be divorced</td>
+    </tr>
+    <tr>
+      <td>katsoa</td>
+      <td>to watch</td>
+      <td>appi</td>
+      <td>father-in-law</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="partituuri">Partituuri</h4>
+
+<div id="coldbound1" data-file="/assets/sheetmusic/coldbound1.musicxml" data-tracks="0" class="notation">
+</div>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2019-11-10 15:35" class="post-list__meta--date date">10 Nov 2019</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#suomea">suomea</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2019/The_Nothing_s_Hunter/" title="The Nothing's Hunter">The Nothing's Hunter</a></h2>
+        
+			 <p><section class="post"><h4 id="suomi-sanakirja">Suomi-sanakirja</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Words</th>
+      <th>Phrases</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>asua</td>
+      <td>to live</td>
+      <td>Ei se mit mitään</td>
+      <td>No worries</td>
+    </tr>
+    <tr>
+      <td>etsiä</td>
+      <td>to search</td>
+      <td>Mistä sinä olet kotoisin?</td>
+      <td>Where are you from?</td>
+    </tr>
+    <tr>
+      <td>maksaa</td>
+      <td>to pay</td>
+      <td>Minkämaalainen sinä olet?</td>
+      <td>What nationality are you?</td>
+    </tr>
+    <tr>
+      <td>rakastaa</td>
+      <td>to love</td>
+      <td>Mita kieltä sinä puhut?</td>
+      <td>What language do you speak?</td>
+    </tr>
+    <tr>
+      <td>istua</td>
+      <td>to sit</td>
+      <td>Mitä sinulle kuuluu?</td>
+      <td>How are you?</td>
+    </tr>
+    <tr>
+      <td>nauraa</td>
+      <td>to laugh</td>
+      <td>Minulle kuuluu hyvää. Enta sinulle?</td>
+      <td>I’m fine and you?</td>
+    </tr>
+    <tr>
+      <td>kotona</td>
+      <td>home</td>
+      <td>Ihan hyvää, kiitos</td>
+      <td>Quite alright, thanks</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>Ei ongelmaa</td>
+      <td>No problem</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Link to different browser embeddable sheet music engines: <a href="https://opensheetmusicdisplay.org/2018/09/11/sheet-music-display-libraries-browsers/">here</a></p>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2019-10-13 17:23" class="post-list__meta--date date">13 Oct 2019</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#suomea">suomea</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+  </ol>
+
+  <hr class="post-list__divider ">
+
+  
+      <nav class="pagination" role="navigation">
+  
+    
+      <a rel="prev" class="posts newer btn small" href="/page2/">← Newer Posts</a>
+    
+  
+
+  <span class="pagination__page-number">Page 3 of 4</span>
+
+  
+    <a rel="next" class="posts older btn small" href="/page4/">Older Posts →</a>
+  
+</nav>
+
+  
+
+</div>
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

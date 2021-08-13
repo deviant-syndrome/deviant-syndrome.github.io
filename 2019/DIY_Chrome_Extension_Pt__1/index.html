@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>DIY Chrome Extension Pt. 1</title>
+  <meta name="description" content="Why?
+
+My addiction to proper dark/low-contract and outright badass interfaces is well-known and could even considered pathological.by one’s standards. This, alongside with inability to use third-party browser extensions in my company’s laptop (for security reasons) finally led me to start exploring the shocking world of DIY Chrome Extensions.
+
+I did not even bother researching what you need to do, for your Chrome extension to make it to Google’s store facilities, I just wanted something, that works locally, personally for me and does one simple thing: dim the eye melting colours of corporate/enterprise web UIs. Thankfully, adding local dev versions of Chrome extensions is fairly straightforward.
+
+First steps
+rottingface@vipernest: ~$ md Darkk
+rottingface@vipernest: ~$ cd Darkk
+rottingface@vipernest: ~/Darkk$ touch manifest.json
+
+
+{
+    "name" : "Darkk",
+    "version" : "1.0",
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*"],
+            "css" : ["css/github-dark.css"]
+ 
+        }
+    ],
+    "permissions" : [ "activeTab", "webNavigation", "*://*/*" ],
+    "description" : "Dark mode for my everyday web",
+    "manifest_version" : 2
+}
+
+When you go to chrome://extensions URL in your browser and click “Add unpacked”, specifying your extension directory.
+
+The catch
+There is always one, isn’t it? Some times, it just does not work. Maybe because of Chrome, maybe because of today’s web pages do too much dynamic DOM manipulations on the way. 
+So, in addition to that, I pretended to be a well-trained JS monkey and came up with a script that inserts a new style DOM element, after web page has loaded.
+
+const url = chrome.runtime.getURL('data/github-dark.css');
+
+fetch(url)
+    .then((response) =&gt; response.text())
+    .then((css) =&gt; {
+        var head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+        head.appendChild(style);
+
+        let prcss = css.replace(/@-moz-document regexp\((.*)\) \{(\n|\r)+/, "");
+        style.type = 'text/css';
+        if (style.styleSheet){
+            // This is required for IE8 and below.
+            style.styleSheet.cssText = prcss;
+        } else {
+            style.appendChild(document.createTextNode(prcss));
+        }
+    });
+
+
+Here I wanted just a plain simple thing, apply custom CSS to the page, when the URL matches a pattern specified. 
+Started to develop my in-house Google Chrome extension to adjust some of the WebUI palettes of the services I use every day. Let’s see how easy it goes. I could not really use any third+party extension from the Chrome store ob my working laptop, because of my company’s net security guidelines.
+
+So, I created a simple .manifest file. Added a background script that hooks to a navigation complete element.
+By the way, simple CSS injections via tabs.injectCSS or “css” in manifest file did not work for some reason. Same went for jQuery (modern browsers almost fully blocking any Cross-Origin or local referencies). Was able to make my way simply through creating a style DOM element and filling its gut with my custom CSS content.
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DIY Chrome Extension Pt. 1">
+  <meta name="twitter:description" content="Why?
+
+My addiction to proper dark/low-contract and outright badass interfaces is well-known and could even considered pathological.by one’s standards. This, alongside with inability to use third-party browser extensions in my company’s laptop (for security reasons) finally led me to start exploring the shocking world of DIY Chrome Extensions.
+
+I did not even bother researching what you need to do, for your Chrome extension to make it to Google’s store facilities, I just wanted something, that works locally, personally for me and does one simple thing: dim the eye melting colours of corporate/enterprise web UIs. Thankfully, adding local dev versions of Chrome extensions is fairly straightforward.
+
+First steps
+rottingface@vipernest: ~$ md Darkk
+rottingface@vipernest: ~$ cd Darkk
+rottingface@vipernest: ~/Darkk$ touch manifest.json
+
+
+{
+    "name" : "Darkk",
+    "version" : "1.0",
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*"],
+            "css" : ["css/github-dark.css"]
+ 
+        }
+    ],
+    "permissions" : [ "activeTab", "webNavigation", "*://*/*" ],
+    "description" : "Dark mode for my everyday web",
+    "manifest_version" : 2
+}
+
+When you go to chrome://extensions URL in your browser and click “Add unpacked”, specifying your extension directory.
+
+The catch
+There is always one, isn’t it? Some times, it just does not work. Maybe because of Chrome, maybe because of today’s web pages do too much dynamic DOM manipulations on the way. 
+So, in addition to that, I pretended to be a well-trained JS monkey and came up with a script that inserts a new style DOM element, after web page has loaded.
+
+const url = chrome.runtime.getURL('data/github-dark.css');
+
+fetch(url)
+    .then((response) =&gt; response.text())
+    .then((css) =&gt; {
+        var head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+        head.appendChild(style);
+
+        let prcss = css.replace(/@-moz-document regexp\((.*)\) \{(\n|\r)+/, "");
+        style.type = 'text/css';
+        if (style.styleSheet){
+            // This is required for IE8 and below.
+            style.styleSheet.cssText = prcss;
+        } else {
+            style.appendChild(document.createTextNode(prcss));
+        }
+    });
+
+
+Here I wanted just a plain simple thing, apply custom CSS to the page, when the URL matches a pattern specified. 
+Started to develop my in-house Google Chrome extension to adjust some of the WebUI palettes of the services I use every day. Let’s see how easy it goes. I could not really use any third+party extension from the Chrome store ob my working laptop, because of my company’s net security guidelines.
+
+So, I created a simple .manifest file. Added a background script that hooks to a navigation complete element.
+By the way, simple CSS injections via tabs.injectCSS or “css” in manifest file did not work for some reason. Same went for jQuery (modern browsers almost fully blocking any Cross-Origin or local referencies). Was able to make my way simply through creating a style DOM element and filling its gut with my custom CSS content.
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DIY Chrome Extension Pt. 1">
+  <meta property="og:description" content="Why?
+
+My addiction to proper dark/low-contract and outright badass interfaces is well-known and could even considered pathological.by one’s standards. This, alongside with inability to use third-party browser extensions in my company’s laptop (for security reasons) finally led me to start exploring the shocking world of DIY Chrome Extensions.
+
+I did not even bother researching what you need to do, for your Chrome extension to make it to Google’s store facilities, I just wanted something, that works locally, personally for me and does one simple thing: dim the eye melting colours of corporate/enterprise web UIs. Thankfully, adding local dev versions of Chrome extensions is fairly straightforward.
+
+First steps
+rottingface@vipernest: ~$ md Darkk
+rottingface@vipernest: ~$ cd Darkk
+rottingface@vipernest: ~/Darkk$ touch manifest.json
+
+
+{
+    "name" : "Darkk",
+    "version" : "1.0",
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*"],
+            "css" : ["css/github-dark.css"]
+ 
+        }
+    ],
+    "permissions" : [ "activeTab", "webNavigation", "*://*/*" ],
+    "description" : "Dark mode for my everyday web",
+    "manifest_version" : 2
+}
+
+When you go to chrome://extensions URL in your browser and click “Add unpacked”, specifying your extension directory.
+
+The catch
+There is always one, isn’t it? Some times, it just does not work. Maybe because of Chrome, maybe because of today’s web pages do too much dynamic DOM manipulations on the way. 
+So, in addition to that, I pretended to be a well-trained JS monkey and came up with a script that inserts a new style DOM element, after web page has loaded.
+
+const url = chrome.runtime.getURL('data/github-dark.css');
+
+fetch(url)
+    .then((response) =&gt; response.text())
+    .then((css) =&gt; {
+        var head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+        head.appendChild(style);
+
+        let prcss = css.replace(/@-moz-document regexp\((.*)\) \{(\n|\r)+/, "");
+        style.type = 'text/css';
+        if (style.styleSheet){
+            // This is required for IE8 and below.
+            style.styleSheet.cssText = prcss;
+        } else {
+            style.appendChild(document.createTextNode(prcss));
+        }
+    });
+
+
+Here I wanted just a plain simple thing, apply custom CSS to the page, when the URL matches a pattern specified. 
+Started to develop my in-house Google Chrome extension to adjust some of the WebUI palettes of the services I use every day. Let’s see how easy it goes. I could not really use any third+party extension from the Chrome store ob my working laptop, because of my company’s net security guidelines.
+
+So, I created a simple .manifest file. Added a background script that hooks to a navigation complete element.
+By the way, simple CSS injections via tabs.injectCSS or “css” in manifest file did not work for some reason. Same went for jQuery (modern browsers almost fully blocking any Cross-Origin or local referencies). Was able to make my way simply through creating a style DOM element and filling its gut with my custom CSS content.
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2019/DIY_Chrome_Extension_Pt__1/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-10-12 11:06" class="post-meta__date date">12 Oct 2019</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#darkk">darkk</a> <a href="/tags/#js">js</a> <a href="/tags/#css">css</a> </span>
+      
+    </div>
+    <h1 class="post-title">DIY Chrome Extension Pt. 1</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="why">Why?</h4>
+
+<p>My addiction to proper dark/low-contract and outright badass interfaces is well-known and could even considered pathological.by one’s standards. This, alongside with inability to use third-party browser extensions in my company’s laptop (for security reasons) finally led me to start exploring the shocking world of DIY Chrome Extensions.</p>
+
+<p>I did not even bother researching what you need to do, for your Chrome extension to make it to Google’s store facilities, I just wanted something, that works locally, personally for me and does one simple thing: dim the eye melting colours of corporate/enterprise web UIs. Thankfully, adding local dev versions of Chrome extensions is fairly straightforward.</p>
+
+<h4 id="first-steps">First steps</h4>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">rottingface@vipernest: ~$</span><span class="w"> </span>md Darkk
+<span class="gp">rottingface@vipernest: ~$</span><span class="w"> </span><span class="nb">cd </span>Darkk
+<span class="gp">rottingface@vipernest: ~/Darkk$</span><span class="w"> </span><span class="nb">touch </span>manifest.json
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Darkk"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"content_scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"matches"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://github.com/*"</span><span class="p">],</span><span class="w">
+            </span><span class="nl">"css"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"css/github-dark.css"</span><span class="p">]</span><span class="w">
+ 
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"permissions"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"activeTab"</span><span class="p">,</span><span class="w"> </span><span class="s2">"webNavigation"</span><span class="p">,</span><span class="w"> </span><span class="s2">"*://*/*"</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Dark mode for my everyday web"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"manifest_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>When you go to <code class="highlighter-rouge">chrome://extensions</code> URL in your browser and click “Add unpacked”, specifying your extension directory.</p>
+
+<h4 id="the-catch">The catch</h4>
+<p>There is always one, isn’t it? Some times, it just does not work. Maybe because of Chrome, maybe because of today’s web pages do too much dynamic DOM manipulations on the way. 
+So, in addition to that, I pretended to be a well-trained JS monkey and came up with a script that inserts a new <code class="highlighter-rouge">style</code> DOM element, after web page has loaded.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">chrome</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">getURL</span><span class="p">(</span><span class="dl">'</span><span class="s1">data/github-dark.css</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">css</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">head</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">head</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">head</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="nx">style</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">style</span><span class="dl">'</span><span class="p">);</span>
+
+        <span class="nx">head</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">style</span><span class="p">);</span>
+
+        <span class="kd">let</span> <span class="nx">prcss</span> <span class="o">=</span> <span class="nx">css</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/@-moz-document regexp</span><span class="se">\((</span><span class="sr">.*</span><span class="se">)\)</span><span class="sr"> </span><span class="se">\{(\n</span><span class="sr">|</span><span class="se">\r)</span><span class="sr">+/</span><span class="p">,</span> <span class="dl">""</span><span class="p">);</span>
+        <span class="nx">style</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">text/css</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">style</span><span class="p">.</span><span class="nx">styleSheet</span><span class="p">){</span>
+            <span class="c1">// This is required for IE8 and below.</span>
+            <span class="nx">style</span><span class="p">.</span><span class="nx">styleSheet</span><span class="p">.</span><span class="nx">cssText</span> <span class="o">=</span> <span class="nx">prcss</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">style</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">prcss</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+</code></pre></div></div>
+
+<p>Here I wanted just a plain simple thing, apply custom CSS to the page, when the URL matches a pattern specified. 
+Started to develop my in-house Google Chrome extension to adjust some of the WebUI palettes of the services I use every day. Let’s see how easy it goes. I could not really use any third+party extension from the Chrome store ob my working laptop, because of my company’s net security guidelines.</p>
+
+<p>So, I created a simple .manifest file. Added a background script that hooks to a navigation complete element.
+By the way, simple CSS injections via <code class="highlighter-rouge">tabs.injectCSS</code> or “css” in manifest file did not work for some reason. Same went for jQuery (modern browsers almost fully blocking any Cross-Origin or local referencies). Was able to make my way simply through creating a <code class="highlighter-rouge">style</code> DOM element and filling its gut with my custom CSS content.</p>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

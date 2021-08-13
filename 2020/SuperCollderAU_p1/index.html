@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>SuperCollderAU</title>
+  <meta name="description" content="Part 1: Building
+
+Hey! You! Wanna turn your SuperCollider program into a real AU virtual instrument to use in your DAW? Great, then come with me into the depths of C++ sloppiness and clumsiness.
+
+So, once upon.a time there was a project that allowed to run a SuperCollider SC synth server inside an AU plugin. It even ended up in the
+ official SC repositories. But years  were  passing and dependencies around it slowly mutated, becoming more and more hostile. At some point in time, it stopped producing a valid AU, and later then even stopped building at all. The original author still expresses some interest to the project, last commit was about half year ago, but yet again I’m too anti-social to bother people with my crazy ideas, so I went there myself.
+
+git clone --recursive https://github.com/supercollider/SuperColliderAU
+
+
+Down below are the steps that fixes problem with building it.
+
+
+  
+    At the moment of writing this post, I am on macOS Catalina 10.15.3 (19D76). I do not know how much it is actually important, but nevertheless.
+  
+  
+    It is better to build Supercollider from its standalone repo. Just get the fresh revision and follow the build instructions. Then copy it to /SuperColliderAU/supercollider/build. Revision (22e45f78fb8db8769aea34ce4ce09082917dd40d) worked for me.
+  
+  
+    Go to superCollider submodule and checkout to develop branch. Get some fresh revision, (30205c18a6cb5d74fff775d28469051899a2d0bb) worked for me.
+  
+  
+    On some hosts (Like the one bundled with JUCE as a code example, SuperColliderAU does not get fully initialised on scan, so the scan crushes, when tries to destroy its instance afterwards). If that is your case, edit the SCProcess.cpp file, comment out the mPort-&gt;stopAsioThread(); line.
+  
+  
+    By the way, what’s awesome about running a JUCE VST Host through Xcode, you can use debugger on the problematic plugin code, if you have sources and it was compiled with debug symbols.
+  
+  Supercollider now uses bundled C++ boost, SupercolliderAU make files are not aware of that. As a workaround:
+    deadvikki@darkhorse$ brew install boost
+    
+    6.1. And edited SuperCollierAU CMakeList.txt file, so it searches in my local include paths:
+    diff --git a/CMakeLists.txt b/CMakeLists.txt
+index dd3d4c7..b206ac6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -76,11 +76,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+ 
+set(scau_bundle "SuperColliderAU")
+set(SNDFILE_INCLUDE_DIR ${SC_DIR}/external_libraries/libsndfile/)
+-set(BOOST_INCLUDE_DIR ${SC_DIR}external_libraries/boost/)
++set(BOOST_INCLUDE_DIR /usr/local/include/)
+set(TLSF_INCLUDE_DIR ${SC_DIR}/external_libraries/TLSF-2.4.6/src/)
+ 
+ include_directories(${SC_DIR}/external_libraries
+-       ${SC_DIR}/${BOOST_INCLUDE_DIR}
++       ${BOOST_INCLUDE_DIR}
+        ${SNDFILE_INCLUDE_DIR}
+        ${PTHREADS_INCLUDE_DIR}
+       ${TLSF_INCLUDE_DIR}
+(END)
+
+  
+  We do not want to use bundled Boost, so we say
+    cmake -DSYSTEM_BOOST=ON ..
+make
+    
+    5.1. It will compile, but the link process will fail, but that’s not fatal
+  
+  Re-run make in verbose mode,
+    make VERBOSE=1
+    
+    6.1. Manually execute the last command, just edit it a bit. 
+ 6.2. Remove -lboost_system and add  -L /usr/local/lib -framework AppKit
+  
+  ! Run make again to it can finish copying resource files to build dir.
+
+
+By the way it screwed up my icu4c vesion , which node relied on. So, 
+brew info icu4c 
+brew switch icu4c 64.2
+
+Bottom line: 
+It builds.Currently it does not passes AUVAL checks, thankfully, garbage DAWs like my old trustworthy Tracktion7, do not bother validation. People been reporting that it also work in Reaper.
+
+Problem: it seems that we are not freeing UDP port properly, so within the same host it starts on different port every time. But it might be the nature of UDP ports
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SuperCollderAU">
+  <meta name="twitter:description" content="Part 1: Building
+
+Hey! You! Wanna turn your SuperCollider program into a real AU virtual instrument to use in your DAW? Great, then come with me into the depths of C++ sloppiness and clumsiness.
+
+So, once upon.a time there was a project that allowed to run a SuperCollider SC synth server inside an AU plugin. It even ended up in the
+ official SC repositories. But years  were  passing and dependencies around it slowly mutated, becoming more and more hostile. At some point in time, it stopped producing a valid AU, and later then even stopped building at all. The original author still expresses some interest to the project, last commit was about half year ago, but yet again I’m too anti-social to bother people with my crazy ideas, so I went there myself.
+
+git clone --recursive https://github.com/supercollider/SuperColliderAU
+
+
+Down below are the steps that fixes problem with building it.
+
+
+  
+    At the moment of writing this post, I am on macOS Catalina 10.15.3 (19D76). I do not know how much it is actually important, but nevertheless.
+  
+  
+    It is better to build Supercollider from its standalone repo. Just get the fresh revision and follow the build instructions. Then copy it to /SuperColliderAU/supercollider/build. Revision (22e45f78fb8db8769aea34ce4ce09082917dd40d) worked for me.
+  
+  
+    Go to superCollider submodule and checkout to develop branch. Get some fresh revision, (30205c18a6cb5d74fff775d28469051899a2d0bb) worked for me.
+  
+  
+    On some hosts (Like the one bundled with JUCE as a code example, SuperColliderAU does not get fully initialised on scan, so the scan crushes, when tries to destroy its instance afterwards). If that is your case, edit the SCProcess.cpp file, comment out the mPort-&gt;stopAsioThread(); line.
+  
+  
+    By the way, what’s awesome about running a JUCE VST Host through Xcode, you can use debugger on the problematic plugin code, if you have sources and it was compiled with debug symbols.
+  
+  Supercollider now uses bundled C++ boost, SupercolliderAU make files are not aware of that. As a workaround:
+    deadvikki@darkhorse$ brew install boost
+    
+    6.1. And edited SuperCollierAU CMakeList.txt file, so it searches in my local include paths:
+    diff --git a/CMakeLists.txt b/CMakeLists.txt
+index dd3d4c7..b206ac6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -76,11 +76,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+ 
+set(scau_bundle "SuperColliderAU")
+set(SNDFILE_INCLUDE_DIR ${SC_DIR}/external_libraries/libsndfile/)
+-set(BOOST_INCLUDE_DIR ${SC_DIR}external_libraries/boost/)
++set(BOOST_INCLUDE_DIR /usr/local/include/)
+set(TLSF_INCLUDE_DIR ${SC_DIR}/external_libraries/TLSF-2.4.6/src/)
+ 
+ include_directories(${SC_DIR}/external_libraries
+-       ${SC_DIR}/${BOOST_INCLUDE_DIR}
++       ${BOOST_INCLUDE_DIR}
+        ${SNDFILE_INCLUDE_DIR}
+        ${PTHREADS_INCLUDE_DIR}
+       ${TLSF_INCLUDE_DIR}
+(END)
+
+  
+  We do not want to use bundled Boost, so we say
+    cmake -DSYSTEM_BOOST=ON ..
+make
+    
+    5.1. It will compile, but the link process will fail, but that’s not fatal
+  
+  Re-run make in verbose mode,
+    make VERBOSE=1
+    
+    6.1. Manually execute the last command, just edit it a bit. 
+ 6.2. Remove -lboost_system and add  -L /usr/local/lib -framework AppKit
+  
+  ! Run make again to it can finish copying resource files to build dir.
+
+
+By the way it screwed up my icu4c vesion , which node relied on. So, 
+brew info icu4c 
+brew switch icu4c 64.2
+
+Bottom line: 
+It builds.Currently it does not passes AUVAL checks, thankfully, garbage DAWs like my old trustworthy Tracktion7, do not bother validation. People been reporting that it also work in Reaper.
+
+Problem: it seems that we are not freeing UDP port properly, so within the same host it starts on different port every time. But it might be the nature of UDP ports
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SuperCollderAU">
+  <meta property="og:description" content="Part 1: Building
+
+Hey! You! Wanna turn your SuperCollider program into a real AU virtual instrument to use in your DAW? Great, then come with me into the depths of C++ sloppiness and clumsiness.
+
+So, once upon.a time there was a project that allowed to run a SuperCollider SC synth server inside an AU plugin. It even ended up in the
+ official SC repositories. But years  were  passing and dependencies around it slowly mutated, becoming more and more hostile. At some point in time, it stopped producing a valid AU, and later then even stopped building at all. The original author still expresses some interest to the project, last commit was about half year ago, but yet again I’m too anti-social to bother people with my crazy ideas, so I went there myself.
+
+git clone --recursive https://github.com/supercollider/SuperColliderAU
+
+
+Down below are the steps that fixes problem with building it.
+
+
+  
+    At the moment of writing this post, I am on macOS Catalina 10.15.3 (19D76). I do not know how much it is actually important, but nevertheless.
+  
+  
+    It is better to build Supercollider from its standalone repo. Just get the fresh revision and follow the build instructions. Then copy it to /SuperColliderAU/supercollider/build. Revision (22e45f78fb8db8769aea34ce4ce09082917dd40d) worked for me.
+  
+  
+    Go to superCollider submodule and checkout to develop branch. Get some fresh revision, (30205c18a6cb5d74fff775d28469051899a2d0bb) worked for me.
+  
+  
+    On some hosts (Like the one bundled with JUCE as a code example, SuperColliderAU does not get fully initialised on scan, so the scan crushes, when tries to destroy its instance afterwards). If that is your case, edit the SCProcess.cpp file, comment out the mPort-&gt;stopAsioThread(); line.
+  
+  
+    By the way, what’s awesome about running a JUCE VST Host through Xcode, you can use debugger on the problematic plugin code, if you have sources and it was compiled with debug symbols.
+  
+  Supercollider now uses bundled C++ boost, SupercolliderAU make files are not aware of that. As a workaround:
+    deadvikki@darkhorse$ brew install boost
+    
+    6.1. And edited SuperCollierAU CMakeList.txt file, so it searches in my local include paths:
+    diff --git a/CMakeLists.txt b/CMakeLists.txt
+index dd3d4c7..b206ac6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -76,11 +76,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+ 
+set(scau_bundle "SuperColliderAU")
+set(SNDFILE_INCLUDE_DIR ${SC_DIR}/external_libraries/libsndfile/)
+-set(BOOST_INCLUDE_DIR ${SC_DIR}external_libraries/boost/)
++set(BOOST_INCLUDE_DIR /usr/local/include/)
+set(TLSF_INCLUDE_DIR ${SC_DIR}/external_libraries/TLSF-2.4.6/src/)
+ 
+ include_directories(${SC_DIR}/external_libraries
+-       ${SC_DIR}/${BOOST_INCLUDE_DIR}
++       ${BOOST_INCLUDE_DIR}
+        ${SNDFILE_INCLUDE_DIR}
+        ${PTHREADS_INCLUDE_DIR}
+       ${TLSF_INCLUDE_DIR}
+(END)
+
+  
+  We do not want to use bundled Boost, so we say
+    cmake -DSYSTEM_BOOST=ON ..
+make
+    
+    5.1. It will compile, but the link process will fail, but that’s not fatal
+  
+  Re-run make in verbose mode,
+    make VERBOSE=1
+    
+    6.1. Manually execute the last command, just edit it a bit. 
+ 6.2. Remove -lboost_system and add  -L /usr/local/lib -framework AppKit
+  
+  ! Run make again to it can finish copying resource files to build dir.
+
+
+By the way it screwed up my icu4c vesion , which node relied on. So, 
+brew info icu4c 
+brew switch icu4c 64.2
+
+Bottom line: 
+It builds.Currently it does not passes AUVAL checks, thankfully, garbage DAWs like my old trustworthy Tracktion7, do not bother validation. People been reporting that it also work in Reaper.
+
+Problem: it seems that we are not freeing UDP port properly, so within the same host it starts on different port every time. But it might be the nature of UDP ports
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2020/SuperCollderAU_p1/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2020-05-21 22:05" class="post-meta__date date">21 May 2020</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#dsp">dsp</a> <a href="/tags/#juce">juce</a> <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+      
+    </div>
+    <h1 class="post-title">SuperCollderAU</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="part-1-building">Part 1: Building</h4>
+
+<p>Hey! You! Wanna turn your SuperCollider program into a real AU virtual instrument to use in your DAW? Great, then come with me into the depths of C++ sloppiness and clumsiness.</p>
+
+<p>So, once upon.a time there was a project that allowed to run a SuperCollider SC synth server inside an AU plugin. It even ended up in the
+ official SC repositories. But years  were  passing and dependencies around it slowly mutated, becoming more and more hostile. At some point in time, it stopped producing a valid AU, and later then even stopped building at all. The original author still expresses some interest to the project, last commit was about half year ago, but yet again I’m too anti-social to bother people with my crazy ideas, so I went there myself.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--recursive</span> https://github.com/supercollider/SuperColliderAU
+</code></pre></div></div>
+
+<p>Down below are the steps that fixes problem with building it.</p>
+
+<ol>
+  <li>
+    <p>At the moment of writing this post, I am on macOS Catalina 10.15.3 (19D76). I do not know how much it is actually important, but nevertheless.</p>
+  </li>
+  <li>
+    <p>It is better to build Supercollider from its standalone repo. Just get the fresh revision and follow the build instructions. Then copy it to /SuperColliderAU/supercollider/build. Revision (22e45f78fb8db8769aea34ce4ce09082917dd40d) worked for me.</p>
+  </li>
+  <li>
+    <p>Go to superCollider submodule and checkout to develop branch. Get some fresh revision, (30205c18a6cb5d74fff775d28469051899a2d0bb) worked for me.</p>
+  </li>
+  <li>
+    <p>On some hosts (Like the one bundled with JUCE as a code example, SuperColliderAU does not get fully initialised on scan, so the scan crushes, when tries to destroy its instance afterwards). If that is your case, edit the SCProcess.cpp file, comment out the mPort-&gt;stopAsioThread(); line.</p>
+  </li>
+  <li>
+    <p>By the way, what’s awesome about running a JUCE VST Host through Xcode, you can use debugger on the problematic plugin code, if you have sources and it was compiled with debug symbols.</p>
+  </li>
+  <li>Supercollider now uses bundled C++ boost, SupercolliderAU make files are not aware of that. As a workaround:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deadvikki@darkhorse<span class="nv">$ </span>brew <span class="nb">install </span>boost
+</code></pre></div>    </div>
+    <p>6.1. And edited SuperCollierAU CMakeList.txt file, so it searches in my local include paths:</p>
+    <pre><code class="language-code">diff --git a/CMakeLists.txt b/CMakeLists.txt
+index dd3d4c7..b206ac6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -76,11 +76,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+ 
+set(scau_bundle "SuperColliderAU")
+set(SNDFILE_INCLUDE_DIR ${SC_DIR}/external_libraries/libsndfile/)
+-set(BOOST_INCLUDE_DIR ${SC_DIR}external_libraries/boost/)
++set(BOOST_INCLUDE_DIR /usr/local/include/)
+set(TLSF_INCLUDE_DIR ${SC_DIR}/external_libraries/TLSF-2.4.6/src/)
+ 
+ include_directories(${SC_DIR}/external_libraries
+-       ${SC_DIR}/${BOOST_INCLUDE_DIR}
++       ${BOOST_INCLUDE_DIR}
+        ${SNDFILE_INCLUDE_DIR}
+        ${PTHREADS_INCLUDE_DIR}
+       ${TLSF_INCLUDE_DIR}
+(END)
+</code></pre>
+  </li>
+  <li>We do not want to use bundled Boost, so we say
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-DSYSTEM_BOOST</span><span class="o">=</span>ON ..
+make
+</code></pre></div>    </div>
+    <p>5.1. It will compile, but the link process will fail, but that’s not fatal</p>
+  </li>
+  <li>Re-run make in verbose mode,
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nv">VERBOSE</span><span class="o">=</span>1
+</code></pre></div>    </div>
+    <p>6.1. Manually execute the last command, just edit it a bit. 
+ 6.2. Remove <code class="highlighter-rouge">-lboost_system</code> and add  <code class="highlighter-rouge">-L /usr/local/lib -framework AppKit</code></p>
+  </li>
+  <li><code class="highlighter-rouge">!</code> Run make again to it can finish copying resource files to build dir.</li>
+</ol>
+
+<p>By the way it screwed up my icu4c vesion , which node relied on. So, 
+brew info icu4c <br />
+brew switch icu4c 64.2</p>
+
+<p>Bottom line: 
+It builds.Currently it does not passes AUVAL checks, thankfully, garbage DAWs like my old trustworthy Tracktion7, do not bother validation. People been reporting that it also work in Reaper.</p>
+
+<p>Problem: it seems that we are not freeing UDP port properly, so within the same host it starts on different port every time. But it might be the nature of UDP ports</p>
+
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+.notation > * {
+    background: white;
+    filter: invert(0.8);
+}
+
+.notation-light * {
+    background: white;
+    filter: invert(0.8);
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>MembrainSC. Introduction</title>
+  <meta name="description" content="A drum machine with that “sci-fi underground” vibe…
+
+So, I can already imagine you all asking me, why design your own drum machine in 2020, for fokks sake? 
+Well, in short, I have my reasons. Those are mainly education, inspiration and megalomania, of course. The latter is particularly important, because, instead of doing one more classic 80’s drum machine replica (which am I not capable of, anyway) I came up with an idea of a plugin, that resembles the same “engineering around limitations” approach to doing drum sounds: a combination of synthesis, physical modelling and PCM samples.
+
+Also, unlike those old low-computational power units, we can supply it with much more humanise capabilities, especially for cymbals.
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MembrainSC. Introduction">
+  <meta name="twitter:description" content="A drum machine with that “sci-fi underground” vibe…
+
+So, I can already imagine you all asking me, why design your own drum machine in 2020, for fokks sake? 
+Well, in short, I have my reasons. Those are mainly education, inspiration and megalomania, of course. The latter is particularly important, because, instead of doing one more classic 80’s drum machine replica (which am I not capable of, anyway) I came up with an idea of a plugin, that resembles the same “engineering around limitations” approach to doing drum sounds: a combination of synthesis, physical modelling and PCM samples.
+
+Also, unlike those old low-computational power units, we can supply it with much more humanise capabilities, especially for cymbals.
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MembrainSC. Introduction">
+  <meta property="og:description" content="A drum machine with that “sci-fi underground” vibe…
+
+So, I can already imagine you all asking me, why design your own drum machine in 2020, for fokks sake? 
+Well, in short, I have my reasons. Those are mainly education, inspiration and megalomania, of course. The latter is particularly important, because, instead of doing one more classic 80’s drum machine replica (which am I not capable of, anyway) I came up with an idea of a plugin, that resembles the same “engineering around limitations” approach to doing drum sounds: a combination of synthesis, physical modelling and PCM samples.
+
+Also, unlike those old low-computational power units, we can supply it with much more humanise capabilities, especially for cymbals.
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2020/MembrainSC_Contents/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2020-05-21 20:13" class="post-meta__date date">21 May 2020</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#dsp">dsp</a> <a href="/tags/#juce">juce</a> <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+      
+    </div>
+    <h1 class="post-title">MembrainSC. Introduction</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="a-drum-machine-with-that-sci-fi-underground-vibe">A drum machine with that “sci-fi underground” vibe…</h4>
+
+<p>So, I can already imagine you all asking me, why design your own drum machine in 2020, for fokks sake? 
+Well, in short, I have my reasons. Those are mainly education, inspiration and megalomania, of course. The latter is particularly important, because, instead of doing one more classic 80’s drum machine replica (which am I not capable of, anyway) I came up with an idea of a plugin, that resembles the same “engineering around limitations” approach to doing drum sounds: a combination of synthesis, physical modelling and PCM samples.</p>
+
+<p>Also, unlike those old low-computational power units, we can supply it with much more humanise capabilities, especially for cymbals.</p>
+
+<!-- readmore -->
+
+<p>And last, but not the least, I can create a UI for it, re-imaging how old-school piece of music hardware would look like if it was designed specially for underground bands of the era. Yeah, I’ve always wandered, why did not we get the same bad-ass hellmonster-charged designs for drum machines / sequencers, that we usually get for guitar pedals and stuff.</p>
+
+<p>Apparently, beside all those skeudomorphic obsessions, there is one very important practical aspect l want to embed in my drum machine design
+, which is mixing-in samples on the fly, so I won’t need to deal with bussing those in the  drum processing chain of my DAW, ‘cause rather hard to keep those things tidy there. 
+So, I think, if executed properly, MembrainSC can become the heart and command control of my drum productions/programming. Yeah, one can dream.</p>
+
+<p>So, basic planned features for the plugin are:</p>
+<ol>
+  <li>Kick drum, which is a combination of a synth with a pitch envelope, filter and two samples, one pre-defined for click, and the second selectable. The available controls would be something like: tune, decay, filter.</li>
+  <li>Snare drum. The true pearl of this unit. Consists of physically modelled membrane sound and a selectable sample. Controls more sophisticated this time. Like: tension, loss, body, snare noise</li>
+  <li>Cymbals. Interesting approximation of a cymbal sound by passing a noise through a series of ring filters.</li>
+  <li>Snare, Cymbals and Toms also have humanise control for adding variety on every shot.</li>
+  <li>Plugins output is multichannel.</li>
+</ol>
+
+<p>Multichannel output is crucial here. The routing is organised the way, that every piece of the kit is outputted to a separate stereo output, after being mixed with a sample, if available. This will help me to keep my drum channel section tidy, avoiding complicated bussing when I need to process multiple layers of heterogeneous sounds as a single drum kit piece.</p>
+
+<h4 id="demanufacturing">(De)manufacturing:</h4>
+
+<p>Below are the my dev blog entries for each stage of this project in (sorta) chronological order,</p>
+<ol>
+  <li><a href="/2020/MembrainSC_Toolset/">Technical overview and toolset</a></li>
+  <li><a href="/2020/SuperCollderAU_p1/">SuperColliderAU p1</a> (building)</li>
+  <li><a href="/2020/SuperColliderAU_p2/">SuperColliderAU p2</a> (containerising inside JUCE audio plugin)</li>
+  <li><a href="/2020/SuperCollider_pt3_rgun/">JUCE RomplerGun</a> and BlipBlop</li>
+  <li><a href="/2020/SuperColliderAU_p4_mix/">JUCE routing and multichannel output</a></li>
+  <li>JUCE Fast UI prototyping in Plugin Parameter Hell.</li>
+  <li>Supercollider synthdefs for snare drum and “smashed” cymbal</li>
+  <li>Selecting and tweaking parameters</li>
+</ol>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

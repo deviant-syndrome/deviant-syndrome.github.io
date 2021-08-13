@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>SuperCollider AU</title>
+  <meta name="description" content="Part 3. Rompler gun
+
+In order for MembrainSC to stand-out, alongside with the other features, we want it be able to play one-shot percussion PCM samples. This might seem unimportant and obvious, but combining synthethis / modeling with samples is extremely valuable. Again, I want to empaphize, that it moves complexity of layering different elements of percussion hits away from your DAW routing.
+
+So, playing wave samples. JUCE has built-in support for that, and the API is surprisingly agile and straightforward.
+All you need to do, is to define a new class, make it inherit Synthesiser, define a file reader for your wav, define the key range (yes, JUCE even does the sample pitch-mapping for you!).
+
+void RomplerGun::setup() {
+    // add voices to our sampler
+    for (int i = 0; i &lt; MAX_VOICES; i++) {
+        addVoice(new SamplerVoice());
+    }
+
+    // set up our AudioFormatManager class as detailed in the API docs
+    // we can now use WAV and AIFF files!
+    audioFormatManager.registerBasicFormats();
+
+    // now that we have our manager, lets read a simple file so we can pass it to our SamplerSound object.
+    File* file = new File(File::getSpecialLocation(File::currentApplicationFile).getFullPathName() + "/Contents/Resources/kick_trimmed.wav");
+    
+    AudioFormatReader* reader = audioFormatManager.createReaderFor(*file);
+
+    // lock our sound to middle C
+    BigInteger allNotes;
+    allNotes.setRange(60, 1, true);
+
+    // finally, add our sound
+    addSound(new SamplerSound("default", *reader, allNotes, 60, 0, 10, 10.0));
+    int numFiles = scanROM(File::getSpecialLocation(File::userDocumentsDirectory).getFullPathName() + "/MembrainSC");
+    std::cout &lt;&lt; "Scanned files: " &lt;&lt; numFiles &lt;&lt; "\n";
+    
+    sampleLoaded = true;
+    sampleIndex = 0;
+}
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SuperCollider AU">
+  <meta name="twitter:description" content="Part 3. Rompler gun
+
+In order for MembrainSC to stand-out, alongside with the other features, we want it be able to play one-shot percussion PCM samples. This might seem unimportant and obvious, but combining synthethis / modeling with samples is extremely valuable. Again, I want to empaphize, that it moves complexity of layering different elements of percussion hits away from your DAW routing.
+
+So, playing wave samples. JUCE has built-in support for that, and the API is surprisingly agile and straightforward.
+All you need to do, is to define a new class, make it inherit Synthesiser, define a file reader for your wav, define the key range (yes, JUCE even does the sample pitch-mapping for you!).
+
+void RomplerGun::setup() {
+    // add voices to our sampler
+    for (int i = 0; i &lt; MAX_VOICES; i++) {
+        addVoice(new SamplerVoice());
+    }
+
+    // set up our AudioFormatManager class as detailed in the API docs
+    // we can now use WAV and AIFF files!
+    audioFormatManager.registerBasicFormats();
+
+    // now that we have our manager, lets read a simple file so we can pass it to our SamplerSound object.
+    File* file = new File(File::getSpecialLocation(File::currentApplicationFile).getFullPathName() + "/Contents/Resources/kick_trimmed.wav");
+    
+    AudioFormatReader* reader = audioFormatManager.createReaderFor(*file);
+
+    // lock our sound to middle C
+    BigInteger allNotes;
+    allNotes.setRange(60, 1, true);
+
+    // finally, add our sound
+    addSound(new SamplerSound("default", *reader, allNotes, 60, 0, 10, 10.0));
+    int numFiles = scanROM(File::getSpecialLocation(File::userDocumentsDirectory).getFullPathName() + "/MembrainSC");
+    std::cout &lt;&lt; "Scanned files: " &lt;&lt; numFiles &lt;&lt; "\n";
+    
+    sampleLoaded = true;
+    sampleIndex = 0;
+}
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SuperCollider AU">
+  <meta property="og:description" content="Part 3. Rompler gun
+
+In order for MembrainSC to stand-out, alongside with the other features, we want it be able to play one-shot percussion PCM samples. This might seem unimportant and obvious, but combining synthethis / modeling with samples is extremely valuable. Again, I want to empaphize, that it moves complexity of layering different elements of percussion hits away from your DAW routing.
+
+So, playing wave samples. JUCE has built-in support for that, and the API is surprisingly agile and straightforward.
+All you need to do, is to define a new class, make it inherit Synthesiser, define a file reader for your wav, define the key range (yes, JUCE even does the sample pitch-mapping for you!).
+
+void RomplerGun::setup() {
+    // add voices to our sampler
+    for (int i = 0; i &lt; MAX_VOICES; i++) {
+        addVoice(new SamplerVoice());
+    }
+
+    // set up our AudioFormatManager class as detailed in the API docs
+    // we can now use WAV and AIFF files!
+    audioFormatManager.registerBasicFormats();
+
+    // now that we have our manager, lets read a simple file so we can pass it to our SamplerSound object.
+    File* file = new File(File::getSpecialLocation(File::currentApplicationFile).getFullPathName() + "/Contents/Resources/kick_trimmed.wav");
+    
+    AudioFormatReader* reader = audioFormatManager.createReaderFor(*file);
+
+    // lock our sound to middle C
+    BigInteger allNotes;
+    allNotes.setRange(60, 1, true);
+
+    // finally, add our sound
+    addSound(new SamplerSound("default", *reader, allNotes, 60, 0, 10, 10.0));
+    int numFiles = scanROM(File::getSpecialLocation(File::userDocumentsDirectory).getFullPathName() + "/MembrainSC");
+    std::cout &lt;&lt; "Scanned files: " &lt;&lt; numFiles &lt;&lt; "\n";
+    
+    sampleLoaded = true;
+    sampleIndex = 0;
+}
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="canonical" href="/2020/SuperCollider_pt3_rgun/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2020-06-02 21:01" class="post-meta__date date">2 Jun 2020</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#juce">juce</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
+      
+    </div>
+    <h1 class="post-title">SuperCollider AU</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="part-3-rompler-gun">Part 3. Rompler gun</h4>
+
+<p>In order for MembrainSC to stand-out, alongside with the other features, we want it be able to play one-shot percussion PCM samples. This might seem unimportant and obvious, but combining synthethis / modeling with samples is extremely valuable. Again, I want to empaphize, that it moves complexity of layering different elements of percussion hits away from your DAW routing.</p>
+
+<p>So, playing wave samples. JUCE has built-in support for that, and the API is surprisingly agile and straightforward.
+All you need to do, is to define a new class, make it inherit Synthesiser, define a file reader for your wav, define the key range (yes, JUCE even does the sample pitch-mapping for you!).</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">RomplerGun</span><span class="o">::</span><span class="n">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// add voices to our sampler</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_VOICES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">addVoice</span><span class="p">(</span><span class="k">new</span> <span class="n">SamplerVoice</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="c1">// set up our AudioFormatManager class as detailed in the API docs</span>
+    <span class="c1">// we can now use WAV and AIFF files!</span>
+    <span class="n">audioFormatManager</span><span class="p">.</span><span class="n">registerBasicFormats</span><span class="p">();</span>
+
+    <span class="c1">// now that we have our manager, lets read a simple file so we can pass it to our SamplerSound object.</span>
+    <span class="n">File</span><span class="o">*</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">getSpecialLocation</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">currentApplicationFile</span><span class="p">).</span><span class="n">getFullPathName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"/Contents/Resources/kick_trimmed.wav"</span><span class="p">);</span>
+    
+    <span class="n">AudioFormatReader</span><span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">audioFormatManager</span><span class="p">.</span><span class="n">createReaderFor</span><span class="p">(</span><span class="o">*</span><span class="n">file</span><span class="p">);</span>
+
+    <span class="c1">// lock our sound to middle C</span>
+    <span class="n">BigInteger</span> <span class="n">allNotes</span><span class="p">;</span>
+    <span class="n">allNotes</span><span class="p">.</span><span class="n">setRange</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="c1">// finally, add our sound</span>
+    <span class="n">addSound</span><span class="p">(</span><span class="k">new</span> <span class="n">SamplerSound</span><span class="p">(</span><span class="s">"default"</span><span class="p">,</span> <span class="o">*</span><span class="n">reader</span><span class="p">,</span> <span class="n">allNotes</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">));</span>
+    <span class="kt">int</span> <span class="n">numFiles</span> <span class="o">=</span> <span class="n">scanROM</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">getSpecialLocation</span><span class="p">(</span><span class="n">File</span><span class="o">::</span><span class="n">userDocumentsDirectory</span><span class="p">).</span><span class="n">getFullPathName</span><span class="p">()</span> <span class="o">+</span> <span class="s">"/MembrainSC"</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Scanned files: "</span> <span class="o">&lt;&lt;</span> <span class="n">numFiles</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    
+    <span class="n">sampleLoaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">sampleIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<!-- readmore -->
+<p>Now, let’s just go through a couple of non-obvious nitty-gritty implementation details of that.</p>
+
+<h4 id="sample-indexing">Sample indexing</h4>
+<p>For simplicity, we will declare, that all our drumkit-piece specific samples are placed in a separate directory within user files area, for example: /User/Documents/MembrainSC/Samples/Kick 
+JUCE has build-in convenient directory indexing utilities.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">RomplerGun</span><span class="o">::</span><span class="n">scanROM</span><span class="p">(</span><span class="n">String</span> <span class="n">directory</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">DirectoryIterator</span> <span class="n">iter</span> <span class="p">(</span><span class="n">File</span> <span class="p">(</span><span class="n">directory</span><span class="p">),</span> <span class="nb">false</span><span class="p">,</span> <span class="s">"*.wav"</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="n">next</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">File</span> <span class="n">theFileItFound</span> <span class="p">(</span><span class="n">iter</span><span class="p">.</span><span class="n">getFile</span><span class="p">());</span>
+        <span class="n">availableSamples</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">theFileItFound</span><span class="p">);</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="sample-loading">Sample loading</h4>
+
+<p>In the example above, we were loading sample during initiialization. If we want to change load more wave sounds, dynamically after, we, obviously, should not do it in the main processing thread. We definitely do not want to change the synth sample sound to something that is not loaded yet, either. 
+The answer for that seems a little bit scary for the regular software, and outright nightmarish for time-crtitical DSP environment: threading. Especially for someone, who does not know a damn thing about C++ threading, like me.</p>
+
+<p>There is a lonely beam of light in this darkness, though. Recently, I saw Pete Goodliffe’s panel at JUCE ADC, where he told that you don’t really want to use all those mutex-based patterns in real-world DSP, because of lock acquisition and release times, anyway. 
+Instead, he proposed more simple approaches, based on atomicity of some core C++ data types, such as boolean and pointer. 
+So, if you’re doing stuff on the one thread, set completed = false. Once done,   update the pointer and set completed = true. On the other thread, just check the completed flag, and if it is set, you can safely read from the pointer.</p>
+
+<p>So, here we are, implementing this pattern for sample loading. We have a class that implements JUCE thread, and performs sample loading:</p>
+
+<details>
+  <summary>Lots of poor C++ code
+</summary>
+  <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">SampleLoadThread</span>  <span class="o">:</span> <span class="k">public</span> <span class="n">Thread</span>
+<span class="p">{</span>
+    <span class="n">SampleLoadThread</span> <span class="p">(</span><span class="n">RomplerGun</span><span class="o">*</span> <span class="n">romplerGun</span><span class="p">,</span> <span class="n">File</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">Thread</span> <span class="p">(</span><span class="s">"sampleLoad"</span><span class="p">),</span> <span class="n">file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rg</span> <span class="o">=</span> <span class="n">romplerGun</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">run</span><span class="p">()</span> <span class="k">override</span>
+    <span class="p">{</span>
+        <span class="n">rg</span><span class="o">-&gt;</span><span class="n">loadSample</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Sample loaded!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">RomplerGun</span><span class="o">*</span> <span class="n">rg</span><span class="p">;</span>
+    <span class="n">File</span> <span class="n">file</span><span class="p">;</span>
+    
+    <span class="n">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</span> <span class="p">(</span><span class="n">SampleLoadThread</span><span class="p">)</span>
+    
+    <span class="o">~</span><span class="n">SampleLoadThread</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="o">-&gt;</span><span class="n">stopThread</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">RomplerGun</span><span class="o">::</span><span class="n">loadSample</span><span class="p">(</span><span class="n">File</span> <span class="n">file</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">sampleLoaded</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">AudioFormatReader</span><span class="o">*</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">audioFormatManager</span><span class="p">.</span><span class="n">createReaderFor</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+
+    <span class="n">BigInteger</span> <span class="n">allNotes</span><span class="p">;</span>
+    <span class="n">allNotes</span><span class="p">.</span><span class="n">setRange</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+    <span class="n">tempSound</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="n">SamplerSound</span><span class="p">(</span><span class="s">"default"</span><span class="p">,</span> <span class="o">*</span><span class="n">reader</span><span class="p">,</span> <span class="n">allNotes</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">));</span>
+    <span class="n">sampleLoaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">RomplerGun</span><span class="o">::</span><span class="n">checkIfNewSampleLoaded</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">sampleLoaded</span> <span class="o">&amp;&amp;</span> <span class="n">tempSound</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">clearSounds</span><span class="p">();</span>
+        <span class="n">addSound</span><span class="p">(</span><span class="n">tempSound</span><span class="p">);</span>
+        <span class="n">tempSound</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Sample changed!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+</details>
+
+<p>In RomplerGun we have simple methods, that allow us to start sample switch, and swap SamplerSounds in our synth, when a new one finished loading. Those a lightweight and can be called in the processing block.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">MembrainScAudioProcessor</span><span class="o">::</span><span class="n">processBlock</span> <span class="p">(</span><span class="n">AudioBuffer</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">MidiBuffer</span><span class="o">&amp;</span> <span class="n">midiMessages</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// ...</span>
+    <span class="n">kickRomplerGun</span><span class="p">.</span><span class="n">setSample</span><span class="p">(</span><span class="n">sampleNum</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">());</span>
+    <span class="n">kickRomplerGun</span><span class="p">.</span><span class="n">checkIfNewSampleLoaded</span><span class="p">();</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>  
+</code></pre></div></div>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>
