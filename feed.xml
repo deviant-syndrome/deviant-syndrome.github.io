@@ -5,8 +5,8 @@
     <description>coding, multimedia, gamedev, engineering</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 27 Aug 2022 11:52:45 +0300</pubDate>
-    <lastBuildDate>Sat, 27 Aug 2022 11:52:45 +0300</lastBuildDate>
+    <pubDate>Sat, 27 Aug 2022 11:55:35 +0300</pubDate>
+    <lastBuildDate>Sat, 27 Aug 2022 11:55:35 +0300</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -86,7 +86,7 @@ pacmd load-module module-null-sink &lt;span class=&quot;nv&quot;&gt;sink_name&lt
 pacmd load-module module-rtp-send &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rtp.monitor &lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1234 &lt;span class=&quot;nv&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;(RTP protocol)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol] can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Real-time_Transport_Protocol&quot;&gt;RTP protocol&lt;/a&gt; can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).&lt;/p&gt;
 
 &lt;p&gt;By the way, you can check the UDP communication between docker container and host using netcat.&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# inside the container&lt;/span&gt;
@@ -119,8 +119,7 @@ When I try to stream raw PCM audio using &lt;code class=&quot;highlighter-rouge&
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vlc &lt;span class=&quot;nt&quot;&gt;--demux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rawaud &lt;span class=&quot;nt&quot;&gt;--rawaud-channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2 &lt;span class=&quot;nt&quot;&gt;--rawaud-samplerate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;44100 udp://@:1234
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;First, I thought it was raw audio byte format problem, judging by the logs the defaul format is &lt;code class=&quot;highlighter-rouge&quot;&gt;s16be&lt;/code&gt; (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo here:
-(https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/)&lt;/p&gt;
+&lt;p&gt;First, I thought it was raw audio byte format problem, judging by the logs the defaul format is &lt;code class=&quot;highlighter-rouge&quot;&gt;s16be&lt;/code&gt; (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo &lt;a href=&quot;https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;However, I made sure they are matching and it left me with nothing but two more flavoirs of digital audio pollution. Well, it’s time to reveal you the brutal truth. Pulseaudio RTP sinks are &lt;em&gt;multi-cast only&lt;/em&gt;. So, when you specify a single IP address and port there, it dumps all the it’s sister RTP Control Stuff (stats, metadata and heartbeats) right above the raw audio, manifestating itself in a form a constant audiable noise.&lt;/p&gt;
 
