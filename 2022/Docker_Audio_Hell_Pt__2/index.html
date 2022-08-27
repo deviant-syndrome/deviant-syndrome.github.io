@@ -13,10 +13,10 @@ In previous article we briefly touched upon evolution of audio playback and proc
 
 Ok. Let’s first politely (for the most part) dismiss the obvious suggestions from the sane-minded people. This would be sure mixed with some old-man’s rumbling touching the peculiarity of his ill habits.
 Q: Why not just install Wine on your host system? 
-A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure I’m ready for that yet.
+A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure if I’m ready for that yet.
 
-Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of schenaningas anyway?
-A: Two point here. Frist, I simply do not want to install another piece of heavyweight software on my laptop (which is, tehcnically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)
+Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of shenanigans anyway?
+A: Two point here. First, I simply do not want to install another piece of heavyweight software on my laptop (which is, technically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)
 
 Q: What’s the use of some old Win32 application?  It does not fit the modern audio production standards at all. 
 A: That’s just how I roll, sir/ma’m
@@ -26,107 +26,7 @@ On normal Unix-like systems, the host’s sound (and MIDI) hardware could be sim
 docker run --rm --device /dev/snd ALSAIMAGE speaker-test
 
 
-
-Hoops of Hellfire and Blades
-
-As an alternatively-abled, alternavie OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:
-
-  Some strange latency issues, latency increases over time, and requires me to periodically restart the server on my host OS.
-  My version of pulseaudio, obtained from Homebrew (I believe), does not allow me to output to a virtual device (in my case, BlackHole 16ch)
-
-
-Seems, like the problem here is not particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).
-
-
-  MacOS PulseAudio Server Logs
-
-  I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
-I: [] module-card-restore.c: Restoring port latency offsets for card BlackHole_16ch.
-D: [] card.c: Looking for initial profile for card BlackHole_16ch
-D: [] card.c: on availability unknown
-I: [] card.c: BlackHole_16ch: active_profile: on
-I: [] card.c: Created 0 "BlackHole_16ch"
-D: [] module-coreaudio-device.c: Sample rate: 44100.000000
-D: [] module-coreaudio-device.c: 64 bytes per packet
-D: [] module-coreaudio-device.c: 1 frames per packet
-D: [] module-coreaudio-device.c: 64 bytes per frame
-D: [] module-coreaudio-device.c: 16 channels per frame
-D: [] module-coreaudio-device.c: 32 bits per channel
-D: [] module-coreaudio-device.c: Stream name is &gt;Channel 1, Channel 2, Channel 3, Channel 4, Channel 5, Channel 6, Channel 7, Channel 8, Channel 9, Channel 10, Channel 11, Channel 12, Channel 13, Channel 14, Channel 15, Channel 16&lt;
-D: [] module-device-restore.c: Database contains no data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann
-D: [] module-device-restore.c: Database contains no (or invalid) data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann:null
-I: [] sink.c: Created sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann" with sample spec float32le 16ch 44100Hz and channel map mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono
-I: [] sink.c:     device.string = "BlackHole 16ch"
-I: [] sink.c:     device.product.name = "BlackHole 16ch"
-I: [] sink.c:     device.description = "BlackHole 16ch"
-I: [] sink.c:     device.access_mode = "mmap"
-I: [] sink.c:     device.class = "sound"
-I: [] sink.c:     device.api = "CoreAudio"
-I: [] sink.c:     device.buffering.buffer_size = "32768"
-I: [] sink.c:     device.vendor.name = "Existential Audio Inc."
-I: [] sink.c:     device.icon_name = "audio-card"
-D: [] source.c: Failed to register name Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann.monitor.
-I: [] sink.c: Freeing sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann"
-E: [] module-coreaudio-device.c: unable to create sink.
-  
-
-
-Those couple of issues mentioned above, of course, make recording the container’s audio output comparable to jumping through the hoops of hellfire and blades every tine. So, instead of that, I decided to use 
-OulseAudio RTP sink support, which could be defined like that (on the host system):
-pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 -vvvvv
-# since we did not daemonize the serivce, the commands below can be executed in a separate terminal window
-pacmd load-module module-null-sink sink_name=rtp
-pacmd load-module module-rtp-send source=rtp.monitor port=1234 loop=1
-
-
-(RTP protocol)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol] can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).
-
-By the way, you can check the UDP commnication between docker container and host using netcat.
-# inside the container
-nc -u &lt;HOST_IP&gt; 1234
-
-# on host machine
-nc -ul 1234 
-
-
-And we are also have to do some exotic magic to simply obtain the host’s IP on the Docker network. Our life would be too easy and dull without that, wouldn’t it?
-# either an arbitrary IPv4 address from host
-Hostip="$(ip -4 -o a | awk '{print $4}' | cut -d/ -f1 | grep -v 127.0.0.1 | head -n1)"
-
-# or especially IP from docker daemon
-Hostip="$(ip -4 -o a| grep docker0 | awk '{print $4}' | cut -d/ -f1)"
-
-
-Then why not simply define a loop back address and a free UDP port, by convention for RTP it’s 1234 (RTP usually uses UDP as a transport). Then we could simply forward this port from guest to host. Well, shocking news, ladies ang gentelmen, 
-in Docker world, ports are forwared from host to container, not the other way around. So, if you are into that kind of naughty stuff, you\ll have to use dockers’s –network=host option. So, then you can determine the host’s IP and speicify it in the config. (Hack me gently with a chainsaw, but I do not remember, why loopback did not work in this case).
-
-6inks, 6inks, 6inks
-
-Aaaaaand, it works. Well, sort of. I was able to pass my audio to the other side. It was accompanied by a constant wall of digital noise, though. 
-When I try to stream raw PCM audio using faplay, for example:
-
-ffplay  -sample_rate 44100 -autoexit -f s16be rtp://127.0.0.1:1234
-
-When I try to do the same, with, say, VLC player, it tries to interpret the data stream as some interleaved AV, and outputs all kind of glitchy weirdess in the video window.
-
-vlc --demux=rawaud --rawaud-channels=2 --rawaud-samplerate=44100 udp://@:1234
-
-
-First, I thought it was raw audio byte format problem, judging by the logs the defaul format is s16be (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo here:
-(https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/)
-
-However, I made sure they are matching and it left me with nothing but two more flavoirs of digital audio pollution. Well, it’s time to reveal you the brutal truth. Pulseaudio RTP sinks are multi-cast only. So, when you specify a single IP address and port there, it dumps all the it’s sister RTP Control Stuff (stats, metadata and heartbeats) right above the raw audio, manifestating itself in a form a constant audiable noise.
-
-So, I swithed to multicast, and now now I’m able to get the audio output from Docker container to my virtual device for recording. 
-The latency is still there of course. Thankfully, I’m not obligated to perform live with this kind of setup.
-
-I might still be insane, though
-
-PulseAudio has native mechanism for capturing audio. The monitor sink is created the similar way, and then, allegedly, you can pipe it anywhere.
-pactl load-module module-null-sink sink_name=steam
-parec -d steam.monitor | oggenc -b 192 -o steam.ogg --raw - 
-
-oggenc is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.
+However, on our beloved slick 2+K$ tinfoil cans, we are going into…
 
 ">
   <meta name="author" content="Deviant Syndrome">
@@ -144,10 +44,10 @@ In previous article we briefly touched upon evolution of audio playback and proc
 
 Ok. Let’s first politely (for the most part) dismiss the obvious suggestions from the sane-minded people. This would be sure mixed with some old-man’s rumbling touching the peculiarity of his ill habits.
 Q: Why not just install Wine on your host system? 
-A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure I’m ready for that yet.
+A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure if I’m ready for that yet.
 
-Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of schenaningas anyway?
-A: Two point here. Frist, I simply do not want to install another piece of heavyweight software on my laptop (which is, tehcnically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)
+Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of shenanigans anyway?
+A: Two point here. First, I simply do not want to install another piece of heavyweight software on my laptop (which is, technically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)
 
 Q: What’s the use of some old Win32 application?  It does not fit the modern audio production standards at all. 
 A: That’s just how I roll, sir/ma’m
@@ -157,107 +57,7 @@ On normal Unix-like systems, the host’s sound (and MIDI) hardware could be sim
 docker run --rm --device /dev/snd ALSAIMAGE speaker-test
 
 
-
-Hoops of Hellfire and Blades
-
-As an alternatively-abled, alternavie OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:
-
-  Some strange latency issues, latency increases over time, and requires me to periodically restart the server on my host OS.
-  My version of pulseaudio, obtained from Homebrew (I believe), does not allow me to output to a virtual device (in my case, BlackHole 16ch)
-
-
-Seems, like the problem here is not particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).
-
-
-  MacOS PulseAudio Server Logs
-
-  I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
-I: [] module-card-restore.c: Restoring port latency offsets for card BlackHole_16ch.
-D: [] card.c: Looking for initial profile for card BlackHole_16ch
-D: [] card.c: on availability unknown
-I: [] card.c: BlackHole_16ch: active_profile: on
-I: [] card.c: Created 0 "BlackHole_16ch"
-D: [] module-coreaudio-device.c: Sample rate: 44100.000000
-D: [] module-coreaudio-device.c: 64 bytes per packet
-D: [] module-coreaudio-device.c: 1 frames per packet
-D: [] module-coreaudio-device.c: 64 bytes per frame
-D: [] module-coreaudio-device.c: 16 channels per frame
-D: [] module-coreaudio-device.c: 32 bits per channel
-D: [] module-coreaudio-device.c: Stream name is &gt;Channel 1, Channel 2, Channel 3, Channel 4, Channel 5, Channel 6, Channel 7, Channel 8, Channel 9, Channel 10, Channel 11, Channel 12, Channel 13, Channel 14, Channel 15, Channel 16&lt;
-D: [] module-device-restore.c: Database contains no data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann
-D: [] module-device-restore.c: Database contains no (or invalid) data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann:null
-I: [] sink.c: Created sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann" with sample spec float32le 16ch 44100Hz and channel map mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono
-I: [] sink.c:     device.string = "BlackHole 16ch"
-I: [] sink.c:     device.product.name = "BlackHole 16ch"
-I: [] sink.c:     device.description = "BlackHole 16ch"
-I: [] sink.c:     device.access_mode = "mmap"
-I: [] sink.c:     device.class = "sound"
-I: [] sink.c:     device.api = "CoreAudio"
-I: [] sink.c:     device.buffering.buffer_size = "32768"
-I: [] sink.c:     device.vendor.name = "Existential Audio Inc."
-I: [] sink.c:     device.icon_name = "audio-card"
-D: [] source.c: Failed to register name Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann.monitor.
-I: [] sink.c: Freeing sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann"
-E: [] module-coreaudio-device.c: unable to create sink.
-  
-
-
-Those couple of issues mentioned above, of course, make recording the container’s audio output comparable to jumping through the hoops of hellfire and blades every tine. So, instead of that, I decided to use 
-OulseAudio RTP sink support, which could be defined like that (on the host system):
-pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 -vvvvv
-# since we did not daemonize the serivce, the commands below can be executed in a separate terminal window
-pacmd load-module module-null-sink sink_name=rtp
-pacmd load-module module-rtp-send source=rtp.monitor port=1234 loop=1
-
-
-(RTP protocol)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol] can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).
-
-By the way, you can check the UDP commnication between docker container and host using netcat.
-# inside the container
-nc -u &lt;HOST_IP&gt; 1234
-
-# on host machine
-nc -ul 1234 
-
-
-And we are also have to do some exotic magic to simply obtain the host’s IP on the Docker network. Our life would be too easy and dull without that, wouldn’t it?
-# either an arbitrary IPv4 address from host
-Hostip="$(ip -4 -o a | awk '{print $4}' | cut -d/ -f1 | grep -v 127.0.0.1 | head -n1)"
-
-# or especially IP from docker daemon
-Hostip="$(ip -4 -o a| grep docker0 | awk '{print $4}' | cut -d/ -f1)"
-
-
-Then why not simply define a loop back address and a free UDP port, by convention for RTP it’s 1234 (RTP usually uses UDP as a transport). Then we could simply forward this port from guest to host. Well, shocking news, ladies ang gentelmen, 
-in Docker world, ports are forwared from host to container, not the other way around. So, if you are into that kind of naughty stuff, you\ll have to use dockers’s –network=host option. So, then you can determine the host’s IP and speicify it in the config. (Hack me gently with a chainsaw, but I do not remember, why loopback did not work in this case).
-
-6inks, 6inks, 6inks
-
-Aaaaaand, it works. Well, sort of. I was able to pass my audio to the other side. It was accompanied by a constant wall of digital noise, though. 
-When I try to stream raw PCM audio using faplay, for example:
-
-ffplay  -sample_rate 44100 -autoexit -f s16be rtp://127.0.0.1:1234
-
-When I try to do the same, with, say, VLC player, it tries to interpret the data stream as some interleaved AV, and outputs all kind of glitchy weirdess in the video window.
-
-vlc --demux=rawaud --rawaud-channels=2 --rawaud-samplerate=44100 udp://@:1234
-
-
-First, I thought it was raw audio byte format problem, judging by the logs the defaul format is s16be (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo here:
-(https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/)
-
-However, I made sure they are matching and it left me with nothing but two more flavoirs of digital audio pollution. Well, it’s time to reveal you the brutal truth. Pulseaudio RTP sinks are multi-cast only. So, when you specify a single IP address and port there, it dumps all the it’s sister RTP Control Stuff (stats, metadata and heartbeats) right above the raw audio, manifestating itself in a form a constant audiable noise.
-
-So, I swithed to multicast, and now now I’m able to get the audio output from Docker container to my virtual device for recording. 
-The latency is still there of course. Thankfully, I’m not obligated to perform live with this kind of setup.
-
-I might still be insane, though
-
-PulseAudio has native mechanism for capturing audio. The monitor sink is created the similar way, and then, allegedly, you can pipe it anywhere.
-pactl load-module module-null-sink sink_name=steam
-parec -d steam.monitor | oggenc -b 192 -o steam.ogg --raw - 
-
-oggenc is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.
+However, on our beloved slick 2+K$ tinfoil cans, we are going into…
 
 ">
   
@@ -271,10 +71,10 @@ In previous article we briefly touched upon evolution of audio playback and proc
 
 Ok. Let’s first politely (for the most part) dismiss the obvious suggestions from the sane-minded people. This would be sure mixed with some old-man’s rumbling touching the peculiarity of his ill habits.
 Q: Why not just install Wine on your host system? 
-A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure I’m ready for that yet.
+A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure if I’m ready for that yet.
 
-Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of schenaningas anyway?
-A: Two point here. Frist, I simply do not want to install another piece of heavyweight software on my laptop (which is, tehcnically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)
+Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of shenanigans anyway?
+A: Two point here. First, I simply do not want to install another piece of heavyweight software on my laptop (which is, technically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)
 
 Q: What’s the use of some old Win32 application?  It does not fit the modern audio production standards at all. 
 A: That’s just how I roll, sir/ma’m
@@ -284,107 +84,7 @@ On normal Unix-like systems, the host’s sound (and MIDI) hardware could be sim
 docker run --rm --device /dev/snd ALSAIMAGE speaker-test
 
 
-
-Hoops of Hellfire and Blades
-
-As an alternatively-abled, alternavie OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:
-
-  Some strange latency issues, latency increases over time, and requires me to periodically restart the server on my host OS.
-  My version of pulseaudio, obtained from Homebrew (I believe), does not allow me to output to a virtual device (in my case, BlackHole 16ch)
-
-
-Seems, like the problem here is not particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).
-
-
-  MacOS PulseAudio Server Logs
-
-  I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
-I: [] module-card-restore.c: Restoring port latency offsets for card BlackHole_16ch.
-D: [] card.c: Looking for initial profile for card BlackHole_16ch
-D: [] card.c: on availability unknown
-I: [] card.c: BlackHole_16ch: active_profile: on
-I: [] card.c: Created 0 "BlackHole_16ch"
-D: [] module-coreaudio-device.c: Sample rate: 44100.000000
-D: [] module-coreaudio-device.c: 64 bytes per packet
-D: [] module-coreaudio-device.c: 1 frames per packet
-D: [] module-coreaudio-device.c: 64 bytes per frame
-D: [] module-coreaudio-device.c: 16 channels per frame
-D: [] module-coreaudio-device.c: 32 bits per channel
-D: [] module-coreaudio-device.c: Stream name is &gt;Channel 1, Channel 2, Channel 3, Channel 4, Channel 5, Channel 6, Channel 7, Channel 8, Channel 9, Channel 10, Channel 11, Channel 12, Channel 13, Channel 14, Channel 15, Channel 16&lt;
-D: [] module-device-restore.c: Database contains no data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann
-D: [] module-device-restore.c: Database contains no (or invalid) data for key: sink:Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann:null
-I: [] sink.c: Created sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann" with sample spec float32le 16ch 44100Hz and channel map mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono,mono
-I: [] sink.c:     device.string = "BlackHole 16ch"
-I: [] sink.c:     device.product.name = "BlackHole 16ch"
-I: [] sink.c:     device.description = "BlackHole 16ch"
-I: [] sink.c:     device.access_mode = "mmap"
-I: [] sink.c:     device.class = "sound"
-I: [] sink.c:     device.api = "CoreAudio"
-I: [] sink.c:     device.buffering.buffer_size = "32768"
-I: [] sink.c:     device.vendor.name = "Existential Audio Inc."
-I: [] sink.c:     device.icon_name = "audio-card"
-D: [] source.c: Failed to register name Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann.monitor.
-I: [] sink.c: Freeing sink 0 "Channel_1__Channel_2__Channel_3__Channel_4__Channel_5__Channel_6__Channel_7__Channel_8__Channel_9__Channel_10__Channel_11__Chann"
-E: [] module-coreaudio-device.c: unable to create sink.
-  
-
-
-Those couple of issues mentioned above, of course, make recording the container’s audio output comparable to jumping through the hoops of hellfire and blades every tine. So, instead of that, I decided to use 
-OulseAudio RTP sink support, which could be defined like that (on the host system):
-pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 -vvvvv
-# since we did not daemonize the serivce, the commands below can be executed in a separate terminal window
-pacmd load-module module-null-sink sink_name=rtp
-pacmd load-module module-rtp-send source=rtp.monitor port=1234 loop=1
-
-
-(RTP protocol)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol] can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).
-
-By the way, you can check the UDP commnication between docker container and host using netcat.
-# inside the container
-nc -u &lt;HOST_IP&gt; 1234
-
-# on host machine
-nc -ul 1234 
-
-
-And we are also have to do some exotic magic to simply obtain the host’s IP on the Docker network. Our life would be too easy and dull without that, wouldn’t it?
-# either an arbitrary IPv4 address from host
-Hostip="$(ip -4 -o a | awk '{print $4}' | cut -d/ -f1 | grep -v 127.0.0.1 | head -n1)"
-
-# or especially IP from docker daemon
-Hostip="$(ip -4 -o a| grep docker0 | awk '{print $4}' | cut -d/ -f1)"
-
-
-Then why not simply define a loop back address and a free UDP port, by convention for RTP it’s 1234 (RTP usually uses UDP as a transport). Then we could simply forward this port from guest to host. Well, shocking news, ladies ang gentelmen, 
-in Docker world, ports are forwared from host to container, not the other way around. So, if you are into that kind of naughty stuff, you\ll have to use dockers’s –network=host option. So, then you can determine the host’s IP and speicify it in the config. (Hack me gently with a chainsaw, but I do not remember, why loopback did not work in this case).
-
-6inks, 6inks, 6inks
-
-Aaaaaand, it works. Well, sort of. I was able to pass my audio to the other side. It was accompanied by a constant wall of digital noise, though. 
-When I try to stream raw PCM audio using faplay, for example:
-
-ffplay  -sample_rate 44100 -autoexit -f s16be rtp://127.0.0.1:1234
-
-When I try to do the same, with, say, VLC player, it tries to interpret the data stream as some interleaved AV, and outputs all kind of glitchy weirdess in the video window.
-
-vlc --demux=rawaud --rawaud-channels=2 --rawaud-samplerate=44100 udp://@:1234
-
-
-First, I thought it was raw audio byte format problem, judging by the logs the defaul format is s16be (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo here:
-(https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/)
-
-However, I made sure they are matching and it left me with nothing but two more flavoirs of digital audio pollution. Well, it’s time to reveal you the brutal truth. Pulseaudio RTP sinks are multi-cast only. So, when you specify a single IP address and port there, it dumps all the it’s sister RTP Control Stuff (stats, metadata and heartbeats) right above the raw audio, manifestating itself in a form a constant audiable noise.
-
-So, I swithed to multicast, and now now I’m able to get the audio output from Docker container to my virtual device for recording. 
-The latency is still there of course. Thankfully, I’m not obligated to perform live with this kind of setup.
-
-I might still be insane, though
-
-PulseAudio has native mechanism for capturing audio. The monitor sink is created the similar way, and then, allegedly, you can pipe it anywhere.
-pactl load-module module-null-sink sink_name=steam
-parec -d steam.monitor | oggenc -b 192 -o steam.ogg --raw - 
-
-oggenc is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.
+However, on our beloved slick 2+K$ tinfoil cans, we are going into…
 
 ">
   <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
@@ -409,7 +109,7 @@ oggenc is just for example here. Raw stream can be encoded into anything. The th
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1661589250310431000">
+  <link rel="stylesheet" href="/css/main.css?1661590365296493000">
   <link rel="canonical" href="/2022/Docker_Audio_Hell_Pt__2/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -457,7 +157,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1661589250310431000">
+<link rel="stylesheet" href="/css/main.css?1661590365296493000">
 </head>
 
 
@@ -556,14 +256,14 @@ window.MathJax = {
   <section class="post">
     <h4 id="false-promises-of-posix-compatibility">False Promises of POSIX-compatibility</h4>
 
-<p>In previous article we briefly touched upon evolution of audio playback and processing under Unix-like operating system. That was quite a ride, if you remember. Maintaining traditions firmly set in this blog, let’s ask ourselves a question, how can we make my experience with *NIX audio even more pathological. Any suggestions? Right! Let’s run it in Docker under MacOS.</p>
+<p>In <a href="/2022/Docker_Audio_Hell/">previous article</a> we briefly touched upon evolution of audio playback and processing under Unix-like operating system. That was quite a ride, if you remember. Maintaining traditions firmly set in this blog, let’s ask ourselves a question, how can we make my experience with *NIX audio even more pathological. Any suggestions? Right! Let’s run it in Docker under MacOS.</p>
 
 <p>Ok. Let’s first politely (for the most part) dismiss the obvious suggestions from the sane-minded people. This would be sure mixed with some old-man’s rumbling touching the peculiarity of his ill habits.
 Q: Why not just install Wine on your host system? 
-A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure I’m ready for that yet.</p>
+A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure if I’m ready for that yet.</p>
 
-<p>Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of schenaningas anyway?
-A: Two point here. Frist, I simply do not want to install another piece of heavyweight software on my laptop (which is, tehcnically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)</p>
+<p>Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of shenanigans anyway?
+A: Two point here. First, I simply do not want to install another piece of heavyweight software on my laptop (which is, technically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)</p>
 
 <p>Q: What’s the use of some old Win32 application?  It does not fit the modern audio production standards at all. 
 A: That’s just how I roll, sir/ma’m</p>
@@ -571,18 +271,21 @@ A: That’s just how I roll, sir/ma’m</p>
 <p>On normal Unix-like systems, the host’s sound (and MIDI) hardware could be simply shared via plain docker device mountpoint, like:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># x11docker provides this setup with option --alsa.</span>
 docker run <span class="nt">--rm</span> <span class="nt">--device</span> /dev/snd ALSAIMAGE speaker-test
-
 </code></pre></div></div>
+
+<p>However, on our beloved slick 2+K$ tinfoil cans, we are going into…</p>
+
+<!-- readmore -->
 
 <h4 id="hoops-of-hellfire-and-blades">Hoops of Hellfire and Blades</h4>
 
-<p>As an alternatively-abled, alternavie OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:</p>
+<p>As an alternatively-abled, alternative OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:</p>
 <ul>
   <li>Some strange latency issues, latency increases over time, and requires me to periodically restart the server on my host OS.</li>
   <li>My version of pulseaudio, obtained from Homebrew (I believe), does not allow me to output to a virtual device (in my case, BlackHole 16ch)</li>
 </ul>
 
-<p>Seems, like the problem here is not particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).</p>
+<p>Seems, like the problem here is no particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).</p>
 
 <details>
   <summary>MacOS PulseAudio Server Logs
@@ -628,7 +331,7 @@ pacmd load-module module-rtp-send <span class="nb">source</span><span class="o">
 
 <p>(RTP protocol)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol] can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).</p>
 
-<p>By the way, you can check the UDP commnication between docker container and host using netcat.</p>
+<p>By the way, you can check the UDP communication between docker container and host using netcat.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># inside the container</span>
 nc <span class="nt">-u</span> &lt;HOST_IP&gt; 1234
 
@@ -650,10 +353,10 @@ in Docker world, ports are forwared <em>from host to container</em>, not the oth
 <h4 id="6inks-6inks-6inks">6inks, 6inks, 6inks</h4>
 
 <p>Aaaaaand, it works. Well, sort of. I was able to pass my audio to the <em>other side</em>. It was accompanied by a constant wall of digital noise, though. 
-When I try to stream raw PCM audio using faplay, for example:</p>
+When I try to stream raw PCM audio using <code class="highlighter-rouge">faplay</code>, for example:</p>
 
-<pre><code class="language-`bash">ffplay  -sample_rate 44100 -autoexit -f s16be rtp://127.0.0.1:1234
-</code></pre>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffplay  <span class="nt">-sample_rate</span> 44100 <span class="nt">-autoexit</span> <span class="nt">-f</span> s16be rtp://127.0.0.1:1234
+</code></pre></div></div>
 <p>When I try to do the same, with, say, VLC player, it tries to interpret the data stream as some interleaved AV, and outputs all kind of glitchy weirdess in the video window.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlc <span class="nt">--demux</span><span class="o">=</span>rawaud <span class="nt">--rawaud-channels</span><span class="o">=</span>2 <span class="nt">--rawaud-samplerate</span><span class="o">=</span>44100 udp://@:1234
@@ -689,7 +392,7 @@ parec <span class="nt">-d</span> steam.monitor | oggenc <span class="nt">-b</spa
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1661589250310431000"></script>
+<script type="text/javascript" src="/js/main.js?1661590365296493000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

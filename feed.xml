@@ -5,22 +5,22 @@
     <description>coding, multimedia, gamedev, engineering</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 27 Aug 2022 11:34:10 +0300</pubDate>
-    <lastBuildDate>Sat, 27 Aug 2022 11:34:10 +0300</lastBuildDate>
+    <pubDate>Sat, 27 Aug 2022 11:52:45 +0300</pubDate>
+    <lastBuildDate>Sat, 27 Aug 2022 11:52:45 +0300</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>Docker Audio Hell Pt. 2</title>
         <description>&lt;h4 id=&quot;false-promises-of-posix-compatibility&quot;&gt;False Promises of POSIX-compatibility&lt;/h4&gt;
 
-&lt;p&gt;In previous article we briefly touched upon evolution of audio playback and processing under Unix-like operating system. That was quite a ride, if you remember. Maintaining traditions firmly set in this blog, let’s ask ourselves a question, how can we make my experience with *NIX audio even more pathological. Any suggestions? Right! Let’s run it in Docker under MacOS.&lt;/p&gt;
+&lt;p&gt;In &lt;a href=&quot;/2022/Docker_Audio_Hell/&quot;&gt;previous article&lt;/a&gt; we briefly touched upon evolution of audio playback and processing under Unix-like operating system. That was quite a ride, if you remember. Maintaining traditions firmly set in this blog, let’s ask ourselves a question, how can we make my experience with *NIX audio even more pathological. Any suggestions? Right! Let’s run it in Docker under MacOS.&lt;/p&gt;
 
 &lt;p&gt;Ok. Let’s first politely (for the most part) dismiss the obvious suggestions from the sane-minded people. This would be sure mixed with some old-man’s rumbling touching the peculiarity of his ill habits.
 Q: Why not just install Wine on your host system? 
-A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure I’m ready for that yet.&lt;/p&gt;
+A: Being a mentally challenged paranoid I am, I have to state that I\m simply afraid. As of now, MacOS has completely dropped 32-bit support, the instructions of building and setting up Wine on those kind of systems looks like for building a portal to Hell. I’m not sure if I’m ready for that yet.&lt;/p&gt;
 
-&lt;p&gt;Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of schenaningas anyway?
-A: Two point here. Frist, I simply do not want to install another piece of heavyweight software on my laptop (which is, tehcnically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)&lt;/p&gt;
+&lt;p&gt;Q: Why not use a proper HyperVisor, instead of crippled Docker, which was not designed for those kinds of shenanigans anyway?
+A: Two point here. First, I simply do not want to install another piece of heavyweight software on my laptop (which is, technically, not even mine). Haven’t I already have this Docker thing lying around and my dayjob makes me interact with it a lot. So why not utilise it for something useful? (depends, on how one defines “useful”, of course)&lt;/p&gt;
 
 &lt;p&gt;Q: What’s the use of some old Win32 application?  It does not fit the modern audio production standards at all. 
 A: That’s just how I roll, sir/ma’m&lt;/p&gt;
@@ -28,18 +28,21 @@ A: That’s just how I roll, sir/ma’m&lt;/p&gt;
 &lt;p&gt;On normal Unix-like systems, the host’s sound (and MIDI) hardware could be simply shared via plain docker device mountpoint, like:&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# x11docker provides this setup with option --alsa.&lt;/span&gt;
 docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--device&lt;/span&gt; /dev/snd ALSAIMAGE speaker-test
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;However, on our beloved slick 2+K$ tinfoil cans, we are going into…&lt;/p&gt;
+
+&lt;!-- readmore --&gt;
 
 &lt;h4 id=&quot;hoops-of-hellfire-and-blades&quot;&gt;Hoops of Hellfire and Blades&lt;/h4&gt;
 
-&lt;p&gt;As an alternatively-abled, alternavie OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:&lt;/p&gt;
+&lt;p&gt;As an alternatively-abled, alternative OS (MacOS X) user, I do not have this luxury. The solution proposed, was to actually utilise pulseaudio native audio-over-the-network support. As I described earlier, conceptually it works, but I spotted two problems with that:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Some strange latency issues, latency increases over time, and requires me to periodically restart the server on my host OS.&lt;/li&gt;
   &lt;li&gt;My version of pulseaudio, obtained from Homebrew (I believe), does not allow me to output to a virtual device (in my case, BlackHole 16ch)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Seems, like the problem here is not particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).&lt;/p&gt;
+&lt;p&gt;Seems, like the problem here is no particular device being virtual, but rather PulseAudio failing at creating sink name. See https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/ . I could try to debug this, however, my attempts at building latest pulseaudio could be compared to monkey trying to land a fighter jet (no offence to the monkeys, through, I managed to build it, but then it failed to start, stating that my alternative OS semaphores are not POSIX compatible).&lt;/p&gt;
 
 &lt;details&gt;
   &lt;summary&gt;MacOS PulseAudio Server Logs
@@ -85,7 +88,7 @@ pacmd load-module module-rtp-send &lt;span class=&quot;nb&quot;&gt;source&lt;/sp
 
 &lt;p&gt;(RTP protocol)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol] can work in two modes, standard single-cast and (multi-cast)[https://en.wikipedia.org/wiki/Real-time_Transport_Protocol]. So, if use define a sink with default options, . And unfortunately, you would never guess, what would be the mutkcast address, you’ll have to probe it manually, or grep pulseaudio logs. And this option only accetps single IP or multi-cast range, no hostname resolve supported. So, the “docker.io” tricks would not work here (the phrase “would not work” could be the most frequent word combination of this blog, need to check for that one day).&lt;/p&gt;
 
-&lt;p&gt;By the way, you can check the UDP commnication between docker container and host using netcat.&lt;/p&gt;
+&lt;p&gt;By the way, you can check the UDP communication between docker container and host using netcat.&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# inside the container&lt;/span&gt;
 nc &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; &amp;lt;HOST_IP&amp;gt; 1234
 
@@ -107,10 +110,10 @@ in Docker world, ports are forwared &lt;em&gt;from host to container&lt;/em&gt;,
 &lt;h4 id=&quot;6inks-6inks-6inks&quot;&gt;6inks, 6inks, 6inks&lt;/h4&gt;
 
 &lt;p&gt;Aaaaaand, it works. Well, sort of. I was able to pass my audio to the &lt;em&gt;other side&lt;/em&gt;. It was accompanied by a constant wall of digital noise, though. 
-When I try to stream raw PCM audio using faplay, for example:&lt;/p&gt;
+When I try to stream raw PCM audio using &lt;code class=&quot;highlighter-rouge&quot;&gt;faplay&lt;/code&gt;, for example:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-`bash&quot;&gt;ffplay  -sample_rate 44100 -autoexit -f s16be rtp://127.0.0.1:1234
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ffplay  &lt;span class=&quot;nt&quot;&gt;-sample_rate&lt;/span&gt; 44100 &lt;span class=&quot;nt&quot;&gt;-autoexit&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; s16be rtp://127.0.0.1:1234
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;When I try to do the same, with, say, VLC player, it tries to interpret the data stream as some interleaved AV, and outputs all kind of glitchy weirdess in the video window.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vlc &lt;span class=&quot;nt&quot;&gt;--demux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rawaud &lt;span class=&quot;nt&quot;&gt;--rawaud-channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2 &lt;span class=&quot;nt&quot;&gt;--rawaud-samplerate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;44100 udp://@:1234
