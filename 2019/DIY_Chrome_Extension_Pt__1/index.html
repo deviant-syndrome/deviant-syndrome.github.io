@@ -223,7 +223,7 @@ By the way, simple CSS injections via tabs.injectCSS or “css” in manifest fi
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1661590535535066000">
+  <link rel="stylesheet" href="/css/main.css?1685261901345671000">
   <link rel="canonical" href="/2019/DIY_Chrome_Extension_Pt__1/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -271,7 +271,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1661590535535066000">
+<link rel="stylesheet" href="/css/main.css?1685261901345671000">
 </head>
 
 
@@ -395,11 +395,11 @@ window.MathJax = {
     </span><span class="nl">"manifest_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
-<p>When you go to <code class="highlighter-rouge">chrome://extensions</code> URL in your browser and click “Add unpacked”, specifying your extension directory.</p>
+<p>When you go to <code class="language-plaintext highlighter-rouge">chrome://extensions</code> URL in your browser and click “Add unpacked”, specifying your extension directory.</p>
 
 <h4 id="the-catch">The catch</h4>
 <p>There is always one, isn’t it? Some times, it just does not work. Maybe because of Chrome, maybe because of today’s web pages do too much dynamic DOM manipulations on the way. 
-So, in addition to that, I pretended to be a well-trained JS monkey and came up with a script that inserts a new <code class="highlighter-rouge">style</code> DOM element, after web page has loaded.</p>
+So, in addition to that, I pretended to be a well-trained JS monkey and came up with a script that inserts a new <code class="language-plaintext highlighter-rouge">style</code> DOM element, after web page has loaded.</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">chrome</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">getURL</span><span class="p">(</span><span class="dl">'</span><span class="s1">data/github-dark.css</span><span class="dl">'</span><span class="p">);</span>
 
@@ -426,7 +426,7 @@ So, in addition to that, I pretended to be a well-trained JS monkey and came up 
 Started to develop my in-house Google Chrome extension to adjust some of the WebUI palettes of the services I use every day. Let’s see how easy it goes. I could not really use any third+party extension from the Chrome store ob my working laptop, because of my company’s net security guidelines.</p>
 
 <p>So, I created a simple .manifest file. Added a background script that hooks to a navigation complete element.
-By the way, simple CSS injections via <code class="highlighter-rouge">tabs.injectCSS</code> or “css” in manifest file did not work for some reason. Same went for jQuery (modern browsers almost fully blocking any Cross-Origin or local referencies). Was able to make my way simply through creating a <code class="highlighter-rouge">style</code> DOM element and filling its gut with my custom CSS content.</p>
+By the way, simple CSS injections via <code class="language-plaintext highlighter-rouge">tabs.injectCSS</code> or “css” in manifest file did not work for some reason. Same went for jQuery (modern browsers almost fully blocking any Cross-Origin or local referencies). Was able to make my way simply through creating a <code class="language-plaintext highlighter-rouge">style</code> DOM element and filling its gut with my custom CSS content.</p>
 
   </section>
   
@@ -437,11 +437,11 @@ By the way, simple CSS injections via <code class="highlighter-rouge">tabs.injec
       </div>
 
       <footer class="footer">
-  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">&copy; 2023 Deviant Syndrome. All rights reserved.</span>
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1661590535535066000"></script>
+<script type="text/javascript" src="/js/main.js?1685261901345671000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

@@ -5,9 +5,138 @@
     <description>coding, multimedia, gamedev, engineering</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 27 Aug 2022 11:55:35 +0300</pubDate>
-    <lastBuildDate>Sat, 27 Aug 2022 11:55:35 +0300</lastBuildDate>
-    <generator>Jekyll v4.0.0</generator>
+    <pubDate>Sun, 28 May 2023 11:18:21 +0300</pubDate>
+    <lastBuildDate>Sun, 28 May 2023 11:18:21 +0300</lastBuildDate>
+    <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>Live Bounce Recording Using Terminal</title>
+        <description>&lt;h4 id=&quot;icebreaker&quot;&gt;Icebreaker&lt;/h4&gt;
+&lt;p&gt;My obsession with using found sounds in my recording, often gives me a sudden itch to bounce a few seconds of audio output from a random application on my computer. 
+Say, a web application or a video player.&lt;/p&gt;
+
+&lt;p&gt;And then I really feel, how cumbersome and inflated it is to start a general purpose DAW for that, and crawl through an 
+awkward ritual of gently rubbing its multichannel mixer and transport controls for that. It is the same as 
+summoning a 12 feet tall four-horned purple demon to open a can of beans for you.&lt;/p&gt;
+
+&lt;p&gt;There are of course lightweight open source wave editors, like &lt;a href=&quot;https://www.audacityteam.org/&quot;&gt;Audacity&lt;/a&gt;.&lt;br /&gt;
+Sadly, previous versions of it had some problems with recording “virtual” audio outputs akin to &lt;a href=&quot;https://existential.audio/blackhole/&quot;&gt;BlackHole 16ch&lt;/a&gt;, 
+I’m currently using.&lt;/p&gt;
+
+&lt;p&gt;Seems to be working correctly from version 3.2.5 onwards, though. Till this version was published I had plenty of free time to develop my own crappy solution
+for yet another purposely invented problem. But this is how you mine proper tech-blog material, isn’t it? So, let’s go!&lt;/p&gt;
+
+&lt;h4 id=&quot;the-ingredients&quot;&gt;The Ingredients&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sox.sourceforge.net/&quot;&gt;SoX&lt;/a&gt; - swiss army knife for DSP via terminal, as it is nominated by its developers. And, oh boy, indeed it is.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ffmpeg.org/ffplay.html&quot;&gt;ffplay&lt;/a&gt; - a part of FFmpeg audio suite, and it is a very simple portable media player using the FFmpeg libraries&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;the-magic&quot;&gt;The Magic&lt;/h4&gt;
+
+&lt;p&gt;UNIX-like terminal command piping using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; operator. Pipe operator placed between two commands simply tells the shell,
+that first commands input becomes second command output. This thing combined with another UNIX paradigm called &lt;a href=&quot;https://en.wikipedia.org/wiki/Redirect_(computing)&quot;&gt;IO Redirect&lt;/a&gt;
+is what really unlocks that “shell magic” at the reach of your fingertips (unless half of them had forever ingrown into
+that horrible bio-prosthetic named after a small rodent species). So the commands for bouncing live output to a file are the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sox &lt;span class=&quot;nt&quot;&gt;-V6&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; coreaudio &lt;span class=&quot;s2&quot;&gt;&quot;BlackHole 16ch&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; wav - | ffplay -
+sox &lt;span class=&quot;nt&quot;&gt;-V6&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; coreaudio &lt;span class=&quot;s2&quot;&gt;&quot;BlackHole 16ch&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; wav output.wav
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, I provided two very similar commands here. Indeed, I use the same source for both of them, which is my 
+virtual input device. 
+First command just redirects the output of my virtual device to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ffplay&lt;/code&gt;. This solves the recording monitoring problem. 
+Next one actually does the recording of audio to disk. 
+Monitoring pipeline sometimes fails, while recording is stable, so I would recommend to run it in separate terminal 
+sessions.&lt;/p&gt;
+
+&lt;h4 id=&quot;but-wait-there-is-more&quot;&gt;But wait, there is more!&lt;/h4&gt;
+
+&lt;p&gt;Albeit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sox&lt;/code&gt; does not look all that “user-friendly”, it can be much smarter than trivial methods of live record bouncing. Especially, when it comes to trimming silence.
+Let’s consider the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sox &lt;span class=&quot;nt&quot;&gt;-V6&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; coreaudio &lt;span class=&quot;s2&quot;&gt;&quot;BlackHole 16ch&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; wav output.wav silence 1 0.1 1% 1 0.5 1%
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This command will record audio from my virtual device, and trim silence from the beginning and the end of the recording. Technically, this applies “silence” effect as a part the internal FX chain of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sox&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s break down the parameters a bit:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Parameter&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1 0.1 1%&lt;/td&gt;
+      &lt;td&gt;Detects silence segments that are at least 1 second long, with a silence threshold of 0.1 (10% of maximum volume).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1 0.5 1%&lt;/td&gt;
+      &lt;td&gt;Removes silence segments that are at least 1 second long, with a silence threshold of 0.5 (50% of maximum volume).&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;You can read more about &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sox&lt;/code&gt; silence effect &lt;a href=&quot;https://sox.sourceforge.io/sox.html#EFFECTS&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When bouncing live audio, you would probably want some safeguard to prevent overwriting existing files. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sox&lt;/code&gt; does not have a built-in solution for that, but you can easily write a small shell script to do that for you. Here is a small example:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;wildcard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+
+&lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;wildcard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/\*/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$counter&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$filename&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$filename&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;break
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;counter++&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Then you can use it like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;output_filename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;./find_next_file.sh &lt;span class=&quot;s2&quot;&gt;&quot;output*.wav&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+sox &lt;span class=&quot;nt&quot;&gt;-V6&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; coreaudio &lt;span class=&quot;s2&quot;&gt;&quot;BlackHole 16ch&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; wav &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$output_filename&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;!-- readmore --&gt;
+
+&lt;h4 id=&quot;additional-notes&quot;&gt;Additional Notes&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sox&lt;/code&gt; will record all the available input channels of your device into a single file. In my case it is 16 channels. How often do you deal with 16-channel WAV files? I was personally quite surprised that standard WAVEs support more than 2 channels. Indeed, it was a relatively recent addition to the standard.
+The WAVE format began supporting more than two channels with the introduction of the WAVE Format Extensible (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WAVEFORMATEXTENSIBLE&lt;/code&gt;) specification.&lt;/p&gt;
+
+&lt;p&gt;This specification was introduced as part of the DirectX Media Objects (DMO) architecture, which was included with DirectX 8.0, released by Microsoft in 2000.
+It is worth noting, that this specification was most likely designed to support spatial audio, and not multi-track recording.&lt;/p&gt;
+
+&lt;p&gt;However, the spatilisation mapping is not a part of the WAVE specification, and is defined by the application. There are several different spatialisation schemes, and they are not compatible with each other. So, the exact spatialisation you get will depend of the software.&lt;/p&gt;
+
+&lt;p&gt;I was wondering, why this problem was not addressed by the BWF convention, which adds broadcasting-specific metadata to the WAVE format, such as timecodes and project information. Probably, because BWF was introduced in 1997, three years prior to the WAVEFORMATEXTENSIBLE specification.&lt;/p&gt;
+
+&lt;p&gt;It is a bit of a shame, because it would be a perfect place to store the channel mapping information. However, there is a &lt;a href=&quot;https://tech.ebu.ch/docs/tech/tech3285.pdf&quot;&gt;proposal&lt;/a&gt; and also, a &lt;a href=&quot;https://tech.ebu.ch/docs/r/r111.pdf&quot;&gt;recommendation&lt;/a&gt; to extend the BWF specification to support multi-channel audio. It is not a part of the official BWF specification yet, but it is already supported by some software, like &lt;a href=&quot;https://www.sounddevices.com/wave-agent&quot;&gt;Sound Devices Wave Agent&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Max MSP is a very powerful tool for audio processing, and it can be used for live audio recording as well. However, it is not a lightweight solution for that by any means, despite it does not have the overhead of conventional linear multi-track audio edtitor. For bouncing live audio using Max there is a very convenient  &lt;a href=&quot;https://docs.cycling74.com/max5/refpages/msp-ref/sfrecord~.html&quot;&gt;~sfrecord&lt;/a&gt; object.&lt;/p&gt;
+
+&lt;p&gt;Seems like this &lt;a href=&quot;https://madskjeldgaard.dk/posts/sox-tutorial-cli-tape-music/#:~:text=SoX%20includes%20a%20very%20handy,c%20in%20the%20terminal%20window.&quot;&gt;tech-blog&lt;/a&gt; does a much better job at breaking down the capabilities of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sox&lt;/code&gt; than me.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 13 May 2023 12:05:05 +0300</pubDate>
+        <link>/2023/Live_Bounce_Recording_Using_Terminal/</link>
+        <guid isPermaLink="true">/2023/Live_Bounce_Recording_Using_Terminal/</guid>
+        
+        <category>bash</category>
+        
+        <category>dsp</category>
+        
+        
+        <category>vst audio software</category>
+        
+      </item>
     
       <item>
         <title>Docker Audio Hell Pt. 2</title>
@@ -47,7 +176,7 @@ docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&qu
 &lt;details&gt;
   &lt;summary&gt;MacOS PulseAudio Server Logs
 &lt;/summary&gt;
-  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
 I: [] module-card-restore.c: Restoring port latency offsets for card BlackHole_16ch.
 D: [] card.c: Looking for initial profile for card BlackHole_16ch
 D: [] card.c: on availability unknown
@@ -110,7 +239,7 @@ in Docker world, ports are forwared &lt;em&gt;from host to container&lt;/em&gt;,
 &lt;h4 id=&quot;6inks-6inks-6inks&quot;&gt;6inks, 6inks, 6inks&lt;/h4&gt;
 
 &lt;p&gt;Aaaaaand, it works. Well, sort of. I was able to pass my audio to the &lt;em&gt;other side&lt;/em&gt;. It was accompanied by a constant wall of digital noise, though. 
-When I try to stream raw PCM audio using &lt;code class=&quot;highlighter-rouge&quot;&gt;faplay&lt;/code&gt;, for example:&lt;/p&gt;
+When I try to stream raw PCM audio using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;faplay&lt;/code&gt;, for example:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ffplay  &lt;span class=&quot;nt&quot;&gt;-sample_rate&lt;/span&gt; 44100 &lt;span class=&quot;nt&quot;&gt;-autoexit&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; s16be rtp://127.0.0.1:1234
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -119,7 +248,7 @@ When I try to stream raw PCM audio using &lt;code class=&quot;highlighter-rouge&
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vlc &lt;span class=&quot;nt&quot;&gt;--demux&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rawaud &lt;span class=&quot;nt&quot;&gt;--rawaud-channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2 &lt;span class=&quot;nt&quot;&gt;--rawaud-samplerate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;44100 udp://@:1234
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;First, I thought it was raw audio byte format problem, judging by the logs the defaul format is &lt;code class=&quot;highlighter-rouge&quot;&gt;s16be&lt;/code&gt; (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo &lt;a href=&quot;https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;First, I thought it was raw audio byte format problem, judging by the logs the defaul format is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s16be&lt;/code&gt; (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo &lt;a href=&quot;https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;However, I made sure they are matching and it left me with nothing but two more flavoirs of digital audio pollution. Well, it’s time to reveal you the brutal truth. Pulseaudio RTP sinks are &lt;em&gt;multi-cast only&lt;/em&gt;. So, when you specify a single IP address and port there, it dumps all the it’s sister RTP Control Stuff (stats, metadata and heartbeats) right above the raw audio, manifestating itself in a form a constant audiable noise.&lt;/p&gt;
 
@@ -132,7 +261,7 @@ The latency is still there of course. Thankfully, I’m not obligated to perform
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pactl load-module module-null-sink &lt;span class=&quot;nv&quot;&gt;sink_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;steam
 parec &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; steam.monitor | oggenc &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; 192 &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; steam.ogg &lt;span class=&quot;nt&quot;&gt;--raw&lt;/span&gt; - 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;oggenc&lt;/code&gt; is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oggenc&lt;/code&gt; is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 21 Aug 2022 17:26:57 +0300</pubDate>
@@ -221,7 +350,7 @@ parec &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; steam.monitor | oggenc &l
 
 &lt;p&gt;In this article, we are going to quickly reiterate the reason why audio-production on Linux can be challenging (if not frustrating at times). I think, the main reason for that, besides of course, my own incompetence, is audio-facilties being handled in too much of Unix-way. But what is Unix way, anyway? Well, in short, we have one isolated piece of software doing one single thing, but doing well.If any additional processing needs to be done with the output, we pipe (|) it into another isolated piece of software. Several steps of that form a &lt;em&gt;pipeline&lt;/em&gt;. 
 Sounds great, right? Well, unfortunately, sometimes the seeming tidiness of this approach could quikcly go down the tubes (pun intended). 
-Once you need something specific, or something simply done &lt;em&gt;your&lt;/em&gt; way, you’ll have to explore the whole pipeline from end to end. It’s alright, if the nodes there are simple utilities like &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;grep&lt;/code&gt;, but imaging exploring each of those having massive tectonic layers of legacy software archeology above them.&lt;/p&gt;
+Once you need something specific, or something simply done &lt;em&gt;your&lt;/em&gt; way, you’ll have to explore the whole pipeline from end to end. It’s alright, if the nodes there are simple utilities like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt;, but imaging exploring each of those having massive tectonic layers of legacy software archeology above them.&lt;/p&gt;
 
 &lt;p&gt;So, here is how this usually happens. It all starts with ALSA, a kernel subsystem, which works directly with your audio hardware. It does not efficiently handle software mixing and routing, though, so applications  cannot share your device inputs/outputs effieicently, and we were not even talking about routing audio inputs and outputs between them. 
 To satisfy those needs, PulseAudio was introduced. A software wrapper around ALSA, that re-routes all the audio streams through itself, and distributes it between existing hardware inputs and outputs (sinks). Applications compiled to use PulseAuido as audio-driver cannot use ALSA directly, all according to the hightest standards of incomprehensible madman’s logic we maintain in the world of prograaming.&lt;/p&gt;
@@ -234,7 +363,7 @@ For a long time, JACK was the standard for (semi)professional audio work on Linu
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/figures/amoeba2.svg&quot; alt=&quot;heck&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;JACK provides &lt;a href=&quot;https://jackaudio.org/faq/netjack.html&quot;&gt;several ways&lt;/a&gt; remote audio networking. It’s native &lt;code class=&quot;highlighter-rouge&quot;&gt;netone&lt;/code&gt; addon using CELT codec and master/follower pattern,  and some newer netJACK2, which has network discovery.&lt;/p&gt;
+&lt;p&gt;JACK provides &lt;a href=&quot;https://jackaudio.org/faq/netjack.html&quot;&gt;several ways&lt;/a&gt; remote audio networking. It’s native &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;netone&lt;/code&gt; addon using CELT codec and master/follower pattern,  and some newer netJACK2, which has network discovery.&lt;/p&gt;
 
 &lt;p&gt;Lately, yet another ultra-low-latency professional-audio-grade Unix soundsystem was introduced. It’s called PipeWire, and it is sort of a chamenion protocol, which can act as a PulseAudio backend for PulseAudio clients, Jack backend to Jack clients and so on. AFAIK, Pipewire does not have audio-over-network support.&lt;/p&gt;
 
@@ -438,7 +567,7 @@ Steps:&lt;/p&gt;
 &lt;p&gt;Minor caveat though: if your algorithm uses a dependency outside standard GNU/SciPi set, which is almost always the case for any audio-related, you cannot provide it with the training job. 
 Techincally, you can install this dependency on your SageMaker Studio instance and run your code there. But guess what? Since training utilises almost all of the CPU, so, after 10 mins of no heartbeats, Amazon marks the instance as dead and shuts it down. Uskomaton!&lt;/p&gt;
 
-&lt;p&gt;Theoretically, the manual tells you, that you could use the standard &lt;code class=&quot;highlighter-rouge&quot;&gt;scipy&lt;/code&gt; utilities for reading your audio files, if they stricly comply to 44.2Khz 16bit PCM standard. I tried that, with the following:&lt;/p&gt;
+&lt;p&gt;Theoretically, the manual tells you, that you could use the standard &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scipy&lt;/code&gt; utilities for reading your audio files, if they stricly comply to 44.2Khz 16bit PCM standard. I tried that, with the following:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;f &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;find ./ &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'*.wav'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do 
 &lt;/span&gt;ffmpeg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-acodec&lt;/span&gt; pcm_s16le &lt;span class=&quot;nt&quot;&gt;-ar&lt;/span&gt; 44100 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%.wav&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;z.wav&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
@@ -460,7 +589,7 @@ Techincally, you can install this dependency on your SageMaker Studio instance a
 
 &lt;p&gt;This is where you’ll begin to realize that those “Free Tier” conditions are quite limiting. First and foremost, no GPU instances are included in free tier limits. Technically, TensorFlow supports calculation on XLA devices, and you would need to change the following in the initialisation code of WaveGAN &lt;a href=&quot;https://github.com/chrisdonahue/wavegan/blob/master/loader.py#L193&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;            &lt;span class=&quot;s&quot;&gt;'/device::XLA_CPU:{}'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefetch_gpu_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;            &lt;span class=&quot;s&quot;&gt;'/device::XLA_CPU:{}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefetch_gpu_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Sweet, but it is still notebably slower than one would expect, I got about 720 steps overnight, versus about 2000 on a GPU instance. Maybe I should have been using the CPU version of the AWS Tensorflow image for that?&lt;br /&gt;
@@ -476,20 +605,20 @@ And adversities with the GPU instances do not end on their cost. They are disabl
 
 &lt;p&gt;It might be better to skip the AWS WebUI altogether and use boto3 library to run the code that deploys image and runs training locally.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;account&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boto_session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_caller_identity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Account&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;region&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boto_session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region_name&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{}.dkr.ecr.{}.amazonaws.com/sagemaker-decision-trees:latest&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;region&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;account&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boto_session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_caller_identity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Account&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;region&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boto_session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region_name&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{}.dkr.ecr.{}.amazonaws.com/sagemaker-decision-trees:latest&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;region&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;estimator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;role&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;ml.c4.2xlarge&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;output_path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;s3://{}/output&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_bucket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;output_path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;s3://{}/output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_bucket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()),&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;sagemaker_session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;I am still not sure if I can provide clear instructions on setting up the AWS permissions for the whole setup. So, I’ll just leave a citation from AWS documentation here:&lt;/p&gt;
@@ -546,7 +675,7 @@ This also applies to a lot of software written for academic research purposes. U
 
 &lt;p&gt;Did not won over MONO(?)/framework installation problems, though. Every time I run a fresh image it would ask me to download a few things. Not critcal for me right now. 
 When running a Linux distro inside docker, ALSA will not work properly out of the box, as it would not be able to locate a hardware audio
- interface (no dummy hw bindings allowed at ALSA level, if you want that - welcome to kernel recomplication!). On most UNIX and Unix-like environments, you can just bind your &lt;code class=&quot;highlighter-rouge&quot;&gt;/snd/audio &lt;/code&gt; from host to docker container, but not on your shiny polished MacOS. One of the possible solutions here, is to use pulseaudio client-server over its native transport.&lt;/p&gt;
+ interface (no dummy hw bindings allowed at ALSA level, if you want that - welcome to kernel recomplication!). On most UNIX and Unix-like environments, you can just bind your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/snd/audio &lt;/code&gt; from host to docker container, but not on your shiny polished MacOS. One of the possible solutions here, is to use pulseaudio client-server over its native transport.&lt;/p&gt;
 
 &lt;p&gt;Pulseaudio was once designed to be a “distribution layer” between ALSA and applications, for them to share audio channels and buffers properly
 . It worked quite well for general-purpose multimedia apps, but fell a bit short when it came to .. working with audio (i.e DAWs, audio-editors, samplers, etc). Therefore, people designed Jack which serves a similar purpose, but with much richer feature set and latency footprint. I believe, Jack is currently the “unofficial standard” for audio and music production on Linux.&lt;/p&gt;
@@ -604,7 +733,7 @@ winetricks corefonts
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/sc_theme.png&quot; alt=&quot;Screenshot SuperCollider&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Dir:&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;[&lt;/code&gt;&lt;span style=&quot;background: green; color: aquamarine&quot;&gt;~/Library/ApplicationSupport/SuperCollider/Help&lt;/span&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dir:&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[&lt;/code&gt;&lt;span style=&quot;background: green; color: aquamarine&quot;&gt;~/Library/ApplicationSupport/SuperCollider/Help&lt;/span&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;]&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;First, some CSS mad skillz, mostly based on &lt;a href=&quot;https://github.com/gkroon/dracula-css&quot;&gt;Dracula&lt;/a&gt; theme. Notice the dirty 
 hack to evade flooding into CodeMirror spans.&lt;/p&gt;
@@ -742,7 +871,7 @@ hack to evade flooding into CodeMirror spans.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
 &lt;/details&gt;
-&lt;p&gt;Then disable CodeMirror bindings in the following two files. In the last file, I substituted the &lt;code class=&quot;highlighter-rouge&quot;&gt;cm-default&lt;/code&gt; with
+&lt;p&gt;Then disable CodeMirror bindings in the following two files. In the last file, I substituted the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cm-default&lt;/code&gt; with
 the ones you’ll find in CodeMirror’s theme CSS files, which also goes by the name of the famous Romanian count. 
 I of course could change the CodeMirror’s theme the proper way, as its documentation suggests, however, then I would
 need to change the HTML help file generation for SC, which I’m too lazy and desorganized for.&lt;/p&gt;
@@ -879,36 +1008,6 @@ This could be complemented with how Steve Albini described his feelings towards 
         <pubDate>Sat, 02 Jan 2021 22:51:58 +0200</pubDate>
         <link>/2021/Moby_Drums_and_Samples/</link>
         <guid isPermaLink="true">/2021/Moby_Drums_and_Samples/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>The Years's Gift</title>
-        <description>&lt;h4 id=&quot;my-first-riff-analysis-ever&quot;&gt;My first riff analysis ever&lt;/h4&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/figures/catamenia_bridge_1-1-1.svg&quot; style=&quot;width: 100%; filter: invert(0.8);&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;So, let’s take a look at this bunch of notes from a song, I’m trying to learn. For almost a year now. Yeah, that’s embarrassing as heck, I know. 
-It has a , that totally example of what could be called “power chord music theory”. The .. you can rather easily introduce accidentals and even short temporary modulations, just by playing the notes of a scale in form of all power chords. 
-Let’s take a closer look at how it happens.&lt;/p&gt;
-
-&lt;!-- readmore --&gt;
-
-&lt;p&gt;Functionally, this is a bridge between a verse and a chorus. The phrase starts with a fifth (dominant) step of the scale, which is quite a conventional way to start building a bridge section. 
-There is also a tiny rhythmic detail, that caught my eye here. Notice, how the same 8th note, and the opening fifth steps last not 8 notes, but in fact 9 notes, introducing a subtle rhythmic offset. 
-If this, was, for example, programmed within visual MIDI editor or something, we would have natural tendency to arrange those notes in symmetry,putting 8 bars of B, and change the step with the first note of bar 2. 
-After this, second bar for the most part just smoothly descends us through the steps of the scale, starting from the submediant (VI) back to the tonic (E). 
-And they are all diatonic notes, up to supertonic II. The second chord of minor scale should be a diminished chord. However, we are playing this line in all power chords, so, an accidental C# is introduced here. This accidental spices up the sound of this progression a bit, and can be also viewed as a note from corresponding melodic minor scale.&lt;br /&gt;
-This is how you can easily overthink 2 bars of power chords into a wall of text.&lt;/p&gt;
-
-&lt;p&gt;Note 1: On the sheet music illustration above, the chord symbols show implied chords by the function, not the actual chords played in piece
-Note 2: The original key of this song is in fact Eb minor, but I’m too lazy to re-tune my guitar, so I just transposed it (if you are interested, what kind of nightmare is transposing a piece of music in MuseScore, you can read it here).&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 11 Sep 2020 22:41:53 +0300</pubDate>
-        <link>/2020/The_Years_s_Gift/</link>
-        <guid isPermaLink="true">/2020/The_Years_s_Gift/</guid>
         
         
       </item>

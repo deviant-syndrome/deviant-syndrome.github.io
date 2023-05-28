@@ -48,7 +48,7 @@
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1661590535535066000">
+  <link rel="stylesheet" href="/css/main.css?1685261901345671000">
   <link rel="canonical" href="/page2/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -96,7 +96,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1661590535535066000">
+<link rel="stylesheet" href="/css/main.css?1685261901345671000">
 </head>
 
 
@@ -195,7 +195,7 @@ window.MathJax = {
     
       <li><a href="/categories/#dsp-math">dsp math (2)</a></li>
     
-      <li><a href="/categories/#vst-audio-software">vst audio software (13)</a></li>
+      <li><a href="/categories/#vst-audio-software">vst audio software (14)</a></li>
     
       <li><a href="/categories/#music">music (1)</a></li>
     
@@ -227,6 +227,29 @@ window.MathJax = {
 
   <ol class="post-list">
     
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/The_Years_s_Gift/" title="The Years's Gift">The Years's Gift</a></h2>
+        
+	<p class="excerpt"><h4 id="my-first-riff-analysis-ever">My first riff analysis ever</h4>
+
+<p><img src="/assets/images/figures/catamenia_bridge_1-1-1.svg" style="width: 100%; filter: invert(0.8);" /></p>
+
+<p>So, let’s take a look at this bunch of notes from a song, I’m trying to learn. For almost a year now. Yeah, that’s embarrassing as heck, I know. 
+It has a , that totally example of what could be called “power chord music theory”. The .. you can rather easily introduce accidentals and even short temporary modulations, just by playing the notes of a scale in form of all power chords. 
+Let’s take a closer look at how it happens.</p>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2020/The_Years_s_Gift/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2020-09-11 22:41" class="post-list__meta--date date">11 Sep 2020</time>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
     
       <li>
         <h2 class="post-list__post-title post-title"><a href="/2020/Acid_Snots/" title="Acid Snots. The Edge of the Obsession">Acid Snots. The Edge of the Obsession</a></h2>
@@ -334,6 +357,10 @@ window.MathJax = {
       
         	
      
+  
+
+  
+
   
 
   
@@ -1444,7 +1471,7 @@ next();
 	<p class="excerpt"><h4 id="supercolliders-extensions-for-physical-modeling">SuperCollider’s extensions for physical modeling</h4>
 
 <p>Last year I (almost accidently) discovered <a href="https://supercollider.github.io/">SuperCollider</a>. This is a kind of advanced mutlipurpose audio software platform, a computer music nerd like me could only dream about. Its server part is 
-a real-time audio-generationg powerhouse, which responds to OSC protocol commands, and could be programmed using <code class="highlighter-rouge">sclang</code> language.</p>
+a real-time audio-generationg powerhouse, which responds to OSC protocol commands, and could be programmed using <code class="language-plaintext highlighter-rouge">sclang</code> language.</p>
 
 <p>I’ve installed it and was totally hooked, the moment I executed its  helloworld code. Why? Well, it generated a gabber beat on the fly, for f0kks sake!</p>
 
@@ -2603,6 +2630,10 @@ constantly giving you headaches.</li>
 
   
 
+  
+
+  
+
 </div>
 
 <div class="cplay-bounds"> <!-- gray bounding box  -->
@@ -2791,97 +2822,6 @@ But this approach kinda fell flat for me. Guess why? Boooring GUI? Yes sure, and
         <hr class="post-list__divider">
       </li>
     
-      <li>
-        <h2 class="post-list__post-title post-title"><a href="/2020/SuperCollderAU_p1/" title="SuperCollderAU">SuperCollderAU</a></h2>
-        
-			 <p><section class="post"><h4 id="part-1-building">Part 1: Building</h4>
-
-<p>Hey! You! Wanna turn your SuperCollider program into a real AU virtual instrument to use in your DAW? Great, then come with me into the depths of C++ sloppiness and clumsiness.</p>
-
-<p>So, once upon.a time there was a project that allowed to run a SuperCollider SC synth server inside an AU plugin. It even ended up in the
- official SC repositories. But years  were  passing and dependencies around it slowly mutated, becoming more and more hostile. At some point in time, it stopped producing a valid AU, and later then even stopped building at all. The original author still expresses some interest to the project, last commit was about half year ago, but yet again I’m too anti-social to bother people with my crazy ideas, so I went there myself.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">--recursive</span> https://github.com/supercollider/SuperColliderAU
-</code></pre></div></div>
-
-<p>Down below are the steps that fixes problem with building it.</p>
-
-<ol>
-  <li>
-    <p>At the moment of writing this post, I am on macOS Catalina 10.15.3 (19D76). I do not know how much it is actually important, but nevertheless.</p>
-  </li>
-  <li>
-    <p>It is better to build Supercollider from its standalone repo. Just get the fresh revision and follow the build instructions. Then copy it to /SuperColliderAU/supercollider/build. Revision (22e45f78fb8db8769aea34ce4ce09082917dd40d) worked for me.</p>
-  </li>
-  <li>
-    <p>Go to superCollider submodule and checkout to develop branch. Get some fresh revision, (30205c18a6cb5d74fff775d28469051899a2d0bb) worked for me.</p>
-  </li>
-  <li>
-    <p>On some hosts (Like the one bundled with JUCE as a code example, SuperColliderAU does not get fully initialised on scan, so the scan crushes, when tries to destroy its instance afterwards). If that is your case, edit the SCProcess.cpp file, comment out the mPort-&gt;stopAsioThread(); line.</p>
-  </li>
-  <li>
-    <p>By the way, what’s awesome about running a JUCE VST Host through Xcode, you can use debugger on the problematic plugin code, if you have sources and it was compiled with debug symbols.</p>
-  </li>
-  <li>Supercollider now uses bundled C++ boost, SupercolliderAU make files are not aware of that. As a workaround:
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deadvikki@darkhorse<span class="nv">$ </span>brew <span class="nb">install </span>boost
-</code></pre></div>    </div>
-    <p>6.1. And edited SuperCollierAU CMakeList.txt file, so it searches in my local include paths:</p>
-    <pre><code class="language-code">diff --git a/CMakeLists.txt b/CMakeLists.txt
-index dd3d4c7..b206ac6 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -76,11 +76,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
- 
-set(scau_bundle "SuperColliderAU")
-set(SNDFILE_INCLUDE_DIR ${SC_DIR}/external_libraries/libsndfile/)
--set(BOOST_INCLUDE_DIR ${SC_DIR}external_libraries/boost/)
-+set(BOOST_INCLUDE_DIR /usr/local/include/)
-set(TLSF_INCLUDE_DIR ${SC_DIR}/external_libraries/TLSF-2.4.6/src/)
- 
- include_directories(${SC_DIR}/external_libraries
--       ${SC_DIR}/${BOOST_INCLUDE_DIR}
-+       ${BOOST_INCLUDE_DIR}
-        ${SNDFILE_INCLUDE_DIR}
-        ${PTHREADS_INCLUDE_DIR}
-       ${TLSF_INCLUDE_DIR}
-(END)
-</code></pre>
-  </li>
-  <li>We do not want to use bundled Boost, so we say
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-DSYSTEM_BOOST</span><span class="o">=</span>ON ..
-make
-</code></pre></div>    </div>
-    <p>5.1. It will compile, but the link process will fail, but that’s not fatal</p>
-  </li>
-  <li>Re-run make in verbose mode,
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nv">VERBOSE</span><span class="o">=</span>1
-</code></pre></div>    </div>
-    <p>6.1. Manually execute the last command, just edit it a bit. 
- 6.2. Remove <code class="highlighter-rouge">-lboost_system</code> and add  <code class="highlighter-rouge">-L /usr/local/lib -framework AppKit</code></p>
-  </li>
-  <li><code class="highlighter-rouge">!</code> Run make again to it can finish copying resource files to build dir.</li>
-</ol>
-
-<p>By the way it screwed up my icu4c vesion , which node relied on. So, 
-brew info icu4c <br />
-brew switch icu4c 64.2</p>
-
-<p>Bottom line: 
-It builds.Currently it does not passes AUVAL checks, thankfully, garbage DAWs like my old trustworthy Tracktion7, do not bother validation. People been reporting that it also work in Reaper.</p>
-
-<p>Problem: it seems that we are not freeing UDP port properly, so within the same host it starts on different port every time. But it might be the nature of UDP ports</p>
-
-</section></p>
-		
-        <div class="post-list__meta">
-            <time datetime="2020-05-21 22:05" class="post-list__meta--date date">21 May 2020</time>
-            
-            &#8226; <span class="post-meta__tags">on <a href="/tags/#dsp">dsp</a> <a href="/tags/#juce">juce</a> <a href="/tags/#supercollider">supercollider</a> <a href="/tags/#membrainsc">membrainsc</a> </span>
-            
-        </div>
-        <hr class="post-list__divider">
-      </li>
-    
   </ol>
 
   <hr class="post-list__divider ">
@@ -2908,11 +2848,11 @@ It builds.Currently it does not passes AUVAL checks, thankfully, garbage DAWs li
       </div>
 
       <footer class="footer">
-  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">&copy; 2023 Deviant Syndrome. All rights reserved.</span>
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1661590535535066000"></script>
+<script type="text/javascript" src="/js/main.js?1685261901345671000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

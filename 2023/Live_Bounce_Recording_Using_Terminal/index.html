@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+
+  <title>Live Bounce Recording Using Terminal</title>
+  <meta name="description" content="Icebreaker
+My obsession with using found sounds in my recording, often gives me a sudden itch to bounce a few seconds of audio output from a random application on my computer. 
+Say, a web application or a video player.
+
+And then I really feel, how cumbersome and inflated it is to start a general purpose DAW for that, and crawl through an 
+awkward ritual of gently rubbing its multichannel mixer and transport controls for that. It is the same as 
+summoning a 12 feet tall four-horned purple demon to open a can of beans for you.
+
+There are of course lightweight open source wave editors, like Audacity.
+Sadly, previous versions of it had some problems with recording “virtual” audio outputs akin to BlackHole 16ch, 
+I’m currently using.
+
+Seems to be working correctly from version 3.2.5 onwards, though. Till this version was published I had plenty of free time to develop my own crappy solution
+for yet another purposely invented problem. But this is how you mine proper tech-blog material, isn’t it? So, let’s go!
+
+The Ingredients
+
+
+  SoX - swiss army knife for DSP via terminal, as it is nominated by its developers. And, oh boy, indeed it is.
+  ffplay - a part of FFmpeg audio suite, and it is a very simple portable media player using the FFmpeg libraries
+
+
+The Magic
+
+UNIX-like terminal command piping using the | operator. Pipe operator placed between two commands simply tells the shell,
+that first commands input becomes second command output. This thing combined with another UNIX paradigm called IO Redirect
+is what really unlocks that “shell magic” at the reach of your fingertips (unless half of them had forever ingrown into
+that horrible bio-prosthetic named after a small rodent species). So the commands for bouncing live output to a file are the following:
+
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav - | ffplay -
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav output.wav
+
+As you can see, I provided two very similar commands here. Indeed, I use the same source for both of them, which is my 
+virtual input device. 
+First command just redirects the output of my virtual device to ffplay. This solves the recording monitoring problem. 
+Next one actually does the recording of audio to disk. 
+Monitoring pipeline sometimes fails, while recording is stable, so I would recommend to run it in separate terminal 
+sessions.
+
+But wait, there is more!
+
+Albeit sox does not look all that “user-friendly”, it can be much smarter than trivial methods of live record bouncing. Especially, when it comes to trimming silence.
+Let’s consider the following command:
+
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav output.wav silence 1 0.1 1% 1 0.5 1%
+
+
+This command will record audio from my virtual device, and trim silence from the beginning and the end of the recording. Technically, this applies “silence” effect as a part the internal FX chain of sox.
+
+Let’s break down the parameters a bit:
+
+
+  
+    
+      Parameter
+      Description
+    
+  
+  
+    
+      1 0.1 1%
+      Detects silence segments that are at least 1 second long, with a silence threshold of 0.1 (10% of maximum volume).
+    
+    
+      1 0.5 1%
+      Removes silence segments that are at least 1 second long, with a silence threshold of 0.5 (50% of maximum volume).
+    
+  
+
+
+You can read more about sox silence effect here.
+
+When bouncing live audio, you would probably want some safeguard to prevent overwriting existing files. sox does not have a built-in solution for that, but you can easily write a small shell script to do that for you. Here is a small example:
+
+#!/bin/bash
+
+wildcard="$1"
+counter=1
+
+while true; do
+filename="${wildcard/\*/$counter}"
+if [ ! -e "$filename" ]; then
+echo "$filename"
+break
+fi
+((counter++))
+done
+
+Then you can use it like this:
+
+output_filename=$(./find_next_file.sh "output*.wav")
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav "$output_filename"
+
+
+">
+  <meta name="author" content="Deviant Syndrome">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Live Bounce Recording Using Terminal">
+  <meta name="twitter:description" content="Icebreaker
+My obsession with using found sounds in my recording, often gives me a sudden itch to bounce a few seconds of audio output from a random application on my computer. 
+Say, a web application or a video player.
+
+And then I really feel, how cumbersome and inflated it is to start a general purpose DAW for that, and crawl through an 
+awkward ritual of gently rubbing its multichannel mixer and transport controls for that. It is the same as 
+summoning a 12 feet tall four-horned purple demon to open a can of beans for you.
+
+There are of course lightweight open source wave editors, like Audacity.
+Sadly, previous versions of it had some problems with recording “virtual” audio outputs akin to BlackHole 16ch, 
+I’m currently using.
+
+Seems to be working correctly from version 3.2.5 onwards, though. Till this version was published I had plenty of free time to develop my own crappy solution
+for yet another purposely invented problem. But this is how you mine proper tech-blog material, isn’t it? So, let’s go!
+
+The Ingredients
+
+
+  SoX - swiss army knife for DSP via terminal, as it is nominated by its developers. And, oh boy, indeed it is.
+  ffplay - a part of FFmpeg audio suite, and it is a very simple portable media player using the FFmpeg libraries
+
+
+The Magic
+
+UNIX-like terminal command piping using the | operator. Pipe operator placed between two commands simply tells the shell,
+that first commands input becomes second command output. This thing combined with another UNIX paradigm called IO Redirect
+is what really unlocks that “shell magic” at the reach of your fingertips (unless half of them had forever ingrown into
+that horrible bio-prosthetic named after a small rodent species). So the commands for bouncing live output to a file are the following:
+
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav - | ffplay -
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav output.wav
+
+As you can see, I provided two very similar commands here. Indeed, I use the same source for both of them, which is my 
+virtual input device. 
+First command just redirects the output of my virtual device to ffplay. This solves the recording monitoring problem. 
+Next one actually does the recording of audio to disk. 
+Monitoring pipeline sometimes fails, while recording is stable, so I would recommend to run it in separate terminal 
+sessions.
+
+But wait, there is more!
+
+Albeit sox does not look all that “user-friendly”, it can be much smarter than trivial methods of live record bouncing. Especially, when it comes to trimming silence.
+Let’s consider the following command:
+
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav output.wav silence 1 0.1 1% 1 0.5 1%
+
+
+This command will record audio from my virtual device, and trim silence from the beginning and the end of the recording. Technically, this applies “silence” effect as a part the internal FX chain of sox.
+
+Let’s break down the parameters a bit:
+
+
+  
+    
+      Parameter
+      Description
+    
+  
+  
+    
+      1 0.1 1%
+      Detects silence segments that are at least 1 second long, with a silence threshold of 0.1 (10% of maximum volume).
+    
+    
+      1 0.5 1%
+      Removes silence segments that are at least 1 second long, with a silence threshold of 0.5 (50% of maximum volume).
+    
+  
+
+
+You can read more about sox silence effect here.
+
+When bouncing live audio, you would probably want some safeguard to prevent overwriting existing files. sox does not have a built-in solution for that, but you can easily write a small shell script to do that for you. Here is a small example:
+
+#!/bin/bash
+
+wildcard="$1"
+counter=1
+
+while true; do
+filename="${wildcard/\*/$counter}"
+if [ ! -e "$filename" ]; then
+echo "$filename"
+break
+fi
+((counter++))
+done
+
+Then you can use it like this:
+
+output_filename=$(./find_next_file.sh "output*.wav")
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav "$output_filename"
+
+
+">
+  
+  <meta name="twitter:image" content="/images/favicons/favicon-194x194.png" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Live Bounce Recording Using Terminal">
+  <meta property="og:description" content="Icebreaker
+My obsession with using found sounds in my recording, often gives me a sudden itch to bounce a few seconds of audio output from a random application on my computer. 
+Say, a web application or a video player.
+
+And then I really feel, how cumbersome and inflated it is to start a general purpose DAW for that, and crawl through an 
+awkward ritual of gently rubbing its multichannel mixer and transport controls for that. It is the same as 
+summoning a 12 feet tall four-horned purple demon to open a can of beans for you.
+
+There are of course lightweight open source wave editors, like Audacity.
+Sadly, previous versions of it had some problems with recording “virtual” audio outputs akin to BlackHole 16ch, 
+I’m currently using.
+
+Seems to be working correctly from version 3.2.5 onwards, though. Till this version was published I had plenty of free time to develop my own crappy solution
+for yet another purposely invented problem. But this is how you mine proper tech-blog material, isn’t it? So, let’s go!
+
+The Ingredients
+
+
+  SoX - swiss army knife for DSP via terminal, as it is nominated by its developers. And, oh boy, indeed it is.
+  ffplay - a part of FFmpeg audio suite, and it is a very simple portable media player using the FFmpeg libraries
+
+
+The Magic
+
+UNIX-like terminal command piping using the | operator. Pipe operator placed between two commands simply tells the shell,
+that first commands input becomes second command output. This thing combined with another UNIX paradigm called IO Redirect
+is what really unlocks that “shell magic” at the reach of your fingertips (unless half of them had forever ingrown into
+that horrible bio-prosthetic named after a small rodent species). So the commands for bouncing live output to a file are the following:
+
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav - | ffplay -
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav output.wav
+
+As you can see, I provided two very similar commands here. Indeed, I use the same source for both of them, which is my 
+virtual input device. 
+First command just redirects the output of my virtual device to ffplay. This solves the recording monitoring problem. 
+Next one actually does the recording of audio to disk. 
+Monitoring pipeline sometimes fails, while recording is stable, so I would recommend to run it in separate terminal 
+sessions.
+
+But wait, there is more!
+
+Albeit sox does not look all that “user-friendly”, it can be much smarter than trivial methods of live record bouncing. Especially, when it comes to trimming silence.
+Let’s consider the following command:
+
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav output.wav silence 1 0.1 1% 1 0.5 1%
+
+
+This command will record audio from my virtual device, and trim silence from the beginning and the end of the recording. Technically, this applies “silence” effect as a part the internal FX chain of sox.
+
+Let’s break down the parameters a bit:
+
+
+  
+    
+      Parameter
+      Description
+    
+  
+  
+    
+      1 0.1 1%
+      Detects silence segments that are at least 1 second long, with a silence threshold of 0.1 (10% of maximum volume).
+    
+    
+      1 0.5 1%
+      Removes silence segments that are at least 1 second long, with a silence threshold of 0.5 (50% of maximum volume).
+    
+  
+
+
+You can read more about sox silence effect here.
+
+When bouncing live audio, you would probably want some safeguard to prevent overwriting existing files. sox does not have a built-in solution for that, but you can easily write a small shell script to do that for you. Here is a small example:
+
+#!/bin/bash
+
+wildcard="$1"
+counter=1
+
+while true; do
+filename="${wildcard/\*/$counter}"
+if [ ! -e "$filename" ]; then
+echo "$filename"
+break
+fi
+((counter++))
+done
+
+Then you can use it like this:
+
+output_filename=$(./find_next_file.sh "output*.wav")
+sox -V6 -t coreaudio "BlackHole 16ch" -t wav "$output_filename"
+
+
+">
+  <meta property="og:image" content="/images/favicons/favicon-194x194.png" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-194x194.png" sizes="194x194">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/images/favicons/manifest.json">
+  <link rel="shortcut icon" href="/images/favicons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link rel="stylesheet" href="/css/main.css?1685261901345671000">
+  <link rel="canonical" href="/2023/Live_Bounce_Recording_Using_Terminal/">
+  <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
+<script>
+window.MathJax = {
+  tex: {
+      packages: ['base', 'ams', 'noerrors', 'noundefined'],
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: false
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};
+
+  window.MathJax = {
+  startup: {
+    ready: () => {
+      console.log('MathJax is loaded, but not yet initialized');
+      MathJax.startup.defaultReady();
+      console.log('MathJax is initialized, and the initial typeset is queued');
+    }
+  }
+};
+</script>
+<style>
+  @font-face {
+    font-family: 'alphaTab';
+     src: url('/js/alphaTab/Font/Bravura.eot');
+     src: url('/js/alphaTab/Font/Bravura.eot') format('embedded-opentype')
+          , url('/js/alphaTab/Font/Bravura.woff') format('woff')
+          , url('/js/alphaTab/Font/Bravura.etf') format('opentype')
+          , url('/js/alphaTab/Font/Bravura.svg') format('svg');
+     font-weight: normal;
+     font-style: normal;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/notation.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="/js/mathjax/tex-chtml.js" id="MathJax-script" async></script>
+
+<script src="/js/alphaTab/AlphaTab.js" async></script>
+<script src="/js/audiojs/audio.min.js"></script>
+<link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
+<link rel="stylesheet" href="/css/main.css?1685261901345671000">
+</head>
+
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+  <i class="icon icon-list btn-mobile-menu__icon"></i>
+  <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+</span>
+
+<header class="panel-cover" style="background-image: url(/images/cover.jpg)">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <a href="/" title="link to home of Deviant Syndrome">
+          <img src="/images/profile.jpg" class="user-image" alt="My Profile Photo">
+          <h1 class="panel-cover__title panel-title">Deviant Syndrome</h1>
+        </a>
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description">coding, multimedia, gamedev, engineering</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="link to Deviant Syndrome blog" class="blog-button">Blog</a></li>
+            </ul>
+          </nav>
+
+          <nav class="cover-navigation navigation--social">
+            <ul class="navigation">
+
+              <!-- Bandcamp -->
+              <li class="navigation__item">
+                <a href="http://hexensoldat.bandcamp.com" title="@Deviant Syndrome on Bandcamp"
+                   target="_blank">
+                  <i class="icon icon-social-bandcamp"></i>
+                  <span class="label">Bandcamp</span>
+                </a>
+              </li>
+
+              
+
+            
+
+            
+
+            
+              <!-- GitHub -->
+              <li class="navigation__item">
+                <a href="https://www.github.com/deviant-syndrome" title="deviant-syndrome on GitHub" target="_blank">
+                  <i class="icon icon-social-github"></i>
+                  <span class="label">GitHub</span>
+                </a>
+              </li>
+            
+
+            
+
+            <!-- RSS -->
+            <li class="navigation__item">
+              <a href="/feed.xml" title="Subscribe" target="_blank">
+                <i class="icon icon-rss"></i>
+                <span class="label">RSS</span>
+              </a>
+            </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <article class="post-container post-container--single">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2023-05-13 12:05" class="post-meta__date date">13 May 2023</time>
+      
+      &#8226; <span class="post-meta__tags">on <a href="/tags/#bash">bash</a> <a href="/tags/#dsp">dsp</a> </span>
+      
+    </div>
+    <h1 class="post-title">Live Bounce Recording Using Terminal</h1>
+  </header>
+
+  <section class="post">
+    <h4 id="icebreaker">Icebreaker</h4>
+<p>My obsession with using found sounds in my recording, often gives me a sudden itch to bounce a few seconds of audio output from a random application on my computer. 
+Say, a web application or a video player.</p>
+
+<p>And then I really feel, how cumbersome and inflated it is to start a general purpose DAW for that, and crawl through an 
+awkward ritual of gently rubbing its multichannel mixer and transport controls for that. It is the same as 
+summoning a 12 feet tall four-horned purple demon to open a can of beans for you.</p>
+
+<p>There are of course lightweight open source wave editors, like <a href="https://www.audacityteam.org/">Audacity</a>.<br />
+Sadly, previous versions of it had some problems with recording “virtual” audio outputs akin to <a href="https://existential.audio/blackhole/">BlackHole 16ch</a>, 
+I’m currently using.</p>
+
+<p>Seems to be working correctly from version 3.2.5 onwards, though. Till this version was published I had plenty of free time to develop my own crappy solution
+for yet another purposely invented problem. But this is how you mine proper tech-blog material, isn’t it? So, let’s go!</p>
+
+<h4 id="the-ingredients">The Ingredients</h4>
+
+<ul>
+  <li><a href="https://sox.sourceforge.net/">SoX</a> - swiss army knife for DSP via terminal, as it is nominated by its developers. And, oh boy, indeed it is.</li>
+  <li><a href="https://ffmpeg.org/ffplay.html">ffplay</a> - a part of FFmpeg audio suite, and it is a very simple portable media player using the FFmpeg libraries</li>
+</ul>
+
+<h4 id="the-magic">The Magic</h4>
+
+<p>UNIX-like terminal command piping using the <code class="language-plaintext highlighter-rouge">|</code> operator. Pipe operator placed between two commands simply tells the shell,
+that first commands input becomes second command output. This thing combined with another UNIX paradigm called <a href="https://en.wikipedia.org/wiki/Redirect_(computing)">IO Redirect</a>
+is what really unlocks that “shell magic” at the reach of your fingertips (unless half of them had forever ingrown into
+that horrible bio-prosthetic named after a small rodent species). So the commands for bouncing live output to a file are the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sox <span class="nt">-V6</span> <span class="nt">-t</span> coreaudio <span class="s2">"BlackHole 16ch"</span> <span class="nt">-t</span> wav - | ffplay -
+sox <span class="nt">-V6</span> <span class="nt">-t</span> coreaudio <span class="s2">"BlackHole 16ch"</span> <span class="nt">-t</span> wav output.wav
+</code></pre></div></div>
+<p>As you can see, I provided two very similar commands here. Indeed, I use the same source for both of them, which is my 
+virtual input device. 
+First command just redirects the output of my virtual device to <code class="language-plaintext highlighter-rouge">ffplay</code>. This solves the recording monitoring problem. 
+Next one actually does the recording of audio to disk. 
+Monitoring pipeline sometimes fails, while recording is stable, so I would recommend to run it in separate terminal 
+sessions.</p>
+
+<h4 id="but-wait-there-is-more">But wait, there is more!</h4>
+
+<p>Albeit <code class="language-plaintext highlighter-rouge">sox</code> does not look all that “user-friendly”, it can be much smarter than trivial methods of live record bouncing. Especially, when it comes to trimming silence.
+Let’s consider the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sox <span class="nt">-V6</span> <span class="nt">-t</span> coreaudio <span class="s2">"BlackHole 16ch"</span> <span class="nt">-t</span> wav output.wav silence 1 0.1 1% 1 0.5 1%
+</code></pre></div></div>
+
+<p>This command will record audio from my virtual device, and trim silence from the beginning and the end of the recording. Technically, this applies “silence” effect as a part the internal FX chain of <code class="language-plaintext highlighter-rouge">sox</code>.</p>
+
+<p>Let’s break down the parameters a bit:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1 0.1 1%</td>
+      <td>Detects silence segments that are at least 1 second long, with a silence threshold of 0.1 (10% of maximum volume).</td>
+    </tr>
+    <tr>
+      <td>1 0.5 1%</td>
+      <td>Removes silence segments that are at least 1 second long, with a silence threshold of 0.5 (50% of maximum volume).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You can read more about <code class="language-plaintext highlighter-rouge">sox</code> silence effect <a href="https://sox.sourceforge.io/sox.html#EFFECTS">here</a>.</p>
+
+<p>When bouncing live audio, you would probably want some safeguard to prevent overwriting existing files. <code class="language-plaintext highlighter-rouge">sox</code> does not have a built-in solution for that, but you can easily write a small shell script to do that for you. Here is a small example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">wildcard</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="nv">counter</span><span class="o">=</span>1
+
+<span class="k">while </span><span class="nb">true</span><span class="p">;</span> <span class="k">do
+</span><span class="nv">filename</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">wildcard</span><span class="p">/\*/</span><span class="nv">$counter</span><span class="k">}</span><span class="s2">"</span>
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-e</span> <span class="s2">"</span><span class="nv">$filename</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$filename</span><span class="s2">"</span>
+<span class="nb">break
+</span><span class="k">fi</span>
+<span class="o">((</span>counter++<span class="o">))</span>
+<span class="k">done</span>
+</code></pre></div></div>
+<p>Then you can use it like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">output_filename</span><span class="o">=</span><span class="si">$(</span>./find_next_file.sh <span class="s2">"output*.wav"</span><span class="si">)</span>
+sox <span class="nt">-V6</span> <span class="nt">-t</span> coreaudio <span class="s2">"BlackHole 16ch"</span> <span class="nt">-t</span> wav <span class="s2">"</span><span class="nv">$output_filename</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<!-- readmore -->
+
+<h4 id="additional-notes">Additional Notes</h4>
+
+<p><code class="language-plaintext highlighter-rouge">sox</code> will record all the available input channels of your device into a single file. In my case it is 16 channels. How often do you deal with 16-channel WAV files? I was personally quite surprised that standard WAVEs support more than 2 channels. Indeed, it was a relatively recent addition to the standard.
+The WAVE format began supporting more than two channels with the introduction of the WAVE Format Extensible (<code class="language-plaintext highlighter-rouge">WAVEFORMATEXTENSIBLE</code>) specification.</p>
+
+<p>This specification was introduced as part of the DirectX Media Objects (DMO) architecture, which was included with DirectX 8.0, released by Microsoft in 2000.
+It is worth noting, that this specification was most likely designed to support spatial audio, and not multi-track recording.</p>
+
+<p>However, the spatilisation mapping is not a part of the WAVE specification, and is defined by the application. There are several different spatialisation schemes, and they are not compatible with each other. So, the exact spatialisation you get will depend of the software.</p>
+
+<p>I was wondering, why this problem was not addressed by the BWF convention, which adds broadcasting-specific metadata to the WAVE format, such as timecodes and project information. Probably, because BWF was introduced in 1997, three years prior to the WAVEFORMATEXTENSIBLE specification.</p>
+
+<p>It is a bit of a shame, because it would be a perfect place to store the channel mapping information. However, there is a <a href="https://tech.ebu.ch/docs/tech/tech3285.pdf">proposal</a> and also, a <a href="https://tech.ebu.ch/docs/r/r111.pdf">recommendation</a> to extend the BWF specification to support multi-channel audio. It is not a part of the official BWF specification yet, but it is already supported by some software, like <a href="https://www.sounddevices.com/wave-agent">Sound Devices Wave Agent</a>.</p>
+
+<p>Max MSP is a very powerful tool for audio processing, and it can be used for live audio recording as well. However, it is not a lightweight solution for that by any means, despite it does not have the overhead of conventional linear multi-track audio edtitor. For bouncing live audio using Max there is a very convenient  <a href="https://docs.cycling74.com/max5/refpages/msp-ref/sfrecord~.html">~sfrecord</a> object.</p>
+
+<p>Seems like this <a href="https://madskjeldgaard.dk/posts/sox-tutorial-cli-tape-music/#:~:text=SoX%20includes%20a%20very%20handy,c%20in%20the%20terminal%20window.">tech-blog</a> does a much better job at breaking down the capabilities of <code class="language-plaintext highlighter-rouge">sox</code> than me.</p>
+
+  </section>
+  
+</article>
+
+
+
+      </div>
+
+      <footer class="footer">
+  <span class="footer__copyright">&copy; 2023 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
+</footer>
+
+<script type="text/javascript" src="/js/main.js?1685261901345671000"></script>
+<script type="text/javascript" src="/js/sheetrender.js"></script>
+<script src="/js/audioplaylist.js"></script>	
+
+
+    </div>
+  </body>
+</html>

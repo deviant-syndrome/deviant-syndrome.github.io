@@ -109,7 +109,7 @@ However, on our beloved slick 2+K$ tinfoil cans, we are going into…
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1661590535535066000">
+  <link rel="stylesheet" href="/css/main.css?1685261901345671000">
   <link rel="canonical" href="/2022/Docker_Audio_Hell_Pt__2/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -157,7 +157,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1661590535535066000">
+<link rel="stylesheet" href="/css/main.css?1685261901345671000">
 </head>
 
 
@@ -290,7 +290,7 @@ docker run <span class="nt">--rm</span> <span class="nt">--device</span> /dev/sn
 <details>
   <summary>MacOS PulseAudio Server Logs
 </summary>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I: [] module-coreaudio-device.c: Initializing module for CoreAudio device 'BlackHole 16ch' (id 52)
 I: [] module-card-restore.c: Restoring port latency offsets for card BlackHole_16ch.
 D: [] card.c: Looking for initial profile for card BlackHole_16ch
 D: [] card.c: on availability unknown
@@ -353,7 +353,7 @@ in Docker world, ports are forwared <em>from host to container</em>, not the oth
 <h4 id="6inks-6inks-6inks">6inks, 6inks, 6inks</h4>
 
 <p>Aaaaaand, it works. Well, sort of. I was able to pass my audio to the <em>other side</em>. It was accompanied by a constant wall of digital noise, though. 
-When I try to stream raw PCM audio using <code class="highlighter-rouge">faplay</code>, for example:</p>
+When I try to stream raw PCM audio using <code class="language-plaintext highlighter-rouge">faplay</code>, for example:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffplay  <span class="nt">-sample_rate</span> 44100 <span class="nt">-autoexit</span> <span class="nt">-f</span> s16be rtp://127.0.0.1:1234
 </code></pre></div></div>
@@ -362,7 +362,7 @@ When I try to stream raw PCM audio using <code class="highlighter-rouge">faplay<
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vlc <span class="nt">--demux</span><span class="o">=</span>rawaud <span class="nt">--rawaud-channels</span><span class="o">=</span>2 <span class="nt">--rawaud-samplerate</span><span class="o">=</span>44100 udp://@:1234
 </code></pre></div></div>
 
-<p>First, I thought it was raw audio byte format problem, judging by the logs the defaul format is <code class="highlighter-rouge">s16be</code> (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo <a href="https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/">here</a></p>
+<p>First, I thought it was raw audio byte format problem, judging by the logs the defaul format is <code class="language-plaintext highlighter-rouge">s16be</code> (16 bit big-endian). Just to get gist of the lunacy factor, you can take a tour of audio byte format zoo <a href="https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/SupportedAudioFormats/">here</a></p>
 
 <p>However, I made sure they are matching and it left me with nothing but two more flavoirs of digital audio pollution. Well, it’s time to reveal you the brutal truth. Pulseaudio RTP sinks are <em>multi-cast only</em>. So, when you specify a single IP address and port there, it dumps all the it’s sister RTP Control Stuff (stats, metadata and heartbeats) right above the raw audio, manifestating itself in a form a constant audiable noise.</p>
 
@@ -375,7 +375,7 @@ The latency is still there of course. Thankfully, I’m not obligated to perform
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pactl load-module module-null-sink <span class="nv">sink_name</span><span class="o">=</span>steam
 parec <span class="nt">-d</span> steam.monitor | oggenc <span class="nt">-b</span> 192 <span class="nt">-o</span> steam.ogg <span class="nt">--raw</span> - 
 </code></pre></div></div>
-<p><code class="highlighter-rouge">oggenc</code> is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.</p>
+<p><code class="language-plaintext highlighter-rouge">oggenc</code> is just for example here. Raw stream can be encoded into anything. The thing I have not tested yet, is would the standard output still be available, as recording without monitoring is not fun at all. Trust me, I used to do that.</p>
 
 
   </section>
@@ -387,11 +387,11 @@ parec <span class="nt">-d</span> steam.monitor | oggenc <span class="nt">-b</spa
       </div>
 
       <footer class="footer">
-  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">&copy; 2023 Deviant Syndrome. All rights reserved.</span>
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1661590535535066000"></script>
+<script type="text/javascript" src="/js/main.js?1685261901345671000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

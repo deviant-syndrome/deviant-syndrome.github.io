@@ -73,7 +73,7 @@ To get a bit of grip on that, let’s explore JUCE’s mixing and routing possib
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1661590535535066000">
+  <link rel="stylesheet" href="/css/main.css?1685261901345671000">
   <link rel="canonical" href="/2020/SuperColliderAU_p4_mix/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -121,7 +121,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1661590535535066000">
+<link rel="stylesheet" href="/css/main.css?1685261901345671000">
 </head>
 
 
@@ -229,11 +229,11 @@ To get a bit of grip on that, let’s explore JUCE’s mixing and routing possib
 
 <h4 id="juceaudiosource">juce::AudioSource</h4>
 
-<p><code class="highlighter-rouge">AudioSource</code> is the base class for objects that can produce a continious stream of audio. The main point of interest for us there will be a method called <code class="highlighter-rouge">getNextAudioBlock()</code>, which, basically fills the audio buffer. For our purposes we will use this class a wrapper around our previously built audio components. 
+<p><code class="language-plaintext highlighter-rouge">AudioSource</code> is the base class for objects that can produce a continious stream of audio. The main point of interest for us there will be a method called <code class="language-plaintext highlighter-rouge">getNextAudioBlock()</code>, which, basically fills the audio buffer. For our purposes we will use this class a wrapper around our previously built audio components. 
 Consider this, we are passing our sound-inducing code object to AudioSource wrappers contrsuctor, and then it takes .. of filling the buffer. 
 After the buffer is full, we are applying a gain level to it. Default is 0.5 (which is convenient for the common case of two audio sources mixed at equilibrium). We will also have a separate method to set the gain.</p>
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "RomplerGunAudioSource.h"
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"RomplerGunAudioSource.h"</span><span class="cp">
 </span>
 <span class="n">RomplerGunAudioSource</span><span class="o">::</span><span class="n">RomplerGunAudioSource</span><span class="p">(</span><span class="n">RomplerGun</span><span class="o">&amp;</span> <span class="n">rg</span><span class="p">)</span> <span class="o">:</span> <span class="n">romplerGun</span><span class="p">(</span><span class="n">rg</span><span class="p">)</span> <span class="p">{</span>
 
@@ -250,7 +250,7 @@ After the buffer is full, we are applying a gain level to it. Default is 0.5 (wh
 </code></pre></div></div>
 
 <p>This way, we will obtain the possibility to mix them down into one stereo output, using another JUCE class which is described below. 
-<em>NOTE</em>: for unknown reasons (possibly, poor C++ knowledge), it does not work when I call <code class="highlighter-rouge">prepareToPlay()</code> method of the plugin instance inside the AudioSource wrapper. Maybe, it misbehaves, because I actually invoke <code class="highlighter-rouge">prepareToPlay()</code> multiple times, so, I assume I should move the preparations from the PluginProcessor class initilization to those AudioSource descendants, rather than repeating the invocation there.</p>
+<em>NOTE</em>: for unknown reasons (possibly, poor C++ knowledge), it does not work when I call <code class="language-plaintext highlighter-rouge">prepareToPlay()</code> method of the plugin instance inside the AudioSource wrapper. Maybe, it misbehaves, because I actually invoke <code class="language-plaintext highlighter-rouge">prepareToPlay()</code> multiple times, so, I assume I should move the preparations from the PluginProcessor class initilization to those AudioSource descendants, rather than repeating the invocation there.</p>
 
 <h4 id="jucemixeraudiosource">juce::MixerAudioSource</h4>
 
@@ -261,12 +261,12 @@ MixerAudioSource, and add your   audiosources as its inputs.</p>
         <span class="n">kickMix</span><span class="p">.</span><span class="n">addInputSource</span><span class="p">(</span><span class="o">&amp;</span><span class="n">blipBlopKickAudioSource</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p><em>NOTE</em>: for some other unknown reason (possibly, substance abuse), I was able to get it working only by setting <code class="highlighter-rouge">releaseResources</code> flag to false, 
+<p><em>NOTE</em>: for some other unknown reason (possibly, substance abuse), I was able to get it working only by setting <code class="language-plaintext highlighter-rouge">releaseResources</code> flag to false, 
 otherwise it got the software crushing on exit. I guess, this now causes a memory leak, which would need to be fixed.</p>
 
 <h4 id="juce-output-bus-setup">JUCE Output Bus Setup</h4>
 
-<p>Thanks to <code class="highlighter-rouge">MixerAudioSource</code>, we are now able to make hybrid drum sounds, by mixing different sources toghether, like simple synthesized blip kick and a kick drum PCM sample. We will use similar approach for a snare drum, where we mix an audio output of of vibrating physical membraine with a PCM sample as well. So, the last bit to be handled, is routing them to separate VST output channels. Luckily enough, JUCE’s API for bus routing is not that complicated either.
+<p>Thanks to <code class="language-plaintext highlighter-rouge">MixerAudioSource</code>, we are now able to make hybrid drum sounds, by mixing different sources toghether, like simple synthesized blip kick and a kick drum PCM sample. We will use similar approach for a snare drum, where we mix an audio output of of vibrating physical membraine with a PCM sample as well. So, the last bit to be handled, is routing them to separate VST output channels. Luckily enough, JUCE’s API for bus routing is not that complicated either.
 You need to specify the number of channels in the class’s headers  macro.</p>
 
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MembrainScAudioProcessor</span><span class="o">::</span><span class="n">MembrainScAudioProcessor</span><span class="p">()</span>
@@ -328,11 +328,11 @@ some boilerplate code to pass the MIDI event around from the main loop.</p>
       </div>
 
       <footer class="footer">
-  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">&copy; 2023 Deviant Syndrome. All rights reserved.</span>
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1661590535535066000"></script>
+<script type="text/javascript" src="/js/main.js?1685261901345671000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

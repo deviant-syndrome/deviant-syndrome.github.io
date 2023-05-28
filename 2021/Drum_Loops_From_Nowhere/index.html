@@ -109,7 +109,7 @@ So here is a small demo I built around a manipulated drum loop which was generat
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1661590535535066000">
+  <link rel="stylesheet" href="/css/main.css?1685261901345671000">
   <link rel="canonical" href="/2021/Drum_Loops_From_Nowhere/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -157,7 +157,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1661590535535066000">
+<link rel="stylesheet" href="/css/main.css?1685261901345671000">
 </head>
 
 
@@ -382,7 +382,7 @@ Steps:</p>
 <p>Minor caveat though: if your algorithm uses a dependency outside standard GNU/SciPi set, which is almost always the case for any audio-related, you cannot provide it with the training job. 
 Techincally, you can install this dependency on your SageMaker Studio instance and run your code there. But guess what? Since training utilises almost all of the CPU, so, after 10 mins of no heartbeats, Amazon marks the instance as dead and shuts it down. Uskomaton!</p>
 
-<p>Theoretically, the manual tells you, that you could use the standard <code class="highlighter-rouge">scipy</code> utilities for reading your audio files, if they stricly comply to 44.2Khz 16bit PCM standard. I tried that, with the following:</p>
+<p>Theoretically, the manual tells you, that you could use the standard <code class="language-plaintext highlighter-rouge">scipy</code> utilities for reading your audio files, if they stricly comply to 44.2Khz 16bit PCM standard. I tried that, with the following:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>f <span class="k">in</span> <span class="si">$(</span>find ./ <span class="nt">-name</span> <span class="s1">'*.wav'</span><span class="si">)</span><span class="p">;</span> <span class="k">do 
 </span>ffmpeg <span class="nt">-i</span> <span class="nv">$f</span> <span class="nt">-acodec</span> pcm_s16le <span class="nt">-ar</span> 44100 <span class="k">${</span><span class="nv">f</span><span class="p">%.wav</span><span class="k">}</span>z.wav<span class="p">;</span> 
@@ -404,7 +404,7 @@ Techincally, you can install this dependency on your SageMaker Studio instance a
 
 <p>This is where you’ll begin to realize that those “Free Tier” conditions are quite limiting. First and foremost, no GPU instances are included in free tier limits. Technically, TensorFlow supports calculation on XLA devices, and you would need to change the following in the initialisation code of WaveGAN <a href="https://github.com/chrisdonahue/wavegan/blob/master/loader.py#L193">here</a>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            <span class="s">'/device::XLA_CPU:{}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">prefetch_gpu_num</span><span class="p">)))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            <span class="s">'/device::XLA_CPU:{}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">prefetch_gpu_num</span><span class="p">)))</span>
 </code></pre></div></div>
 
 <p>Sweet, but it is still notebably slower than one would expect, I got about 720 steps overnight, versus about 2000 on a GPU instance. Maybe I should have been using the CPU version of the AWS Tensorflow image for that?<br />
@@ -420,20 +420,20 @@ And adversities with the GPU instances do not end on their cost. They are disabl
 
 <p>It might be better to skip the AWS WebUI altogether and use boto3 library to run the code that deploys image and runs training locally.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">account</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">boto_session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s">"sts"</span><span class="p">)</span><span class="o">.</span><span class="n">get_caller_identity</span><span class="p">()[</span><span class="s">"Account"</span><span class="p">]</span>
-<span class="n">region</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">boto_session</span><span class="o">.</span><span class="n">region_name</span>
-<span class="n">image</span> <span class="o">=</span> <span class="s">"{}.dkr.ecr.{}.amazonaws.com/sagemaker-decision-trees:latest"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">account</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">account</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">boto_session</span><span class="p">.</span><span class="n">client</span><span class="p">(</span><span class="s">"sts"</span><span class="p">).</span><span class="n">get_caller_identity</span><span class="p">()[</span><span class="s">"Account"</span><span class="p">]</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">sess</span><span class="p">.</span><span class="n">boto_session</span><span class="p">.</span><span class="n">region_name</span>
+<span class="n">image</span> <span class="o">=</span> <span class="s">"{}.dkr.ecr.{}.amazonaws.com/sagemaker-decision-trees:latest"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">account</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
 
-<span class="n">tree</span> <span class="o">=</span> <span class="n">sage</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">Estimator</span><span class="p">(</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">sage</span><span class="p">.</span><span class="n">estimator</span><span class="p">.</span><span class="n">Estimator</span><span class="p">(</span>
     <span class="n">image</span><span class="p">,</span>
     <span class="n">role</span><span class="p">,</span>
     <span class="mi">1</span><span class="p">,</span>
     <span class="s">"ml.c4.2xlarge"</span><span class="p">,</span>
-    <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://{}/output"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">default_bucket</span><span class="p">()),</span>
+    <span class="n">output_path</span><span class="o">=</span><span class="s">"s3://{}/output"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">sess</span><span class="p">.</span><span class="n">default_bucket</span><span class="p">()),</span>
     <span class="n">sagemaker_session</span><span class="o">=</span><span class="n">sess</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_location</span><span class="p">)</span>
+<span class="n">tree</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_location</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>I am still not sure if I can provide clear instructions on setting up the AWS permissions for the whole setup. So, I’ll just leave a citation from AWS documentation here:</p>
@@ -461,11 +461,11 @@ For that matter I would maybe need to extract the slicing logic into separate �
       </div>
 
       <footer class="footer">
-  <span class="footer__copyright">&copy; 2022 Deviant Syndrome. All rights reserved.</span>
+  <span class="footer__copyright">&copy; 2023 Deviant Syndrome. All rights reserved.</span>
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1661590535535066000"></script>
+<script type="text/javascript" src="/js/main.js?1685261901345671000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 
