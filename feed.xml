@@ -5,9 +5,103 @@
     <description>coding, multimedia, gamedev, engineering</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 28 May 2023 11:18:21 +0300</pubDate>
-    <lastBuildDate>Sun, 28 May 2023 11:18:21 +0300</lastBuildDate>
+    <pubDate>Sat, 17 Jun 2023 11:23:52 +0300</pubDate>
+    <lastBuildDate>Sat, 17 Jun 2023 11:23:52 +0300</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>History of Digital Recording</title>
+        <description>&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/a/a9/Dat_cartridge.jpg&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;at-least-my-take-on-it&quot;&gt;At Least, My Take On It&lt;/h4&gt;
+
+&lt;p&gt;So, during another lunch break at my not-creative-at-all day job, we were discussing the possibility of existence of purely digital recordings in the 80’s. 
+I always hijack the conversation to talk about music, and this time was no exception, which, of course, tells you a lot about my social skills and level of adaptation.&lt;/p&gt;
+
+&lt;p&gt;I was quite sure that it was possible, but I was not sure about the exact dates and the technology used.
+Over the course of discussion, one of my colleagues even challenged me to tighten up the definition of “digital recording” itself.
+This was the turning point, because I realized, that we are talking about the existence of systems or solutions that included both tools digital synthesis and sequencing, as well as digital recording the result.
+All that extravaganza when the DSP was still at its infancy.
+As we all know, 80’s were flourishing with digital synthesizers, but the digital recording was not that widespread, so
+you would still track your beloved Yamaha DX7 or Roland D-50 to a tape recorder, or a reel-to-reel machine. 
+During the conversation, we agreed, that this does not count as a digital recording, because the recording medium is analog.&lt;/p&gt;
+
+&lt;p&gt;So, I made some vague hypothesis on what kind of setup that might be and what was the year when it hit the market. 
+I decided later, that I will do some quick fact-checking to update my friends with the correct answer. This however, turned into 
+a full-blown mystery investigation, which I am going to share with you.&lt;/p&gt;
+
+&lt;!-- readmore --&gt;
+
+&lt;h4 id=&quot;1-1970s&quot;&gt;1. 1970’s&lt;/h4&gt;
+&lt;p&gt;Commercially available devices using &lt;a href=&quot;https://en.wikipedia.org/wiki/Digital_recording&quot;&gt;PCM&lt;/a&gt; technology apparently existed since late 1960’s. Digital signal was print onto industrial-grade videotapes. During that time it was primarily
+used in broadcasting and mastering of analog records. A few digital recordings of orchestral (mainly jazz) pieces were
+made during 1970s.&lt;/p&gt;
+
+&lt;h4 id=&quot;2-1990s&quot;&gt;2. 1990’s&lt;/h4&gt;
+&lt;p&gt;It was, however, the &lt;a href=&quot;https://en.wikipedia.org/wiki/Digital_Audio_Tape&quot;&gt;compact-cassette digital format&lt;/a&gt;, first introduced in 1989 by Sony, that was the DAT how most of us
+remember it, if we had heard of it at all. Technology was quite widespread in mostly semi-professional and project
+studios during 1990s. Then it kinda died out, and the reasons for that, if condensed in one paragraph, would be two main things.
+First, were the medium issues, DAT tape was quite thin, and it was prone to stretching and breaking, and unlike analog tape
+which degrades gracefully, digital recording is either perfect or broken. Also, DAT playback was much more mechanically complex
+because of rotary helical scan head, which was also prone to mechanical failure.
+Second is, sadly, less technical and more political. This was something, remembered as “anti-DAT” lobbying, which was a campaign by RIAA, mainly in US.&lt;/p&gt;
+
+&lt;h4 id=&quot;3-wait-what-about-the-80s&quot;&gt;3. Wait, what about the 80’s?&lt;/h4&gt;
+
+&lt;p&gt;No matter how I tried, I could not present the development of digital recording as a chronologically linear process.
+In that era, there were at least three technologies of digitall recording, developed independently, each with it’s own
+philosophy and approach. I will try to present them in (approximate) order of their appearance.&lt;/p&gt;
+
+&lt;h4 id=&quot;30-csound-1985&quot;&gt;3.0 CSound (~1985)&lt;/h4&gt;
+&lt;p&gt;This entry falls more into an “honorably mentioned” category, because this thing is mostly used in academic circles, and
+hardly any commercial or even “independent” music was produced using it. During the development of CSound in the 1980s, it was primarily run on mainframe computers, such as the &lt;a href=&quot;https://en.wikipedia.org/wiki/PDP-10&quot;&gt;DEC PDP-10&lt;/a&gt; and CDC Cyber series. These mainframes were commonly found in academic and research institutions, where CSound was initially developed and used.
+I could hardly imagine any adequate digital storage media for the CSound output, available around that time.&lt;/p&gt;
+
+&lt;h4 id=&quot;31-ppg-wave-system-1987&quot;&gt;3.1 PPG Wave System (~1987)&lt;/h4&gt;
+
+&lt;p&gt;One the first fully-digital synthesis and recording solutions could be considered PPG Wave System, which dates as far, as approximately 1987.  A multi-component frankenstein put together from a line of earlier PPG hardware was re-using wavetable digital
+technology of earlier PPG Synths, WaveComputer, which was developed as a competitor to the monstrous Fairlight CMI,
+which had only sampling and sequencing capabilities. A battle between Godzilla and King-Kong, indeed. The system was enormously expensive, and did not get wide adoption. 
+It used own proprietary hardware for storage of digital data called &lt;a href=&quot;https://web.archive.org/web/20131208112832/http://theppgs.com/hdu.html&quot;&gt;Hard Disk Unit (HDU)&lt;/a&gt;.
+Only a few units were produced, and the exact specifications and release dates are hard to find.&lt;/p&gt;
+
+&lt;p&gt;Now, after all those fossilised giants, let’s finally proceed to recording and digital sound-design on desktop(-ish) computers.&lt;/p&gt;
+
+&lt;h4 id=&quot;32-digidesign-turbosynth-1988&quot;&gt;3.2. Digidesign Turbosynth (~1988)&lt;/h4&gt;
+
+&lt;p&gt;Digidesign, you’re gonna hear this name a lot, was a company, that was founded in 1984, and was one of the pioneers of digital audio. Now it is known as AVID with their flagship product being ProTools, which many of you probably heard of.
+This company was one of the first companies to develop a digital audio workstation (DAW) for Apple Macintosh computers.
+But, apparently, in parallel they developed a software called &lt;a href=&quot;http://www.muzines.co.uk/articles/digidesign-turbosynth/4028&quot;&gt;Turbosynth&lt;/a&gt;, which was a software synthesizer, that utilised the modular approach, and was capable of recording the output to a hard-disk of a computer. 
+Not in real-time, of course – to good to be true.
+We could surely declare this setup a winner, if we could move past the fact, that the hard-disk capacity of Macintosh II, which was the most powerful Macintosh computer at that time, was around 40MB (the largest storage peripheral you could get), which is a hard-shot for storing digital recording that has a fidelity tolerable for semi/professional audio productions.
+There was also an Atari ST version. Atari ST had a hard-disk add-on called &lt;a href=&quot;https://www.computinghistory.org.uk/det/48870/Atari-Megafile-60/&quot;&gt;Megafile 60&lt;/a&gt;, which had a capacity of 60MB. Slightly better, however it was launched in 1990, which is a bit late for our story.&lt;/p&gt;
+
+&lt;h4 id=&quot;33-digidesign-sound-tools-1989&quot;&gt;3.3. Digidesign Sound Tools (1989)&lt;/h4&gt;
+&lt;p&gt;In 1989 Digidesign launched a product called &lt;a href=&quot;https://www.soundonsound.com/reviews/digidesign-sound-tools&quot;&gt;Sound Tools&lt;/a&gt;, which could be considered a predecessor of what we traditionally call a DAW. 
+This was a hybrid system. The hardware part was a 2-channel 16-bit A/D converter, which was connected to a Macintosh computer via SCSI interface. The software was a set of tools for audio recording and editing, familiar to anyone who ever used a computer for audio production.
+Sound Tools was proudly marketed as “tapeless recording technology”, and was a direct competitor to the aforementioned DAT format.
+Usually, when talking about the “first digital recording” this is the only thing mentioned. 
+However, there is one more thing, that I would like to tell you about.&lt;/p&gt;
+
+&lt;h4 id=&quot;34-maxmspfts-1989&quot;&gt;3.4. Max/&lt;del&gt;MSP&lt;/del&gt;FTS! (1989)&lt;/h4&gt;
+&lt;p&gt;According to &lt;a href=&quot;https://en.wikipedia.org/wiki/Max_(software)&quot;&gt;wikipedia&lt;/a&gt;, In 1989, IRCAM developed Max/FTS (“Faster Than Sound”), a version of Max ported to the IRCAM Signal Processing Workstation (ISPW) for the NeXT. Also known as “Audio Max”, it would prove a forerunner to Max’s MSP audio extensions, adding the ability to do real-time synthesis using an internal hardware digital signal processor (DSP) board. 
+The &lt;a href=&quot;https://en.wikipedia.org/wiki/ISPW&quot;&gt;machine&lt;/a&gt; was based on my beloved Next Computer, I would love this thing to be actually declared a winner of this DSP-arms-race. Sadly, the cost DSP extension board alone was approximately $12,000 US, which made it prohibitively expensive outside of research institutes and universities.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 03 Jun 2023 11:17:57 +0300</pubDate>
+        <link>/2023/History_of_Digital_Recording/</link>
+        <guid isPermaLink="true">/2023/History_of_Digital_Recording/</guid>
+        
+        <category>dsp</category>
+        
+        
+        <category>dsp audio software</category>
+        
+        <category>music</category>
+        
+        <category>journalism?</category>
+        
+      </item>
     
       <item>
         <title>Live Bounce Recording Using Terminal</title>
@@ -970,44 +1064,6 @@ need to change the HTML help file generation for SC, which I’m too lazy and de
         <guid isPermaLink="true">/2021/sc-help-css/</guid>
         
         <category>supercollider</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Sample-Replacement Backwards</title>
-        <description>&lt;h4 id=&quot;mobys-approach&quot;&gt;Moby’s approach&lt;/h4&gt;
-
-&lt;p&gt;Sample reinforcement (or even complete replacement) has became the stample of modern drum production. Surprisingly enough, this practice is not bounded to stricly “electronic” or “sample-based” music. Even for “rock” records, some studios skip the drumkit recording entirely and just program all the drums instead. The more “extreme” drum parts get, the more likely the production will embrace some kind of sample reinforcment, with justification for that being the hightest requirements for timing and hitting consistnecy dictated by the genre.&lt;/p&gt;
-
-&lt;div class=&quot;video-thumb-container&quot;&gt;
-  &lt;img class=&quot;video-thumb&quot; id=&quot;moby1.jpg&quot; src=&quot;/assets/yt-thumbs/moby1.jpg&quot; data-ngsrc=&quot;https://www.youtube.com/watch?v=VJgqdvlSwZs&quot; data-nanogallery2-lightbox=&quot;{ &amp;quot;viewerToolbar&amp;quot;: { &amp;quot;display&amp;quot;: false } }&quot; /&gt;
-  
-    &lt;svg class=&quot;video-thumb-icon&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:cc=&quot;http://creativecommons.org/ns#&quot; xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; xmlns:svg=&quot;http://www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:sodipodi=&quot;http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd&quot; xmlns:inkscape=&quot;http://www.inkscape.org/namespaces/inkscape&quot; inkscape:version=&quot;1.0beta2 (2b71d25, 2019-12-03)&quot; sodipodi:docname=&quot;movie-videos.svg&quot; xml:space=&quot;preserve&quot; style=&quot;enable-background:new 0 0 122.88 95.8&quot; viewBox=&quot;0 0 122.88 95.8&quot; y=&quot;0px&quot; x=&quot;0px&quot; id=&quot;Layer_1&quot; version=&quot;1.1&quot;&gt;&lt;metadata id=&quot;metadata1022&quot;&gt;&lt;rdf:RDF&gt;&lt;cc:Work rdf:about=&quot;&quot;&gt;&lt;dc:format&gt;image/svg+xml&lt;/dc:format&gt;&lt;dc:type rdf:resource=&quot;http://purl.org/dc/dcmitype/StillImage&quot; /&gt;&lt;/cc:Work&gt;&lt;/rdf:RDF&gt;&lt;/metadata&gt;&lt;defs id=&quot;defs1020&quot; /&gt;&lt;sodipodi:namedview inkscape:current-layer=&quot;Layer_1&quot; inkscape:window-maximized=&quot;1&quot; inkscape:window-y=&quot;23&quot; inkscape:window-x=&quot;0&quot; inkscape:cy=&quot;52.761824&quot; inkscape:cx=&quot;59.782559&quot; inkscape:zoom=&quot;9.0501041&quot; showgrid=&quot;false&quot; id=&quot;namedview1018&quot; inkscape:window-height=&quot;1075&quot; inkscape:window-width=&quot;1792&quot; inkscape:pageshadow=&quot;2&quot; inkscape:pageopacity=&quot;0&quot; guidetolerance=&quot;10&quot; gridtolerance=&quot;10&quot; objecttolerance=&quot;10&quot; borderopacity=&quot;1&quot; inkscape:document-rotation=&quot;0&quot; bordercolor=&quot;#666666&quot; pagecolor=&quot;#ffffff&quot; /&gt;&lt;g id=&quot;g1015&quot;&gt;&lt;path class=&quot;bar&quot; id=&quot;path1013&quot; d=&quot;M12.14,0H32.8h29.43h28.8h19.71c3.34,0,6.38,1.37,8.58,3.56c2.2,2.2,3.56,5.24,3.56,8.58v7.13v57.25v7.09 c0,3.34-1.37,6.38-3.56,8.58c-2.2,2.2-5.24,3.56-8.58,3.56h-19.2c-0.16,0.03-0.33,0.04-0.51,0.04c-0.17,0-0.34-0.01-0.51-0.04 H62.74c-0.16,0.03-0.33,0.04-0.51,0.04c-0.17,0-0.34-0.01-0.51-0.04H33.31c-0.16,0.03-0.33,0.04-0.51,0.04 c-0.17,0-0.34-0.01-0.51-0.04H12.14c-3.34,0-6.38-1.37-8.58-3.56S0,86.95,0,83.61v-7.09V19.27v-7.13C0,8.8,1.37,5.76,3.56,3.56 C5.76,1.37,8.8,0,12.14,0L12.14,0z M55.19,31.24l20.53,14.32c0.32,0.2,0.61,0.48,0.84,0.81c0.92,1.33,0.58,3.14-0.74,4.06 L55.37,64.57c-0.5,0.41-1.15,0.66-1.85,0.66c-1.62,0-2.93-1.31-2.93-2.93V33.63h0.01c0-0.58,0.17-1.16,0.52-1.67 C52.05,30.64,53.87,30.32,55.19,31.24L55.19,31.24z M93.95,79.45V89.9h16.78c1.73,0,3.3-0.71,4.44-1.85 c1.14-1.14,1.85-2.71,1.85-4.44v-4.16H93.95L93.95,79.45z M88.1,89.9V79.45H65.16V89.9H88.1L88.1,89.9z M59.31,89.9V79.45H35.73 V89.9H59.31L59.31,89.9z M29.87,89.9V79.45H5.85v4.16c0,1.73,0.71,3.3,1.85,4.44c1.14,1.14,2.71,1.85,4.44,1.85H29.87L29.87,89.9z M5.85,73.6H32.8h29.43h28.8h26V22.2h-26h-28.8H32.8H5.85V73.6L5.85,73.6z M88.1,16.35V5.85H65.16v10.49H88.1L88.1,16.35z M93.95,5.85v10.49h23.07v-4.2c0-1.73-0.71-3.3-1.85-4.44c-1.14-1.14-2.71-1.85-4.44-1.85H93.95L93.95,5.85z M59.31,16.35V5.85 H35.73v10.49H59.31L59.31,16.35z M29.87,16.35V5.85H12.14c-1.73,0-3.3,0.71-4.44,1.85c-1.14,1.14-1.85,2.71-1.85,4.44v4.2H29.87 L29.87,16.35z&quot; /&gt;&lt;/g&gt;&lt;/svg&gt;
-
- 
-&lt;/div&gt;
-
-&lt;p&gt;And it did not happen overnight. The moment first digital drum machine, specifically, &lt;a href=&quot;https://en.wikipedia.org/wiki/Linn_LM-1&quot;&gt;Linn LM-1 Drum Computer&lt;/a&gt; hit the market in 1980 at stunning launch price of $4,995, there were already producers, who did not want all the fuss with miking up a real drum kit. So, they just asked the drummer of the band to program-in their parts into Linn. Later, as the 
-MIDI standard became more and more established among studio equipment manufactures, many of them contemplatingly offering a new kind of “no humans needed” approach to music recording.&lt;/p&gt;
-
-&lt;!-- readmore --&gt;
-&lt;p&gt;Working with drums samples certainly has a number of technical advantages with the mass-produced music context. This term alone could invoke the sense of repulsion among the readers, so I’d better stick with something more neutral, like mass-produced audio-media (MPAM), for example. So, having the drums programmed perfectly aligned, means that we have no need to do any pocketing”. Which means basically, manually moving aroud the bits of digitallized recorded performances, until they would ideally match the grid, introduced by the song’s tempo map. Pocketing itself is considered “ethically questionable” by many producers and music enthusiasts in general. However, having everything on the grid makes further editing and cueing much easier. Why would we need that much editing? Why not just comp a bunch of takes that are good enough? Well, for variaous reasons, which analysis is way beyond my expertise, putting that muchtime and effort into rehearsals and recording is just not commercially viable anymore. We talking about MPAM after all. Besides those “ethically questinable” practices serving as crutch for the next tone+deaf celebrity, there are just down to earch practical aspects of everyday audio editing. Need a shorter track version for advertising? We got you. Need a longer (strip) club version of the same track. We got you.&lt;/p&gt;
-
-&lt;p&gt;Wikipedia, also, &lt;a href=&quot;https://en.wikipedia.org/wiki/Drum_machine&quot;&gt;states&lt;/a&gt;, that drum machines developed out of a need to create drum beats when a drum kit was not available. Increasingly, drum machines and drum programming are used by major record labels to undercut the costly expense of studio drummers.&lt;/p&gt;
-
-&lt;p&gt;Drums samples over live drum recording or on their own, give music producers a lot of flexibility, You now can process each piece in literal isolation, reducing impact of mic bleed. You have a lot more options dealing with inconsistent hits from real drummer that way. Nobody is now forced to make decsions about drum sound once and for all, choice of drum-piece, microphones and preamps.
-Downside of that? Sampled drums sound kinda dull, especially if they are over processed, unless you’re a true genius at sampling and programming them, of course (yes, Mr. Patrick, Iäm looking at you).&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;But aaaanyway…&lt;/em&gt;
-The other day I was watching Moby’s vlog (I can’t believe I’m typing it, but that’s world we live in). So, there our modest electronic music producer was breaking down hit process for one of his track. And he showed something, that I’ve later labeled “sample replacement backwards”. Why backwards? Because he  programmed the electronic drums &lt;em&gt;first&lt;/em&gt;, and then overdubbed them with the real drums!
-That way the programmed drum loop gained depth, variety and micro-shuffles.
-So, instead of sucking out the life from the real drum recording, we can also try to add life to programmed drums.
-This could be complemented with how Steve Albini described his feelings towards the drum machines. In his words, drums machines could be treated as “found objects” or “kitsch objects” repurposed for making music. There are ways of you using them, that you just can never get out of the human drumming, but they are never meant to be a replacement a band’s rythm section in his process.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 02 Jan 2021 22:51:58 +0200</pubDate>
-        <link>/2021/Moby_Drums_and_Samples/</link>
-        <guid isPermaLink="true">/2021/Moby_Drums_and_Samples/</guid>
         
         
       </item>
