@@ -48,7 +48,7 @@
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1686990232354510000">
+  <link rel="stylesheet" href="/css/main.css?1688295469768083000">
   <link rel="canonical" href="/page4/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -96,7 +96,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1686990232354510000">
+<link rel="stylesheet" href="/css/main.css?1688295469768083000">
 </head>
 
 
@@ -201,9 +201,11 @@ window.MathJax = {
     
       <li><a href="/categories/#journalism?">journalism? (3)</a></li>
     
-      <li><a href="/categories/#dsp">dsp (2)</a></li>
+      <li><a href="/categories/#dsp">dsp (3)</a></li>
     
       <li><a href="/categories/#dsp-audio-software">dsp audio software (1)</a></li>
+    
+      <li><a href="/categories/#software">software (1)</a></li>
     
   
 
@@ -229,6 +231,190 @@ window.MathJax = {
 
   <ol class="post-list">
     
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2019/Basics_of_FFT_part_1/" title="Basics of FFT part 1">Basics of FFT part 1</a></h2>
+        
+			 <p><section class="post"><h4 id="math">Math</h4>
+
+<p>As we already know, we can write the Fourier transform in a discrete form like this:</p>
+
+<div class="kdmath">$$
+X_{k} = \sum_{n = 0}^{N} x_n e^{ \frac{-2\pi k n}{N} }
+$$</div>
+
+<p>Note, that when working with DFT we use different notation convention. If in a continuous domain we wrote the Fourier transform as \(\hat{f}\), here we notate the sampled (tabbed) function as \(x\) as it’s frequency domain representation as \(X_k\) where \(k\) is the frequency argument.</p>
+
+<p>So, let’s split that heap of sampled function values into two equally sized parts. One part will contain even indexed samples and the other part odd indexed samples, respectively. Then we can rewrite the DFT in the following form:</p>
+
+<div class="kdmath">$$
+X_{k} = \sum_{m = 0}^{N/2} x_{2m} e^{ \frac{-2\pi ik}{N}2m } + \sum_{m = 0}^{N/2} x_{2m+1} e^{\frac{-2\pi ik}{N}(2m + 1)}
+$$</div>
+
+<p>Now, we want both of this parts to represent a separate self-sufficient DFT transform themselves. To achieve this, we are moving multiplication by 2 from the numerator to denominator, so there it effectively becomes \(N/2\). This way, sigma expression summing from 0 to \(N/2\) becomes a DFT. In the odd part we just moving static stuff outside the sigma operator:</p>
+
+<div class="kdmath">$$
+X_{k} = \sum_{m = 0}^{N/2} x_{2m} e^{\frac{-2\pi i k m}{N/2} } + e^{ \frac{2\pi ik}{N}} \sum_{m = 0}^{N/2} x_{2m + 1} e^{ \frac{-2\pi ikm}{N/2}}
+$$</div>
+
+<p>For further convenience we will define left (even) DFT and right (odd) DFT as \(E_k\) and \(O_k\). In this case we can interpret the
+ statement above as:</p>
+
+<div class="kdmath">$$
+X_{k} = E_k + e^{ \frac{ =2\pi ik}{N}}O_k
+$$</div>
+
+<p>Now, here is the moment where magic happens: complex exponential functions are periodic, and we can take advantage of that, by reusing already calculated \(E_k\) and \(O_k\) to also calculate \(X_{k + N/2}\). Let’s see, how:</p>
+
+<div class="kdmath">$$
+e^{i(\theta + 2\pi ik)} = e^{i\theta}
+$$</div>
+
+<div class="kdmath">$$
+X_{k + N/2} = \sum_{m = 0}^{N/2} x_{2m} e^{\frac{-2\pi i}{N/2}m(k + N/2)} + e^{\frac{-2\pi i}{N/2}(k + N/2)}\sum_{m = 0}^{N/2} x_{2m + 1} e^{\frac{2\pi i}{N/2}m(k + N/2)}
+$$</div>
+
+<p>When simplifying this expression, we express exponential degree of sum as a multiplication of two exponential degrees. So, in the first and second sum it just eliminates, because \(e^{-2\pi i m} = 1\) for any \(m\), and the one coefficient on the right will just change it’s sign, because \(e^{-\pi i} = -1\). In detail this would be like:</p>
+
+<div class="kdmath">$$
+X_{k + N/2} = \sum_{m = 0}^{N/2} x_{2m} e^{\frac{-2\pi i mk}{N/2}} e^{-2\pi i m} + e^{\frac{-2\pi i k}{N/2}} e^{\pi i} \sum_{m = 0}^{m = N/2} e^{\frac{-2\pi i m}{N/2}} e^{-2\pi i m}
+$$</div>
+
+<p>Which simplifies to:</p>
+
+<div class="kdmath">$$
+X_{k + N/2} = E_{k} - e^{\frac{-2\pi ik}{N}} O_k
+$$</div>
+
+<p>So, many classical FFT algorithms perform those calculations recursively, reusing the previously computed \(E_k\) and \(O_k\) (which is illustrated by “butterfly” data flow diagram of those algorithms). The complexity of this algorithm family is about O(N log N)</p>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2019-12-30 08:23" class="post-list__meta--date date">30 Dec 2019</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#fft">fft</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2019/Technical_Demo/" title="Technical Demo">Technical Demo</a></h2>
+        
+			 <p><section class="post"><p>So, I spent a quite a while pimping up my blog engine. And here is the list of awesome features it can do. And event more to come soon. You probably already noticed the cool dark CSS styling of an open-source Jekyll theme, but there is much more to go.</p>
+
+<p>Alright, let’s move.</p>
+
+<h4 id="mathjax-support">MathJax support</h4>
+
+<p>See the awesome math needed for researching DSP whitepapers and stuff.</p>
+<details>
+  <summary>Solving quadratic equations
+</summary>
+  <p>When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are</p>
+
+  <div class="kdmath">$$
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}.
+$$</div>
+
+  <p><span class="kdmath">$\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}$</span></p>
+</details>
+
+<h4 id="alphatab-sheet-music-support">AlphaTab sheet music support</h4>
+
+<p>I’m struggling to teach myself music theory the most thoughtful way – through understanding written scores and sheet music. There is something about written notations, that makes me feel sorta sophisticated, and as I total narcissist I like that feeling.</p>
+
+<details>
+  <summary>Rendering sheet music
+</summary>
+  <div id="alphaTab" data-tex="true" class="notation">
+\title "Canon Rock"
+\subtitle "JerryC"
+\tempo 90
+.
+:2 19.2{v f} 17.2{v f} |
+15.2{v f} 14.2{v f}|
+12.2{v f} 10.2{v f}|
+12.2{v f} 14.2{v f}.4 :8 15.2 17.2 |
+14.1.2 :8 17.2 15.1 14.1{h} 17.2 |
+15.2{v d}.4 :16 17.2{h} 15.2 :8 14.2 14.1 17.1{b(0 4 4 0)}.4 |
+15.1.8 :16 14.1{tu 3} 15.1{tu 3} 14.1{tu 3} :8 17.2 15.1 14.1 :16 12.1{tu 3} 14.1{tu 3} 12.1{tu 3} :8 15.2 14.2 |
+12.2 14.3 12.3 15.2 :32 14.2{h} 15.2{h} 14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}14.2{h} 15.2{h}
+</div>
+</details>
+
+<h4 id="audiojs-embeded-mp3-player">AudioJS Embeded MP3 player</h4>
+
+<p>Feels super cool to be able to embed my audio demos and sketches with a music player via <a href="http://kolber.github.io/audiojs/">audioJS</a>. Then they are all nicely sorted Now also with playlist support!</p>
+
+<details>
+  <summary>Embeded MP3 player
+</summary>
+  <div class="audio-container">
+    <audio src="/mp3/2020/rmod_demo1.mp3" preload="auto"></audio>
+    <ol>
+	<li class="playing">
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo1.mp3">
+	      Guitar through R-Mod module, simple sine used as carrier
+	   </a>
+	</li>
+	<li>
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo2.mp3">
+	      Mora Facility (ambient demo with R-Mod)
+	   </a>
+	</li>
+</ol>
+  </div>
+</details>
+
+<h4 id="thebelab-emneded-jupyter-notebooks">ThebeLab emneded Jupyter notebooks</h4>
+
+<p>Python + scipy + numpy inside a Jupyter notebook. There is nothing better to sketch/flesh-out mathematical ideas than that. With [ThebeLab] and a dedicated Jupyter server available, you can make your Python sketches runnable on your site.</p>
+
+<details class="thebefold" id="thebefold1">
+  <summary>Interactive Jupyter Notebooks
+</summary>
+  <pre data-language="python" class="cm-s-dracula">
+%matplotlib inline
+import numpy as np
+from jupyterthemes import jtplot
+import matplotlib.pyplot as plt
+jtplot.style()
+x = np.linspace(0,10)
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+</pre>
+</details>
+
+<h5 id="coming-soon">Coming soon!</h5>
+<ul>
+  <li>Python notebooks via <a href="https://nbsphinx.readthedocs.io/en/0.5.0/index.html#">nbsphinx</a></li>
+  <li>Embed my demos with a music player via <a href="http://kolber.github.io/audiojs/">audioJS</a></li>
+</ul>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2019-12-08 19:39" class="post-list__meta--date date">8 Dec 2019</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#js">js</a> <a href="/tags/#markdown">markdown</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
     
       <li>
         <h2 class="post-list__post-title post-title"><a href="/2019/The_Stars_of_the_Servant/" title="The Stars of the Servant">The Stars of the Servant</a></h2>
@@ -473,7 +659,7 @@ By the way, simple CSS injections via <code class="language-plaintext highlighte
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1686990232354510000"></script>
+<script type="text/javascript" src="/js/main.js?1688295469768083000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 
