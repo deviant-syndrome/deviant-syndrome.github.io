@@ -25,7 +25,7 @@ So, I had to add the key to the agent. I did it like this:
 
 eval "$(ssh-agent -s)"
 ssh-add -K ~/.ssh/personal_github_rsa
-ssh-add -I
+ssh-add -l
 
 The -K option was specific to macOS and adds the specified identity file to the Keychain, which is the secure password management system on macOS.
 
@@ -67,7 +67,7 @@ So, I had to add the key to the agent. I did it like this:
 
 eval "$(ssh-agent -s)"
 ssh-add -K ~/.ssh/personal_github_rsa
-ssh-add -I
+ssh-add -l
 
 The -K option was specific to macOS and adds the specified identity file to the Keychain, which is the secure password management system on macOS.
 
@@ -105,7 +105,7 @@ So, I had to add the key to the agent. I did it like this:
 
 eval "$(ssh-agent -s)"
 ssh-add -K ~/.ssh/personal_github_rsa
-ssh-add -I
+ssh-add -l
 
 The -K option was specific to macOS and adds the specified identity file to the Keychain, which is the secure password management system on macOS.
 
@@ -142,7 +142,7 @@ ssh-add --apple-use-keychain ~/.ssh/personal_github_rsa
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1688295469768083000">
+  <link rel="stylesheet" href="/css/main.css?1689960479010224000">
   <link rel="canonical" href="/2023/SSH_Agent_under_MacOS_Ventura/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -190,7 +190,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1688295469768083000">
+<link rel="stylesheet" href="/css/main.css?1689960479010224000">
 </head>
 
 
@@ -305,7 +305,7 @@ So, I had to add the key to the agent. I did it like this:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>ssh-agent <span class="nt">-s</span><span class="si">)</span><span class="s2">"</span>
 ssh-add <span class="nt">-K</span> ~/.ssh/personal_github_rsa
-ssh-add <span class="nt">-I</span>
+ssh-add <span class="nt">-l</span>
 </code></pre></div></div>
 <p>The <code class="language-plaintext highlighter-rouge">-K</code> option was specific to macOS and adds the specified identity file to the Keychain, which is the secure password management system on macOS.</p>
 
@@ -333,7 +333,7 @@ the ssh-add(1) manual page.
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1688295469768083000"></script>
+<script type="text/javascript" src="/js/main.js?1689960479010224000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

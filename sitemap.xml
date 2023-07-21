@@ -3,6 +3,36 @@
   
     
     <url>
+      <loc>/2023/Three_Random_Facts/</loc>
+      
+        <lastmod>2023-07-08T18:55:01+03:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>/2023/Importing_WaveEdit_Wavetables_to_Pigments/</loc>
+      
+        <lastmod>2023-06-23T20:37:35+03:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>/2023/SSH_Agent_under_MacOS_Ventura/</loc>
       
         <lastmod>2023-06-17T12:15:38+03:00</lastmod>
@@ -533,7 +563,7 @@
     <url>
       <loc>/feed.xml</loc>
       
-        <lastmod>2023-07-02T13:57:49+03:00</lastmod>
+        <lastmod>2023-07-21T20:27:59+03:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -548,7 +578,7 @@
     <url>
       <loc>/humans.txt</loc>
       
-        <lastmod>2023-07-02T13:57:49+03:00</lastmod>
+        <lastmod>2023-07-21T20:27:59+03:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -567,7 +597,7 @@
     <url>
       <loc>/css/main.css</loc>
       
-        <lastmod>2023-07-02T13:57:49+03:00</lastmod>
+        <lastmod>2023-07-21T20:27:59+03:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -592,7 +622,7 @@
     <url>
       <loc>/css/main.css.map</loc>
       
-        <lastmod>2023-07-02T13:57:49+03:00</lastmod>
+        <lastmod>2023-07-21T20:27:59+03:00</lastmod>
       
       
         <changefreq>monthly</changefreq>

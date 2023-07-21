@@ -48,7 +48,7 @@
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1688295469768083000">
+  <link rel="stylesheet" href="/css/main.css?1689960479010224000">
   <link rel="canonical" href="/page4/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -96,7 +96,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1688295469768083000">
+<link rel="stylesheet" href="/css/main.css?1689960479010224000">
 </head>
 
 
@@ -189,7 +189,7 @@ window.MathJax = {
 
   
     
-      <li><a href="/categories/#code-bits">code bits (4)</a></li>
+      <li><a href="/categories/#code-bits">code bits (5)</a></li>
     
       <li><a href="/categories/#demo">demo (1)</a></li>
     
@@ -201,7 +201,7 @@ window.MathJax = {
     
       <li><a href="/categories/#journalism?">journalism? (3)</a></li>
     
-      <li><a href="/categories/#dsp">dsp (3)</a></li>
+      <li><a href="/categories/#dsp">dsp (4)</a></li>
     
       <li><a href="/categories/#dsp-audio-software">dsp audio software (1)</a></li>
     
@@ -231,6 +231,92 @@ window.MathJax = {
 
   <ol class="post-list">
     
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/VCV_RMod_Notes/" title="Kkampf RMod Tech notes">Kkampf RMod Tech notes</a></h2>
+        
+			 <p><section class="post"><p>As a part of me trying to get into DSP (and attract ladies), I made a simple VCV Rack module that does ring modulation. The implementation of this effect in digital domain is devilishly simple. You just multiply two signals sample by sample to get the output.
+I still wanted my module to comply VCV Rack’s audio audio signal “virtual voltage” standards, so I decided to apply some simple soft clipping to the multiplication product, because multiplication operation can easily give us results in higher orders of magnitude, than the arguments. 
+In theory, a hyperbolic tangent function should applied, because it has those nice smooth leads to the asymptotic (-1, 1). The problem here that it is kinda complex function to evaluate. 
+So, we’d better use some approximation. Let’s see, what is available.</p>
+
+<h4 id="polynomial-interpolation">Polynomial interpolation</h4>
+
+<div class="kdmath">$$
+tanh(x) \approx a_{0}x + a_{1}x^2 + a_{2}x^3 + \cdots + a_{n}x^n
+$$</div>
+
+<p><img src="/assets/images/plots/tan_appx_int.png" alt="Hyperbolic tangent Polynomial Interpolation" class="img-responsive" /></p>
+
+<p>So, we took some of the points of the original curse and interpolated over them. Coefficients are not very important here (or I was too lazy to retype them in \(L_{A}TE^{X}\). Does not look very well to me, it has up to 10th degree argument which implied a lot of multiplications. Also, as you can see from the graph, it goes wild after about, 5. 
+I also tried to experiment to reduce the high-degree arguments as non-significant, but that approach failed miserably. Ok, moving on.</p>
+
+<h4 id="continued-fraction-representations">Continued fraction representations</h4>
+
+<div class="kdmath">$$
+tanh(z) = \frac{z}{1 + \frac{z^2}{3 + \frac{z^2}{5 +\frac{z^2}{7 + \frac{z^2}{9 + \frac{z^2}{11 + \ldots}}}}}}
+$$</div>
+
+<p>And here we can have a recursive process of getting fractions to achieve a certain degree of approximation. Looks nice, but still quite some work to do, especially in  C++ which I’m terrible at. Interesting, can we have a super crude approximation, just giving up on subsequent recursive divisions.</p>
+
+<div class="kdmath">$$
+tanh(x) \approx \frac{x}{1 + \vert{x}\vert}
+$$</div>
+
+<p><img src="/assets/images/plots/tanh_appx_simplest.png" alt="Hyperbolic tangent Polynomial Interpolation" class="img-responsive" /></p>
+
+<p>This looks alright, in fact quite suitable for my need of simple output clipping. 
+In case you’re curios, this is how it sounds like:</p>
+
+<div class="audio-container">
+  <audio src="/mp3/2020/rmod_demo1.mp3" preload="auto"></audio>
+  <ol>
+	<li class="playing">
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo1.mp3">
+	      Guitar through R-Mod module, simple sine used as carrier
+	   </a>
+	</li>
+	<li>
+	   <a href="#" data-src="/assets/mp3/2020/rmod_demo2.mp3">
+	      Mora Facility (ambient demo with R-Mod)
+	   </a>
+	</li>
+</ol>
+</div>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-04-21 18:55" class="post-list__meta--date date">21 Apr 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#kkampf">kkampf</a> <a href="/tags/#vcv">vcv</a> <a href="/tags/#saturation">saturation</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2020/The_Time_of_the_Wolf/" title="The Time of the Wolf">The Time of the Wolf</a></h2>
+        
+			 <p><section class="post"><p>Two cool guitar licks I’m currently practicing:</p>
+
+<div id="coldbound2" data-file="/assets/sheetmusic/coldbound2.musicxml" data-tracks="0" class="notation">
+</div>
+
+<p><em>(the way I spelled the Coldbound lick would force me to finally start remembering ledger lines. Oh, damn)</em></p>
+
+<div id="hangar1" data-file="/assets/sheetmusic/hangar1.musicxml" data-tracks="0" class="notation">
+</div>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2020-01-09 19:26" class="post-list__meta--date date">9 Jan 2020</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#guitar">guitar</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
     
       <li>
         <h2 class="post-list__post-title post-title"><a href="/2019/Basics_of_FFT_part_1/" title="Basics of FFT part 1">Basics of FFT part 1</a></h2>
@@ -659,7 +745,7 @@ By the way, simple CSS injections via <code class="language-plaintext highlighte
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1688295469768083000"></script>
+<script type="text/javascript" src="/js/main.js?1689960479010224000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

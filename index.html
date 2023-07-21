@@ -48,7 +48,7 @@
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1688295469768083000">
+  <link rel="stylesheet" href="/css/main.css?1689960479010224000">
   <link rel="canonical" href="/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -96,7 +96,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1688295469768083000">
+<link rel="stylesheet" href="/css/main.css?1689960479010224000">
 </head>
 
 
@@ -189,7 +189,7 @@ window.MathJax = {
 
   
     
-      <li><a href="/categories/#code-bits">code bits (4)</a></li>
+      <li><a href="/categories/#code-bits">code bits (5)</a></li>
     
       <li><a href="/categories/#demo">demo (1)</a></li>
     
@@ -201,7 +201,7 @@ window.MathJax = {
     
       <li><a href="/categories/#journalism?">journalism? (3)</a></li>
     
-      <li><a href="/categories/#dsp">dsp (3)</a></li>
+      <li><a href="/categories/#dsp">dsp (4)</a></li>
     
       <li><a href="/categories/#dsp-audio-software">dsp audio software (1)</a></li>
     
@@ -233,6 +233,70 @@ window.MathJax = {
     
     
       <li>
+        <h2 class="post-list__post-title post-title"><a href="/2023/Three_Random_Facts/" title="Three Random Facts">Three Random Facts</a></h2>
+        
+			 <p><section class="post"><p>Unrelated to anything, but I just wanted to share three random encounters with some seriously weird stuff.</p>
+<ol>
+  <li>XCode, by default, if you’re running your code it will pause the execution every time it stumbles 
+upon a failing assertion. Annoying as hell. The fix for that is somewhat brutal.
+    <ul>
+      <li>Open the “Breakpoint Navigator” by clicking on the icon that looks like a right-angle or arrow in the left pane of the Xcode window.</li>
+      <li>In the bottom left of the “Breakpoint Navigator”, click on the ‘+’ sign, then select “Exception Breakpoint…”</li>
+      <li>A new window will open. Choose “All” for “Exception”</li>
+      <li>Check “Automatically continue after evaluating actions”! That’s it</li>
+    </ul>
+  </li>
+  <li>Ever trying to reset some MacOS application settings. Like, there configuration files are nowhere to be found.
+It’s all because of Objective-C NSUserDefaults. They are supposed to be stored in ~/Library/Preferences/ folder.
+However, only executing the following made the settings reset for good:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defaults delete com.codeplex.pcsxr
+</code></pre></div>    </div>
+    <p><code class="language-plaintext highlighter-rouge">com.codeplex.pcsxr</code> is just an example, but all the other application namespaces are similar.</p>
+  </li>
+  <li>In SLADE you have to add the scripts manually to the WAD archive, otherwise they won’t be executed. To make this work with UDMF, you have to add the scripts LUMP before the ENDMAP marker. Also, you need recomplile it manually if changed.</li>
+</ol>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2023-07-08 18:55" class="post-list__meta--date date">8 Jul 2023</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#xcode">xcode</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2023/Importing_WaveEdit_Wavetables_to_Pigments/" title="Importing WaveEdit Wavetables to Pigments">Importing WaveEdit Wavetables to Pigments</a></h2>
+        
+			 <p><section class="post"><p>Just a quick note on how to import wavetables from <a href="https://www.waveeditonline.com/">WaveEdit</a> to <a href="https://www.arturia.com/products/analog-classics/pigments">Pigments</a>
+Pigments is an brilliant exhibit of what is now called a <em>power synth</em>-buzzword, I first encountered it in “Future Music” magazine  Much like <a href="https://www.native-instruments.com/en/products/komplete/synths/massive/">Massive</a>, 
+it combines a pack of different synthesis techniques (engines), all streamlined into a single interface for you to mix and match. Both of aforementioned products
+also sport an easy “drag-and-drop” modulation system, which is a great way to get started with sound design.</p>
+
+<p>Pigments is a great synth, but it does not have a built-in wavetable editor. So, how about another 
+weird audio-software-combo? I’m not sure if it is a good idea, but it is definitely a fun one. 
+I think that WaveEdit was originally designed to be used with <a href="https://www.openacousticdevices.info/">AudioMoth</a>, or some
+other audio hardware, but it is also a great tool for wavetable editing with a very appealing UI. 
+More importantly, it has an integrated library of community-curated wavetables, which you can use as a starting point for your own designs,
+or to approximate some of the classic digital synth sounds, like the ones from <a href="https://waldorfmusic.com/en/microwave">Waldorf Microwave</a> or <a href="https://en.wikipedia.org/wiki/PPG_Wave">PPG Wave</a>.</p>
+
+<p>There is a tiny compatibility issue, though, probably related to wavetable resolution. If I save a wavetable in WaveEdit, and then try to import it to Pigments, the 
+frames do not line up. The wavetable is still usable, but it is not exactly what I wanted. I think that the problem is that WaveEdit uses 64 frames per wavetable, while Pigments uses 512.
+How do we make them align properly? Simple! Just make it 8x slower, e.g. apply the speed multiplier of 0.125 and you are good to go.</p>
+
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2023-06-23 20:37" class="post-list__meta--date date">23 Jun 2023</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#waveedit">waveedit</a> <a href="/tags/#software">software</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
         <h2 class="post-list__post-title post-title"><a href="/2023/SSH_Agent_under_MacOS_Ventura/" title="SSH Agent under MacOS Ventura">SSH Agent under MacOS Ventura</a></h2>
         
 			 <p><section class="post"><p>After upgrading to MacOS Venture I had a bit of a problem with the SSH agent. This problem, though, could still 
@@ -253,7 +317,7 @@ So, I had to add the key to the agent. I did it like this:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>ssh-agent <span class="nt">-s</span><span class="si">)</span><span class="s2">"</span>
 ssh-add <span class="nt">-K</span> ~/.ssh/personal_github_rsa
-ssh-add <span class="nt">-I</span>
+ssh-add <span class="nt">-l</span>
 </code></pre></div></div>
 <p>The <code class="language-plaintext highlighter-rouge">-K</code> option was specific to macOS and adds the specified identity file to the Keychain, which is the secure password management system on macOS.</p>
 
@@ -586,95 +650,6 @@ For a long time, JACK was the standard for (semi)professional audio work on Linu
         <hr class="post-list__divider">
       </li>
     
-      <li>
-        <h2 class="post-list__post-title post-title"><a href="/2021/GotoDrums/" title="GoToDrums. Free Drum Sample Lib">GoToDrums. Free Drum Sample Lib</a></h2>
-        
-			 <p><section class="post"><h4 id="motivation">Motivation</h4>
-
-<p>Challenging the paradigm of taking sampled drum sounds for granted and using them as, if it is one of the most conventional practices that constitute the framework for creating “electronic music”.</p>
-
-<h4 id="attempt-at-some-historical-excourse">Attempt at Some Historical Excourse</h4>
-
-<p>Since when  had it became like that?</p>
-
-<p>Sampling one-hit percussion, or, alternatively, recreating it with synthesis, was the primary direction in early electronic music, that made it into consumer sector, since the nature of battery instruments implies repetition, and those sounds are usually short, which made then good candidates to be utilized in first low-memory digital samplers. Since those instruments usually do not have a strongly defined pitch, so the pitch change is not used as a form of expression, when playing those. That eliminates the problem of handling changing pitch of an instrument, during synthesis or having to store a large number of pitches in sampler’s memory. Early rhythm-machines, were mostly built around borderline neglecting the timbral structure in favour of persistence of generated rhythmic pattern, e.g. a sequence of transients.</p>
-
-<h4 id="description">Description</h4>
-
-<p>Overall, the sound of this small library, can be described as something really lo-fi, but still moderately punchy and usable. To put those
- samples together, I’ve been digging through a whole lot of source material. This <a href="https://www.youtube.com/watch?v=DFhFDrlYTng&amp;t=1063s">tutorial</a> about recreating a snare drum sound with FM
-  synthesis, and this SOS <a href="https://www.soundonsound.com/techniques/practical-cymbal-synthesis">article</a> about cymbal synthesis, were the most important bits of information that kickstarted the whole thing. Rest of this kit’s pieces were done intuitively. Part of those are very basic, like subtractive synthesis, other came out from more adventurous approaches, including resonant filter banks, and layering of found sounds.</p>
-
-<p>Using this lib, I put together a simple gloomy rock tune, what would serve the demonstration purposes. But before we proceed, I feel like I need to put a disclaimer: this collection of sounds it not designed to be high-quality commercial grade product, but rather an exercise, showcasing the exciting possibilities that open up the moment you get off the beaten “pre-cooked drum samples” path.</p>
-
-<div class="audio-container" style="margin-bottom: 32px;">
-	<audio src="/mp3/2021/GoToDrums_demo.mp3" preload="auto"></audio>
-</div>
-
-<div class="downloadBox" onclick="window.location='/assets/soundfonts/gotodrums.zip'; return false;">
-  Download Zip<br />
-  <p style="font-size: small; margin-top: 2px; margin-bottom: 2px;">GoToDrums Soundfont</p>
-</div>
-
-<h4 id="takeaways">Takeaways</h4>
-
-<p>Sometimes, rhythmic patterns and note length are really more important than the timbres themselves. This sets us back to the origins of rhythm-machines. This aspect of how humans perceive rythms is what made the concept of “programmed drums” wholesome.</p>
-
-<p>So, while trying to nail down the timbres, I should have really been paying more attention to dynamics, for this whole sample patch to be more expressive. Well, there were reasons for that beyond my ignorance. Initially, using a free version of TX Software Sampler, I found a number of expression-related settings to be non-intuitive, while other to have UX and stability issues. No offence to the authors, it might be my DAW’s or my OS problem as well. 
-Probably, my (kill to) cure from that would be trying to do the same workout on Yamaha sampler, so I’d realise how much of privileged “mouse-smudger” I am, using point-and-click software.</p>
-
-<p>Cymbals naturally have their dynamic range very wide. And practically none of the widespread approximations (FM, samples, resonant filters) does cover the desired palette of hues on their own. So, ideally, when trying to approximate a cymbal sound, you would have to change the model/approach when reaching a certain velocity boundary. Like, one FM patch for the lower velocities, another one for the moderate ones, and when, probably some combination of pre-recorded sound and resonant. And since the change of timber could be dramatically obvious, you’ll probably need to apply to crossfading between them as well.</p>
-
-<p>The latter sounds like a whole lot of manual work on any sampler, so, if I ever go down that path, that would be, I’ll have to think about automating the process of laying down the usual 32/64/128 levels of velocity, each from a separate sampled sound.</p>
-</section></p>
-		
-        <div class="post-list__meta">
-            <time datetime="2021-07-26 17:44" class="post-list__meta--date date">26 Jul 2021</time>
-            
-            &#8226; <span class="post-meta__tags">on <a href="/tags/#drums">drums</a> </span>
-            
-        </div>
-        <hr class="post-list__divider">
-      </li>
-    
-      <li>
-        <h2 class="post-list__post-title post-title"><a href="/2021/Drum_Loops_From_Nowhere/" title="Drum Loops From Nowhere">Drum Loops From Nowhere</a></h2>
-        
-	<p class="excerpt"><h4 id="why-should-i-do-what-everyone-does">Why Should I Do What Everyone Does</h4>
-
-<p>What I currently miss the most with my minimalist no-budget music production setup, definitely would be some organic, pounding and swinging battery. I do not really have much interest in using loops or pre-processed sample libs (tHat CUTt trhU Ze MiX!), because as Chris Randall once said, you have no time to screw around with somebody else’s music if you’re really want to make your own. Truly, with the standards I impose on my self, simply downloading a copy of MT PowerDrums, would be a statement of artistic and engineer impotence.
-So far, I got some applicable results in “personalised” percussive sounds, by exploring the following approaches:</p>
-<ul>
-  <li>Basic subtractive and FM synthesis. Unless, you are a sound-design and electrical-engineering expert, that is your usual “blip-blop” type of electro-drum sounds.</li>
-  <li>Found objects. This is always fun. Just put your smartphone on record every time you take out the trash,</li>
-  <li>Physical modeling. Good for membrane percussion, quickly gets complicated for cymbals, because of their complex “clustered” nature of sound.</li>
-</ul>
-
-<p>So here is a small demo I built around a manipulated drum loop which was generate. On the course of this post I’ll try to explain how you can create one yourself.</p>
-
-<div class="audio-container" style="margin-bottom: 32px;">
-	<audio src="/mp3/2021/nn_drums_demo.mp3" preload="auto"></audio>
-</div>
-
-<div class="downloadBox" onclick="window.location='/assets/nn_gen_drum_phrases.zip'; return false;">
-  Download Zip<br />
-  <p style="font-size: small; margin-top: 2px; margin-bottom: 2px;">Sample WAVs Generated by NN</p>
-</div>
-
-</p>
-	<p style="padding-top: 20px; text-align: right;"><a href="/2021/Drum_Loops_From_Nowhere/" class="btn">
-			  Read more<!-- <img src="/images/more.svg"></img> -->
-			</a></p>  
-		
-        <div class="post-list__meta">
-            <time datetime="2021-06-14 12:36" class="post-list__meta--date date">14 Jun 2021</time>
-            
-            &#8226; <span class="post-meta__tags">on <a href="/tags/#wavegan">wavegan</a> <a href="/tags/#software">software</a> <a href="/tags/#docker">docker</a> <a href="/tags/#dsp">dsp</a> </span>
-            
-        </div>
-        <hr class="post-list__divider">
-      </li>
-    
   </ol>
 
   <hr class="post-list__divider ">
@@ -701,7 +676,7 @@ So far, I got some applicable results in “personalised” percussive sounds, b
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1688295469768083000"></script>
+<script type="text/javascript" src="/js/main.js?1689960479010224000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

@@ -48,7 +48,7 @@
   <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/main.css?1688295469768083000">
+  <link rel="stylesheet" href="/css/main.css?1689960479010224000">
   <link rel="canonical" href="/page2/">
   <link rel="alternate" type="application/rss+xml" title="Deviant Syndrome" href="/feed.xml">
 <script>
@@ -96,7 +96,7 @@ window.MathJax = {
 <script src="/js/audiojs/audio.min.js"></script>
 <link  href="/js/nanogallery2/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 <script  type="text/javascript" src="/js/nanogallery2/jquery.nanogallery2.min.js"></script>
-<link rel="stylesheet" href="/css/main.css?1688295469768083000">
+<link rel="stylesheet" href="/css/main.css?1689960479010224000">
 </head>
 
 
@@ -189,7 +189,7 @@ window.MathJax = {
 
   
     
-      <li><a href="/categories/#code-bits">code bits (4)</a></li>
+      <li><a href="/categories/#code-bits">code bits (5)</a></li>
     
       <li><a href="/categories/#demo">demo (1)</a></li>
     
@@ -201,7 +201,7 @@ window.MathJax = {
     
       <li><a href="/categories/#journalism?">journalism? (3)</a></li>
     
-      <li><a href="/categories/#dsp">dsp (3)</a></li>
+      <li><a href="/categories/#dsp">dsp (4)</a></li>
     
       <li><a href="/categories/#dsp-audio-software">dsp audio software (1)</a></li>
     
@@ -231,6 +231,95 @@ window.MathJax = {
 
   <ol class="post-list">
     
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2021/GotoDrums/" title="GoToDrums. Free Drum Sample Lib">GoToDrums. Free Drum Sample Lib</a></h2>
+        
+			 <p><section class="post"><h4 id="motivation">Motivation</h4>
+
+<p>Challenging the paradigm of taking sampled drum sounds for granted and using them as, if it is one of the most conventional practices that constitute the framework for creating “electronic music”.</p>
+
+<h4 id="attempt-at-some-historical-excourse">Attempt at Some Historical Excourse</h4>
+
+<p>Since when  had it became like that?</p>
+
+<p>Sampling one-hit percussion, or, alternatively, recreating it with synthesis, was the primary direction in early electronic music, that made it into consumer sector, since the nature of battery instruments implies repetition, and those sounds are usually short, which made then good candidates to be utilized in first low-memory digital samplers. Since those instruments usually do not have a strongly defined pitch, so the pitch change is not used as a form of expression, when playing those. That eliminates the problem of handling changing pitch of an instrument, during synthesis or having to store a large number of pitches in sampler’s memory. Early rhythm-machines, were mostly built around borderline neglecting the timbral structure in favour of persistence of generated rhythmic pattern, e.g. a sequence of transients.</p>
+
+<h4 id="description">Description</h4>
+
+<p>Overall, the sound of this small library, can be described as something really lo-fi, but still moderately punchy and usable. To put those
+ samples together, I’ve been digging through a whole lot of source material. This <a href="https://www.youtube.com/watch?v=DFhFDrlYTng&amp;t=1063s">tutorial</a> about recreating a snare drum sound with FM
+  synthesis, and this SOS <a href="https://www.soundonsound.com/techniques/practical-cymbal-synthesis">article</a> about cymbal synthesis, were the most important bits of information that kickstarted the whole thing. Rest of this kit’s pieces were done intuitively. Part of those are very basic, like subtractive synthesis, other came out from more adventurous approaches, including resonant filter banks, and layering of found sounds.</p>
+
+<p>Using this lib, I put together a simple gloomy rock tune, what would serve the demonstration purposes. But before we proceed, I feel like I need to put a disclaimer: this collection of sounds it not designed to be high-quality commercial grade product, but rather an exercise, showcasing the exciting possibilities that open up the moment you get off the beaten “pre-cooked drum samples” path.</p>
+
+<div class="audio-container" style="margin-bottom: 32px;">
+	<audio src="/mp3/2021/GoToDrums_demo.mp3" preload="auto"></audio>
+</div>
+
+<div class="downloadBox" onclick="window.location='/assets/soundfonts/gotodrums.zip'; return false;">
+  Download Zip<br />
+  <p style="font-size: small; margin-top: 2px; margin-bottom: 2px;">GoToDrums Soundfont</p>
+</div>
+
+<h4 id="takeaways">Takeaways</h4>
+
+<p>Sometimes, rhythmic patterns and note length are really more important than the timbres themselves. This sets us back to the origins of rhythm-machines. This aspect of how humans perceive rythms is what made the concept of “programmed drums” wholesome.</p>
+
+<p>So, while trying to nail down the timbres, I should have really been paying more attention to dynamics, for this whole sample patch to be more expressive. Well, there were reasons for that beyond my ignorance. Initially, using a free version of TX Software Sampler, I found a number of expression-related settings to be non-intuitive, while other to have UX and stability issues. No offence to the authors, it might be my DAW’s or my OS problem as well. 
+Probably, my (kill to) cure from that would be trying to do the same workout on Yamaha sampler, so I’d realise how much of privileged “mouse-smudger” I am, using point-and-click software.</p>
+
+<p>Cymbals naturally have their dynamic range very wide. And practically none of the widespread approximations (FM, samples, resonant filters) does cover the desired palette of hues on their own. So, ideally, when trying to approximate a cymbal sound, you would have to change the model/approach when reaching a certain velocity boundary. Like, one FM patch for the lower velocities, another one for the moderate ones, and when, probably some combination of pre-recorded sound and resonant. And since the change of timber could be dramatically obvious, you’ll probably need to apply to crossfading between them as well.</p>
+
+<p>The latter sounds like a whole lot of manual work on any sampler, so, if I ever go down that path, that would be, I’ll have to think about automating the process of laying down the usual 32/64/128 levels of velocity, each from a separate sampled sound.</p>
+</section></p>
+		
+        <div class="post-list__meta">
+            <time datetime="2021-07-26 17:44" class="post-list__meta--date date">26 Jul 2021</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#drums">drums</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
+    
+      <li>
+        <h2 class="post-list__post-title post-title"><a href="/2021/Drum_Loops_From_Nowhere/" title="Drum Loops From Nowhere">Drum Loops From Nowhere</a></h2>
+        
+	<p class="excerpt"><h4 id="why-should-i-do-what-everyone-does">Why Should I Do What Everyone Does</h4>
+
+<p>What I currently miss the most with my minimalist no-budget music production setup, definitely would be some organic, pounding and swinging battery. I do not really have much interest in using loops or pre-processed sample libs (tHat CUTt trhU Ze MiX!), because as Chris Randall once said, you have no time to screw around with somebody else’s music if you’re really want to make your own. Truly, with the standards I impose on my self, simply downloading a copy of MT PowerDrums, would be a statement of artistic and engineer impotence.
+So far, I got some applicable results in “personalised” percussive sounds, by exploring the following approaches:</p>
+<ul>
+  <li>Basic subtractive and FM synthesis. Unless, you are a sound-design and electrical-engineering expert, that is your usual “blip-blop” type of electro-drum sounds.</li>
+  <li>Found objects. This is always fun. Just put your smartphone on record every time you take out the trash,</li>
+  <li>Physical modeling. Good for membrane percussion, quickly gets complicated for cymbals, because of their complex “clustered” nature of sound.</li>
+</ul>
+
+<p>So here is a small demo I built around a manipulated drum loop which was generate. On the course of this post I’ll try to explain how you can create one yourself.</p>
+
+<div class="audio-container" style="margin-bottom: 32px;">
+	<audio src="/mp3/2021/nn_drums_demo.mp3" preload="auto"></audio>
+</div>
+
+<div class="downloadBox" onclick="window.location='/assets/nn_gen_drum_phrases.zip'; return false;">
+  Download Zip<br />
+  <p style="font-size: small; margin-top: 2px; margin-bottom: 2px;">Sample WAVs Generated by NN</p>
+</div>
+
+</p>
+	<p style="padding-top: 20px; text-align: right;"><a href="/2021/Drum_Loops_From_Nowhere/" class="btn">
+			  Read more<!-- <img src="/images/more.svg"></img> -->
+			</a></p>  
+		
+        <div class="post-list__meta">
+            <time datetime="2021-06-14 12:36" class="post-list__meta--date date">14 Jun 2021</time>
+            
+            &#8226; <span class="post-meta__tags">on <a href="/tags/#wavegan">wavegan</a> <a href="/tags/#software">software</a> <a href="/tags/#docker">docker</a> <a href="/tags/#dsp">dsp</a> </span>
+            
+        </div>
+        <hr class="post-list__divider">
+      </li>
     
       <li>
         <h2 class="post-list__post-title post-title"><a href="/2021/MacOS_Catalina_Docker_Wine_For_Windows_VST_Plugins/" title="MacOS Catalina Docker Wine For Windows VST Plugins">MacOS Catalina Docker Wine For Windows VST Plugins</a></h2>
@@ -1872,1140 +1961,6 @@ To get a bit of grip on that, let’s explore JUCE’s mixing and routing possib
         <hr class="post-list__divider">
       </li>
     
-      <li>
-        <h2 class="post-list__post-title post-title"><a href="/2020/Architecture_Ownership/" title="Architecture Ownership in the World of Agile">Architecture Ownership in the World of Agile</a></h2>
-        
-			 <p><section class="post"><blockquote>
-  <p>Advertisements are all good; the news is all bad</p>
-
-  <p>– <cite>Marshall McLuhan</cite></p>
-</blockquote>
-
-<p>This article summarises my thoughts, on why we often end up shipping terrible code, despite formally following
-all the good practices.</p>
-
-<h4 id="we-will-think-about-this-in-the-next-sprint">We will think about this in the next sprint</h4>
-
-<p>Agile software development presents itself as a set of perfectly fitted values, unfortunately, very little of them really help to 
-improve the quality of the product from the engineering point of view. 
-This bulk of healthy practices of customer collaboration and continious delivery does not really directly address any of the potential code quality issues that comes along. Sometimes it feels like this methodology is enforcing you to avoid this topic entirely, 
-substituting it with a “pact with the Devil” grade approach. Instead of making bad code better, it makes bad code <em>shippable</em>.
-What’s even more pityful, the agile requirements can blur the lines between “good code” and “shippable code” so much, 
-that developer teams can ship code for years, without even realizing how bad it is. Until it all suddenly crumbles. 
-Sure, that the profressional software engineering communitty reacted to that with their famous and noble <a href="https://en.wikipedia.org/wiki/Software_craftsmanship#Manifesto">Software Craftmanship Manifesto</a>, it is IMHO still too abstract to have a  real impact on how software development (read: writing code) is approached in the world of Agile.</p>
-
-<h4 id="peer-reviewed-garbage">Peer-reviewed garbage</h4>
-
-<blockquote>
-  <p>Relevant information is hard to come by. Soom it’ll be everywhere, unnoticed.</p>
-
-  <p>– <cite>John Cage</cite></p>
-</blockquote>
-
-<p>Despite being very important and useful practice, code review cannot solve the problem of “shippable code” by itself.
-In practice, code review can efficiently check the following:</p>
-<ul>
-  <li>Some obvious errors, which were  overlooked by the author and caught by a fresh pair of eyes</li>
-  <li>Compliance to team’s conventions, readability and code quality standards</li>
-  <li>Correctness of selected data structures</li>
-  <li>Correctness of class structure and links between the elements introduced within the PR and nearby</li>
-</ul>
-
-<p>What code review process often fails to achieve, is to evaluate how does this part of code, which might be cohesive and
-make total sense by itself, fits into the bigger picture: the project, the domain, the role, etc.
-Thus, it becomes very hard to prevent situation, where on paper (and in mind) you ship a perfectly fine piece of code, 
-when in fact, you’re just throwing another bucket of garbage into a pile.
-<em>Practical example</em>: the PR adds some new functionality to a feature and it introduces a new service/utility class.
-But what if that domain already has 50 services? Can a peer reviewer confidently keep track on that?</p>
-
-<h4 id="micro-services-are-not-the-answer">Micro-services are not the answer</h4>
-
-<blockquote>
-  <p>There is nothing we really need to do that is not dangerous.</p>
-
-  <p>– <cite>John Cage</cite></p>
-</blockquote>
-
-<p>The proposed solution for that would be the thing I call “architecture ownership”. Or “ownership of architecture”, this
-should be analogous to other agile jargonisms like “product ownership”, “feature ownership”, etc.
-Being an owner of a certain part of the project architecture implies having the answers to the following questions:</p>
-
-<ul>
-  <li>What are the business objects? What operations are defined on them?</li>
-  <li>What invariants do those business object have?</li>
-  <li>What is the pipeline of presenting those objects to the cusomer?</li>
-  <li>What is the biggest current code quality challenge, what pollutes code the most?</li>
-</ul>
-
-<p>There is important omitment to be made here. You cannot have architecture ownership at the beginning of a project/feature, 
-because in agile world, you, basically, not supposed to make architectural decisions at that point. Sounds crazy, huh?<br />
-It might be a good approach, to have ownerships of certain domains/feature stuctures and flows, once they have matured a bit. 
-Frequently that comes alongside with heavy refactoring and code re-arrangements, but once you have those set, it will be much 
-easier to detect undesireable distortions of architecture, when reviewing some PRs.</p>
-
-<p>Certain architectural descsions, like invariant checking, strict typing, member visibility, final classes and methods can enforce 
-some definitive patterns, so it will make sub-par OOP approaches if not impossible, then at least clearly visible even in isolated PRs.</p>
-
-<h4 id="but-what-do-i-do">But what do I do?</h4>
-
-<blockquote>
-  <p>The way to loose our principles is to examine them.</p>
-
-  <p>– <cite>John Cage</cite></p>
-</blockquote>
-
-<p>Practical steps to introducing the concept of architecture ownership within an agile team would be the following:</p>
-<ul>
-  <li>Identify a part of the product, that needs architecture ownership. Most often it is the one, that is the  hardest to maintain, and
-constantly giving you headaches.</li>
-  <li>Measure the test coverage of this part</li>
-  <li>Try to determine what was the main reason this part of the project became unmaintanable. What kind of bad patterns accumulated there?</li>
-  <li>Based on the previous observation, come up with new clean architecture, that enforces certain patterns</li>
-  <li>Gradually move this feature/functionality to the new architecture, using previously written test as a backup</li>
-  <li>Agree on a way of code reviewing the upcoming related PRs, that checks them for possible pollutions and misusage of current elements of the architecture.</li>
-</ul>
-</section></p>
-		
-        <div class="post-list__meta">
-            <time datetime="2020-08-05 20:02" class="post-list__meta--date date">5 Aug 2020</time>
-            
-            &#8226; <span class="post-meta__tags">on <a href="/tags/#agile">agile</a> <a href="/tags/#software">software</a> </span>
-            
-        </div>
-        <hr class="post-list__divider">
-      </li>
-    
-      <li>
-        <h2 class="post-list__post-title post-title"><a href="/2020/Audio_Postcards_1/" title="Audio Postcards from Stokfjörður's Dungeon">Audio Postcards from Stokfjörður's Dungeon</a></h2>
-        
-			 <p><section class="post"><style>
-	.cplay-bounds {
-		background-color: #4b4848;
-		padding: 4px;
-	}
-	.cplay-bg {
-	    height: 130px;
-		margin-top: 4px;
-		background-image: url("/assets/images/cover_art/healing.png");
-		color: #cfd4d4;
-	}
-	h4.cplay-h {
-        margin-top: 0px;
-		padding-top: 6px;
-		padding-left: 6px;
-	}
-</style>
-
-<div data-nanogallery2="{&quot;thumbnailHeight&quot;:150,
-				     &quot;thumbnailWidth&quot;:&quot;auto&quot;,
-				     &quot;itemsBaseURL&quot;:&quot;&quot;,
-&quot;thumbnailBuildInit2&quot;:&quot;image_grayscale_100%&quot;}" id="/assets/galleries/2020/Suomenlinna">
-
-  <!-- gallery content -->
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-
-      
-      
-      
-      
-        <a href="/assets/galleries/2020/Suomenlinna/1.jpeg" title="1" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/1.jpeg">1</a>
-      	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        <a href="/assets/galleries/2020/Suomenlinna/2.jpeg" title="2" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/2.jpeg">2</a>
-      	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        <a href="/assets/galleries/2020/Suomenlinna/3.jpeg" title="3" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/3.jpeg">3</a>
-      	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        <a href="/assets/galleries/2020/Suomenlinna/4.jpeg" title="4" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/4.jpeg">4</a>
-      	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        <a href="/assets/galleries/2020/Suomenlinna/5.jpeg" title="5" data-ngthumb="/assets/galleries/2020/Suomenlinna/thumbs/5.jpeg">5</a>
-      	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        	
-     
-  
-
-  
-    
-
-      
-      
-      
-      
-        	
-     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</div>
-
-<div class="cplay-bounds"> <!-- gray bounding box  -->
-	<b style="padding-left: 6px; color: lightblue">Dark Ambient/Experimental</b>
-	<div class="cplay-bg">
-	   <h4 class="cplay-h">Health Chamber</h4> <!-- todo margin -->
-	   <p style="margin-left: 6px">Some raw soundscapes I came up with while assembling my virtual modular</p>
-	</div>
-	<!-- player -->
-	<div class="audio-container">
-	   <audio src="/mp3/2020/healthChamber.mp3" preload="auto"></audio>
-	</div>
-</div>
-</section></p>
-		
-        <div class="post-list__meta">
-            <time datetime="2020-08-04 21:28" class="post-list__meta--date date">4 Aug 2020</time>
-            
-        </div>
-        <hr class="post-list__divider">
-      </li>
-    
   </ol>
 
   <hr class="post-list__divider ">
@@ -3036,7 +1991,7 @@ constantly giving you headaches.</li>
   <span class="footer__copyright">Based on <a href="https://github.com/joshgerdes/jekyll-uno">jekyll-uno</a> theme by Josh Gerdes</span>
 </footer>
 
-<script type="text/javascript" src="/js/main.js?1688295469768083000"></script>
+<script type="text/javascript" src="/js/main.js?1689960479010224000"></script>
 <script type="text/javascript" src="/js/sheetrender.js"></script>
 <script src="/js/audioplaylist.js"></script>	
 

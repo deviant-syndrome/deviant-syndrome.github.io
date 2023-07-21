@@ -5,9 +5,75 @@
     <description>coding, multimedia, gamedev, engineering</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 02 Jul 2023 13:57:49 +0300</pubDate>
-    <lastBuildDate>Sun, 02 Jul 2023 13:57:49 +0300</lastBuildDate>
+    <pubDate>Fri, 21 Jul 2023 20:27:59 +0300</pubDate>
+    <lastBuildDate>Fri, 21 Jul 2023 20:27:59 +0300</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>Three Random Facts</title>
+        <description>&lt;p&gt;Unrelated to anything, but I just wanted to share three random encounters with some seriously weird stuff.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;XCode, by default, if you’re running your code it will pause the execution every time it stumbles 
+upon a failing assertion. Annoying as hell. The fix for that is somewhat brutal.
+    &lt;ul&gt;
+      &lt;li&gt;Open the “Breakpoint Navigator” by clicking on the icon that looks like a right-angle or arrow in the left pane of the Xcode window.&lt;/li&gt;
+      &lt;li&gt;In the bottom left of the “Breakpoint Navigator”, click on the ‘+’ sign, then select “Exception Breakpoint…”&lt;/li&gt;
+      &lt;li&gt;A new window will open. Choose “All” for “Exception”&lt;/li&gt;
+      &lt;li&gt;Check “Automatically continue after evaluating actions”! That’s it&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ever trying to reset some MacOS application settings. Like, there configuration files are nowhere to be found.
+It’s all because of Objective-C NSUserDefaults. They are supposed to be stored in ~/Library/Preferences/ folder.
+However, only executing the following made the settings reset for good:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;defaults delete com.codeplex.pcsxr
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;com.codeplex.pcsxr&lt;/code&gt; is just an example, but all the other application namespaces are similar.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In SLADE you have to add the scripts manually to the WAD archive, otherwise they won’t be executed. To make this work with UDMF, you have to add the scripts LUMP before the ENDMAP marker. Also, you need recomplile it manually if changed.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 08 Jul 2023 18:55:01 +0300</pubDate>
+        <link>/2023/Three_Random_Facts/</link>
+        <guid isPermaLink="true">/2023/Three_Random_Facts/</guid>
+        
+        <category>xcode</category>
+        
+        
+        <category>code bits</category>
+        
+      </item>
+    
+      <item>
+        <title>Importing WaveEdit Wavetables to Pigments</title>
+        <description>&lt;p&gt;Just a quick note on how to import wavetables from &lt;a href=&quot;https://www.waveeditonline.com/&quot;&gt;WaveEdit&lt;/a&gt; to &lt;a href=&quot;https://www.arturia.com/products/analog-classics/pigments&quot;&gt;Pigments&lt;/a&gt;
+Pigments is an brilliant exhibit of what is now called a &lt;em&gt;power synth&lt;/em&gt;-buzzword, I first encountered it in “Future Music” magazine  Much like &lt;a href=&quot;https://www.native-instruments.com/en/products/komplete/synths/massive/&quot;&gt;Massive&lt;/a&gt;, 
+it combines a pack of different synthesis techniques (engines), all streamlined into a single interface for you to mix and match. Both of aforementioned products
+also sport an easy “drag-and-drop” modulation system, which is a great way to get started with sound design.&lt;/p&gt;
+
+&lt;p&gt;Pigments is a great synth, but it does not have a built-in wavetable editor. So, how about another 
+weird audio-software-combo? I’m not sure if it is a good idea, but it is definitely a fun one. 
+I think that WaveEdit was originally designed to be used with &lt;a href=&quot;https://www.openacousticdevices.info/&quot;&gt;AudioMoth&lt;/a&gt;, or some
+other audio hardware, but it is also a great tool for wavetable editing with a very appealing UI. 
+More importantly, it has an integrated library of community-curated wavetables, which you can use as a starting point for your own designs,
+or to approximate some of the classic digital synth sounds, like the ones from &lt;a href=&quot;https://waldorfmusic.com/en/microwave&quot;&gt;Waldorf Microwave&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/PPG_Wave&quot;&gt;PPG Wave&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There is a tiny compatibility issue, though, probably related to wavetable resolution. If I save a wavetable in WaveEdit, and then try to import it to Pigments, the 
+frames do not line up. The wavetable is still usable, but it is not exactly what I wanted. I think that the problem is that WaveEdit uses 64 frames per wavetable, while Pigments uses 512.
+How do we make them align properly? Simple! Just make it 8x slower, e.g. apply the speed multiplier of 0.125 and you are good to go.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 23 Jun 2023 20:37:35 +0300</pubDate>
+        <link>/2023/Importing_WaveEdit_Wavetables_to_Pigments/</link>
+        <guid isPermaLink="true">/2023/Importing_WaveEdit_Wavetables_to_Pigments/</guid>
+        
+        <category>waveedit</category>
+        
+        <category>software</category>
+        
+        
+        <category>dsp</category>
+        
+      </item>
     
       <item>
         <title>SSH Agent under MacOS Ventura</title>
@@ -29,7 +95,7 @@ So, I had to add the key to the agent. I did it like this:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;ssh-agent &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 ssh-add &lt;span class=&quot;nt&quot;&gt;-K&lt;/span&gt; ~/.ssh/personal_github_rsa
-ssh-add &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;
+ssh-add &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-K&lt;/code&gt; option was specific to macOS and adds the specified identity file to the Keychain, which is the secure password management system on macOS.&lt;/p&gt;
 
@@ -552,276 +618,6 @@ For a long time, JACK was the standard for (semi)professional audio work on Linu
         <category>vst audio software</category>
         
         <category>dsp</category>
-        
-      </item>
-    
-      <item>
-        <title>GoToDrums. Free Drum Sample Lib</title>
-        <description>&lt;h4 id=&quot;motivation&quot;&gt;Motivation&lt;/h4&gt;
-
-&lt;p&gt;Challenging the paradigm of taking sampled drum sounds for granted and using them as, if it is one of the most conventional practices that constitute the framework for creating “electronic music”.&lt;/p&gt;
-
-&lt;h4 id=&quot;attempt-at-some-historical-excourse&quot;&gt;Attempt at Some Historical Excourse&lt;/h4&gt;
-
-&lt;p&gt;Since when  had it became like that?&lt;/p&gt;
-
-&lt;p&gt;Sampling one-hit percussion, or, alternatively, recreating it with synthesis, was the primary direction in early electronic music, that made it into consumer sector, since the nature of battery instruments implies repetition, and those sounds are usually short, which made then good candidates to be utilized in first low-memory digital samplers. Since those instruments usually do not have a strongly defined pitch, so the pitch change is not used as a form of expression, when playing those. That eliminates the problem of handling changing pitch of an instrument, during synthesis or having to store a large number of pitches in sampler’s memory. Early rhythm-machines, were mostly built around borderline neglecting the timbral structure in favour of persistence of generated rhythmic pattern, e.g. a sequence of transients.&lt;/p&gt;
-
-&lt;h4 id=&quot;description&quot;&gt;Description&lt;/h4&gt;
-
-&lt;p&gt;Overall, the sound of this small library, can be described as something really lo-fi, but still moderately punchy and usable. To put those
- samples together, I’ve been digging through a whole lot of source material. This &lt;a href=&quot;https://www.youtube.com/watch?v=DFhFDrlYTng&amp;amp;t=1063s&quot;&gt;tutorial&lt;/a&gt; about recreating a snare drum sound with FM
-  synthesis, and this SOS &lt;a href=&quot;https://www.soundonsound.com/techniques/practical-cymbal-synthesis&quot;&gt;article&lt;/a&gt; about cymbal synthesis, were the most important bits of information that kickstarted the whole thing. Rest of this kit’s pieces were done intuitively. Part of those are very basic, like subtractive synthesis, other came out from more adventurous approaches, including resonant filter banks, and layering of found sounds.&lt;/p&gt;
-
-&lt;p&gt;Using this lib, I put together a simple gloomy rock tune, what would serve the demonstration purposes. But before we proceed, I feel like I need to put a disclaimer: this collection of sounds it not designed to be high-quality commercial grade product, but rather an exercise, showcasing the exciting possibilities that open up the moment you get off the beaten “pre-cooked drum samples” path.&lt;/p&gt;
-
-&lt;div class=&quot;audio-container&quot; style=&quot;margin-bottom: 32px;&quot;&gt;
-	&lt;audio src=&quot;/mp3/2021/GoToDrums_demo.mp3&quot; preload=&quot;auto&quot;&gt;&lt;/audio&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;downloadBox&quot; onclick=&quot;window.location='/assets/soundfonts/gotodrums.zip'; return false;&quot;&gt;
-  Download Zip&lt;br /&gt;
-  &lt;p style=&quot;font-size: small; margin-top: 2px; margin-bottom: 2px;&quot;&gt;GoToDrums Soundfont&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;takeaways&quot;&gt;Takeaways&lt;/h4&gt;
-
-&lt;p&gt;Sometimes, rhythmic patterns and note length are really more important than the timbres themselves. This sets us back to the origins of rhythm-machines. This aspect of how humans perceive rythms is what made the concept of “programmed drums” wholesome.&lt;/p&gt;
-
-&lt;p&gt;So, while trying to nail down the timbres, I should have really been paying more attention to dynamics, for this whole sample patch to be more expressive. Well, there were reasons for that beyond my ignorance. Initially, using a free version of TX Software Sampler, I found a number of expression-related settings to be non-intuitive, while other to have UX and stability issues. No offence to the authors, it might be my DAW’s or my OS problem as well. 
-Probably, my (kill to) cure from that would be trying to do the same workout on Yamaha sampler, so I’d realise how much of privileged “mouse-smudger” I am, using point-and-click software.&lt;/p&gt;
-
-&lt;p&gt;Cymbals naturally have their dynamic range very wide. And practically none of the widespread approximations (FM, samples, resonant filters) does cover the desired palette of hues on their own. So, ideally, when trying to approximate a cymbal sound, you would have to change the model/approach when reaching a certain velocity boundary. Like, one FM patch for the lower velocities, another one for the moderate ones, and when, probably some combination of pre-recorded sound and resonant. And since the change of timber could be dramatically obvious, you’ll probably need to apply to crossfading between them as well.&lt;/p&gt;
-
-&lt;p&gt;The latter sounds like a whole lot of manual work on any sampler, so, if I ever go down that path, that would be, I’ll have to think about automating the process of laying down the usual 32/64/128 levels of velocity, each from a separate sampled sound.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 26 Jul 2021 17:44:02 +0300</pubDate>
-        <link>/2021/GotoDrums/</link>
-        <guid isPermaLink="true">/2021/GotoDrums/</guid>
-        
-        <category>drums</category>
-        
-        
-        <category>vst audio software</category>
-        
-      </item>
-    
-      <item>
-        <title>Drum Loops From Nowhere</title>
-        <description>&lt;h4 id=&quot;why-should-i-do-what-everyone-does&quot;&gt;Why Should I Do What Everyone Does&lt;/h4&gt;
-
-&lt;p&gt;What I currently miss the most with my minimalist no-budget music production setup, definitely would be some organic, pounding and swinging battery. I do not really have much interest in using loops or pre-processed sample libs (tHat CUTt trhU Ze MiX!), because as Chris Randall once said, you have no time to screw around with somebody else’s music if you’re really want to make your own. Truly, with the standards I impose on my self, simply downloading a copy of MT PowerDrums, would be a statement of artistic and engineer impotence.
-So far, I got some applicable results in “personalised” percussive sounds, by exploring the following approaches:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Basic subtractive and FM synthesis. Unless, you are a sound-design and electrical-engineering expert, that is your usual “blip-blop” type of electro-drum sounds.&lt;/li&gt;
-  &lt;li&gt;Found objects. This is always fun. Just put your smartphone on record every time you take out the trash,&lt;/li&gt;
-  &lt;li&gt;Physical modeling. Good for membrane percussion, quickly gets complicated for cymbals, because of their complex “clustered” nature of sound.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;So here is a small demo I built around a manipulated drum loop which was generate. On the course of this post I’ll try to explain how you can create one yourself.&lt;/p&gt;
-
-&lt;div class=&quot;audio-container&quot; style=&quot;margin-bottom: 32px;&quot;&gt;
-	&lt;audio src=&quot;/mp3/2021/nn_drums_demo.mp3&quot; preload=&quot;auto&quot;&gt;&lt;/audio&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;downloadBox&quot; onclick=&quot;window.location='/assets/nn_gen_drum_phrases.zip'; return false;&quot;&gt;
-  Download Zip&lt;br /&gt;
-  &lt;p style=&quot;font-size: small; margin-top: 2px; margin-bottom: 2px;&quot;&gt;Sample WAVs Generated by NN&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- readmore --&gt;
-
-&lt;h4 id=&quot;neural-networks-for-sound-generation&quot;&gt;Neural Networks for Sound Generation&lt;/h4&gt;
-
-&lt;p&gt;What I have not tried yet, would be NN-generated sound for drum loops and samples. First, and foremost (for a math-n00b like me), it requires
- sufficiently less
- mathematical knowledge
-. Neural
- networks consist almost entirely of linear algebra. No third-grade partial derivative equation systems, which wonderful world of physical modeling is so full of. Second, if current physical modeling paradigm concentrates of modeling a sound of a single hit (excitation of membrane or string pluck), generative neural networks, being completely agnostic of the physical nature of signals they are working with, could in fact, produce a non-deterministic rhythmic sequence of percussion hits (or rather, transients), if only we would train the model exclusively on soloed drum parts, of course. Which is the exact thing we’re gonna do!&lt;/p&gt;
-
-&lt;p&gt;This way, a trained NN model could become an endless source of free and unique sounds, phrases and rhythmic textures . Well, maybe not completely free, as it still considered a but of a legal “gray area”, whenever you really own something to the copyright owners of the material you’ve trained you neural network on. Some GAN software explicitly states in it’s license, that the code itself and the models it produces are free for non-commercial use only.&lt;/p&gt;
-
-&lt;p&gt;The reason, it excites me so much, is that I personally feel, that this kind of approach is a bit underexplored area of artistic expression using machine-learning. I draw this conclusion from the fact, that the most advanced projects in this segment, such as Jukebox AI, seem to concentrate on producing a flow of “consumption ready” generated “music”. I netherless, admit the stellar results in facilitating that, achieved by community of developers and users of that software. My goals are much less ambitious.&lt;/p&gt;
-
-&lt;h4 id=&quot;generative-adversarial-networks-in-one-passage-under-a-minute&quot;&gt;Generative Adversarial Networks in One Passage Under a Minute&lt;/h4&gt;
-
-&lt;p&gt;The basics of machine learning is finding the coefficients (weights) for nodes in a traversable structure, so when calculating the output, it
- matches the label apriori given to a sample of input data. The way nodes are connected loosely represent, hence the name. To describe a wide
-  area of machine learning applications on a very high-level, a term “labeling” could be used. So, NN model that got its node weights determined by being “trained” on million of kitten and puppy photos, could then determine (“label”) if an arbitrary input photo is a photo of a cub or a kitten with a decent level of accuracy.
-In case of generating content task, Two neural networks, the generative one and discriminative one. When learning, generative network acquires a latent space of, from which it draws samples to produce random signals. Those random signals then sent to discriminative network, which is trained to determine if those have the same characteristics as initial data. For sake of that, both networks are trained on the same dataset. So, by playing this , this pair are capable of fluently generating new content that would “fit” the initial data traits.&lt;/p&gt;
-
-&lt;h4 id=&quot;using-wavegan-and-aws-cloud-computing-solution-to-facilitate-the-experiment&quot;&gt;Using WaveGAN and AWS Cloud Computing Solution to Facilitate the Experiment&lt;/h4&gt;
-
-&lt;p&gt;For our attempt at NN-generated percussion we will be using &lt;a href=&quot;https://github.com/chrisdonahue/wavegan&quot;&gt;WaveGAN&lt;/a&gt; - an implementation of GAN which samples audio at high-temporal resolutions, thus, being to capture spectral structures across a range of timescales, when learning. It is implemented in Python using &lt;a href=&quot;https://www.tensorflow.org/&quot;&gt;Tensorflow 1.2&lt;/a&gt; framework.&lt;/p&gt;
-
-&lt;p&gt;So, how do we train our WaveGAN model on those audio-files? 
-Well, unless you are fond of computer games, issued after Y2K, or (unlike me) a real scientist with access to your university’s mainframe, you probably do not have a powerful enough GPU hardware to train a GAN in a comfort of your dungeon. As a cloud based solution that provides GPU-based computing I chose AWS, for the following initial reaons:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Uncanny familiarity. If you have a goatie and know what “MVC” is, I have bad news for ya.&lt;/li&gt;
-  &lt;li&gt;Religious concerns (there is no way I’m touching Azure)&lt;/li&gt;
-  &lt;li&gt;Advertised dedicated machine learning solution (emphasis on “advertised”)&lt;/li&gt;
-  &lt;li&gt;Advertised “Free-Tier” for newly created accounts (double emphasis on “advertised”)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;sagemaker-high-level-overview-and-initial-experiment-plan&quot;&gt;SageMaker. High Level Overview and Initial Experiment Plan&lt;/h4&gt;
-
-&lt;p&gt;Let’s take a high level overview of how SageMaker works. 
-So, skimmed from all the buzzwords and marketing, it is a number of core Amazon AWS offerings (virtual machines and cloud storage), all duck-taped toghether around the topic of machine learning. Basically, it automates the following flow, that you would otherwise do manually when traning the neural network in the clooud:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Provisioning and starting an instance&lt;/li&gt;
-  &lt;li&gt;Copying the program and train data to the instance&lt;/li&gt;
-  &lt;li&gt;Start the program in the training mode&lt;/li&gt;
-  &lt;li&gt;Collect metrics&lt;/li&gt;
-  &lt;li&gt;Stop training&lt;/li&gt;
-  &lt;li&gt;Copy the model from the instance to AWS S3 cloud storage (“checkpoint”)&lt;/li&gt;
-  &lt;li&gt;Shut down the instance&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;// Illustration, training jobs&lt;/p&gt;
-
-&lt;p&gt;To be fair, it actually does more than that. For example, it supports training parallelization (it can partition by data, or by.). Sounds fun, but unless you’re using something readymade from SageMaker’s marketplace , you’ll have to do quite unobvious modifications to you code, to make it work.&lt;/p&gt;
-
-&lt;p&gt;Also, you’ll get something called “SageMaker Studio”, a small dedicated server, fronted by Jupyter Python Notebook, which aslo has a permanent SSD storage and all the core AWS utils as well, as the essential data-science Python libs like SciPy pre-installed. To execute the notebook’s cell, you’ll need to select a runtime and a kernel, which will start a remote cloud instance and connect to your notebook to a Python kernel . You can choose between TensorFlow and PyTorch being the backbone of your computations.
-Those notebooks, would be, actually, useful, when getting the output of your trained network. because SageMaker’s solutions for hosting a model seem a bit overcomplicated to me, as they have a flow and setup completely separate from the “training” phase.&lt;/p&gt;
-
-&lt;h4 id=&quot;the-process-expectations-vs-reality&quot;&gt;The Process. Expectations vs Reality&lt;/h4&gt;
-
-&lt;p&gt;Before even creating my personal Amazon account, I had the following theoretical steps in mind: 
-Steps:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Create an Amazon Account, they offer something like one month of free computation using their SageMaker platform.&lt;/li&gt;
-  &lt;li&gt;Use WaveGAN (probably not the best choice for the task, but seems easy enough to set up and go).&lt;/li&gt;
-  &lt;li&gt;Get some raw material. Demo loops of drum libraries should be a good enough bit for the first try&lt;/li&gt;
-  &lt;li&gt;Upload them to S3 somehow&lt;/li&gt;
-  &lt;li&gt;Start learning&lt;/li&gt;
-  &lt;li&gt;Monitor the training. Use log-based monitoring&lt;/li&gt;
-  &lt;li&gt;Start a notebook instance&lt;/li&gt;
-  &lt;li&gt;Load the trained model&lt;/li&gt;
-  &lt;li&gt;Generate sounds&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;So, how did it hold up against my initial expectations? Well, OK-ish, I’d say.&lt;/p&gt;
-
-&lt;p&gt;First and foremost, AWS Console Web UI is nothing but a freaking labyrinth. So, I had to bookmark a bunch of pages, to whom I kept constantly coming back to lookup and refrence things along the way.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&amp;amp;all-free-tier.sort-order=asc&amp;amp;awsf.Free%20Tier%20Types=*all&amp;amp;awsf.Free%20Tier%20Categories=*all&quot;&gt;AWS free tier guide&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://sagemaker.readthedocs.io/en/stable/overview.html#train-a-model-with-the-sagemaker-python-sdk&quot;&gt;Custom learning script on a SageMaker instance&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://sagemaker-examples.readthedocs.io/en/latest/training/bring_your_own_container.html&quot;&gt;Build and bring your own container&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html&quot;&gt;AWS Admin credentials&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/sagemaker/pricing/&quot;&gt;SageMaker pricing, instance types and stuff&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://sagemaker.readthedocs.io/en/stable/frameworks/tensorflow/using_tf.html&quot;&gt;How to adapt the script&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/general/latest/gr/sagemaker.html#limits_sagemaker&quot;&gt;AWS Service quotas&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://github.com/aws/deep-learning-containers/blob/master/available_images.md&quot;&gt;AWS Docker Containers for Machine Learning&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Second, according to the documentation, if you want SageMaker to work with a custom learn algorithm, you’ll need to build and deploy your custom docker image. Yeah, “DevOps Plumber” trade union card of GTFO, this is how we do things in the world of enterprise-level cloud computing, right? Well, maybe I am too harsh. Actually, you can start a traning job from SageMaker Studio using an entrypoint that starts the custom algorythm. to use multiple source files, you need to use the source_dir argument when setting up the Estimator, and then put your code files in the directory you specify.&lt;/p&gt;
-
-&lt;p&gt;Minor caveat though: if your algorithm uses a dependency outside standard GNU/SciPi set, which is almost always the case for any audio-related, you cannot provide it with the training job. 
-Techincally, you can install this dependency on your SageMaker Studio instance and run your code there. But guess what? Since training utilises almost all of the CPU, so, after 10 mins of no heartbeats, Amazon marks the instance as dead and shuts it down. Uskomaton!&lt;/p&gt;
-
-&lt;p&gt;Theoretically, the manual tells you, that you could use the standard &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scipy&lt;/code&gt; utilities for reading your audio files, if they stricly comply to 44.2Khz 16bit PCM standard. I tried that, with the following:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;f &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;find ./ &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'*.wav'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do 
-&lt;/span&gt;ffmpeg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-acodec&lt;/span&gt; pcm_s16le &lt;span class=&quot;nt&quot;&gt;-ar&lt;/span&gt; 44100 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%.wav&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;z.wav&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%.wav&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;z.wav &lt;span class=&quot;nv&quot;&gt;$f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That did not work, as WaveGAN kept crashing over reading input files, so I refined steps of training a GAN to be:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Build and upload your custom image to Amazon ECR&lt;/li&gt;
-  &lt;li&gt;Upload raw material to S3&lt;/li&gt;
-  &lt;li&gt;Start a training job either through SageMaker UI or Python API.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Notice how I’ve amended the “monitoring” step. I did it, because SageMaker’s proposed solution for monitoring is a freaking joke. Like downloading the checkpoints and examining them locally with Tensorboard? &lt;strong&gt;Bruuuuuuh&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Using this tutorial I was able to put together a modified version of the original tensorflow docker container which I made publicly available in this &lt;a href=&quot;https://github.com/deviant-syndrome/wavegan-sagemaker&quot;&gt;repo&lt;/a&gt;. After a few 30 min feedback cycles, I was able to get it working.&lt;/p&gt;
-
-&lt;p&gt;This is where you’ll begin to realize that those “Free Tier” conditions are quite limiting. First and foremost, no GPU instances are included in free tier limits. Technically, TensorFlow supports calculation on XLA devices, and you would need to change the following in the initialisation code of WaveGAN &lt;a href=&quot;https://github.com/chrisdonahue/wavegan/blob/master/loader.py#L193&quot;&gt;here&lt;/a&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;            &lt;span class=&quot;s&quot;&gt;'/device::XLA_CPU:{}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prefetch_gpu_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Sweet, but it is still notebably slower than one would expect, I got about 720 steps overnight, versus about 2000 on a GPU instance. Maybe I should have been using the CPU version of the AWS Tensorflow image for that?&lt;br /&gt;
-And adversities with the GPU instances do not end on their cost. They are disabled in your AWS account by default and you have to contact AWS support to get access to them. AWS support service SLA is about 24 hours, which is quite alright for an enterprise like this, but could be a real show-stopper, when you have your creative juices flowing.&lt;/p&gt;
-
-&lt;h4 id=&quot;what-was-left-behind&quot;&gt;What was left behind&lt;/h4&gt;
-
-&lt;p&gt;I did not familiarize myself enough with the machine learning domain in general and Tensorflow framework specifically to take advantage of &lt;a href=&quot;https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html&quot;&gt;SageMaker’s distributed learnning capabilities&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Seems like WaveGAN output sample rates are quite low 16-22Khz depending on the output length. This means that we would have a very pronounced aliasing in the cymbals/percussion domain, and generally low sound fidelity.&lt;/p&gt;
-
-&lt;p&gt;For more rhythmic excitement and cohesiveness, I probably need longer slices (currently, maximum is 4 seconds at 16Khz)&lt;/p&gt;
-
-&lt;p&gt;It might be better to skip the AWS WebUI altogether and use boto3 library to run the code that deploys image and runs training locally.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;account&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boto_session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sts&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_caller_identity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Account&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;region&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boto_session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region_name&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{}.dkr.ecr.{}.amazonaws.com/sagemaker-decision-trees:latest&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;account&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;region&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Estimator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;role&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;ml.c4.2xlarge&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;output_path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;s3://{}/output&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;default_bucket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()),&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sagemaker_session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I am still not sure if I can provide clear instructions on setting up the AWS permissions for the whole setup. So, I’ll just leave a citation from AWS documentation here:&lt;/p&gt;
-
-&lt;p&gt;Running this notebook requires permissions in addition to the normal SageMakerFullAccess permissions. This is because we’ll creating new repositories in Amazon ECR. The easiest way to add these permissions is simply to add the managed policy AmazonEC2ContainerRegistryFullAccess to the role that you used to start your notebook instance. There’s no need to restart your notebook instance when you do this, the new permissions will be available immediately.&lt;/p&gt;
-
-&lt;p&gt;I used a very basic soloed drumkit from a drum lib demo for the input data. Next time I could try something more extreme like those isolated drum playthroughs: &lt;a href=&quot;https://www.youtube.com/watch?v=7tw0l5l66N0&quot;&gt;1&lt;/a&gt;, &lt;a href=&quot;https://www.youtube.com/watch?v=2fXAWK42na8&quot;&gt;2&lt;/a&gt;, &lt;a href=&quot;https://www.youtube.com/watch?v=6nlcH_9Bbbk&quot;&gt;3&lt;/a&gt;, &lt;a href=&quot;https://www.youtube.com/watch?v=mL-LyKcFE5c&quot;&gt;4&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Need to see, how WaveGAN is generating sample slices from the source audio. Need to see the number of slices and 
-how they are affecting the number of training epochs. The number of steps recommended in the manual is 200K. 
-For that matter I would maybe need to extract the slicing logic into separate “analytical” code that would prompt me about the numer of steps/time needed.&lt;/p&gt;
-
-&lt;h4 id=&quot;ps&quot;&gt;P.S.&lt;/h4&gt;
-
-&lt;p&gt;If you ever wandered how to run docker on a machine without a network interface:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dockerd &lt;span class=&quot;nt&quot;&gt;--iptables&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--bridge&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;none
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Mon, 14 Jun 2021 12:36:27 +0300</pubDate>
-        <link>/2021/Drum_Loops_From_Nowhere/</link>
-        <guid isPermaLink="true">/2021/Drum_Loops_From_Nowhere/</guid>
-        
-        <category>wavegan</category>
-        
-        <category>software</category>
-        
-        <category>docker</category>
-        
-        <category>dsp</category>
-        
-        
-        <category>code bits</category>
-        
-        <category>vst audio software</category>
         
       </item>
     
